@@ -1,0 +1,26 @@
+{
+  "name": "iso-svg",
+  "version": "0.0.0",
+  "homepage": "https://github.com/WebSeed/iso-svg",
+  "authors": [
+    "Will Bamford <w.bamford@gmail.com>"
+  ],
+  "main": "index.html",
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "requirejs": "~2.1.13"
+  },
+  "devDependencies": {
+    "jasmine": "~2.0.0"
+  }
+}
