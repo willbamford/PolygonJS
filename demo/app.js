@@ -1,4 +1,6 @@
-require([], function () {
+require(['iso-svg/surface'], function (surface) {
+    var s = surface.create({});
 
-    alert('Yipee!');
+    s.line(10, 10, 100, 100);
+    s.circle(100, 100, 25);
 });

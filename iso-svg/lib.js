@@ -8,7 +8,7 @@ define([], function () {
             if (arr && arr.length > 0) {
                 var i = 0, len = arr.length;
                 while (i < len) {
-                    if (fn(arr[i], i)) break;
+                    fn(arr[i], i);
                     i++;
                 }
             }
