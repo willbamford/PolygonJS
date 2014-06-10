@@ -1,6 +1,17 @@
-require(['iso-svg/surface'], function (surface) {
-    var s = surface.create({});
+require(
+    [
+        'iso-svg/surface',
+        'iso-svg/projector',
+        'iso-svg/meshes/icosahedron'
+    ],
+    function (surface, projector, icosahedron) {
 
-    s.line(10, 10, 100, 100);
-    s.circle(100, 100, 25);
-});
+        var s = surface.create({});
+        var p = projector.create({
+            surface: s,
+            scale: 40
+        });
+
+        p.vertices(icosahedron.vertices);
+    }
+);

@@ -4,6 +4,14 @@ define([], function () {
 
     var math = {
 
+        scale: function (v, s) {
+            if (v) {
+                for (var i = 0; i < v.length; i++)
+                    v[i] *= s;
+            }
+            return v;
+        },
+
         magSquared: function (a) {
             return (a[0] * a[0]) + (a[1] * a[1]) + (a[2] * a[2]);
         },
@@ -42,25 +50,25 @@ define([], function () {
             return this.normalise(v);
         },
 
-        normalFromPoints: function (p1, p2, p3) {
-            var a = this.subtract(p2, p1);
-            var b = this.subtract(p3, p1);
+        normalFromVertices: function (v1, v2, v3) {
+            var a = this.subtract(v2, v1);
+            var b = this.subtract(v3, v1);
             return this.normal(a, b);
         },
 
-        isoProject: function (p) {
-            var px = p[0], py = p[1], pz = p[2];
+        isoProject: function (v) {
+            var vx = v[0], vy = v[1], vz = v[2];
             var alpha = Math.PI / 6; // 30 degrees
             var beta = alpha;
-            var x = (px * Math.cos(alpha)) - (py * Math.cos(beta));
-            var y = (px * Math.sin(alpha)) + (py * Math.sin(beta)) + pz;
+            var x = (vx * Math.cos(alpha)) - (vy * Math.cos(beta));
+            var y = (vx * Math.sin(alpha)) + (vy * Math.sin(beta)) + vz;
             return [x, y];
         },
 
-        isoGameProject: function (p) {
-            var px = p[0], py = p[1], pz = p[2];
-            var x = px - pz;
-            var y = 0.5 * (px + pz) + py;
+        isoGameProject: function (v) {
+            var vx = v[0], vy = v[1], vz = v[2];
+            var x = vx - vz;
+            var y = 0.5 * (vx + vz) + vy;
             return [x, y];
         }
 

@@ -7,7 +7,6 @@ define(['iso-svg/lib', 'iso-svg/sylvester'], function (lib, sylvester) {
         create: function (opts) {
             return lib.create(this, opts);
         }
-
         
 
     };

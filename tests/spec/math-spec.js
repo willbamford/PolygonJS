@@ -4,6 +4,21 @@ define(['iso-svg/math'], function (math) {
 
     describe('math', function () {
 
+        describe('scale', function () {
+
+            it('should scale a vector by a given scalar value', function () {
+                var v = math.scale([10], 2);
+                expect(v[0]).toBe(20);
+                v = math.scale([-5, 2], 0.5);
+                expect(v[0]).toBe(-2.5);
+                expect(v[1]).toBe(1);
+                v = math.scale([1, 2, 3], 4);
+                expect(v[0]).toBe(4);
+                expect(v[1]).toBe(8);
+                expect(v[2]).toBe(12);
+            });
+        }),
+
         describe('magSquared', function () {
 
             it('should return the square of a 3D vector\'s magnitude', function () {
@@ -78,14 +93,14 @@ define(['iso-svg/math'], function (math) {
             });
         });
 
-        describe('normalFromPoints', function () {
+        describe('normalFromVertices', function () {
 
-            it('should calculate the normal from three 3D points', function () {
+            it('should calculate the normal from three 3D vertices', function () {
 
-                var p1 = [5, 5, 5];
-                var p2 = [6, 5, 5];
-                var p3 = [5, 10, 5];
-                var n = math.normalFromPoints(p1, p2, p3);
+                var v1 = [5, 5, 5];
+                var v2 = [6, 5, 5];
+                var v3 = [5, 10, 5];
+                var n = math.normalFromVertices(v1, v2, v3);
                 expect(n[0]).toBe(0);
                 expect(n[1]).toBe(0);
                 expect(n[2]).toBe(1);
@@ -94,37 +109,37 @@ define(['iso-svg/math'], function (math) {
 
         describe('isoProject', function () {
 
-            it('should project a 3D point to 2D isometric (30 degrees)', function () {
+            it('should project a 3D vertex to 2D isometric (30 degrees)', function () {
 
-                var p = math.isoProject([0, 0, 0]);
-                expect(p[0]).toBe(0);
-                expect(p[1]).toBe(0);
+                var v = math.isoProject([0, 0, 0]);
+                expect(v[0]).toBe(0);
+                expect(v[1]).toBe(0);
 
-                p = math.isoProject([1, 1, 1]);
-                expect(p[0]).toBe(0);
-                expect(p[1]).toBe(2);
+                v = math.isoProject([1, 1, 1]);
+                expect(v[0]).toBe(0);
+                expect(v[1]).toBe(2);
 
-                p = math.isoProject([20, 30, 40]);
-                expect(p[0]).toBeCloseTo(-8.660, 3);
-                expect(p[1]).toBe(65);
+                v = math.isoProject([20, 30, 40]);
+                expect(v[0]).toBeCloseTo(-8.660, 3);
+                expect(v[1]).toBe(65);
             });
         });
 
         describe('isoGameProject', function () {
 
-            it('should project a 3D point to 2D game isometric (one up, two across)', function () {
+            it('should project a 3D vertex to 2D game isometric (one up, two across)', function () {
                 
-                var p = math.isoGameProject([0, 0, 0]);
-                expect(p[0]).toBe(0);
-                expect(p[1]).toBe(0);
+                var v = math.isoGameProject([0, 0, 0]);
+                expect(v[0]).toBe(0);
+                expect(v[1]).toBe(0);
 
-                p = math.isoGameProject([1, 1, 1]);
-                expect(p[0]).toBe(0);
-                expect(p[1]).toBe(2);
+                v = math.isoGameProject([1, 1, 1]);
+                expect(v[0]).toBe(0);
+                expect(v[1]).toBe(2);
 
-                p = math.isoGameProject([20, 30, 40]);
-                expect(p[0]).toBe(-20, 3);
-                expect(p[1]).toBe(60);
+                v = math.isoGameProject([20, 30, 40]);
+                expect(v[0]).toBe(-20, 3);
+                expect(v[1]).toBe(60);
             });
         });
     });
