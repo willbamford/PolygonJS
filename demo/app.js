@@ -14,11 +14,6 @@ require(
             scale: 40
         });
 
-        // lib.each(cube.faces, function (face) {
-        //     var vertices = cube.getFaceVertices(face);
-        //     p.polygon(vertices);
-        // });
-
         lib.each(icosahedron.faces, function (face) {
             var vertices = icosahedron.getFaceVertices(face);
             p.polygon(vertices);

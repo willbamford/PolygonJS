@@ -12,12 +12,10 @@ define(['iso-svg/lib', 'iso-svg/math'], function (lib, math) {
 
         init: function (opts) {
             var self = this;
-            if (opts.surface)
-                this.surface = opts.surface;
-            if (opts.scale)
-                this.scale = opts.scale;
+            if (opts.surface) this.surface = opts.surface;
+            if (opts.scale) this.scale = opts.scale;
             this.project = function (vertex) {
-                var point = math.isoGameProject(vertex);
+                var point = math.isoProject(vertex);
                 point = math.scale(point, self.scale);
                 return point;
             }
@@ -40,8 +38,7 @@ define(['iso-svg/lib', 'iso-svg/math'], function (lib, math) {
             var self = this;
             var points = [];
             lib.each(vertices, function (vertex) {
-                var point = self.project(vertex);
-                points.push(point);
+                points.push(self.project(vertex));
             });
             this.surface.polygon(points);
         }
