@@ -1,4 +1,4 @@
-define(['iso-svg/lib'], function (lib) {
+define(['iso-svg/lib', 'iso-svg/math'], function (lib, math) {
 
     var mesh = {
 
@@ -21,6 +21,7 @@ define(['iso-svg/lib'], function (lib) {
                 this.setVertices(opts.vertices);
             if (opts.faces)
                 this.setFaces(opts.faces);
+            this.updateNormals();
             return this;
         },
 
@@ -33,22 +34,31 @@ define(['iso-svg/lib'], function (lib) {
         },
 
         updateNormals: function () {
-            var self = this;
+            var self = this, vertices;
             this.normals = [];
             lib.each(this.faces, function (face) {
-                
-                self.normals.push([]);
+                vertices = self.getVerticesForFace(face);
+                self.normals.push(math.normalFromVertices(
+                    vertices[0],
+                    vertices[1],
+                    vertices[2]
+                ));
             });
         },
 
-        // TODO: test
-        getFaceVertices: function (face) {
-            var self = this;
-            var verts = [];
-            lib.each(face, function (index) {
-                verts.push(self.vertices[index]);
+        eachFace: function (fn) {
+            var self = this, vertices, normal;
+            lib.each(this.faces, function (face, faceIndex) {
+                fn(self.getVerticesForFace(face), self.normals[faceIndex]);
             });
-            return verts;
+        },
+
+        getVerticesForFace: function (face) {
+            var self = this, vertices = [];
+            lib.each(face, function (index) {
+                vertices.push(self.vertices[index]);
+            });
+            return vertices;
         }
     };
 

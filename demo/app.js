@@ -14,9 +14,10 @@ require(
             scale: 40
         });
 
-        lib.each(icosahedron.faces, function (face) {
-            var vertices = icosahedron.getFaceVertices(face);
-            p.polygon(vertices);
+        icosahedron.eachFace(function (vertices, normal) {
+            console.log('vertices.length: ' + vertices.length);
+            console.log('normal: ' + normal);
+            p.face(vertices, normal);
         });
     }
 );

@@ -22,25 +22,27 @@ define(['iso-svg/lib', 'iso-svg/math'], function (lib, math) {
             return this;
         },
 
-        vertex: function (v) {
-            var point = this.project(v);
+        vertex: function (vertex) {
+            var point = this.project(vertex);
             this.surface.circle(point[0], point[1], 1);
         },
 
         vertices: function (vertices) {
             var self = this;
-            lib.each(vertices, function (v) {
-                self.vertex(v);
+            lib.each(vertices, function (vertex) {
+                self.vertex(vertex);
             });
         },
 
-        polygon: function (vertices) {
-            var self = this;
-            var points = [];
+        face: function (vertices, normal) {
+            var self = this, points = [], dp;
             lib.each(vertices, function (vertex) {
                 points.push(self.project(vertex));
             });
-            this.surface.polygon(points);
+            dp = math.dotProduct([0.577, 0.577, 0.577], normal);
+            console.log('dp: ' + dp);
+            if (dp > 0)
+                this.surface.polygon(points);
         }
     };
 

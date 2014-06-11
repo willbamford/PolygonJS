@@ -27,6 +27,16 @@ define([], function () {
                 a[0] * b[1] - a[1] * b[0]];
         },
 
+        // TODO: TEST
+        dotProduct: function (a, b) {
+            var v = 0;
+            if (a && b && (a.length === b.length)) {
+                for (var i = 0; i < a.length; i++)
+                    v += a[i] * b[i];
+            }
+            return v;
+        },
+
         subtract: function (a, b) {
             return [
                 b[0] - a[0],
