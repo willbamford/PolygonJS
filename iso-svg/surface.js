@@ -76,6 +76,28 @@ define(['iso-svg/lib'], function (lib) {
 
         dot: function (x, y) {
             return this.circle(x, y, 1);
+        },
+
+        polygon: function (points, style) {
+            var self = this;
+            var encodedPoints = '';
+            style = style || 'fill: ' + this.randomColour();
+            lib.each(points, function (point) {
+                var x = point[0] + self.cx;
+                var y = point[1] + self.cy;
+                encodedPoints += x + ',' + y + ' ';
+            });
+            var polygon = this.createEl('polygon', {
+                points: encodedPoints,
+                style: style
+            });
+            this.svg.appendChild(polygon);
+            return polygon;
+        },
+
+        randomColour: function () {
+            var colours = ['chocolate', 'indianred', 'mediumslateblue', 'lavender', 'lightblue', 'darkorange', 'seagreen', 'navy', 'royalblue', 'olive', 'lightgoldenrodyellow', 'pink'];
+            return colours[Math.floor(Math.random() * colours.length)];
         }
     };
 

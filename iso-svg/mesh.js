@@ -39,6 +39,16 @@ define(['iso-svg/lib'], function (lib) {
                 
                 self.normals.push([]);
             });
+        },
+
+        // TODO: test
+        getFaceVertices: function (face) {
+            var self = this;
+            var verts = [];
+            lib.each(face, function (index) {
+                verts.push(self.vertices[index]);
+            });
+            return verts;
         }
     };
 

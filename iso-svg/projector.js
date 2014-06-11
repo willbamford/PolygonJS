@@ -11,17 +11,22 @@ define(['iso-svg/lib', 'iso-svg/math'], function (lib, math) {
         },
 
         init: function (opts) {
+            var self = this;
             if (opts.surface)
                 this.surface = opts.surface;
             if (opts.scale)
                 this.scale = opts.scale;
+            this.project = function (vertex) {
+                var point = math.isoGameProject(vertex);
+                point = math.scale(point, self.scale);
+                return point;
+            }
             return this;
         },
 
         vertex: function (v) {
-            var coords = math.isoProject(v);
-            coords = math.scale(coords, this.scale);
-            this.surface.circle(coords[0], coords[1], 1);
+            var point = this.project(v);
+            this.surface.circle(point[0], point[1], 1);
         },
 
         vertices: function (vertices) {
@@ -29,6 +34,16 @@ define(['iso-svg/lib', 'iso-svg/math'], function (lib, math) {
             lib.each(vertices, function (v) {
                 self.vertex(v);
             });
+        },
+
+        polygon: function (vertices) {
+            var self = this;
+            var points = [];
+            lib.each(vertices, function (vertex) {
+                var point = self.project(vertex);
+                points.push(point);
+            });
+            this.surface.polygon(points);
         }
     };
 
