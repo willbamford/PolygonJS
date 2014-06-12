@@ -2,10 +2,12 @@ define(['iso-svg/lib', 'iso-svg/math'], function (lib, math) {
 
     var mesh = {
 
-        // Z
-        // | Y
-        // |/
-        // 0-- X
+        //   Z
+        //   |
+        //   |
+        //   0-- X
+        //  /
+        // Y
 
         vertices: [],
         faces: [],
