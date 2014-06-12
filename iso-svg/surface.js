@@ -96,7 +96,7 @@ define(['iso-svg/lib'], function (lib) {
         },
 
         randomColour: function () {
-            var colours = ['chocolate', 'indianred', 'mediumslateblue', 'lavender', 'lightblue', 'darkorange', 'seagreen', 'navy', 'royalblue', 'olive', 'lightgoldenrodyellow', 'pink'];
+            var colours = ['chocolate', 'indianred', 'lavender', 'lightblue', 'darkorange', 'seagreen', 'navy', 'royalblue', 'olive', 'pink'];
             return colours[Math.floor(Math.random() * colours.length)];
         }
     };

@@ -27,6 +27,17 @@ define([], function () {
                 a[0] * b[1] - a[1] * b[0]];
         },
 
+        // TODO: copy
+        copyVector: function (vector) {
+            var copy = [];
+            if (vector) {
+                for (var i = 0; i < vector.length; i++) {
+                    copy[i] = vector[i];
+                }
+            }
+            return copy;
+        },
+
         // TODO: TEST
         dotProduct: function (a, b) {
             var v = 0;
@@ -66,8 +77,12 @@ define([], function () {
             return this.normal(a, b);
         },
 
+        orthoProject: function (v) {
+            return [v[1], -v[2]]; // (y, z)
+        },
+
         isoProject: function (v) {
-            var vx = v[0], vy = v[1], vz = v[2];
+            var vx = v[0], vy = v[1], vz = -v[2];
             var alpha = Math.PI / 6; // 30 degrees
             var beta = alpha;
             var x = (vx * Math.cos(alpha)) - (vy * Math.cos(beta));
@@ -76,7 +91,7 @@ define([], function () {
         },
 
         isoGameProject: function (v) {
-            var vx = v[0], vy = v[1], vz = v[2];
+            var vx = v[0], vy = v[1], vz = -v[2];
             var x = vx - vz;
             var y = 0.5 * (vx + vz) + vy;
             return [x, y];
