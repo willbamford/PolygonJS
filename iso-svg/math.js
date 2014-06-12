@@ -27,18 +27,6 @@ define([], function () {
                 a[0] * b[1] - a[1] * b[0]];
         },
 
-        // TODO: copy
-        copyVector: function (vector) {
-            var copy = [];
-            if (vector) {
-                for (var i = 0; i < vector.length; i++) {
-                    copy[i] = vector[i];
-                }
-            }
-            return copy;
-        },
-
-        // TODO: TEST
         dotProduct: function (a, b) {
             var v = 0;
             if (a && b && (a.length === b.length)) {

@@ -46,8 +46,6 @@ define(['iso-svg/mesh'], function (mesh) {
                     vertices: [[0, 0, 0], [1, 0, 0], [0, 1, 0], [1, 1, 0]],
                     faces: [[0, 1, 2], [0, 2, 3]]
                 });
-                expect(m.normals.length).toEqual(0);
-                m.updateNormals();
                 expect(m.normals.length).toEqual(m.faces.length);
 
             });

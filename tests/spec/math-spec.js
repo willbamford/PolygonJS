@@ -53,6 +53,23 @@ define(['iso-svg/math'], function (math) {
             });
         });
 
+        describe('dotProduct', function () {
+
+            it('should return the dot product (scalar) of two n-dimensional vectors', function () {
+                var a = [1, 0, 0];
+                var b = [0, 0, 1];
+                expect(math.dotProduct(a, b)).toBe(0);
+
+                a = [1, 0, 0];
+                b = [1, 0, 0];
+                expect(math.dotProduct(a, b)).toBe(1);
+
+                a = [0, 0, -1];
+                b = [0, 0, 1];
+                expect(math.dotProduct(a, b)).toBe(-1);
+            });
+        });
+
         describe('subtract', function () {
 
             it('should return the difference between two 3D vectors', function () {
@@ -117,11 +134,11 @@ define(['iso-svg/math'], function (math) {
 
                 v = math.isoProject([1, 1, 1]);
                 expect(v[0]).toBe(0);
-                expect(v[1]).toBe(2);
+                expect(v[1]).toBe(0);
 
                 v = math.isoProject([20, 30, 40]);
                 expect(v[0]).toBeCloseTo(-8.660, 3);
-                expect(v[1]).toBe(65);
+                expect(v[1]).toBe(-15);
             });
         });
 
@@ -134,12 +151,12 @@ define(['iso-svg/math'], function (math) {
                 expect(v[1]).toBe(0);
 
                 v = math.isoGameProject([1, 1, 1]);
-                expect(v[0]).toBe(0);
-                expect(v[1]).toBe(2);
+                expect(v[0]).toBe(2);
+                expect(v[1]).toBe(1);
 
                 v = math.isoGameProject([20, 30, 40]);
-                expect(v[0]).toBe(-20, 3);
-                expect(v[1]).toBe(60);
+                expect(v[0]).toBe(60);
+                expect(v[1]).toBe(20);
             });
         });
     });
