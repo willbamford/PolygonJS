@@ -11,13 +11,7 @@ define(['iso-svg/lib', 'iso-svg/math'], function (lib, math) {
         
         this.surface = opts.surface;
         this.scale = opts.scale;
-        this.eye = math.normalise([1, 1, 1]);
-        
-        this.project = function (vertex) {
-            var point = math.isoProject(vertex);
-            point = math.scale(point, self.scale);
-            return point;
-        }
+        this.camera = opts.camera;
         return this;
     };
 
@@ -40,17 +34,14 @@ define(['iso-svg/lib', 'iso-svg/math'], function (lib, math) {
         },
 
         face: function (vertices, normal) {
-            var self = this, points = [], dp;
+
+            var self = this, points = [], dp, camera = this.camera;
             lib.each(vertices, function (vertex) {
-                // console.log('vertex: ' + vertex);
-                points.push(self.project(vertex));
-                // console.log('point: ' + self.project(vertex));
+                points.push(camera.project(vertex));
             });
-            // console.log('normal: ' + normal);
-            // console.log('points: ' + points);
-            dp = math.dotProduct(normal, this.eye);
-            console.log('dp: ' + dp);
-            if (dp > 0)
+
+            dp = math.dotProduct(normal, camera.facingVector);
+            if (dp <= 0)
                 this.surface.polygon(points);
         }
     };

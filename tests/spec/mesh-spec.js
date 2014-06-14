@@ -2,8 +2,6 @@ define(['iso-svg/Mesh'], function (Mesh) {
 
     "use strict";
 
-    console.dir(Mesh);
-
     describe('Mesh', function () {
         
         describe('create', function () {

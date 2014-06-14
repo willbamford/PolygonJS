@@ -123,41 +123,5 @@ define(['iso-svg/math'], function (math) {
                 expect(n[2]).toBe(1);
             });
         });
-
-        describe('isoProject', function () {
-
-            it('should project a 3D vertex to 2D isometric (30 degrees)', function () {
-
-                var v = math.isoProject([0, 0, 0]);
-                expect(v[0]).toBe(0);
-                expect(v[1]).toBe(0);
-
-                v = math.isoProject([1, 1, 1]);
-                expect(v[0]).toBe(0);
-                expect(v[1]).toBe(0);
-
-                v = math.isoProject([20, 30, 40]);
-                expect(v[0]).toBeCloseTo(-8.660, 3);
-                expect(v[1]).toBe(-15);
-            });
-        });
-
-        describe('isoGameProject', function () {
-
-            it('should project a 3D vertex to 2D game isometric (one up, two across)', function () {
-                
-                var v = math.isoGameProject([0, 0, 0]);
-                expect(v[0]).toBe(0);
-                expect(v[1]).toBe(0);
-
-                v = math.isoGameProject([1, 1, 1]);
-                expect(v[0]).toBe(2);
-                expect(v[1]).toBe(1);
-
-                v = math.isoGameProject([20, 30, 40]);
-                expect(v[0]).toBe(60);
-                expect(v[1]).toBe(20);
-            });
-        });
     });
 });

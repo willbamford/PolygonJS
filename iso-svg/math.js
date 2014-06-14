@@ -63,28 +63,7 @@ define([], function () {
             var a = this.subtract(v2, v1);
             var b = this.subtract(v3, v1);
             return this.normal(a, b);
-        },
-
-        orthoProject: function (v) {
-            return [v[1], -v[2]]; // (y, z)
-        },
-
-        isoProject: function (v) {
-            var vx = v[0], vy = v[1], vz = -v[2];
-            var alpha = Math.PI / 6; // 30 degrees
-            var beta = alpha;
-            var x = (vx * Math.cos(alpha)) - (vy * Math.cos(beta));
-            var y = (vx * Math.sin(alpha)) + (vy * Math.sin(beta)) + vz;
-            return [x, y];
-        },
-
-        isoGameProject: function (v) {
-            var vx = v[0], vy = v[1], vz = -v[2];
-            var x = vx - vz;
-            var y = 0.5 * (vx + vz) + vy;
-            return [x, y];
         }
-
     };
 
     return math;
