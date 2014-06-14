@@ -1,28 +1,31 @@
 define(['iso-svg/lib', 'iso-svg/math'], function (lib, math) {
 
-    var projector = {
+    "use strict";
 
-        surface: null,
-        scale: 1,
-        eye: null,
+    var Projector = function (opts) {
+        this.surface = null;
+        this.scale = 1;
+        this.eye = null;
 
-        create: function (opts) {
-            var instance = lib.create(this);
-            return instance.init(opts);
-        },
+        var self = this;
+        
+        this.surface = opts.surface;
+        this.scale = opts.scale;
+        this.eye = math.normalise([1, 1, 1]);
+        
+        this.project = function (vertex) {
+            var point = math.isoProject(vertex);
+            point = math.scale(point, self.scale);
+            return point;
+        }
+        return this;
+    };
 
-        init: function (opts) {
-            var self = this;
-            if (opts.surface) this.surface = opts.surface;
-            if (opts.scale) this.scale = opts.scale;
-            self.eye = math.normalise([1, 1, 1]);
-            this.project = function (vertex) {
-                var point = math.isoProject(vertex);
-                point = math.scale(point, self.scale);
-                return point;
-            }
-            return this;
-        },
+    Projector.create = function (opts) {
+        return new Projector(opts);
+    };
+
+    Projector.prototype = {
 
         vertex: function (vertex) {
             var point = this.project(vertex);
@@ -52,5 +55,5 @@ define(['iso-svg/lib', 'iso-svg/math'], function (lib, math) {
         }
     };
 
-    return projector;
+    return Projector;
 });

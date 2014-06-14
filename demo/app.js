@@ -2,14 +2,16 @@ require(
     [
         'iso-svg/lib',
         'iso-svg/surface',
-        'iso-svg/projector',
+        'iso-svg/Projector',
         'iso-svg/meshes/icosahedron',
         'iso-svg/meshes/cube'
     ],
-    function (lib, surface, projector, icosahedron, cube) {
+    function (lib, surface, Projector, icosahedron, cube) {
+
+        "use strict";
 
         var s = surface.create({});
-        var p = projector.create({
+        var p = Projector.create({
             surface: s,
             scale: 40
         });

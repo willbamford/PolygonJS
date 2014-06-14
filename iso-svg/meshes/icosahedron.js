@@ -1,11 +1,13 @@
-define(['iso-svg/mesh'], function (mesh) {
+define(['iso-svg/Mesh'], function (Mesh) {
+
+    "use strict";
 
     // Based on: http://gamedev.stackexchange.com/a/31312/31803
 
     var X = 0.525731112119133606;
     var Z = 0.850650808352039932;
 
-    var icosahedron = mesh.create({
+    var icosahedron = Mesh.create({
         vertices: [
             [-X,  0,  Z],
             [ X,  0,  Z],

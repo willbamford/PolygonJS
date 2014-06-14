@@ -1,6 +1,8 @@
 define(['iso-svg/lib', 'iso-svg/math'], function (lib, math) {
 
-    var mesh = {
+    "use strict";
+
+    var Mesh = function (opts) {
 
         //   Z
         //   |
@@ -9,31 +11,20 @@ define(['iso-svg/lib', 'iso-svg/math'], function (lib, math) {
         //  /
         // Y
 
-        vertices: [],
-        faces: [],
-        normals: [], // Per face, not vertex
+        this.normals = []; // Per face, not vertex
 
-        create: function (opts) {
-            var instance = lib.create(this);
-            return instance.init(opts);
-        },
+        this.vertices = opts.vertices || [];
+        this.faces = opts.faces || [];
 
-        init: function (opts) {
-            if (opts.vertices)
-                this.setVertices(opts.vertices);
-            if (opts.faces)
-                this.setFaces(opts.faces);
-            this.updateNormals();
-            return this;
-        },
+        this.updateNormals();
+        return this;
+    };
 
-        setVertices: function (vertices) {
-            this.vertices = vertices;
-        },
+    Mesh.create = function (opts) {
+        return new Mesh(opts);
+    };
 
-        setFaces: function (faces) {
-            this.faces = faces;
-        },
+    Mesh.prototype = {
 
         updateNormals: function () {
             var self = this, vertices;
@@ -64,5 +55,5 @@ define(['iso-svg/lib', 'iso-svg/math'], function (lib, math) {
         }
     };
 
-    return mesh;
+    return Mesh;
 });

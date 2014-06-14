@@ -1,12 +1,14 @@
-define(['iso-svg/mesh'], function (mesh) { 
+define(['iso-svg/Mesh'], function (Mesh) { 
 
     "use strict";
 
-    describe('mesh', function () {
+    console.dir(Mesh);
+
+    describe('Mesh', function () {
         
         describe('create', function () {
             it('should be able to create new instances', function () {
-                var m = mesh.create({});
+                var m = Mesh.create({});
                 expect(m).not.toBeNull();
             });
 
@@ -15,7 +17,7 @@ define(['iso-svg/mesh'], function (mesh) {
                     vertices: [[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1]],
                     faces: [[0, 1, 2], [0, 2, 3]]
                 }
-                var m = mesh.create(opts);
+                var m = Mesh.create(opts);
                 expect(m.vertices).toEqual(opts.vertices);
                 expect(m.faces).toEqual(opts.faces);
             });
@@ -23,18 +25,18 @@ define(['iso-svg/mesh'], function (mesh) {
         
         describe('setVertices', function () {
             it('should set vertices', function () {
-                var m = mesh.create({});
+                var m = Mesh.create({});
                 var vertices = [[0, 0, 0], [1, 1, 1]];
-                m.setVertices(vertices);
+                m.vertices = vertices;
                 expect(m.vertices).toEqual(vertices);
             });
         });
 
         describe('setFaces', function () {
             it('should set faces', function () {
-                var m = mesh.create({});
+                var m = Mesh.create({});
                 var faces = [[0, 1, 2], [0, 2, 3]];
-                m.setFaces(faces);
+                m.faces = faces;
                 expect(m.faces).toEqual(faces);
             });
         });
@@ -42,7 +44,7 @@ define(['iso-svg/mesh'], function (mesh) {
         describe('updateNormals', function () {
             it('should recalculate normals based on vertices and faces', function () {
                 // Ground square with two triangular faces
-                var m = mesh.create({
+                var m = Mesh.create({
                     vertices: [[0, 0, 0], [1, 0, 0], [0, 1, 0], [1, 1, 0]],
                     faces: [[0, 1, 2], [0, 2, 3]]
                 });

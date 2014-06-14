@@ -1,16 +1,13 @@
-define(['iso-svg/lib', 'iso-svg/sylvester'], function (lib, sylvester) {
+define(['iso-svg/lib'], function (lib) {
 
-    console.log(sylvester);
+    "use strict";
 
-    var entity = {
-
-        create: function (opts) {
-            return lib.create(this, opts);
-        }
-        
-
+    var Entity = function (opts) {
     };
- 
-    return entity;
 
+    Entity.create = function (opts) {
+        return new Entity(opts);
+    }
+
+    return Entity;
 });

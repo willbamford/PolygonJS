@@ -1,6 +1,8 @@
-define(['iso-svg/mesh'], function (mesh) {
+define(['iso-svg/lib', 'iso-svg/Mesh'], function (lib, Mesh) {
 
-    var cube = mesh.create({
+    "use strict";
+
+    var cube = Mesh.create({
         vertices: [
             [ 1,  1,  1],
             [ 1,  1, -1],

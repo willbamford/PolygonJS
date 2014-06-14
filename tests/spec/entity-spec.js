@@ -1,13 +1,13 @@
-define(['iso-svg/entity'], function (entity) { 
+define(['iso-svg/Entity'], function (Entity) { 
 
     "use strict";
 
-    describe('entity', function () {
+    describe('Entity', function () {
 
         describe('create', function () {
             
             it('should be able to create new instances', function () {
-                var e = entity.create({});
+                var e = Entity.create({});
                 expect(e).not.toBeNull();
             });
 

@@ -1,39 +1,35 @@
 define(['iso-svg/lib'], function (lib) {
 
-    var surface = {
+    "use strict";
 
-        SVG_NS: 'http://www.w3.org/2000/svg',
-        XML_NS: 'http://www.w3.org/2000/xmlns/',
+    var SVG_NS = 'http://www.w3.org/2000/svg';
+    var XML_NS = 'http://www.w3.org/2000/xmlns/';
 
-        width: 640,
-        height: 480,
-        cx: 320,
-        cy: 240,
+    var Surface = function (opts) {
+        opts = opts || {};
+        this.width = opts.width || 640;
+        this.height = opts.height || 480;
+        this.cx = this.width / 2;
+        this.cy = this.height / 2;
+        var svg = this.createEl('svg', {
+            style: 'border: 1px solid #eee',
+            width: this.width,
+            height: this.height
+        });
+        this.setAttrNS(svg, XML_NS, 'xmlns:xlink', 'http://www.w3.org/1999/xlink');
+        document.body.appendChild(svg);
+        this.svg = svg;
+        return this;
+    };
 
-        create: function (opts) {
-            var instance = lib.create(this);
-            return instance.init(opts);
-        },
+    Surface.create = function (opts) {
+        return new Surface(opts);
+    };
 
-        init: function (opts) {
-            opts = opts || {};
-            if (opts.width) this.width = opts.width;
-            if (opts.height) this.height = opts.height;
-            this.cx = this.width / 2;
-            this.cy = this.height / 2;
-            var svg = this.createEl('svg', {
-                style: 'border: 1px solid #eee',
-                width: this.width,
-                height: this.height
-            });
-            this.setAttrNS(svg, this.XML_NS, 'xmlns:xlink', 'http://www.w3.org/1999/xlink');
-            document.body.appendChild(svg);
-            this.svg = svg;
-            return this;
-        },
+    Surface.prototype = {
 
         createEl: function (name, attrs) {
-            var el = document.createElementNS(this.SVG_NS, name);
+            var el = document.createElementNS(SVG_NS, name);
             var attrs = attrs || {};
             for (var attr in attrs)
                 this.setAttr(el, attr, attrs[attr]);
@@ -101,5 +97,5 @@ define(['iso-svg/lib'], function (lib) {
         }
     };
 
-    return surface;
+    return Surface;
 });
