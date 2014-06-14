@@ -35,14 +35,20 @@ define(['iso-svg/lib', 'iso-svg/math'], function (lib, math) {
 
         face: function (vertices, normal) {
 
-            var self = this, points = [], dp, camera = this.camera;
+            var self = this;
+            var points = [];
+            var camera = this.camera;
             lib.each(vertices, function (vertex) {
                 points.push(camera.project(vertex));
             });
 
-            dp = math.dotProduct(normal, camera.facingVector);
-            if (dp <= 0)
-                this.surface.polygon(points);
+            var dp = math.dotProduct(normal, camera.facingVector);
+            if (dp <= 0) {
+                var l = Math.floor(-dp * 255);
+                // l = 127 + Math.floor(-math.dotProduct(normal, [-0.25, -0.5, -1]) * 127);
+                var style = 'fill: rgba(' + 0 + ',' + 0 + ',' + l + ', 1.0)';
+                this.surface.polygon(points, style);
+            }
         }
     };
 
