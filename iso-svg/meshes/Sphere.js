@@ -39,9 +39,8 @@ define(
                     if (map[abk]) {
                         abi = map[abk];
                     } else {
-                        ab = math.mean([vs[face[0]], vs[face[1]]]);
-                        math.normalise(ab);
-                        if (levelOfDetail === 0) math.scale(ab, 0.9);
+                        ab = math.normalise(math.mean([vs[face[0]], vs[face[1]]]));
+                        // if (levelOfDetail === 0) math.scale(ab, 0.9);
                         abi = vertices.length; vertices.push(ab);
                         map[abk] = abi;
                     }
@@ -49,9 +48,8 @@ define(
                     if (map[bck]) {
                         bci = map[bck];
                     } else {
-                        bc = math.mean([vs[face[1]], vs[face[2]]]);
-                        math.normalise(bc);
-                        if (levelOfDetail === 0) math.scale(bc, 0.9);
+                        bc = math.normalise(math.mean([vs[face[1]], vs[face[2]]]));
+                        // if (levelOfDetail === 0) math.scale(bc, 0.9);
                         bci = vertices.length; vertices.push(bc);
                         map[bck] = bci;
                     }
@@ -59,9 +57,8 @@ define(
                     if (map[cak]) {
                         cai = map[cak];
                     } else {
-                        ca = math.mean([vs[face[2]], vs[face[0]]]);
-                        math.normalise(ca);
-                        if (levelOfDetail === 0) math.scale(ca, 0.9);
+                        ca = math.normalise(math.mean([vs[face[2]], vs[face[0]]]));
+                        // if (levelOfDetail === 0) math.scale(ca, 0.9);
                         cai = vertices.length; vertices.push(ca);
                         map[cak] = cai;
                     }
@@ -74,9 +71,6 @@ define(
 
                 fs = faces;
             }
-
-            console.log('faces.length: ' + faces.length);
-            console.log('vertices.length: ' + vertices.length);
 
             return Mesh.create({
                 vertices: vertices,
