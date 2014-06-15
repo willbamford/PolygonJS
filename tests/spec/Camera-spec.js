@@ -51,17 +51,36 @@ define(['iso-svg/Camera'], function (Camera) {
                 });
 
                 var p = camera.project([0, 0, 0]);
-                expect(p[0]).toBe(0);
-                expect(p[1]).toBe(0);
+                expect(p[0]).toBeCloseTo(0);
+                expect(p[1]).toBeCloseTo(0);
 
                 p = camera.project([1, 1, 1]);
-                expect(p[0]).toBe(0);
-                expect(p[1]).toBe(0);
+                expect(p[0]).toBeCloseTo(0);
+                expect(p[1]).toBeCloseTo(0);
 
                 p = camera.project([20, 30, 40]);
                 expect(p[0]).toBeCloseTo(-8.660, 3);
-                expect(p[1]).toBe(-15);
+                expect(p[1]).toBeCloseTo(-15);
             })
+        });
+
+        describe('distanceSort', function () {
+            it('should be a able to sort vertices by distance from the camera', function () {
+                var camera = Camera.create({
+                    mode: Camera.ISOMETRIC,
+                    zoom: 1
+                });
+
+                var sortedIndices = camera.distanceSort([
+                    [0, 0, 0],
+                    [-1, -1, -1],
+                    [1, 1, 1]
+                ]);
+                // expect(sortedIndices.length).toBe(3);
+                // expect(sortedIndices[0]).toBe(1);
+                // expect(sortedIndices[1]).toBe(0);
+                // expect(sortedIndices[2]).toBe(2);
+            });
         });
     });
 });

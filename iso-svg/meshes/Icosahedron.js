@@ -49,7 +49,7 @@ define(['iso-svg/Mesh'], function (Mesh) {
             ]
         });
         return instance;
-    }
+    };
 
     return Icosahedron;
 });

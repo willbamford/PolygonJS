@@ -45,5 +45,11 @@ define(['iso-svg/lib', 'iso-svg/math', 'iso-svg/Entity'], function (lib, math, E
         return point;
     };
 
+    Camera.prototype.distanceSort = function (vertices) {
+
+        
+
+    };
+
     return Camera;
 });

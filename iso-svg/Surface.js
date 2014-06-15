@@ -30,7 +30,7 @@ define(['iso-svg/lib'], function (lib) {
 
         createEl: function (name, attrs) {
             var el = document.createElementNS(SVG_NS, name);
-            var attrs = attrs || {};
+            attrs = attrs || {};
             for (var attr in attrs)
                 this.setAttr(el, attr, attrs[attr]);
             return el;

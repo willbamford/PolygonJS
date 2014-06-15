@@ -45,7 +45,7 @@ define(['iso-svg/lib', 'iso-svg/math'], function (lib, math) {
             var dp = math.dotProduct(normal, camera.facingVector);
             if (dp <= 0) {
                 var l = Math.floor(-dp * 255);
-                // l = 127 + Math.floor(-math.dotProduct(normal, [-0.25, -0.5, -1]) * 127);
+                // l = 127 + Math.floor(-math.dotProduct(normal, [0.5, -0.5, -1]) * 127);
                 var style = 'fill: rgba(' + 0 + ',' + 0 + ',' + l + ', 1.0)';
                 this.surface.polygon(points, style);
             }

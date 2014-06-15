@@ -7,7 +7,7 @@ define(['iso-svg/lib'], function (lib) {
 
     Entity.create = function (opts) {
         return new Entity(opts);
-    }
+    };
 
     return Entity;
 });
