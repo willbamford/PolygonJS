@@ -16,6 +16,7 @@ define(
             var vertices = vs;
             var faces = fs;
             var levelOfDetail = opts.levelOfDetail;
+            var spikiness = opts.spikiness || 0;
             var a, b, c, ab, bc, ca, ai, bi, ci, abi, bci, cai, abk, bck, cak;
             var map = {};
 
@@ -29,7 +30,7 @@ define(
                     abi = map[abk];
                 } else {
                     ab = math.normalise(math.mean([vs[face[0]], vs[face[1]]]));
-                    // if (levelOfDetail === 0) math.scale(ab, 0.9);
+                    if (levelOfDetail === 0 && spikiness !== 0) math.scale(ab, 1 - spikiness);
                     abi = vertices.length; vertices.push(ab);
                     map[abk] = abi;
                 }
@@ -38,7 +39,7 @@ define(
                     bci = map[bck];
                 } else {
                     bc = math.normalise(math.mean([vs[face[1]], vs[face[2]]]));
-                    // if (levelOfDetail === 0) math.scale(bc, 0.9);
+                    if (levelOfDetail === 0 && spikiness !== 0) math.scale(bc, 1 - spikiness);
                     bci = vertices.length; vertices.push(bc);
                     map[bck] = bci;
                 }
@@ -47,12 +48,11 @@ define(
                     cai = map[cak];
                 } else {
                     ca = math.normalise(math.mean([vs[face[2]], vs[face[0]]]));
-                    // if (levelOfDetail === 0) math.scale(ca, 0.9);
+                    if (levelOfDetail === 0 && spikiness !== 0) math.scale(ca, 1 - spikiness);
                     cai = vertices.length; vertices.push(ca);
                     map[cak] = cai;
                 }
 
-                // Turn a single face into four each iteration
                 faces.push([ai, abi, cai]);
                 faces.push([abi, bi, bci]);
                 faces.push([cai, bci, ci]);

@@ -34,20 +34,18 @@ define(['iso-svg/lib', 'iso-svg/math'], function (lib, math) {
         },
 
         face: function (vertices, normal) {
-
             var self = this;
             var points = [];
             var camera = this.camera;
             lib.each(vertices, function (vertex) {
                 points.push(camera.project(vertex));
             });
-
             var dp = math.dotProduct(normal, camera.facingVector);
-            if (true /*dp <= 0*/) {
+            if (dp <= 0) {
                 var r = Math.floor(math.clamp(math.dotProduct(normal, [1, 0, 0]) * 255, 0, 255));
                 var g = Math.floor(math.clamp(math.dotProduct(normal, [0, 1, 0]) * 255, 0, 255));
                 var b = Math.floor(math.clamp(math.dotProduct(normal, [0, 0, 1]) * 255, 0, 255));
-                var style = 'stroke: black; fill: rgba(' + r + ',' + g + ',' + b + ', 1)';
+                var style = 'fill: rgba(' + r + ',' + g + ',' + b + ', 1.0)';
                 this.surface.polygon(points, style);
             }
         },
@@ -56,20 +54,13 @@ define(['iso-svg/lib', 'iso-svg/math'], function (lib, math) {
             var self = this;
             var camera = this.camera;
             var faceVertices = mesh.faces.map(function (face, faceIndex) {
-                console.log(faceIndex);
                 var a = [];
                 lib.each(face, function (vertexIndex) {
                     a.push(mesh.vertices[vertexIndex]);
                 });
                 return math.mean(a);
             });
-
-            console.log(faceVertices);
-
             var sortedIndices = camera.distanceSort(faceVertices);
-
-            console.log(sortedIndices);
-
             lib.each(sortedIndices, function (index) {
                 self.face(mesh.getVerticesForFace(mesh.faces[index]), mesh.normals[index]);
             });

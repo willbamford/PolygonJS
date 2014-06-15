@@ -78,10 +78,10 @@ define(['iso-svg/Camera'], function (Camera) {
                     [1, 1, 1]
                 ]);
                 expect(sortedIndices.length).toBe(4);
-                expect(sortedIndices[0]).toBe(1);
-                expect(sortedIndices[1]).toBe(0);
-                expect(sortedIndices[2]).toBe(3);
-                expect(sortedIndices[3]).toBe(2);
+                expect(sortedIndices[0]).toBe(2);
+                expect(sortedIndices[1]).toBe(3);
+                expect(sortedIndices[2]).toBe(0);
+                expect(sortedIndices[3]).toBe(1);
 
                 camera = Camera.create({
                     mode: Camera.ORTHOGRAPHIC,
@@ -95,10 +95,10 @@ define(['iso-svg/Camera'], function (Camera) {
                     [-10, 900, 900]
                 ]);
                 expect(sortedIndices.length).toBe(4);
-                expect(sortedIndices[0]).toBe(3);
-                expect(sortedIndices[1]).toBe(1);
-                expect(sortedIndices[2]).toBe(0);
-                expect(sortedIndices[3]).toBe(2);
+                expect(sortedIndices[0]).toBe(2);
+                expect(sortedIndices[1]).toBe(0);
+                expect(sortedIndices[2]).toBe(1);
+                expect(sortedIndices[3]).toBe(3);
             });
         });
     });
