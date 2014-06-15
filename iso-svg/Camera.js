@@ -46,9 +46,16 @@ define(['iso-svg/lib', 'iso-svg/math', 'iso-svg/Entity'], function (lib, math, E
     };
 
     Camera.prototype.distanceSort = function (vertices) {
-
-        
-
+        var self = this;
+        var eye = math.scale(this.facingVector, 1000);
+        var sorted = vertices.map(function (v, i) { return {v: v, i: i}; });
+        sorted.sort(function (a, b) {
+            return math.distanceSquared(a.v, eye) < math.distanceSquared(b.v, eye);
+        });
+        // sorted.sort(function (a, b) {
+        //     return math.dotProduct(a.v, self.facingVector) < math.dotProduct(b.v, self.facingVector);
+        // });
+        return sorted.map(function (o) { return o.i; });
     };
 
     return Camera;

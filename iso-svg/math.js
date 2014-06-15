@@ -12,12 +12,22 @@ define([], function () {
             return v;
         },
 
+        // TODO: unit test
+        distance: function (a, b) {
+            return Math.sqrt(this.distanceSquared(a, b));
+        },
+
+        // TODO: unit test
+        distanceSquared: function (a, b) {
+            return (a[0] * b[0]) + (a[1] * b[1]) + (a[2] * b[2]);
+        },
+
         magSquared: function (a) {
-            return (a[0] * a[0]) + (a[1] * a[1]) + (a[2] * a[2]);
+            return this.distanceSquared(a, a);
         },
 
         magnitude: function (a) {
-            return Math.sqrt(this.magSquared(a));
+            return this.distance(a, a);
         },
 
         crossProduct: function (a, b) {

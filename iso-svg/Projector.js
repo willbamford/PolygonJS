@@ -43,12 +43,36 @@ define(['iso-svg/lib', 'iso-svg/math'], function (lib, math) {
             });
 
             var dp = math.dotProduct(normal, camera.facingVector);
-            if (dp <= 0) {
-                var l = Math.floor(-dp * 255);
-                // l = 127 + Math.floor(-math.dotProduct(normal, [0.5, -0.5, -1]) * 127);
-                var style = 'fill: rgba(' + 0 + ',' + 0 + ',' + l + ', 1.0)';
+            if (true /*dp <= 0*/) {
+                var r = Math.floor(math.dotProduct(normal, [1, 0, 0]) * 255);
+                var g = Math.floor(math.dotProduct(normal, [0, 1, 0]) * 255);
+                var b = Math.floor(math.dotProduct(normal, [0, 0, 1]) * 255);
+                var style = 'fill: rgba(' + r + ',' + g + ',' + b + ', 1)';
                 this.surface.polygon(points, style);
             }
+        },
+
+        mesh: function (mesh) {
+            var self = this;
+            var camera = this.camera;
+            var faceVertices = mesh.faces.map(function (face, faceIndex) {
+                console.log(faceIndex);
+                var a = [];
+                lib.each(face, function (vertexIndex) {
+                    a.push(mesh.vertices[vertexIndex]);
+                });
+                return math.mean(a);
+            });
+
+            console.log(faceVertices);
+
+            var sortedIndices = camera.distanceSort(faceVertices);
+
+            console.log(sortedIndices);
+
+            lib.each(sortedIndices, function (index) {
+                self.face(mesh.getVerticesForFace(mesh.faces[index]), mesh.normals[index]);
+            });
         }
     };
 

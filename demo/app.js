@@ -22,9 +22,10 @@ require(
             camera: camera
         });
 
-        var sphere = Sphere.create();
-        sphere.eachFace(function (vertices, normal) {
-            projector.face(vertices, normal);
-        });
+        var sphere = Sphere.create({levelOfDetail: 1});
+        projector.mesh(sphere);
+
+        // var cube = Cube.create();
+        // projector.mesh(cube);
     }
 );

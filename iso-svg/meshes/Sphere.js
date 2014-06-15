@@ -15,7 +15,7 @@ define(
             var fs = icosahedron.faces;
             var vertices = vs;
             var faces = fs;
-            var levelOfDetail = 2;
+            var levelOfDetail = opts.levelOfDetail;
             var a, b, c, ab, bc, ca, ai, bi, ci, abi, bci, cai, abk, bck, cak;
             var map = {};
 
@@ -71,10 +71,8 @@ define(
             });
         };
 
-        Sphere.create = function () {
-            return new Sphere({
-                levelOfDetail: 1
-            });
+        Sphere.create = function (opts) {
+            return new Sphere(opts);
         };
 
         return Sphere;

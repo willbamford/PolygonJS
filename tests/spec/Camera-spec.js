@@ -74,12 +74,31 @@ define(['iso-svg/Camera'], function (Camera) {
                 var sortedIndices = camera.distanceSort([
                     [0, 0, 0],
                     [-1, -1, -1],
+                    [5, 3, 2],
                     [1, 1, 1]
                 ]);
-                // expect(sortedIndices.length).toBe(3);
-                // expect(sortedIndices[0]).toBe(1);
-                // expect(sortedIndices[1]).toBe(0);
-                // expect(sortedIndices[2]).toBe(2);
+                expect(sortedIndices.length).toBe(4);
+                expect(sortedIndices[0]).toBe(1);
+                expect(sortedIndices[1]).toBe(0);
+                expect(sortedIndices[2]).toBe(3);
+                expect(sortedIndices[3]).toBe(2);
+
+                camera = Camera.create({
+                    mode: Camera.ORTHOGRAPHIC,
+                    zoom: 1
+                });
+
+                sortedIndices = camera.distanceSort([
+                    [10, 9, 8],
+                    [8, 100, 100],
+                    [1000, -100, -100],
+                    [-10, 900, 900]
+                ]);
+                expect(sortedIndices.length).toBe(4);
+                expect(sortedIndices[0]).toBe(3);
+                expect(sortedIndices[1]).toBe(1);
+                expect(sortedIndices[2]).toBe(0);
+                expect(sortedIndices[3]).toBe(2);
             });
         });
     });
