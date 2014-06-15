@@ -4,16 +4,17 @@ require(
         'iso-svg/Surface',
         'iso-svg/Camera',
         'iso-svg/Projector',
-        'iso-svg/meshes/icosahedron',
-        'iso-svg/meshes/cube'
+        'iso-svg/meshes/Icosahedron',
+        'iso-svg/meshes/Cube',
+        'iso-svg/meshes/Sphere'
     ],
-    function (lib, Surface, Camera, Projector, icosahedron, cube) {
+    function (lib, Surface, Camera, Projector, Icosahedron, Cube, Sphere) {
 
         "use strict";
 
         var surface = Surface.create({});
         var camera = Camera.create({
-            zoom: 80,
+            zoom: 100,
             mode: Camera.ISOMETRIC
         });
         var projector = Projector.create({
@@ -21,7 +22,8 @@ require(
             camera: camera
         });
 
-        icosahedron.eachFace(function (vertices, normal) {
+        var sphere = Sphere.create();
+        sphere.eachFace(function (vertices, normal) {
             projector.face(vertices, normal);
         });
     }

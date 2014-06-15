@@ -82,6 +82,23 @@ define(['iso-svg/math'], function (math) {
             });
         });
 
+        describe('mean', function () {
+
+            it('should return the mean vector', function () {
+
+                var a = math.mean([
+                    [0,  10, 12],
+                    [2, -10, 15],
+                    [4, -20, 14],
+                    [8,  20, 13]
+                ]);
+
+                expect(a[0]).toBe(3.5);
+                expect(a[1]).toBe(0);
+                expect(a[2]).toBe(13.5);
+            });
+        });
+
         describe('normalise', function () {
 
             it('should normalise a 3D vector', function () {

@@ -1,45 +1,85 @@
 define(
-    ['iso-svg/lib', 'iso-svg/math', 'iso-svg/Mesh', 'iso-svg/meshes/icosahedron'],
-    function (lib, math, Mesh, icosahedron) {
+    ['iso-svg/lib', 'iso-svg/math', 'iso-svg/Mesh', 'iso-svg/meshes/Icosahedron'],
+    function (lib, math, Mesh, Icosahedron) {
 
         "use strict";
 
         var Sphere = function (opts) {
 
-            
-            
-            // this.map = {};
-            // this.levelOfDetail = opts.levelOfDetail || 0;
+            var icosahedron = Icosahedron.create();
+            var vs = icosahedron.vertices;
+            var fs = icosahedron.faces;
+            var vertices = vs;
+            var faces = fs;
+            var levelOfDetail = 2;
+            var a, b, c, ab, bc, ca, ai, bi, ci, abi, bci, cai, abk, bck, cak;
+            var map = {};
+            var key = function (i1, i2) {
+                return 'v' + (i1 < i2 ? i1 + ',' + i2 : i2 + ',' + i1);
+            };
 
-            // var self = this;
-            // var vertices = [];
-            // var faces = [];
-            // var i;
-            // var faceLength;
-            // var mapIndex;
-            // var va, vb;
+            while (--levelOfDetail >= 0) {
 
-            // lib.each(icosahedron.vertices, function (vertex, vertexIndex) {
-            //     self.map['(' + vertexIndex + ')'] = vertex;
-            // });
+                faces = [];
 
-            // lib.each(icosahedron.faces, function (face, faceIndex) {
-                
-            //     faceLength = face.length;
-            //     for (i = 0; i < faceLength; i++) {
-            //         if (i + 1 < faceLength) {
-            //             mapIndex = '(' + face[i] + '|' + face[i + 1] + ')';
-            //             if (!self.map[mapIndex]) {
-            //                 va = icosahedron.vertices[face[i]];
-            //                 vb = icosahedron.vertices[face[i +1]];
-            //                 console.log(va);
-            //                 self.map[mapIndex] = math.mean([va, vb]);
-            //                 console.log(mapIndex);
-            //                 console.log(self.map[mapIndex]);
-            //             }
-            //         }
-            //     }
-            // });
+                lib.each(fs, function (face, faceIndex) {
+
+                    a = vs[face[0]];
+                    b = vs[face[1]];
+                    c = vs[face[2]];
+
+                    ai = face[0];
+                    bi = face[1];
+                    ci = face[2];
+
+                    abk = key(ai, bi);
+                    bck = key(bi, ci);
+                    cak = key(ci, ai);
+
+                    if (map[abk]) {
+                        abi = map[abk];
+                    } else {
+                        ab = math.mean([vs[face[0]], vs[face[1]]]);
+                        abi = vertices.length; vertices.push(ab);
+                        map[abk] = abi;
+                    }
+
+                    if (map[bck]) {
+                        bci = map[bck];
+                    } else {
+                        bc = math.mean([vs[face[1]], vs[face[2]]]);
+                        bci = vertices.length; vertices.push(bc);
+                        map[bck] = bci;
+                    }
+
+                    if (map[cak]) {
+                        cai = map[cak];
+                    } else {
+                        ca = math.mean([vs[face[2]], vs[face[0]]]);
+                        cai = vertices.length; vertices.push(ca);
+                        map[cak] = cai;
+                    }
+
+                    faces.push([ai, abi, cai]);
+                    faces.push([abi, bi, bci]);
+                    faces.push([cai, bci, ci]);
+                    faces.push([cai, abi, bci]);
+                });
+
+                fs = faces;
+            }
+
+            lib.each(vertices, function (vertex) {
+                math.normalise(vertex);
+            });
+
+            console.log('faces.length: ' + faces.length);
+            console.log('vertices.length: ' + vertices.length);
+
+            return Mesh.create({
+                vertices: vertices,
+                faces: faces
+            });
         };
 
         Sphere.create = function () {

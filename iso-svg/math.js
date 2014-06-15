@@ -44,6 +44,20 @@ define([], function () {
             ];
         },
 
+        mean: function (vertices) {
+            if (!vertices || vertices.length < 1)
+                return null;
+            var len = vertices.length, vlen = vertices[0].length;
+            var m = [], vertex, i, j;
+            for (j = 0; j < vlen; j++) {
+                m[j] = 0;
+                for (i = 0; i < len; i++)
+                    m[j] += vertices[i][j];
+                m[j] /= len;
+            }
+            return m;
+        },
+
         normalise: function (a) {
             var mag = this.magnitude(a);
             if (mag === 0)
