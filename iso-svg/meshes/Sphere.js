@@ -15,7 +15,7 @@ define(
             var a, b, c, ab, bc, ca, ai, bi, ci, abi, bci, cai, abk, bck, cak;
             var map = {};
             var key = function (i1, i2) {
-                return 'v' + (i1 < i2 ? i1 + ',' + i2 : i2 + ',' + i1);
+                return i1 < i2 ? i1 + ',' + i2 : i2 + ',' + i1;
             };
 
             while (--levelOfDetail >= 0) {
@@ -40,6 +40,8 @@ define(
                         abi = map[abk];
                     } else {
                         ab = math.mean([vs[face[0]], vs[face[1]]]);
+                        math.normalise(ab);
+                        if (levelOfDetail === 0) math.scale(ab, 0.9);
                         abi = vertices.length; vertices.push(ab);
                         map[abk] = abi;
                     }
@@ -48,6 +50,8 @@ define(
                         bci = map[bck];
                     } else {
                         bc = math.mean([vs[face[1]], vs[face[2]]]);
+                        math.normalise(bc);
+                        if (levelOfDetail === 0) math.scale(bc, 0.9);
                         bci = vertices.length; vertices.push(bc);
                         map[bck] = bci;
                     }
@@ -56,6 +60,8 @@ define(
                         cai = map[cak];
                     } else {
                         ca = math.mean([vs[face[2]], vs[face[0]]]);
+                        math.normalise(ca);
+                        if (levelOfDetail === 0) math.scale(ca, 0.9);
                         cai = vertices.length; vertices.push(ca);
                         map[cak] = cai;
                     }
@@ -68,10 +74,6 @@ define(
 
                 fs = faces;
             }
-
-            lib.each(vertices, function (vertex) {
-                math.normalise(vertex);
-            });
 
             console.log('faces.length: ' + faces.length);
             console.log('vertices.length: ' + vertices.length);
