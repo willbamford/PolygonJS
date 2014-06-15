@@ -22,12 +22,10 @@ require(
             camera: camera
         });
 
-        var sphere = Sphere.create(
-            {
-                levelOfDetail: 3,
-                spikiness: 0.1
-            }
-        );
+        var sphere = Sphere.create({
+            levelOfDetail: 3,
+            spikiness: 0.1
+        });
         projector.mesh(sphere);
 
         // var cube = Cube.create();
