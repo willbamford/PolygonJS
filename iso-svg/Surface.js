@@ -22,6 +22,8 @@ define(['iso-svg/lib'], function (lib) {
         return this;
     };
 
+    Surface.lastId = 0;
+
     Surface.create = function (opts) {
         return new Surface(opts);
     };
@@ -74,16 +76,18 @@ define(['iso-svg/lib'], function (lib) {
             return this.circle(x, y, 1);
         },
 
-        polygon: function (points, style) {
+        polygon: function (points, style, id) {
             var self = this;
             var encodedPoints = '';
             style = style || 'fill: ' + this.randomColour();
+            id = id || 'p' + Surface.lastId++;
             lib.each(points, function (point) {
                 var x = point[0] + self.cx;
                 var y = point[1] + self.cy;
                 encodedPoints += x + ',' + y + ' ';
             });
             var polygon = this.createEl('polygon', {
+                id: id,
                 points: encodedPoints,
                 style: style
             });

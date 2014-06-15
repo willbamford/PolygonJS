@@ -4,6 +4,10 @@ define([], function () {
 
     var math = {
 
+        clamp: function (value, min, max) {
+            return Math.max(min, Math.min(max, value));
+        },
+
         scale: function (v, s) {
             if (v) {
                 for (var i = 0; i < v.length; i++)
@@ -12,22 +16,23 @@ define([], function () {
             return v;
         },
 
-        // TODO: unit test
         distance: function (a, b) {
             return Math.sqrt(this.distanceSquared(a, b));
         },
 
-        // TODO: unit test
         distanceSquared: function (a, b) {
-            return (a[0] * b[0]) + (a[1] * b[1]) + (a[2] * b[2]);
+            var x = b[0] - a[0];
+            var y = b[1] - a[1];
+            var z = b[2] - a[2];
+            return x * x + y * y + z * z;
         },
 
         magSquared: function (a) {
-            return this.distanceSquared(a, a);
+            return a[0] * a[0] + a[1] * a[1] + a[2] * a[2];
         },
 
         magnitude: function (a) {
-            return this.distance(a, a);
+            return Math.sqrt(this.magSquared(a));
         },
 
         crossProduct: function (a, b) {

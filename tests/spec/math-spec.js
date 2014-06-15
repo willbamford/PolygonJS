@@ -4,8 +4,15 @@ define(['iso-svg/math'], function (math) {
 
     describe('math', function () {
 
-        describe('scale', function () {
+        describe('clamp', function () {
+            it('should clamp the value between the given min and max', function () {
+                expect(math.clamp(3, 4, 5)).toBe(4);
+                expect(math.clamp(4, 3, 5)).toBe(4);
+                expect(math.clamp(5, 1, 2)).toBe(2);
+            });
+        });
 
+        describe('scale', function () {
             it('should scale a vector by a given scalar value', function () {
                 var v = math.scale([10], 2);
                 expect(v[0]).toBe(20);
@@ -19,12 +26,17 @@ define(['iso-svg/math'], function (math) {
             });
         }),
 
-        describe('magSquared', function () {
-
-            it('should return the square of a 3D vector\'s magnitude', function () {
-                expect(math.magSquared([2, 3, 4])).toBe(29);
+        describe('distance', function () {
+            it('should return the distance between two points', function () {
+                expect(math.distance([1, 2, 3], [10, 9, 8])).toBeCloseTo(12.449);
             });
-        }),
+        });
+
+        describe('distanceSquared', function () {
+            it('should return the square of the distance between two points', function () {
+                expect(math.distanceSquared([1, 2, 3], [10, 9, 8])).toBe(155);
+            });
+        });
 
         describe('magnitude', function () {
 
@@ -33,6 +45,13 @@ define(['iso-svg/math'], function (math) {
                 expect(math.magnitude([-2, 2, -2])).toBeCloseTo(3.464, 3);
             });
         });
+
+        describe('magSquared', function () {
+
+            it('should return the square of a 3D vector\'s magnitude', function () {
+                expect(math.magSquared([2, 3, 4])).toBe(29);
+            });
+        }),
 
         describe('crossProduct', function () {
 
