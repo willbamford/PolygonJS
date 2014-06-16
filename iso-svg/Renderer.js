@@ -2,7 +2,7 @@ define(['iso-svg/lib', 'iso-svg/math'], function (lib, math) {
 
     "use strict";
 
-    var Projector = function (opts) {
+    var Renderer = function (opts) {
         this.surface = null;
         this.scale = 1;
         this.eye = null;
@@ -15,11 +15,11 @@ define(['iso-svg/lib', 'iso-svg/math'], function (lib, math) {
         return this;
     };
 
-    Projector.create = function (opts) {
-        return new Projector(opts);
+    Renderer.create = function (opts) {
+        return new Renderer(opts);
     };
 
-    Projector.prototype = {
+    Renderer.prototype = {
 
         vertex: function (vertex) {
             var point = this.project(vertex);
@@ -67,5 +67,5 @@ define(['iso-svg/lib', 'iso-svg/math'], function (lib, math) {
         }
     };
 
-    return Projector;
+    return Renderer;
 });
