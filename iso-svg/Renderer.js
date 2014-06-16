@@ -41,7 +41,8 @@ define(['iso-svg/lib', 'iso-svg/math'], function (lib, math) {
                 points.push(camera.project(vertex));
             });
             var dp = math.dotProduct(normal, camera.facingVector);
-            if (dp <= 0) {
+            var backfaceCull = true;
+            if (backfaceCull ? dp < 0 : true) {
                 var r = Math.floor(math.clamp(math.dotProduct(normal, [1, 0, 0]) * 255, 0, 255));
                 var g = Math.floor(math.clamp(math.dotProduct(normal, [0, 1, 0]) * 255, 0, 255));
                 var b = Math.floor(math.clamp(math.dotProduct(normal, [0, 0, 1]) * 255, 0, 255));

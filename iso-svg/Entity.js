@@ -3,6 +3,7 @@ define(['iso-svg/lib'], function (lib) {
     "use strict";
 
     var Entity = function (opts) {
+        this.children = [];
     };
 
     Entity.create = function (opts) {
