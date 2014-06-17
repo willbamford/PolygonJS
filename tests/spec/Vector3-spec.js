@@ -100,5 +100,20 @@ define(['iso-svg/geom/Vector3'], function (Vector3) {
                 expect(v.magnitudeSquared()).toEqual(50);
             });
         });
+
+        describe('crossProduct', function () {
+            it('should return the cross product of this vector and the input', function () {
+                expect(
+                    Vector3.create(1, 1, 0).crossProduct(
+                        Vector3.create(1, 0, 1)
+                    ).toArray()
+                ).toEqual([1, -1, -1]);
+                expect(
+                    Vector3.create(3, -2, 5).crossProduct(
+                        Vector3.create(2, 5, 10)
+                    ).toArray()
+                ).toEqual([-45, -20, 19]);
+            });
+        });
     });
 });

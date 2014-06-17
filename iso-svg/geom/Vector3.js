@@ -49,6 +49,14 @@ define([], function () {
 
         magnitudeSquared: function () {
             return this.x * this.x + this.y * this.y + this.z * this.z;
+        },
+
+        crossProduct: function (v) {
+            return Vector3.create(
+                this.y * v.z - this.z * v.y,
+                this.z * v.x - this.x * v.z,
+                this.x * v.y - this.y * v.x
+            );
         }
     };
 
