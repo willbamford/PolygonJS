@@ -41,6 +41,14 @@ define([], function () {
             var dy = v.y - this.y;
             var dz = v.z - this.z;
             return dx * dx + dy * dy + dz * dz;
+        },
+
+        magnitude: function () {
+            return Math.sqrt(this.magnitudeSquared());
+        },
+
+        magnitudeSquared: function () {
+            return this.x * this.x + this.y * this.y + this.z * this.z;
         }
     };
 

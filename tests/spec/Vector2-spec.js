@@ -82,5 +82,20 @@ define(['iso-svg/geom/Vector2'], function (Vector2) {
                 expect(a.distanceToSquared(b)).toEqual(2000);
             });
         });
+
+        describe('magnitude', function () {
+            it('should return the magnitude of the vector', function () {
+                var v = Vector2.create(3, 4);
+                expect(v.magnitude()).toEqual(5);
+            });
+        });
+
+
+        describe('magnitudeSquared', function () {
+            it('should return the magnitude squared of the vector', function () {
+                var v = Vector2.create(3, 4);
+                expect(v.magnitudeSquared()).toEqual(25);
+            });
+        });
     });
 });

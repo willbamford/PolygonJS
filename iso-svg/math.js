@@ -27,12 +27,12 @@ define([], function () {
             return x * x + y * y + z * z;
         },
 
-        magSquared: function (a) {
-            return a[0] * a[0] + a[1] * a[1] + a[2] * a[2];
-        },
-
         magnitude: function (a) {
             return Math.sqrt(this.magSquared(a));
+        },
+
+        magSquared: function (a) {
+            return a[0] * a[0] + a[1] * a[1] + a[2] * a[2];
         },
 
         crossProduct: function (a, b) {

@@ -86,5 +86,19 @@ define(['iso-svg/geom/Vector3'], function (Vector3) {
                 expect(a.distanceToSquared(b)).toEqual(2036);
             });
         });
+
+        describe('magnitude', function () {
+            it('should return the magnitude of the vector', function () {
+                var v = Vector3.create(3, 4, 5);
+                expect(v.magnitude()).toBeCloseTo(7.0711);
+            });
+        });
+
+        describe('magnitudeSquared', function () {
+            it('should return the magnitude squared of the vector', function () {
+                var v = Vector3.create(3, 4, 5);
+                expect(v.magnitudeSquared()).toEqual(50);
+            });
+        });
     });
 });
