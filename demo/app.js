@@ -24,7 +24,7 @@ require(
 
         var sphere = Sphere.create({
             levelOfDetail: 3,
-            spikiness: 0.1
+            spikiness: 0.15
         });
         renderer.mesh(sphere);
 

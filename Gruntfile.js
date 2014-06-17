@@ -9,6 +9,7 @@ module.exports = function (grunt) {
             all: {
                 options: {
                     specs: 'tests/spec/**/*-spec.js',
+                    helpers: 'tests/spec/**/*-helper.js',
                     template: require('grunt-template-jasmine-requirejs')
                 }
             }
