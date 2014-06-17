@@ -66,5 +66,21 @@ define(['iso-svg/geom/Vector2'], function (Vector2) {
                 expect(v2.toArray()).toEqual([40, -20]);
             });
         });
+
+        describe('distanceTo', function () {
+            it('should return the distance (scalar) between this vector and the input', function () {
+                var a = Vector2.create(3, 4);
+                var b = Vector2.create(10, 20);
+                expect(a.distanceTo(b)).toBeCloseTo(17.464);
+            });
+        });
+
+        describe('distanceToSquared', function () {
+            it('should return the distance squared (scalar) between this vector and the input', function () {
+                var a = Vector2.create(20, 10);
+                var b = Vector2.create(-20, -10);
+                expect(a.distanceToSquared(b)).toEqual(2000);
+            });
+        });
     });
 });

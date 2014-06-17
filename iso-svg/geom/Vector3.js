@@ -30,6 +30,17 @@ define([], function () {
 
         multiply: function (k) {
             return new Vector3(k * this.x, k * this.y, k * this.z);
+        },
+
+        distanceTo: function (v) {
+            return Math.sqrt(this.distanceToSquared(v));
+        },
+
+        distanceToSquared: function (v) {
+            var dx = v.x - this.x;
+            var dy = v.y - this.y;
+            var dz = v.z - this.z;
+            return dx * dx + dy * dy + dz * dz;
         }
     };
 

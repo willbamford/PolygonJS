@@ -29,6 +29,16 @@ define([], function () {
 
         multiply: function (k) {
             return new Vector2(k * this.x, k * this.y);
+        },
+
+        distanceTo: function (v) {
+            return Math.sqrt(this.distanceToSquared(v));
+        },
+
+        distanceToSquared: function (v) {
+            var dx = v.x - this.x;
+            var dy = v.y - this.y;
+            return dx * dx + dy * dy;
         }
     };
 
