@@ -22,14 +22,16 @@ require(
             camera: camera
         });
 
-        var icosahedron = Icosahedron.create();
+        // var icosahedron = Icosahedron.create();
+        // renderer.mesh(icosahedron);
+
+        var icosahedron = Sphere.create({
+            levelOfDetail: 3,
+            spikiness: 0.1
+        });
         renderer.mesh(icosahedron);
 
-        // var icosahedron = Sphere.create({
-        //     levelOfDetail: 4,
-        //     spikiness: -0.03
-        // });
-        // renderer.mesh(icosahedron);
+        // renderer.mesh(Icosahedron.create());
 
         // var cube = Cube.create();
         // renderer.mesh(cube);

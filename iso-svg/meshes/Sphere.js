@@ -1,6 +1,12 @@
 define(
-    ['iso-svg/lib', 'iso-svg/math', 'iso-svg/meshes/Mesh', 'iso-svg/meshes/Icosahedron'],
-    function (lib, math, Mesh, Icosahedron) {
+    [
+        'iso-svg/lib',
+        'iso-svg/math',
+        'iso-svg/geom/Vector3',
+        'iso-svg/meshes/Mesh',
+        'iso-svg/meshes/Icosahedron'
+    ],
+    function (lib, math, Vector3, Mesh, Icosahedron) {
 
         "use strict";
 
@@ -29,8 +35,10 @@ define(
                 if (map[abk]) {
                     abi = map[abk];
                 } else {
-                    ab = math.normalise(math.mean([vs[face[0]], vs[face[1]]]));
-                    if (levelOfDetail === 0 && spikiness !== 0) math.scale(ab, 1 - spikiness);
+                    // ab = math.normalise(math.mean([vs[face[0]], vs[face[1]]]));
+                    ab = Vector3.mean([vs[face[0]], vs[face[1]]]).normalise();
+                    // math.normalise(math.mean([vs[face[0]], vs[face[1]]]));
+                    if (levelOfDetail === 0 && spikiness !== 0) ab = ab.multiply(1 - spikiness);
                     abi = vertices.length; vertices.push(ab);
                     map[abk] = abi;
                 }
@@ -38,8 +46,9 @@ define(
                 if (map[bck]) {
                     bci = map[bck];
                 } else {
-                    bc = math.normalise(math.mean([vs[face[1]], vs[face[2]]]));
-                    if (levelOfDetail === 0 && spikiness !== 0) math.scale(bc, 1 - spikiness);
+                    bc = Vector3.mean([vs[face[1]], vs[face[2]]]).normalise();
+                    // bc = math.normalise(math.mean([vs[face[1]], vs[face[2]]]));
+                    if (levelOfDetail === 0 && spikiness !== 0) bc = bc.multiply(1 - spikiness);
                     bci = vertices.length; vertices.push(bc);
                     map[bck] = bci;
                 }
@@ -47,8 +56,9 @@ define(
                 if (map[cak]) {
                     cai = map[cak];
                 } else {
-                    ca = math.normalise(math.mean([vs[face[2]], vs[face[0]]]));
-                    if (levelOfDetail === 0 && spikiness !== 0) math.scale(ca, 1 - spikiness);
+                    ca = Vector3.mean([vs[face[2]], vs[face[0]]]).normalise();
+                    // ca = math.normalise(math.mean([vs[face[2]], vs[face[0]]]));
+                    if (levelOfDetail === 0 && spikiness !== 0) ca = ca.multiply(1 - spikiness);
                     cai = vertices.length; vertices.push(ca);
                     map[cak] = cai;
                 }

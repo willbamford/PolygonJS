@@ -42,14 +42,17 @@ define(
                 lib.each(vertices, function (vertex) {
                     points.push(camera.project(vertex));
                 });
-                var dp = camera.facingVector.dotProduct(normal); //math.dotProduct(normal, camera.facingVector);
+                var dp = camera.facingVector.dotProduct(normal);
                 var backfaceCull = true;
                 if (backfaceCull ? dp < 0 : true) {
-                    var r = Math.floor(math.clamp(normal.dotProduct(Vector3.create(1, 0, 0)) * 255, 0, 255));
-                    var g = Math.floor(math.clamp(normal.dotProduct(Vector3.create(0, 1, 0)) * 255, 0, 255));
-                    var b = Math.floor(math.clamp(normal.dotProduct(Vector3.create(0, 0, 1)) * 255, 0, 255));
-                    var style = 'fill: rgba(' + r + ',' + g + ',' + r + ', 1.0)';
+                    var r = Math.floor(math.clamp(normal.dotProduct(Vector3.X) * 255, 0, 255));
+                    var g = Math.floor(math.clamp(normal.dotProduct(Vector3.Y) * 255, 0, 255));
+                    var b = Math.floor(math.clamp(normal.dotProduct(Vector3.Z) * 255, 0, 255));
+                    var style = 'fill: rgba(' + r + ',' + g + ',' + b + ', 1.0)';
                     this.surface.polygon(points, style);
+                    // points.forEach(function (point) {
+                    //     self.surface.circle(point.x, point.y);
+                    // });
                 }
             },
 
