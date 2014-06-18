@@ -2,14 +2,55 @@ define(['iso-svg/geom/Vector3'], function (Vector3) {
 
     "use strict";
 
-    describe('Vector', function () {
+    describe('Vector3', function () {
         
         describe('create', function () {
             it('should be able to create new instances', function () {
-                var v = Vector3.create(3, 4, 5);
-                expect(v.x).toEqual(3);
-                expect(v.y).toEqual(4);
-                expect(v.z).toEqual(5);
+                expect(Vector3.create(3, 4, 5).toArray()).toEqual([3, 4, 5]);
+            });
+        });
+
+        describe('createFromArray', function () {
+            it('should be able to create new instances from an array', function () {
+                expect(Vector3.createFromArray([3, 4, 5]).toArray()).toEqual([3, 4, 5]);
+            });
+        });
+
+        describe('createFromArrays', function () {
+            it('should be ablee to create an array of instances from a 2D input array', function () {
+                var ia = [
+                    [0, 1, 2],
+                    [3, 4, 5],
+                    [6, 7, 8]
+                ];
+                var oa = Vector3.createFromArrays(ia);
+                expect(oa.length).toBe(3);
+                expect(oa[0].toArray()).toEqual([0, 1, 2]);
+                expect(oa[1].toArray()).toEqual([3, 4, 5]);
+                expect(oa[2].toArray()).toEqual([6, 7, 8]);
+            });
+        });
+
+        describe('mean', function () {
+            it('should return the mean vector', function () {
+                var arrs = [
+                    [0,  10, 12],
+                    [2, -10, 15],
+                    [4, -20, 14],
+                    [8,  20, 13]
+                ];
+                var a = Vector3.mean(Vector3.createFromArrays(arrs));
+                expect(a.toArray()).toEqual([3.5, 0, 13.5]);
+            });
+        });
+
+        describe('normalFromPositionVectors', function () {
+            it('should calculate the normal from three position vectors', function () {
+                var v1 = Vector3.create(5, 5, 5);
+                var v2 = Vector3.create(6, 5, 5);
+                var v3 = Vector3.create(5, 10, 5);
+                var n = Vector3.normalFromPositionVectors(v1, v2, v3);
+                expect(n.toArray()).toEqual([0, 0, 1]);
             });
         });
 
@@ -113,6 +154,43 @@ define(['iso-svg/geom/Vector3'], function (Vector3) {
                         Vector3.create(2, 5, 10)
                     ).toArray()
                 ).toEqual([-45, -20, 19]);
+            });
+        });
+
+        describe('dotProduct', function () {
+            it('should return the dot product of this vector and the input', function () {
+                expect(Vector3.create(1, 0, 0).dotProduct(Vector3.create(0, 0, 1))).toBe(0);
+                expect(Vector3.create(1, 0, 0).dotProduct(Vector3.create(1, 0, 0))).toBe(1);
+                expect(Vector3.create(0, 0, -1).dotProduct(Vector3.create(0, 0, 1))).toBe(-1);
+            });
+        });
+
+        describe('normalise', function () {
+            it('should normalise this vector (mutable)', function () {
+                var v1 = Vector3.create(1, 1, 1);
+                var v2 = v1.normalise();
+                expect(v1).toBe(v2);
+                expect(v1.toArray()).toEqual([0.5773502691896258, 0.5773502691896258, 0.5773502691896258]);
+            });
+            it('should return unmodified array if magnitude is zero', function () {
+                expect(Vector3.create(0, 0, 0).toArray()).toEqual([0, 0, 0]);
+            });
+        });
+
+        describe('normalised', function () {
+            it('should return a copy of the array normalised', function () {
+                var v1 = Vector3.create(2, 2, 2);
+                var v2 = v1.normalised();
+                expect(v1).not.toBe(v2);
+                expect(v2.toArray()).toEqual([0.5773502691896258, 0.5773502691896258, 0.5773502691896258]);
+            });
+        });
+
+        describe('normal', function () {
+            it('should return the normal of this vector with the input vector', function () {
+                var v1 = Vector3.create(10, 0, 0);
+                var v2 = Vector3.create(0, 10, 0);
+                expect(v1.normal(v2).toArray()).toEqual([0, 0, 1]);
             });
         });
     });

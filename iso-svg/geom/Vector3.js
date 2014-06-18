@@ -10,6 +10,45 @@ define([], function () {
         return new Vector3(x, y, z);
     };
 
+    Vector3.createFromArray = function (arr) {
+        return new Vector3(arr[0], arr[1], arr[2]);
+    };
+
+    Vector3.createFromArrays = function (ia) {
+        var oa = [];
+        if (ia) {
+            var len = ia.length;
+            for (var i = 0; i < len; i++) {
+                oa.push(Vector3.createFromArray(ia[i]));
+            }
+        }
+        return oa;
+    };
+
+    Vector3.mean = function (arrs) {
+        var ax = 0;
+        var ay = 0;
+        var az = 0;
+        if (arrs) {
+            var len = arrs.length;
+            for (var i = 0; i < len; i++) {
+                ax += arrs[i].x;
+                ay += arrs[i].y;
+                az += arrs[i].z;
+            }
+            ax /= len;
+            ay /= len;
+            az /= len;
+        }
+        return Vector3.create(ax, ay, az);
+    };
+
+    Vector3.normalFromPositionVectors = function (a, b, c) {
+        var ba = a.subtract(b);
+        var ca = a.subtract(c);
+        return ba.normal(ca);
+    };
+
     Vector3.prototype = {
         
         copy: function () {
@@ -57,7 +96,31 @@ define([], function () {
                 this.z * v.x - this.x * v.z,
                 this.x * v.y - this.y * v.x
             );
-        }
+        },
+
+        dotProduct: function (v) {
+            return this.x * v.x + this.y + v.y + this.z * v.z;
+        },
+
+        normalise: function () {
+            var mag = this.magnitude();
+            if (mag !== 0) {
+                this.x /= mag;
+                this.y /= mag;
+                this.z /= mag;
+            }
+            return this;
+        },
+
+        normalised: function () {
+            return this.copy().normalise();
+        },
+
+        normal: function (v) {
+            return this.crossProduct(v).normalised();
+        },
+
+
     };
 
     Vector3.ZERO = Vector3.create(0, 0, 0);

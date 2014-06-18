@@ -2,7 +2,7 @@ define(['iso-svg/geom/Vector2'], function (Vector2) {
 
     "use strict";
 
-    describe('Vector', function () {
+    describe('Vector2', function () {
         
         describe('create', function () {
             it('should be able to create new instances', function () {
