@@ -118,9 +118,7 @@ define([], function () {
 
         normal: function (v) {
             return this.crossProduct(v).normalised();
-        },
-
-
+        }
     };
 
     Vector3.ZERO = Vector3.create(0, 0, 0);
