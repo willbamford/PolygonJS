@@ -82,8 +82,8 @@ define(['iso-svg/lib'], function (lib) {
             style = style || 'fill: ' + this.randomColour();
             id = id || 'p' + Surface.lastId++;
             lib.each(points, function (point) {
-                var x = point[0] + self.cx;
-                var y = point[1] + self.cy;
+                var x = point.x + self.cx;
+                var y = point.y + self.cy;
                 encodedPoints += x + ',' + y + ' ';
             });
             var polygon = this.createEl('polygon', {

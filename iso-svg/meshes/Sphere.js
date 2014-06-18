@@ -1,5 +1,5 @@
 define(
-    ['iso-svg/lib', 'iso-svg/math', 'iso-svg/Mesh', 'iso-svg/meshes/Icosahedron'],
+    ['iso-svg/lib', 'iso-svg/math', 'iso-svg/meshes/Mesh', 'iso-svg/meshes/Icosahedron'],
     function (lib, math, Mesh, Icosahedron) {
 
         "use strict";
