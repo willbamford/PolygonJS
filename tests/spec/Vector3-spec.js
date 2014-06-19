@@ -112,6 +112,18 @@ define(['iso-svg/geom/Vector3'], function (Vector3) {
             });
         });
 
+        describe('multiplyBy', function () {
+            it('should be able to multiply a vector by a scalar (mutates)', function () {
+                var v1 = Vector3.create(4, -2, 9);
+                var k = 10;
+                var v2 = v1.multiplyBy(k);
+                expect(v1).toBe(v2);
+                expect(v2.x).toEqual(40);
+                expect(v2.y).toEqual(-20);
+                expect(v2.z).toEqual(90);
+            });
+        });
+
         describe('distanceTo', function () {
             it('should return the distance (scalar) between this vector and the input', function () {
                 var a = Vector3.create(3, 4, 5);

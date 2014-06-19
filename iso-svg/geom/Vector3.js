@@ -68,7 +68,14 @@ define([], function () {
         },
 
         multiply: function (k) {
-            return new Vector3(k * this.x, k * this.y, k * this.z);
+            return this.copy().multiplyBy(k);
+        },
+
+        multiplyBy: function (k) {
+            this.x = this.x * k;
+            this.y = this.y * k;
+            this.z = this.z * k;
+            return this;
         },
 
         distanceTo: function (v) {
