@@ -1,4 +1,4 @@
-define(['iso-svg/Mesh'], function (Mesh) { 
+define(['iso-svg/meshes/Mesh', 'iso-svg/geom/Vector3'], function (Mesh, Vector3) { 
 
     "use strict";
 
@@ -12,7 +12,7 @@ define(['iso-svg/Mesh'], function (Mesh) {
 
             it('should allow initialisation with vertices and faces', function () {
                 var opts = {
-                    vertices: [[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1]],
+                    vertices: Vector3.createFromArrays([[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1]]),
                     faces: [[0, 1, 2], [0, 2, 3]]
                 }
                 var m = Mesh.create(opts);
@@ -43,7 +43,7 @@ define(['iso-svg/Mesh'], function (Mesh) {
             it('should recalculate normals based on vertices and faces', function () {
                 // Ground square with two triangular faces
                 var m = Mesh.create({
-                    vertices: [[0, 0, 0], [1, 0, 0], [0, 1, 0], [1, 1, 0]],
+                    vertices: Vector3.createFromArrays([[0, 0, 0], [1, 0, 0], [0, 1, 0], [1, 1, 0]]),
                     faces: [[0, 1, 2], [0, 2, 3]]
                 });
                 expect(m.normals.length).toEqual(m.faces.length);

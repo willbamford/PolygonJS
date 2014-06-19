@@ -1,4 +1,4 @@
-define(['iso-svg/Camera'], function (Camera) { 
+define(['iso-svg/Camera', 'iso-svg/geom/Vector3'], function (Camera, Vector3) { 
 
     "use strict";
 
@@ -25,21 +25,17 @@ define(['iso-svg/Camera'], function (Camera) {
                     zoom: 1
                 });
 
-                var p = camera.project([0, 0, 0]);
-                expect(p[0]).toBe(0);
-                expect(p[1]).toBe(0);
+                var p = camera.project(Vector3.create(0, 0, 0));
+                expect(p.toArray()).toEqual([0, 0]);
 
-                p = camera.project([1, 0, 0]);
-                expect(p[0]).toBe(0);
-                expect(p[1]).toBe(0);
+                p = camera.project(Vector3.create(1, 0, 0));
+                expect(p.toArray()).toEqual([0, 0]);
 
-                p = camera.project([0, 1, 0]);
-                expect(p[0]).toBe(1);
-                expect(p[1]).toBe(0);
+                p = camera.project(Vector3.create(0, 1, 0));
+                expect(p.toArray()).toEqual([1, 0]);
 
-                p = camera.project([0, 0, 1]);
-                expect(p[0]).toBe(0);
-                expect(p[1]).toBe(-1);
+                p = camera.project(Vector3.create(0, 0, 1));
+                expect(p.toArray()).toEqual([0, 1]);
             })
         });
 
@@ -50,17 +46,15 @@ define(['iso-svg/Camera'], function (Camera) {
                     zoom: 1
                 });
 
-                var p = camera.project([0, 0, 0]);
-                expect(p[0]).toBeCloseTo(0);
-                expect(p[1]).toBeCloseTo(0);
+                var p = camera.project(Vector3.create(0, 0, 0));
+                expect(p.toArray()).toEqual([0, 0]);
 
-                p = camera.project([1, 1, 1]);
-                expect(p[0]).toBeCloseTo(0);
-                expect(p[1]).toBeCloseTo(0);
+                p = camera.project(Vector3.create(1, 1, 1));
+                expect(p.toArray()).toEqual([0, 0]);
 
-                p = camera.project([20, 30, 40]);
-                expect(p[0]).toBeCloseTo(-8.660, 3);
-                expect(p[1]).toBeCloseTo(-15);
+                p = camera.project(Vector3.create(20, 30, 40));
+                expect(p.x).toBeCloseTo(-8.660, 3);
+                expect(p.y).toBeCloseTo(-15);
             })
         });
 
@@ -71,12 +65,14 @@ define(['iso-svg/Camera'], function (Camera) {
                     zoom: 1
                 });
 
-                var sortedIndices = camera.distanceSort([
-                    [0, 0, 0],
-                    [-1, -1, -1],
-                    [5, 3, 2],
-                    [1, 1, 1]
-                ]);
+                var sortedIndices = camera.distanceSort(
+                    Vector3.createFromArrays([
+                        [0, 0, 0],
+                        [-1, -1, -1],
+                        [5, 3, 2],
+                        [1, 1, 1]
+                    ])
+                );
                 expect(sortedIndices.length).toBe(4);
                 expect(sortedIndices[0]).toBe(2);
                 expect(sortedIndices[1]).toBe(3);
@@ -88,12 +84,14 @@ define(['iso-svg/Camera'], function (Camera) {
                     zoom: 1
                 });
 
-                sortedIndices = camera.distanceSort([
-                    [10, 9, 8],
-                    [8, 100, 100],
-                    [1000, -100, -100],
-                    [-10, 900, 900]
-                ]);
+                sortedIndices = camera.distanceSort(
+                    Vector3.createFromArrays([
+                        [10, 9, 8],
+                        [8, 100, 100],
+                        [1000, -100, -100],
+                        [-10, 900, 900]
+                    ])
+                );
                 expect(sortedIndices.length).toBe(4);
                 expect(sortedIndices[0]).toBe(2);
                 expect(sortedIndices[1]).toBe(0);
