@@ -117,7 +117,7 @@ define(['iso-svg/geom/Vector3'], function (Vector3) {
                 var v1 = Vector3.create(4, -2, 9);
                 var k = 10;
                 var v2 = v1.multiplyBy(k);
-                expect(v1).toBe(v2);
+                expect(v1).toBe(v2); // Should mutate
                 expect(v2.x).toEqual(40);
                 expect(v2.y).toEqual(-20);
                 expect(v2.z).toEqual(90);

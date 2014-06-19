@@ -1,5 +1,7 @@
 define([], function () {
 
+    "use strict";
+
     var Vector2 = function (x, y) {
         this.x = x;
         this.y = y;
@@ -28,7 +30,13 @@ define([], function () {
         },
 
         multiply: function (k) {
-            return new Vector2(k * this.x, k * this.y);
+            return this.copy().multiplyBy(k);
+        },
+
+        multiplyBy: function (k) {
+            this.x = this.x * k;
+            this.y = this.y * k;
+            return this;
         },
 
         distanceTo: function (v) {
