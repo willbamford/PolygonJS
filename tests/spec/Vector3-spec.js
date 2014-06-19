@@ -81,11 +81,21 @@ define(['iso-svg/geom/Vector3'], function (Vector3) {
         });
 
         describe('add', function () {
-            it('should be able to add two vectors together', function () {
+            it('should be able to add a vector', function () {
                 var v1 = Vector3.create(4, -2, 9);
                 var v2 = Vector3.create(3, 5, -10);
                 var v3 = v1.add(v2);
                 expect(v1.x).toEqual(4); // Should not mutate
+                expect(v3.toArray()).toEqual([7, 3, -1]);
+            });
+        });
+
+        describe('addTo', function () {
+            it('should be able to add a vector (mutates)', function () {
+                var v1 = Vector3.create(4, -2, 9);
+                var v2 = Vector3.create(3, 5, -10);
+                var v3 = v1.addTo(v2);
+                expect(v3).toBe(v1); // Should mutate
                 expect(v3.toArray()).toEqual([7, 3, -1]);
             });
         });

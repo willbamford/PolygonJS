@@ -22,7 +22,13 @@ define([], function () {
         },
 
         add: function (v) {
-            return new Vector2(this.x + v.x, this.y + v.y);
+            return this.copy().addTo(v);
+        },
+
+        addTo: function (v) {
+            this.x += v.x;
+            this.y += v.y;
+            return this;
         },
 
         subtract: function (v) {

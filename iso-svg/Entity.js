@@ -1,79 +1,88 @@
-define(['iso-svg/lib'], function (lib) {
+define(
+    [
+        'iso-svg/lib',
+        'iso-svg/geom/Vector3'
+    ],
+    function (lib, Vector3) {
 
-    "use strict";
+        "use strict";
 
-    var Entity = function (opts) {
-        this.parent = null;
+        var Entity = function (opts) {
+            this.parent = null;
 
-        // this.position = Vector3.create([0, 0, 0] /* Vector3.ZERO */);
-        // this.rotation = Matrix3.IDENTITY.copy(); //Matrix3.copy(Matrix3.IDENTITY); // Matrix3.create([
-        //     // [1, 0, 0],
-        //     // [0, 1, 0],
-        //     // [0, 0, 1]
-        // //] /* Matrix3.IDENTITY */);
-        // this.scale = Vector3.create(Vector3.IDENTITY);
+            this.position = Vector3.ZERO.copy();
 
-        // [
-        //     [1, 0, 0],
-        //     [0, 1, 0],
-        //     [0, 0, 1]
-        // ];
-        // this.scale = Vector3.x(){x: 1, y: 1, z: 1};
+            // this.rotation = Matrix3.IDENTITY.copy(); //Matrix3.copy(Matrix3.IDENTITY); // Matrix3.create([
+            //     // [1, 0, 0],
+            //     // [0, 1, 0],
+            //     // [0, 0, 1]
+            // //] /* Matrix3.IDENTITY */);
+            // this.scale = Vector3.create(Vector3.IDENTITY);
 
-        this.children = [];
-    };
+            // [
+            //     [1, 0, 0],
+            //     [0, 1, 0],
+            //     [0, 0, 1]
+            // ];
+            // this.scale = Vector3.x(){x: 1, y: 1, z: 1};
 
-    Entity.create = function (opts) {
-        return new Entity(opts);
-    };
+            this.scale = Vector3.ONE.copy();
 
-    // Entity.prototype.rotateBy = function (ax, ay, az) {
+            this.children = [];
+        };
 
-    // };
+        Entity.create = function (opts) {
+            return new Entity(opts);
+        };
 
-    // Entity.prototype.rotateByX = function (ax) {
+        // Entity.prototype.rotateBy = function (ax, ay, az) {
 
-    // };
+        // };
 
-    // Entity.prototype.rotateByY = function (ay) {
+        // Entity.prototype.rotateByX = function (ax) {
 
-    // };
+        // };
 
-    // Entity.prototype.rotateByZ = function (az) {
+        // Entity.prototype.rotateByY = function (ay) {
 
-    // };
+        // };
 
-    // Entity.prototype.moveBy = function (dx, dy, dz) {
+        // Entity.prototype.rotateByZ = function (az) {
 
-    // };
+        // };
 
-    // Entity.prototype.moveX = function (dx) {
+        // Entity.prototype.moveBy = function (dx, dy, dz) {
 
-    // };
+        // };
 
-    // Entity.prototype.moveY = function (dy) {
+        // Entity.prototype.moveX = function (dx) {
 
-    // };
+        // };
 
-    // Entity.prototype.moveZ = function (dz) {
+        // Entity.prototype.moveY = function (dy) {
 
-    // };
+        // };
 
-    // Entity.prototype.scaleBy = function (sx, sy, sz) {
+        // Entity.prototype.moveZ = function (dz) {
 
-    // };
+        // };
 
-    // Entity.prototype.scaleByX = function (sx) {
+        // Entity.prototype.scaleBy = function (sx, sy, sz) {
 
-    // };
+        // };
 
-    // Entity.prototype.scaleByY = function (sy) {
+        // Entity.prototype.scaleByX = function (sx) {
 
-    // };
+        // };
 
-    // Entity.prototype.scaleByZ = function (sz) {
+        // Entity.prototype.scaleByY = function (sy) {
 
-    // };
+        // };
 
-    return Entity;
-});
+        // Entity.prototype.scaleByZ = function (sz) {
+
+        // };
+
+        return Entity;
+    }
+);
