@@ -57,6 +57,16 @@ define(['iso-svg/geom/Vector2'], function (Vector2) {
             });
         });
 
+        describe('subtractBy', function () {
+            it('should be able to subtract one vector from another (mutates)', function () {
+                var v1 = Vector2.create(4, -2);
+                var v2 = Vector2.create(3, 5);
+                var v3 = v1.subtractBy(v2);
+                expect(v3).toBe(v1); // Should mutate
+                expect(v3.toArray()).toEqual([1, -7]);
+            });
+        });
+
         describe('multiply', function () {
             it('should be able to multiply a vector by a scalar', function () {
                 var v1 = Vector2.create(4, -2);

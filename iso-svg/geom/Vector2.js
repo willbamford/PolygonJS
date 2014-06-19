@@ -26,7 +26,13 @@ define([], function () {
         },
 
         subtract: function (v) {
-            return new Vector2(this.x - v.x, this.y - v.y);
+            return this.copy().subtractBy(v);
+        },
+
+        subtractBy: function (v) {
+            this.x -= v.x;
+            this.y -= v.y;
+            return this;
         },
 
         multiply: function (k) {

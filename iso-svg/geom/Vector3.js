@@ -66,7 +66,14 @@ define([], function () {
         },
 
         subtract: function (v) {
-            return new Vector3(this.x - v.x, this.y - v.y, this.z - v.z);
+            return this.copy().subtractBy(v);
+        },
+
+        subtractBy: function (v) {
+            this.x -= v.x;
+            this.y -= v.y;
+            this.z -= v.z;
+            return this;
         },
 
         multiply: function (k) {
@@ -74,9 +81,9 @@ define([], function () {
         },
 
         multiplyBy: function (k) {
-            this.x = this.x * k;
-            this.y = this.y * k;
-            this.z = this.z * k;
+            this.x *= k;
+            this.y *= k;
+            this.z *= k;
             return this;
         },
 

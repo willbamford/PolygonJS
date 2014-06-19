@@ -1,5 +1,11 @@
 define(
-    ['iso-svg/lib', 'iso-svg/math', 'iso-svg/geom/Vector2', 'iso-svg/geom/Vector3', 'iso-svg/Entity'],
+    [
+        'iso-svg/lib',
+        'iso-svg/math',
+        'iso-svg/geom/Vector2',
+        'iso-svg/geom/Vector3',
+        'iso-svg/Entity'
+    ],
     function (lib, math, Vector2, Vector3, Entity) {
 
         "use strict"
