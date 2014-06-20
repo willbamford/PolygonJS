@@ -51,16 +51,17 @@ define(['iso-svg/math'], function (math) {
     Matrix3.IDENTITY = Matrix3.create(identity);
 
     Matrix3.prototype = {
+
+        copy: function () {
+            return Matrix3.create(this.toArrays());
+        },
+
         toArrays: function () {
             return [
                 [this.a, this.b, this.c],
                 [this.d, this.e, this.f],
                 [this.g, this.h, this.i],
             ];
-        },
-
-        copy: function () {
-            return Matrix3.create(this.toArrays());
         },
 
         equals: function (m) {

@@ -1,4 +1,4 @@
-define([], function () {
+define(['iso-svg/math'], function (math) {
 
     "use strict";
 
@@ -55,6 +55,12 @@ define([], function () {
         
         copy: function () {
             return new Vector3(this.x, this.y, this.z);
+        },
+
+        equals: function (v) {
+            return (math.equals(this.x, v.x) &&
+                math.equals(this.y, v.y) &&
+                math.equals(this.z, v.z));
         },
 
         toArray: function () {

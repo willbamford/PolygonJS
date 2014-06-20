@@ -99,7 +99,6 @@ define(
                     [13, 14, 15],
                     [16, 17, 18]
                 ]));
-                console.log(p.toArrays());
                 expect(p.equals(Matrix3.create(e))).toBe(true);
             });
         });

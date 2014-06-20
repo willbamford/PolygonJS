@@ -63,6 +63,14 @@ define(['iso-svg/geom/Vector3'], function (Vector3) {
             });
         });
 
+        describe('equals', function () {
+            it('should return true if the two vectors have the same values', function () {
+                expect(Vector3.create(0, 0, 0).equals(Vector3.create(0, 0, 0))).toBe(true);
+                expect(Vector3.create(1, 0.9999999, 1).equals(Vector3.create(1, 1, 1))).toBe(true);
+                expect(Vector3.create(1.000001, 1, 1).equals(Vector3.create(1, 1, 1))).toBe(true);
+            });
+        });
+
         describe('toArray', function () {
             it('should return a one-dimensional array representation of the vector', function () {
                 var v = Vector3.create(55, 44, 33);

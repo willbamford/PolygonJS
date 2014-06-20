@@ -21,6 +21,14 @@ define(['iso-svg/geom/Vector2'], function (Vector2) {
             });
         });
 
+        describe('equals', function () {
+            it('should return true if the two vectors have the same values', function () {
+                expect(Vector2.create(0, 0).equals(Vector2.create(0, 0))).toBe(true);
+                expect(Vector2.create(1, 0.9999999).equals(Vector2.create(1, 1))).toBe(true);
+                expect(Vector2.create(1.000001, 1).equals(Vector2.create(1, 1))).toBe(true);
+            });
+        });
+
         describe('toArray', function () {
             it('should return a one-dimensional array representation of the vector', function () {
                 var v = Vector2.create(55, 44);
