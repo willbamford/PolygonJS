@@ -21,7 +21,7 @@ define(['iso-svg/meshes/Mesh', 'iso-svg/geom/Vector3'], function (Mesh, Vector3)
             });
         });
         
-        describe('setVertices', function () {
+        describe('vertices', function () {
             it('should set vertices', function () {
                 var m = Mesh.create({});
                 var vertices = [[0, 0, 0], [1, 1, 1]];
@@ -30,7 +30,7 @@ define(['iso-svg/meshes/Mesh', 'iso-svg/geom/Vector3'], function (Mesh, Vector3)
             });
         });
 
-        describe('setFaces', function () {
+        describe('faces', function () {
             it('should set faces', function () {
                 var m = Mesh.create({});
                 var faces = [[0, 1, 2], [0, 2, 3]];
@@ -41,7 +41,6 @@ define(['iso-svg/meshes/Mesh', 'iso-svg/geom/Vector3'], function (Mesh, Vector3)
 
         describe('updateNormals', function () {
             it('should recalculate normals based on vertices and faces', function () {
-                // Ground square with two triangular faces
                 var m = Mesh.create({
                     vertices: Vector3.createFromArrays([[0, 0, 0], [1, 0, 0], [0, 1, 0], [1, 1, 0]]),
                     faces: [[0, 1, 2], [0, 2, 3]]

@@ -29,15 +29,15 @@ define(
         Camera.ISOMETRIC = 'isometric';
 
         Camera.orthographicProjection = function (v) {
-            return Vector2.create(v.y, v.z);
+            return Vector2.create(v.z, -v.y);
         };
 
         Camera.isometricProjection = function (v) {
-            var vx = v.x, vy = v.y, vz = -v.z;
+            var vx = v.x, vy = -v.y, vz = v.z;
             var alpha = Math.PI / 6; // 30 degrees
             var beta = alpha;
-            var x = (vx * Math.cos(alpha)) - (vy * Math.cos(beta));
-            var y = (vx * Math.sin(alpha)) + (vy * Math.sin(beta)) + vz;
+            var x = (vx * Math.cos(alpha)) - (vz * Math.cos(beta));
+            var y = (vx * Math.sin(alpha)) + (vz * Math.sin(beta)) + vy;
             return Vector2.create(x, y);
         };
 
@@ -52,9 +52,13 @@ define(
         Camera.prototype.distanceSort = function (vertices) {
             var self = this;
             var sorted = vertices.map(function (v, i) { return {v: v, i: i}; });
+            var eye = this.facingVector.multiply(1000);
             sorted.sort(function (a, b) {
-                return self.facingVector.dotProduct(a.v) - self.facingVector.dotProduct(b.v);
+                return a.v.distanceToSquared(eye) - b.v.distanceToSquared(eye);
             });
+            // sorted.sort(function (a, b) {
+            //     return self.facingVector.dotProduct(a.v) - self.facingVector.dotProduct(b.v);
+            // });
             return sorted.map(function (o) { return o.i; });
         };
 

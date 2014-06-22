@@ -81,6 +81,10 @@ define([], function () {
                 }
             }
             return derived;
+        },
+
+        trim: function (s) {
+            return s.replace(/^\s+|\s+$/g, '');
         }
     };
     return lib;

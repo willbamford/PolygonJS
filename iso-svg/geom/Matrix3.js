@@ -48,8 +48,6 @@ define(['iso-svg/math'], function (math) {
         ]);
     };
 
-    Matrix3.IDENTITY = Matrix3.create(identity);
-
     Matrix3.prototype = {
 
         copy: function () {
@@ -89,6 +87,8 @@ define(['iso-svg/math'], function (math) {
             return p;
         }
     };
+
+    Matrix3.IDENTITY = Matrix3.create(identity);
 
     return Matrix3;
 });

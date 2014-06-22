@@ -143,5 +143,12 @@ define(['iso-svg/lib'], function (lib) {
             });
         });
 
+        describe('trim', function () {
+            it('should trim whitespace from the start / end of a string', function () {
+                expect(lib.trim('    hello    ')).toEqual('hello');
+                expect(lib.trim(' abc def')).toEqual('abc def');
+            });
+        });
+
     });
 });

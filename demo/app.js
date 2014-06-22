@@ -4,13 +4,13 @@ require(
         'iso-svg/Surface',
         'iso-svg/Camera',
         'iso-svg/Renderer',
+        'iso-svg/meshes/Mesh',
         'iso-svg/meshes/Icosahedron',
         'iso-svg/meshes/Cube',
-        'iso-svg/meshes/Sphere'
+        'iso-svg/meshes/Sphere',
+        'text!iso-svg/meshes/data/princeton/m91.off'
     ],
-    function (lib, Surface, Camera, Renderer, Icosahedron, Cube, Sphere) {
-
-        "use strict";
+    function (lib, Surface, Camera, Renderer, Mesh, Icosahedron, Cube, Sphere, meshData) {
 
         var surface = Surface.create({});
         var camera = Camera.create({
@@ -22,18 +22,21 @@ require(
             camera: camera
         });
 
+        var mesh = Mesh.load(meshData, Mesh.OBJECT_FILE_FORMAT);
+        renderer.mesh(mesh);
+
+        // lib.each(mesh.faces, function (face) {
+        //     face = face.reverse();
+        // });
+        // mesh.updateNormals();
+
         // var icosahedron = Icosahedron.create();
         // renderer.mesh(icosahedron);
 
-        var icosahedron = Sphere.create({
-            levelOfDetail: 3,
-            spikiness: 0.1
-        });
-        renderer.mesh(icosahedron);
-
-        // renderer.mesh(Icosahedron.create());
-
-        // var cube = Cube.create();
-        // renderer.mesh(cube);
+        // var icosahedron = Sphere.create({
+        //     levelOfDetail: 3,
+        //     spikiness: 0.1
+        // });
+        // renderer.mesh(icosahedron);
     }
 );

@@ -45,13 +45,13 @@ define(
                 var dp = camera.facingVector.dotProduct(normal);
                 var backfaceCull = true;
                 if (backfaceCull ? dp < 0 : true) {
-                    var r = Math.floor(math.clamp(normal.dotProduct(Vector3.X) * 255, 0, 255));
+                    var b = Math.floor(math.clamp(normal.dotProduct(Vector3.X) * 255, 0, 255));
                     var g = Math.floor(math.clamp(normal.dotProduct(Vector3.Y) * 255, 0, 255));
-                    var b = Math.floor(math.clamp(normal.dotProduct(Vector3.Z) * 255, 0, 255));
+                    var r = Math.floor(math.clamp(normal.dotProduct(Vector3.Z) * 255, 0, 255));
                     var style = 'fill: rgba(' + r + ',' + g + ',' + b + ', 1.0)';
                     this.surface.polygon(points, style);
                     // points.forEach(function (point) {
-                    //     self.surface.circle(point.x, point.y);
+                    //     self.surface.circle(point.x, point.y, 0.2);
                     // });
                 }
             },
