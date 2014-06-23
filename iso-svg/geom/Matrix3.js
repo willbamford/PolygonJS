@@ -9,11 +9,12 @@ define(['iso-svg/math'], function (math) {
     ];
 
     var Matrix3 = function (a) {
+        var t = this;
         a = a || identity;
         if (a) {
-            this.a = a[0][0]; this.b = a[0][1]; this.c = a[0][2];
-            this.d = a[1][0]; this.e = a[1][1]; this.f = a[1][2];
-            this.g = a[2][0]; this.h = a[2][1]; this.i = a[2][2];
+            t.a = a[0][0]; t.b = a[0][1]; t.c = a[0][2];
+            t.d = a[1][0]; t.e = a[1][1]; t.f = a[1][2];
+            t.g = a[2][0]; t.h = a[2][1]; t.i = a[2][2];
         }
     };
 
@@ -85,6 +86,30 @@ define(['iso-svg/math'], function (math) {
             p.i = t.g * m.c + t.h * m.f + t.i * m.i;
 
             return p;
+        },
+
+        inverse: function () {
+
+            var t = this,
+                m = Matrix3.create();
+
+            var det =
+                t.a * (t.e * t.i - t.h * t.f) -
+                t.b * (t.d * t.i - t.f * t.g) +
+                t.c * (t.d * t.h - t.e * t.g);
+
+            var idet = 1 / det;
+            m.a = (t.e * t.i - t.h * t.f) * idet;
+            m.b = (t.c * t.h - t.b * t.i) * idet;
+            m.c = (t.b * t.f - t.c * t.e) * idet;
+            m.d = (t.f * t.g - t.d * t.i) * idet;
+            m.e = (t.a * t.i - t.c * t.g) * idet;
+            m.f = (t.d * t.c - t.a * t.f) * idet;
+            m.g = (t.d * t.h - t.g * t.e) * idet;
+            m.h = (t.g * t.b - t.a * t.h) * idet;
+            m.i = (t.a * t.e - t.d * t.b) * idet;
+
+            return m;
         }
     };
 

@@ -102,5 +102,22 @@ define(
                 expect(p.equals(Matrix3.create(e))).toBe(true);
             });
         });
+
+        describe('inverse', function () {
+            it('should return the inverse of the matrix', function () {
+                var d = [
+                    [2, 0, 0],
+                    [0, 2, 0],
+                    [0, 0, 2]
+                ];
+                var e = [
+                    [0.5, 0, 0],
+                    [0, 0.5, 0],
+                    [0, 0, 0.5]
+                ];
+                var m = Matrix3.create(d);
+                expect(m.inverse().equals(Matrix3.create(e))).toBe(true);
+            });
+        });
     });
 });

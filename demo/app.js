@@ -8,10 +8,21 @@ require(
         'iso-svg/meshes/Icosahedron',
         'iso-svg/meshes/Cube',
         'iso-svg/meshes/Sphere',
-        'text!iso-svg/meshes/data/princeton/m91.off'
+        'iso-svg/format/object-file-format',
+        'text!iso-svg/meshes/data/ball-of-doom.off'
     ],
-    function (lib, Surface, Camera, Renderer, Mesh, Icosahedron, Cube, Sphere, meshData) {
-
+    function (
+        lib,
+        Surface,
+        Camera,
+        Renderer,
+        Mesh,
+        Icosahedron,
+        Cube,
+        Sphere,
+        objectFileFormat,
+        meshData
+    ) {
         var surface = Surface.create({});
         var camera = Camera.create({
             zoom: 100,
@@ -22,8 +33,16 @@ require(
             camera: camera
         });
 
-        var mesh = Mesh.load(meshData, Mesh.OBJECT_FILE_FORMAT);
+        var mesh = objectFileFormat.loadMesh(meshData);
         renderer.mesh(mesh);
+
+        // var sphere = Sphere.create({
+        //     levelOfDetail: 3,
+        //     spikiness: 0.1
+        // });
+        // renderer.mesh(sphere);
+
+        // console.log(objectFileFormat.saveMesh(sphere));
 
         // lib.each(mesh.faces, function (face) {
         //     face = face.reverse();

@@ -49,5 +49,21 @@ define(['iso-svg/meshes/Mesh', 'iso-svg/geom/Vector3'], function (Mesh, Vector3)
 
             });
         });
+
+        // describe('fitToBounds', function () {
+        //     it('should scale the vertices of the mesh proportionally so that they fit within the bounds', function () {
+        //         var m = Mesh.create({
+        //             vertices: Vector3.createFromArray([
+        //                 [-100, -40],
+        //                 [0, 10],
+        //                 [10, 100]
+        //             ]);
+        //         });
+        //         var min = Vector3.create(-1, -1, -1);
+        //         var max = Vector3.create(1, 1, 1);
+        //         m.fitToBounds(min, max);
+        //         expect(m.vertices[0].toArray()).toEqual();
+        //     });
+        // });
     });
 });
