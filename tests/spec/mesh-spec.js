@@ -50,20 +50,21 @@ define(['iso-svg/meshes/Mesh', 'iso-svg/geom/Vector3'], function (Mesh, Vector3)
             });
         });
 
-        // describe('fitToBounds', function () {
-        //     it('should scale the vertices of the mesh proportionally so that they fit within the bounds', function () {
-        //         var m = Mesh.create({
-        //             vertices: Vector3.createFromArray([
-        //                 [-100, -40],
-        //                 [0, 10],
-        //                 [10, 100]
-        //             ]);
-        //         });
-        //         var min = Vector3.create(-1, -1, -1);
-        //         var max = Vector3.create(1, 1, 1);
-        //         m.fitToBounds(min, max);
-        //         expect(m.vertices[0].toArray()).toEqual();
-        //     });
-        // });
+        describe('normalise', function () {
+            it('should scale the vertices of the mesh proportionally so that it fits into a 2 by 2 cube centered at zero axis', function () {
+                var m = Mesh.create({
+                    vertices: Vector3.createFromArrays([
+                        [-200, -40, 20],
+                        [0, 10, 5],
+                        [10, 100, 800]
+                    ]),
+                    faces: [[0, 1, 2]]
+                });
+                m.normalise();
+                expect(m.vertices[0].equals(
+                    Vector3.create(-0.2641509433962264, -0.1761006289308176, -0.9622641509433961)
+                )).toBe(true);
+            });
+        });
     });
 });

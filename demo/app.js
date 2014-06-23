@@ -9,7 +9,7 @@ require(
         'iso-svg/meshes/Cube',
         'iso-svg/meshes/Sphere',
         'iso-svg/format/object-file-format',
-        'text!iso-svg/meshes/data/ball-of-doom.off'
+        'text!iso-svg/meshes/data/princeton/m1026.off'
     ],
     function (
         lib,
@@ -25,7 +25,7 @@ require(
     ) {
         var surface = Surface.create({});
         var camera = Camera.create({
-            zoom: 100,
+            zoom: 120,
             mode: Camera.ISOMETRIC
         });
         var renderer = Renderer.create({
@@ -34,6 +34,7 @@ require(
         });
 
         var mesh = objectFileFormat.loadMesh(meshData);
+        mesh.normalise();
         renderer.mesh(mesh);
 
         // var sphere = Sphere.create({
