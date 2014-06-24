@@ -22,6 +22,34 @@ define(
             return new Entity(opts);
         };
 
+        Entity.prototype = {
+
+            root: function () {
+                var e = this;
+                while (e.parent) e = e.parent;
+                return e;
+            },
+
+            addChild: function (entity) {
+                if (!entity.parent) {
+                    entity.parent = this;
+                    this.children.push(entity);
+                }
+                return this;
+            },
+
+            removeChild: function (entity) {
+                if (entity.parent === this) {
+                    var i = this.children.indexOf(entity);
+                    if (i !== -1) {
+                        this.children.splice(i, 1);
+                        entity.parent = null;
+                    }
+                }
+                return this;
+            }
+        };
+
         return Entity;
     }
 );
