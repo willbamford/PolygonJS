@@ -39,6 +39,52 @@ define(
                 });
             });
 
+            describe('root', function () {
+                it('should return the root entity (may be itself)', function () {
+
+                    var entity = Entity.create({});
+                    var parent = Entity.create({});
+                    var grandparent = Entity.create({});
+
+                    expect(entity.root()).toBe(entity);
+                    entity.parent = parent;
+                    expect(entity.root()).toBe(parent);
+                    entity.parent.parent = grandparent;
+                    expect(entity.root()).toBe(grandparent);
+                });
+            });
+
+            describe('addChild', function () {
+                it('should be able to add child entities', function () {
+                    var entity = Entity.create({});
+                    var childA = Entity.create({});
+                    var childB = Entity.create({});
+                    expect(entity.children.length).toEqual(0);
+                    entity.addChild(childA);
+                    expect(childA.parent).toBe(entity);
+                    expect(entity.children[0]).toBe(childA);
+                    entity.addChild(childA); // Already exists
+                    expect(entity.children[0]).toBe(childA);
+                    entity.addChild(childB);
+                    expect(entity.children[1]).toBe(childB);
+                });
+            });
+
+            describe('removeChild', function () {
+                it('should be able to remove child entities', function () {
+                    var entity = Entity.create({});
+                    var childA = Entity.create({});
+                    var childB = Entity.create({});
+                    entity.addChild(childA).addChild(childB);
+                    entity.removeChild(childA);
+                    expect(childA.parent).toBe(null);
+                    expect(entity.children.length).toEqual(1);
+                    expect(entity.children[0]).toBe(childB);
+                    entity.removeChild(childB).removeChild(childB).removeChild(childB);
+                    expect(entity.children.length).toEqual(0);
+                });
+            });
+
             describe('transform', function () {
 
                 // var e = Entity.create({});
