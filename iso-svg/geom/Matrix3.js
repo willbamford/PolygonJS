@@ -98,6 +98,8 @@ define(['iso-svg/math'], function (math) {
                 t.b * (t.d * t.i - t.f * t.g) +
                 t.c * (t.d * t.h - t.e * t.g);
 
+            if (det === 0) return null;
+            
             var idet = 1 / det;
             m.a = (t.e * t.i - t.h * t.f) * idet;
             m.b = (t.c * t.h - t.b * t.i) * idet;

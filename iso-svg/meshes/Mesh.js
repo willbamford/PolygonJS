@@ -62,12 +62,9 @@ define(
 
             normalise: function () {
                 if (this.vertices && this.vertices.length > 0) {
-                    var minX = Number.MAX_VALUE;
-                    var maxX = Number.MIN_VALUE;
-                    var minY = Number.MAX_VALUE;
-                    var maxY = Number.MIN_VALUE;
-                    var minZ = Number.MAX_VALUE;
-                    var maxZ = Number.MIN_VALUE;
+                    var minX = Number.MAX_VALUE, maxX = Number.MIN_VALUE;
+                    var minY = Number.MAX_VALUE, maxY = Number.MIN_VALUE;
+                    var minZ = Number.MAX_VALUE, maxZ = Number.MIN_VALUE;
                     lib.each(this.vertices, function (vertex) {
                         if (vertex.x < minX) minX = vertex.x;
                         if (vertex.x > maxX) maxX = vertex.x;
@@ -76,17 +73,9 @@ define(
                         if (vertex.z < minZ) minZ = vertex.z;
                         if (vertex.z > maxZ) maxZ = vertex.z;
                     });
-                    var dx = maxX - minX;
-                    var dy = maxY - minY;
-                    var dz = maxZ - minZ;
-                    // console.log('minX: ' + minX + ', maxX: ' + maxX);
-                    // console.log('minY: ' + minY + ', maxY: ' + maxY);
-                    // console.log('minZ: ' + minZ + ', maxZ: ' + maxZ);
-                    // console.log('dx: ' + dx + ', dy: ' + dy + ', dz: ' + dz);
+                    var dx = maxX - minX, dy = maxY - minY, dz = maxZ - minZ;
                     var dmax = Math.max(dx, Math.max(dy, dz));
-                    var tx = 0.5 * (minX + maxX);
-                    var ty = 0.5 * (minY + maxY);
-                    var tz = 0.5 * (minZ + maxZ);
+                    var tx = 0.5 * (minX + maxX), ty = 0.5 * (minY + maxY), tz = 0.5 * (minZ + maxZ);
                     var scale = 2 / dmax;
                     lib.each(this.vertices, function (vertex) {
                         vertex.x -= tx;

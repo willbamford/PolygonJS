@@ -28,9 +28,9 @@ define(['iso-svg/math'], function (math) {
     };
 
     Vector3.mean = function (arrs) {
-        var ax = 0;
-        var ay = 0;
-        var az = 0;
+        var ax = 0,
+            ay = 0,
+            az = 0;
         if (arrs) {
             var len = arrs.length;
             for (var i = 0; i < len; i++) {
@@ -150,11 +150,17 @@ define(['iso-svg/math'], function (math) {
         }
     };
 
-    Vector3.ZERO = Vector3.create(0, 0, 0);
-    Vector3.ONE = Vector3.create(1, 1, 1);
-    Vector3.X = Vector3.create(1, 0, 0);
-    Vector3.Y = Vector3.create(0, 1, 0);
-    Vector3.Z = Vector3.create(0, 0, 1);
+    Vector3.ZERO    = Vector3.create(0, 0, 0);
+    Vector3.ONE     = Vector3.create(1, 1, 1);
+    Vector3.X       = Vector3.create(1, 0, 0);
+    Vector3.Y       = Vector3.create(0, 1, 0);
+    Vector3.Z       = Vector3.create(0, 0, 1);
+    Vector3.UP      = Vector3.create(0, 1, 0);
+    Vector3.DOWN    = Vector3.create(0, -1, 0);
+    Vector3.FORWARD = Vector3.create(1, 0, 0);
+    Vector3.BACK    = Vector3.create(-1, 0, 0);
+    Vector3.RIGHT   = Vector3.create(0, 0, 1);
+    Vector3.LEFT    = Vector3.create(0, 0, -1);
 
     return Vector3;
 });

@@ -9,7 +9,7 @@ require(
         'iso-svg/meshes/Cube',
         'iso-svg/meshes/Sphere',
         'iso-svg/format/object-file-format',
-        'text!iso-svg/meshes/data/princeton/m1026.off'
+        'text!iso-svg/meshes/data/princeton/m103.off'
     ],
     function (
         lib,
@@ -23,9 +23,12 @@ require(
         objectFileFormat,
         meshData
     ) {
+
+        console.time('Render time');
+
         var surface = Surface.create({});
         var camera = Camera.create({
-            zoom: 120,
+            zoom: 160,
             mode: Camera.ISOMETRIC
         });
         var renderer = Renderer.create({
@@ -36,6 +39,11 @@ require(
         var mesh = objectFileFormat.loadMesh(meshData);
         mesh.normalise();
         renderer.mesh(mesh);
+
+        console.timeEnd('Render time');
+
+        console.log('Vertices count: ' + mesh.vertices.length);
+        console.log('Faces count: ' + mesh.faces.length);
 
         // var sphere = Sphere.create({
         //     levelOfDetail: 3,
