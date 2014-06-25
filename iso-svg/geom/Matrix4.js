@@ -75,13 +75,13 @@ define(
                 return p;
             },
 
-            multiplyVector3: function (v) {
+            multiplyPoint: function (p) {
                 var t = this;
                 var x, y, z;
-                // "v.w" is implicitly equal to 1
-                x = v.x * t.a + v.y * t.b + v.z * t.c + t.d;
-                y = v.x * t.e + v.y * t.f + v.z * t.g + t.h;
-                z = v.x * t.i + v.y * t.j + v.z * t.k + t.l;
+                // "p.w" is implicitly equal to 1
+                x = p.x * t.a + p.y * t.b + p.z * t.c + t.d;
+                y = p.x * t.e + p.y * t.f + p.z * t.g + t.h;
+                z = p.x * t.i + p.y * t.j + p.z * t.k + t.l;
                 return Vector3.create(x, y, z);
             }
         };

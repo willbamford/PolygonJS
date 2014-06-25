@@ -48,13 +48,7 @@ define(
                 return this;
             },
 
-            // getWorldTransform: function () {
-            //     if (this.parent)
-            //         return this.getTransform().multiply(this.parent.getWorldTransform());
-            //     return this.getTransform();
-            // },
-
-            getTransform: function () {
+            getLocalTransform: function () { // Optimise by caching?
                 var p = this.position;
                 var r = this.rotation;
                 var s = this.scale;
@@ -64,6 +58,12 @@ define(
                     [r.g,       r.h,       r.i * s.z, p.z],
                     [0, 0, 0, 1]
                 ]);
+            },
+
+            getTransform: function () { // Optimise by caching?
+                return this.parent ?
+                    this.getLocalTransform().multiply(this.parent.getTransform()) :
+                    this.getLocalTransform();
             }
         };
 

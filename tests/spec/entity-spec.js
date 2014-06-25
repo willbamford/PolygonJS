@@ -42,11 +42,9 @@ define(
 
             describe('root', function () {
                 it('should return the root entity (may be itself)', function () {
-
                     var entity = Entity.create({});
                     var parent = Entity.create({});
                     var grandparent = Entity.create({});
-
                     expect(entity.root()).toBe(entity);
                     entity.parent = parent;
                     expect(entity.root()).toBe(parent);
@@ -86,14 +84,14 @@ define(
                 });
             });
 
-            describe('getTransform', function () {
-                it('should be able to create a (local) 4 x 4 homogeneous transformation matrix from position, rotation and scale', function () {
+            describe('getLocalTransform', function () {
+                it('should return a (local) 4 x 4 homogeneous transformation matrix', function () {
                     var e = Entity.create({
                         position: Vector3.create(10, 20, 30),
                         rotation: Matrix3.createRotationX(Math.PI / 4),
                         scale: Vector3.create(4, 2, 3)
                     });
-                    var actual = e.getTransform();
+                    var actual = e.getLocalTransform();
                     var expected = Matrix4.create([
                         [4,        0,         0, 10],
                         [0, 1.414214, -0.707107, 20],
@@ -102,17 +100,45 @@ define(
                     ]);
                     expect(expected.equals(actual)).toBe(true);
                 });
+            });
 
+            describe('getTransform', function () {
+                it('should return the world 4 x 4 homogeneous transformation matrix', function () {
+                    var grandparent = Entity.create({
+                        position: Vector3.create(-1, -2, 30)
+                    });
+                    var parent = Entity.create({
+                        position: Vector3.create(2, 15, 10)
+                    });
+                    var entity = Entity.create({
+                        position: Vector3.create(10, 9, 8)
+                    });
+                    var t = entity.getTransform();
+                    expect(t.equals(Matrix4.create([
+                        [1, 0, 0, 10],
+                        [0, 1, 0,  9],
+                        [0, 0, 1,  8],
+                        [0, 0, 0,  1]
+                    ]))).toBe(true);
 
-                // var e = Entity.create({});
+                    parent.addChild(entity);
+                    t = entity.getTransform();
+                    expect(t.equals(Matrix4.create([
+                        [1, 0, 0, 12],
+                        [0, 1, 0, 24],
+                        [0, 0, 1, 18],
+                        [0, 0, 0,  1]
+                    ]))).toBe(true);
 
-                // it('should contain a transform that is initialised an identity matrix', function () {
-                //     expect(e.transform).toEqual([
-                //         [1, 0, 0],
-                //         [0, 1, 0],
-                //         [0, 0, 1]
-                //     ]);
-                // });
+                    grandparent.addChild(parent);
+                    t = entity.getTransform();
+                    expect(t.equals(Matrix4.create([
+                        [1, 0, 0, 11],
+                        [0, 1, 0, 22],
+                        [0, 0, 1, 48],
+                        [0, 0, 0,  1]
+                    ]))).toBe(true);
+                });
             });
         });
     }
