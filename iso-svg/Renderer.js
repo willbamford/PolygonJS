@@ -7,7 +7,6 @@ define(
         var Renderer = function (opts) {
             this.surface = null;
             this.scale = 1;
-            this.eye = null;
 
             var self = this;
             

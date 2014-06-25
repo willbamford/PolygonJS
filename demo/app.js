@@ -8,8 +8,8 @@ require(
         'iso-svg/meshes/Icosahedron',
         'iso-svg/meshes/Cube',
         'iso-svg/meshes/Sphere',
-        'iso-svg/format/object-file-format',
-        'text!iso-svg/meshes/data/princeton/m103.off'
+        'iso-svg/format/object-file-format'/*,
+        'text!iso-svg/meshes/data/princeton/m103.off'*/
     ],
     function (
         lib,
@@ -28,7 +28,7 @@ require(
 
         var surface = Surface.create({});
         var camera = Camera.create({
-            zoom: 160,
+            zoom: 100,
             mode: Camera.ISOMETRIC
         });
         var renderer = Renderer.create({
@@ -36,20 +36,20 @@ require(
             camera: camera
         });
 
-        var mesh = objectFileFormat.loadMesh(meshData);
-        mesh.normalise();
+        // var mesh = objectFileFormat.loadMesh(meshData);
+        // mesh.normalise();
+        // renderer.mesh(mesh);
+
+        var mesh = Sphere.create({
+            levelOfDetail: 3,
+            spikiness: 0.1
+        });
         renderer.mesh(mesh);
 
         console.timeEnd('Render time');
 
         console.log('Vertices count: ' + mesh.vertices.length);
         console.log('Faces count: ' + mesh.faces.length);
-
-        // var sphere = Sphere.create({
-        //     levelOfDetail: 3,
-        //     spikiness: 0.1
-        // });
-        // renderer.mesh(sphere);
 
         // console.log(objectFileFormat.saveMesh(sphere));
 
