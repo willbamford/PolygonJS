@@ -1,6 +1,9 @@
 define(
-    ['iso-svg/geom/Matrix4'],
-    function (Matrix4) { 
+    [
+        'iso-svg/geom/Matrix4',
+        'iso-svg/geom/Vector3'
+    ],
+    function (Matrix4, Vector3) { 
 
     "use strict";
 
@@ -62,8 +65,41 @@ define(
                 ];
                 var m = Matrix4.create(a);
                 var p = m.multiply(Matrix4.create(b));
-                console.log(p);
                 expect(p.equals(Matrix4.create(e))).toBe(true);
+            });
+        });
+
+        describe('multiplyVector3', function () {
+            it('should return the result of multiplying a point by this matrix', function () {
+                var m = Matrix4.create([
+                    [1, 0, 0, 0],
+                    [0, 1, 0, 0],
+                    [0, 0, 1, 0],
+                    [0, 0, 0, 1]
+                ]);
+                var a = Vector3.create(10, 20, 30);
+                var b = m.multiplyVector3(a);
+                expect(a).not.toBe(b);
+                expect(a.equals(b)).toBe(true);
+
+                m = Matrix4.create([
+                    [1, 0, 0, 5],
+                    [0, 1, 0, 6],
+                    [0, 0, 1, 7],
+                    [0, 0, 0, 1]
+                ]);
+                b = m.multiplyVector3(a);
+                expect(b.equals(Vector3.create(15, 26, 37))).toBe(true);
+
+                m = Matrix4.create([
+                    [4,        0,         0, 10],
+                    [0, 1.414214, -0.707107, 20],
+                    [0, 0.707107,  2.121321, 30],
+                    [0,        0,         0,  1]
+                ]);
+                b = m.multiplyVector3(a);
+                console.log(b);
+                expect(b.equals(Vector3.create(50, 27.07107, 107.78177))).toBe(true);
             });
         });
     });

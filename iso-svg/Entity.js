@@ -2,19 +2,18 @@ define(
     [
         'iso-svg/lib',
         'iso-svg/geom/Vector3',
-        'iso-svg/geom/Matrix3'
+        'iso-svg/geom/Matrix3',
+        'iso-svg/geom/Matrix4'
     ],
-    function (lib, Vector3, Matrix3) {
+    function (lib, Vector3, Matrix3, Matrix4) {
 
         "use strict";
 
         var Entity = function (opts) {
             this.parent = null;
-
-            this.position = Vector3.create(0, 0, 0);
-            this.rotation = Matrix3.IDENTITY.copy();
-            this.scale    = Vector3.create(1, 1, 1);
-
+            this.position = opts.position || Vector3.create(0, 0, 0);
+            this.rotation = opts.rotation || Matrix3.IDENTITY.copy();
+            this.scale    = opts.scale    || Vector3.create(1, 1, 1);
             this.children = [];
         };
 
@@ -47,6 +46,24 @@ define(
                     }
                 }
                 return this;
+            },
+
+            // getWorldTransform: function () {
+            //     if (this.parent)
+            //         return this.getTransform().multiply(this.parent.getWorldTransform());
+            //     return this.getTransform();
+            // },
+
+            getTransform: function () {
+                var p = this.position;
+                var r = this.rotation;
+                var s = this.scale;
+                return Matrix4.create([
+                    [r.a * s.x, r.b,       r.c,       p.x],
+                    [r.d,       r.e * s.y, r.f,       p.y],
+                    [r.g,       r.h,       r.i * s.z, p.z],
+                    [0, 0, 0, 1]
+                ]);
             }
         };
 

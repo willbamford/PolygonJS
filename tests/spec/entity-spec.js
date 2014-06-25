@@ -2,9 +2,10 @@ define(
     [
         'iso-svg/geom/Vector3',
         'iso-svg/geom/Matrix3',
+        'iso-svg/geom/Matrix4',
         'iso-svg/Entity'
     ],
-    function (Vector3, Matrix3, Entity) { 
+    function (Vector3, Matrix3, Matrix4, Entity) { 
 
         "use strict";
 
@@ -85,7 +86,23 @@ define(
                 });
             });
 
-            describe('transform', function () {
+            describe('getTransform', function () {
+                it('should be able to create a (local) 4 x 4 homogeneous transformation matrix from position, rotation and scale', function () {
+                    var e = Entity.create({
+                        position: Vector3.create(10, 20, 30),
+                        rotation: Matrix3.createRotationX(Math.PI / 4),
+                        scale: Vector3.create(4, 2, 3)
+                    });
+                    var actual = e.getTransform();
+                    var expected = Matrix4.create([
+                        [4,        0,         0, 10],
+                        [0, 1.414214, -0.707107, 20],
+                        [0, 0.707107,  2.121321, 30],
+                        [0,        0,         0,  1]
+                    ]);
+                    expect(expected.equals(actual)).toBe(true);
+                });
+
 
                 // var e = Entity.create({});
 
