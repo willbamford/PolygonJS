@@ -1,4 +1,3 @@
-iso-svg
-=======
+# PolygonJS
 
-Experiment into projecting a 3D world into isometric 2D.
+JavaScript 3D library where polygons are first class citizens.
