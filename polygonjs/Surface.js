@@ -1,4 +1,4 @@
-define(['iso-svg/lib'], function (lib) {
+define(['polygonjs/lib'], function (lib) {
 
     "use strict";
 

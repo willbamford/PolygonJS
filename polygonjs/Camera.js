@@ -1,10 +1,10 @@
 define(
     [
-        'iso-svg/lib',
-        'iso-svg/math',
-        'iso-svg/geom/Vector2',
-        'iso-svg/geom/Vector3',
-        'iso-svg/Entity'
+        'polygonjs/lib',
+        'polygonjs/math',
+        'polygonjs/geom/Vector2',
+        'polygonjs/geom/Vector3',
+        'polygonjs/Entity'
     ],
     function (lib, math, Vector2, Vector3, Entity) {
 

@@ -1,4 +1,4 @@
-define(['iso-svg/math'], function (math) { 
+define(['polygonjs/math'], function (math) { 
 
     "use strict";
 

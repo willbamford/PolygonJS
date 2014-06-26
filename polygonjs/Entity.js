@@ -1,9 +1,9 @@
 define(
     [
-        'iso-svg/lib',
-        'iso-svg/geom/Vector3',
-        'iso-svg/geom/Matrix3',
-        'iso-svg/geom/Matrix4'
+        'polygonjs/lib',
+        'polygonjs/geom/Vector3',
+        'polygonjs/geom/Matrix3',
+        'polygonjs/geom/Matrix4'
     ],
     function (lib, Vector3, Matrix3, Matrix4) {
 

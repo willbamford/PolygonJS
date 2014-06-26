@@ -1,15 +1,15 @@
 require(
     [
-        'iso-svg/lib',
-        'iso-svg/Surface',
-        'iso-svg/Camera',
-        'iso-svg/Renderer',
-        'iso-svg/meshes/Mesh',
-        'iso-svg/meshes/Icosahedron',
-        'iso-svg/meshes/Cube',
-        'iso-svg/meshes/Sphere',
-        'iso-svg/format/object-file-format'/*,
-        'text!iso-svg/meshes/data/princeton/m103.off'*/
+        'polygonjs/lib',
+        'polygonjs/Surface',
+        'polygonjs/Camera',
+        'polygonjs/Renderer',
+        'polygonjs/meshes/Mesh',
+        'polygonjs/meshes/Icosahedron',
+        'polygonjs/meshes/Cube',
+        'polygonjs/meshes/Sphere',
+        'polygonjs/format/object-file-format'/*,
+        'text!polygonjs/meshes/data/princeton/m103.off'*/
     ],
     function (
         lib,

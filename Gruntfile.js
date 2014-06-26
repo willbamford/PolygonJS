@@ -3,7 +3,7 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         jshint: {
-            files: ['iso-svg/**/*.js']
+            files: ['polygonjs/**/*.js']
         },
         jasmine: {
             all: {
@@ -18,8 +18,8 @@ module.exports = function (grunt) {
             compile: {
                 options: {
                     baseUrl: '',
-                    name: 'iso-svg/iso-svg',
-                    out: "dist/iso-svg.min.js"
+                    name: 'polygonjs/polygonjs',
+                    out: 'dist/polygonjs.min.js'
                 }
             }
         }

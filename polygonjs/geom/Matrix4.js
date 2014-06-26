@@ -1,5 +1,5 @@
 define(
-    ['iso-svg/math', 'iso-svg/geom/Vector3'],
+    ['polygonjs/math', 'polygonjs/geom/Vector3'],
     function (math, Vector3) {
 
         "use strict";

@@ -1,7 +1,7 @@
 define(
     [
-        'iso-svg/geom/Matrix4',
-        'iso-svg/geom/Vector3'
+        'polygonjs/geom/Matrix4',
+        'polygonjs/geom/Vector3'
     ],
     function (Matrix4, Vector3) { 
 

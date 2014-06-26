@@ -1,4 +1,4 @@
-define(['iso-svg/geom/Vector2'], function (Vector2) { 
+define(['polygonjs/geom/Vector2'], function (Vector2) { 
 
     "use strict";
 

@@ -1,8 +1,8 @@
 define(
     [
-        'iso-svg/Camera',
-        'iso-svg/geom/Vector2',
-        'iso-svg/geom/Vector3'
+        'polygonjs/Camera',
+        'polygonjs/geom/Vector2',
+        'polygonjs/geom/Vector3'
     ],
     function (Camera, Vector2, Vector3) { 
 

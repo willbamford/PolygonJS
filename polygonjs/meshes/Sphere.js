@@ -1,10 +1,10 @@
 define(
     [
-        'iso-svg/lib',
-        'iso-svg/math',
-        'iso-svg/geom/Vector3',
-        'iso-svg/meshes/Mesh',
-        'iso-svg/meshes/Icosahedron'
+        'polygonjs/lib',
+        'polygonjs/math',
+        'polygonjs/geom/Vector3',
+        'polygonjs/meshes/Mesh',
+        'polygonjs/meshes/Icosahedron'
     ],
     function (lib, math, Vector3, Mesh, Icosahedron) {
 

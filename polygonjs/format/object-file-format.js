@@ -1,5 +1,5 @@
 define(
-    ['iso-svg/lib', 'iso-svg/geom/Vector3', 'iso-svg/meshes/Mesh'],
+    ['polygonjs/lib', 'polygonjs/geom/Vector3', 'polygonjs/meshes/Mesh'],
     function (lib, Vector3, Mesh) {
 
         var line = function (s) {

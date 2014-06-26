@@ -1,4 +1,4 @@
-define(['iso-svg/Surface'], function (Surface) { 
+define(['polygonjs/Surface'], function (Surface) { 
 
     "use strict";
 
