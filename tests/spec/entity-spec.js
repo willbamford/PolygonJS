@@ -85,7 +85,7 @@ define(
             });
 
             describe('getLocalTransform', function () {
-                it('should return a (local) 4 x 4 homogeneous transformation matrix', function () {
+                it('should return the local 4 x 4 homogeneous transformation matrix', function () {
                     var e = Entity.create({
                         position: Vector3.create(10, 20, 30),
                         rotation: Matrix3.createRotationX(Math.PI / 4),

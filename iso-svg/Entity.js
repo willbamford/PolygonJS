@@ -56,7 +56,7 @@ define(
                     [r.a * s.x, r.b,       r.c,       p.x],
                     [r.d,       r.e * s.y, r.f,       p.y],
                     [r.g,       r.h,       r.i * s.z, p.z],
-                    [0, 0, 0, 1]
+                    [0,         0,         0,         1  ]
                 ]);
             },
 
