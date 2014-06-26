@@ -2,6 +2,8 @@ define(
     ['polygonjs/lib', 'polygonjs/geom/Vector3', 'polygonjs/meshes/Mesh'],
     function (lib, Vector3, Mesh) {
 
+        "use strict";
+
         var line = function (s) {
             return s + "\n";
         };
