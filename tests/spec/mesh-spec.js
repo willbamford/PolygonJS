@@ -1,4 +1,4 @@
-define(['polygonjs/meshes/Mesh', 'polygonjs/geom/Vector3'], function (Mesh, Vector3) { 
+define(['polygonjs/Mesh', 'polygonjs/geom/Vector3'], function (Mesh, Vector3) { 
 
     "use strict";
 

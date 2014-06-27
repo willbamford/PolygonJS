@@ -4,7 +4,7 @@ require(
         'polygonjs/Surface',
         'polygonjs/Camera',
         'polygonjs/Renderer',
-        'polygonjs/meshes/Mesh',
+        'polygonjs/Mesh',
         'polygonjs/meshes/Icosahedron',
         'polygonjs/meshes/Cube',
         'polygonjs/meshes/Sphere',
