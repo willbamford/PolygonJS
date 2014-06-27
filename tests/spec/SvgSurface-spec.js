@@ -1,8 +1,8 @@
-define(['polygonjs/Surface'], function (Surface) { 
+define(['polygonjs/surfaces/Svg'], function (Surface) { 
 
     "use strict";
 
-    describe('Surface', function () {
+    describe('SVG Surface', function () {
         
         describe('create', function () {
             it('should be able to create new instances', function () {

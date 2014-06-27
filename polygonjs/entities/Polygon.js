@@ -1,6 +1,6 @@
 define(
     ['polygonjs/Entity', 'polygonjs/geom/Vector3'],
-    function (Vector3, Entity) {
+    function (Entity, Vector3) {
 
         var Polygon = function () {
             var opts = {};

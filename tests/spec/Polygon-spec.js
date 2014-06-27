@@ -1,20 +1,20 @@
 define(
     [
         'polygonjs/entities/Polygon',
-        'polygonjs/Entity'],
+        'polygonjs/Entity'
+    ],
     function (Polygon, Entity) {
 
         describe('Polygon', function () {
 
+            it('should "extend" Entity', function () {
+                var p = Polygon.create();
+                expect(p instanceof Polygon).toBe(true);
+                expect(p instanceof Entity).toBe(true);
+            });
+
             describe('create', function () {
 
-                it('should return a new instance which extends an Entity', function () {
-                    var p = Polygon.create();
-                    expect(p instanceof Polygon).toBe(true);
-                    expect(p instanceof Entity).toBe(true);
-                });
-
-                
             });
 
             describe('normal', function () {

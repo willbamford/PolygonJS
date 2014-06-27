@@ -79,7 +79,7 @@ define(['polygonjs/lib'], function (lib) {
         polygon: function (points, style, id) {
             var self = this;
             var encodedPoints = '';
-            style = style || 'fill: ' + this.randomColour();
+            style = style || this.randomColour();
             id = id || 'p' + Surface.lastId++;
             lib.each(points, function (point) {
                 var x = point.x + self.cx;
@@ -89,15 +89,10 @@ define(['polygonjs/lib'], function (lib) {
             var polygon = this.createEl('polygon', {
                 id: id,
                 points: encodedPoints,
-                style: style
+                style: 'fill: ' + style
             });
             this.svg.appendChild(polygon);
             return polygon;
-        },
-
-        randomColour: function () {
-            var colours = ['chocolate', 'indianred', 'lavender', 'lightblue', 'darkorange', 'seagreen', 'navy', 'royalblue', 'olive', 'pink'];
-            return colours[Math.floor(Math.random() * colours.length)];
         }
     };
 

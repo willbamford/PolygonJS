@@ -1,16 +1,17 @@
 define(
     [
+        'polygonjs/Entity',
         'polygonjs/lib',
         'polygonjs/math',
         'polygonjs/geom/Vector2',
-        'polygonjs/geom/Vector3',
-        'polygonjs/Entity'
+        'polygonjs/geom/Vector3'
     ],
-    function (lib, math, Vector2, Vector3, Entity) {
+    function (Entity, lib, math, Vector2, Vector3) {
 
         "use strict"
 
         var Camera = function (opts) {
+            Entity.call(this, opts);
             this.zoom = opts.zoom || 1;
             this.mode = opts.mode || Camera.ISOMETRIC;
             switch (this.mode) {
@@ -27,6 +28,8 @@ define(
 
         Camera.ORTHOGRAPHIC = 'orthographic';
         Camera.ISOMETRIC = 'isometric';
+
+        Camera.prototype = Object.create(Entity.prototype);
 
         Camera.orthographicProjection = function (v) {
             return Vector2.create(v.z, -v.y);

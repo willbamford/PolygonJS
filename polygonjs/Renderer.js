@@ -50,7 +50,7 @@ define(
                     // r = Math.floor(r * Math.random());
                     // g = Math.floor(g * Math.random());
                     // b = Math.floor(b * Math.random());
-                    var style = 'fill: rgba(' + r + ',' + g + ',' + b + ', 1.0)';
+                    var style = 'rgba(' + r + ',' + g + ',' + b + ', 1.0)';
                     this.surface.polygon(points, style);
                     // points.forEach(function (point) {
                     //     self.surface.circle(point.x, point.y, 0.2);

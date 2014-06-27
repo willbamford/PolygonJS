@@ -1,15 +1,15 @@
 require(
     [
         'polygonjs/lib',
-        'polygonjs/Surface',
-        'polygonjs/Camera',
+        'polygonjs/surfaces/Canvas',
+        'polygonjs/entities/Camera',
         'polygonjs/Renderer',
         'polygonjs/Mesh',
         'polygonjs/meshes/Icosahedron',
         'polygonjs/meshes/Cube',
         'polygonjs/meshes/Sphere',
         'polygonjs/format/object-file-format'/*,
-        'text!polygonjs/meshes/data/princeton/m103.off'*/
+        'text!polygonjs/meshes/data/princeton/m1000.off'*/
     ],
     function (
         lib,
@@ -20,8 +20,7 @@ require(
         Icosahedron,
         Cube,
         Sphere,
-        objectFileFormat,
-        meshData
+        objectFileFormat
     ) {
 
         console.time('Render time');
@@ -41,8 +40,8 @@ require(
         // renderer.mesh(mesh);
 
         var mesh = Sphere.create({
-            levelOfDetail: 3,
-            spikiness: 0.1
+            levelOfDetail: 2,
+            spikiness: 0
         });
         renderer.mesh(mesh);
 

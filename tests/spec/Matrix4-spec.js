@@ -98,7 +98,6 @@ define(
                     [0,        0,         0,  1]
                 ]);
                 b = m.multiplyPoint(a);
-                console.log(b);
                 expect(b.equals(Vector3.create(50, 27.07107, 107.78177))).toBe(true);
             });
         });

@@ -1,14 +1,21 @@
 define(
     [
-        'polygonjs/Camera',
+        'polygonjs/entities/Camera',
+        'polygonjs/Entity',
         'polygonjs/geom/Vector2',
         'polygonjs/geom/Vector3'
     ],
-    function (Camera, Vector2, Vector3) { 
+    function (Camera, Entity, Vector2, Vector3) { 
 
         "use strict";
 
         describe('Camera', function () {
+
+            it('should "extend" Entity', function () {
+                var p = Camera.create({});
+                expect(p instanceof Camera).toBe(true);
+                expect(p instanceof Entity).toBe(true);
+            });
 
             describe('create', function () {
                 
