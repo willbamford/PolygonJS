@@ -10,8 +10,8 @@ require(
         'polygonjs/meshes/Cube',
         'polygonjs/meshes/Sphere',
         'polygonjs/format/object-file-format',
-        'polygonjs/Engine',
-        'text!polygonjs/meshes/data/princeton/m100.off'
+        'polygonjs/Engine'/*,
+        'text!polygonjs/meshes/data/princeton/m100.off'*/
     ],
     function (
         lib,
