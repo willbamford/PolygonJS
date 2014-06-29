@@ -51,12 +51,17 @@ define(['polygonjs/lib'], function (lib) {
             el.setAttributeNS(namespace, name, value);
         },
 
+        clear: function () {
+            this.context.clearRect (0, 0, this.width, this.height);
+        },
+
         polygon: function (points, style) {
             var ctx = this.context;
             var len = points.length;
             if (len > 1) {
                 var point = points[0];
                 ctx.fillStyle = style;
+                ctx.strokeStyle = style;
                 ctx.beginPath();
                 ctx.moveTo(point.x + this.cx, point.y + this.cy);
                 for (var i = 1; i < len; i++) {
@@ -65,6 +70,7 @@ define(['polygonjs/lib'], function (lib) {
                 }
                 ctx.closePath();
                 ctx.fill();
+                ctx.stroke(); // Get rid of seams
             }
         }
     };

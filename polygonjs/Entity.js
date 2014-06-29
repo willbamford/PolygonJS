@@ -10,6 +10,8 @@ define(
         "use strict";
 
         var Entity = function (opts) {
+            opts = opts || {};
+            this.type = 'entity';
             this.parent = null;
             this.position = opts.position || Vector3.create(0, 0, 0);
             this.rotation = opts.rotation || Matrix3.IDENTITY.copy();

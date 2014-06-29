@@ -5,6 +5,8 @@ define(
     ],
     function (Polygon, Entity) {
 
+        "use strict";
+
         describe('Polygon', function () {
 
             it('should "extend" Entity', function () {
@@ -15,10 +17,10 @@ define(
 
             describe('create', function () {
 
-            });
-
-            describe('normal', function () {
-
+                it('should have an entity type of "polygon"', function () {
+                    var polygon = Polygon.create();
+                    expect(polygon.type).toBe('polygon');
+                });
             });
         });
     }

@@ -76,6 +76,10 @@ define(['polygonjs/lib'], function (lib) {
             return this.circle(x, y, 1);
         },
 
+        clear: function () {
+            this.svg.innerHTML = '';
+        },
+
         polygon: function (points, style, id) {
             var self = this;
             var encodedPoints = '';

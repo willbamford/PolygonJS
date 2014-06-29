@@ -11,7 +11,9 @@ define(
         "use strict"
 
         var Camera = function (opts) {
+            opts = opts || {};
             Entity.call(this, opts);
+            this.type = 'camera';
             this.zoom = opts.zoom || 1;
             this.mode = opts.mode || Camera.ISOMETRIC;
             switch (this.mode) {

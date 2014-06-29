@@ -12,7 +12,7 @@ define(
         describe('Camera', function () {
 
             it('should "extend" Entity', function () {
-                var p = Camera.create({});
+                var p = Camera.create();
                 expect(p instanceof Camera).toBe(true);
                 expect(p instanceof Entity).toBe(true);
             });
@@ -20,15 +20,19 @@ define(
             describe('create', function () {
                 
                 it('should be able to create new instances', function () {
-                    var camera = Camera.create({});
+                    var camera = Camera.create();
                     expect(camera).not.toBeNull();
                 });
 
                 it('should by default create an isometric mode instance', function () {
-                    var camera = Camera.create({});
+                    var camera = Camera.create();
                     expect(camera.mode).toBe(Camera.ISOMETRIC);
                 });
 
+                it('should have an entity type of "camera"', function () {
+                    var camera = Camera.create();
+                    expect(camera.type).toBe('camera');
+                });
             });
 
             describe('orthographic mode', function () {

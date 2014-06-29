@@ -22,6 +22,10 @@ define(
 
         Renderer.prototype = {
 
+            clear: function () {
+                this.surface.clear();
+            },
+
             vertex: function (vertex) {
                 var point = this.project(vertex);
                 this.surface.circle(point[0], point[1], 1);
@@ -47,9 +51,6 @@ define(
                     var b = Math.floor(math.clamp(normal.dotProduct(Vector3.X) * 255, 0, 255));
                     var g = Math.floor(math.clamp(normal.dotProduct(Vector3.Y) * 255, 0, 255));
                     var r = Math.floor(math.clamp(normal.dotProduct(Vector3.Z) * 255, 0, 255));
-                    // r = Math.floor(r * Math.random());
-                    // g = Math.floor(g * Math.random());
-                    // b = Math.floor(b * Math.random());
                     var style = 'rgba(' + r + ',' + g + ',' + b + ', 1.0)';
                     this.surface.polygon(points, style);
                     // points.forEach(function (point) {

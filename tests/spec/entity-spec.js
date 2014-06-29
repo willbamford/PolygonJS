@@ -13,12 +13,16 @@ define(
 
             describe('create', function () {
 
-                var e = Entity.create({});
+                var e = Entity.create();
 
                 it('should be able to create new instances', function () {
                     expect(e).not.toBeNull();
                 });
                 
+                it('should have an entity type of "entity"', function () {
+                    expect(e.type).toBe('entity');
+                });
+
                 it('should initially have no children', function () {
                     expect(e.children.length).toBe(0);
                 });

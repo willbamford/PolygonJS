@@ -5,11 +5,13 @@ require(
         'polygonjs/entities/Camera',
         'polygonjs/Renderer',
         'polygonjs/Mesh',
+        'polygonjs/geom/Matrix3',
         'polygonjs/meshes/Icosahedron',
         'polygonjs/meshes/Cube',
         'polygonjs/meshes/Sphere',
-        'polygonjs/format/object-file-format'/*,
-        'text!polygonjs/meshes/data/princeton/m1000.off'*/
+        'polygonjs/format/object-file-format',
+        'polygonjs/Engine',
+        'text!polygonjs/meshes/data/princeton/m100.off'
     ],
     function (
         lib,
@@ -17,13 +19,14 @@ require(
         Camera,
         Renderer,
         Mesh,
+        Matrix3,
         Icosahedron,
         Cube,
         Sphere,
-        objectFileFormat
+        objectFileFormat,
+        Engine,
+        meshData
     ) {
-
-        console.time('Render time');
 
         var surface = Surface.create({});
         var camera = Camera.create({
@@ -40,30 +43,40 @@ require(
         // renderer.mesh(mesh);
 
         var mesh = Sphere.create({
-            levelOfDetail: 2,
-            spikiness: 0
+            levelOfDetail: 3,
+            spikiness: 0.1
         });
-        renderer.mesh(mesh);
 
-        console.timeEnd('Render time');
+        var frame = 0;
+
+        var loop = function (delta) {
+
+            var m1 = Matrix3.createRotationZ(delta * 0.002);
+            var m2 = Matrix3.createRotationY(delta * 0.001);
+            var m3 = m1.multiply(m2);
+
+            renderer.clear();
+            frame++;
+            var i = mesh.vertices.length;
+            var vertex;
+            while (--i >= 0) {
+                vertex = mesh.vertices[i];
+                mesh.vertices[i] = m3.multiplyPoint(vertex);
+            }
+            mesh.updateNormals();
+            renderer.mesh(mesh);
+        };
+
+        var engine = Engine.create({
+            onTick: loop
+        });
+        engine.start();
+
+        window.setTimeout(function () {
+            engine.stop();
+        }, 10000);
 
         console.log('Vertices count: ' + mesh.vertices.length);
         console.log('Faces count: ' + mesh.faces.length);
-
-        // console.log(objectFileFormat.saveMesh(sphere));
-
-        // lib.each(mesh.faces, function (face) {
-        //     face = face.reverse();
-        // });
-        // mesh.updateNormals();
-
-        // var icosahedron = Icosahedron.create();
-        // renderer.mesh(icosahedron);
-
-        // var icosahedron = Sphere.create({
-        //     levelOfDetail: 3,
-        //     spikiness: 0.1
-        // });
-        // renderer.mesh(icosahedron);
     }
 );

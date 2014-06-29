@@ -1,6 +1,8 @@
 define(
-    ['polygonjs/geom/Matrix3'],
-    function (Matrix3) { 
+    [
+        'polygonjs/geom/Matrix3',
+        'polygonjs/geom/Vector3'],
+    function (Matrix3, Vector3) { 
 
     "use strict";
 
@@ -100,6 +102,37 @@ define(
                     [16, 17, 18]
                 ]));
                 expect(p.equals(Matrix3.create(e))).toBe(true);
+            });
+        });
+
+        describe('multiplyPoint', function () {
+            it('should return the result of multiplying a point by this matrix', function () {
+                var m = Matrix3.create([
+                    [1, 0, 0],
+                    [0, 1, 0],
+                    [0, 0, 1]
+                ]);
+                var a = Vector3.create(10, 20, 30);
+                var b = m.multiplyPoint(a);
+                expect(a).not.toBe(b);
+                expect(a.equals(b)).toBe(true);
+
+                m = Matrix3.create([
+                    [1, 0, 5],
+                    [0, 1, 6],
+                    [0, 0, 1]
+                ]);
+                b = m.multiplyPoint(a);
+                expect(b.equals(Vector3.create(160, 200, 30))).toBe(true);
+
+                m = Matrix3.create([
+                    [4,        0, 10],
+                    [0, 1.414214, 20],
+                    [0, 0.707107, 30],
+                    [0,        0,  1]
+                ]);
+                b = m.multiplyPoint(a);
+                expect(b.equals(Vector3.create(340, 628.28428, 914.14214))).toBe(true);
             });
         });
 
