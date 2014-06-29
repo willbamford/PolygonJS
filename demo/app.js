@@ -30,7 +30,7 @@ require(
 
         var surface = Surface.create({});
         var camera = Camera.create({
-            zoom: 100,
+            zoom: 120,
             mode: Camera.ISOMETRIC
         });
         var renderer = Renderer.create({
@@ -43,7 +43,7 @@ require(
         // renderer.mesh(mesh);
 
         var mesh = Sphere.create({
-            levelOfDetail: 3,
+            levelOfDetail: 2,
             spikiness: 0.1
         });
 
@@ -51,8 +51,8 @@ require(
 
         var loop = function (delta) {
 
-            var m1 = Matrix3.createRotationZ(delta * 0.002);
-            var m2 = Matrix3.createRotationY(delta * 0.001);
+            var m1 = Matrix3.createRotationZ(delta * 0.001);
+            var m2 = Matrix3.createRotationY(delta * 0.0005);
             var m3 = m1.multiply(m2);
 
             renderer.clear();
