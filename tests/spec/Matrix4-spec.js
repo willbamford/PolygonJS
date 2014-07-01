@@ -101,5 +101,15 @@ define(
                 expect(b.equals(Vector3.create(50, 27.07107, 107.78177))).toBe(true);
             });
         });
+
+        describe('multiplyPointTo', function () {
+            it('should return the result of multiplying a point by this matrix (mutable)', function () {
+                var m = Matrix4.create();
+                var v = Vector3.create(0, 0, 0);
+                spyOn(m, 'multiplyPointTo');
+                var p = m.multiplyPoint(v);
+                expect(m.multiplyPointTo).toHaveBeenCalledWith(v, Vector3.create());
+            });
+        });
     });
 });
