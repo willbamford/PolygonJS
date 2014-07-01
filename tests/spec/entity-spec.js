@@ -114,14 +114,14 @@ define(
                 });
             });
 
-            describe('getLocalTransform', function () {
+            describe('getTransform', function () {
                 it('should return the local 4 x 4 homogeneous transformation matrix', function () {
                     var e = Entity.create({
                         position: Vector3.create(10, 20, 30),
                         rotation: Matrix3.createRotationX(Math.PI / 4),
                         scale: Vector3.create(4, 2, 3)
                     });
-                    var actual = e.getLocalTransform();
+                    var actual = e.getTransform();
                     var expected = Matrix4.create([
                         [4,        0,         0, 10],
                         [0, 1.414214, -0.707107, 20],
@@ -132,7 +132,7 @@ define(
                 });
             });
 
-            describe('getTransform', function () {
+            describe('getWorldTransform', function () {
                 it('should return the world 4 x 4 homogeneous transformation matrix', function () {
                     var grandparent = Entity.create({
                         position: Vector3.create(-1, -2, 30)
@@ -143,7 +143,7 @@ define(
                     var entity = Entity.create({
                         position: Vector3.create(10, 9, 8)
                     });
-                    var t = entity.getTransform();
+                    var t = entity.getWorldTransform();
                     expect(t.equals(Matrix4.create([
                         [1, 0, 0, 10],
                         [0, 1, 0,  9],
@@ -152,7 +152,7 @@ define(
                     ]))).toBe(true);
 
                     parent.addChild(entity);
-                    t = entity.getTransform();
+                    t = entity.getWorldTransform();
                     expect(t.equals(Matrix4.create([
                         [1, 0, 0, 12],
                         [0, 1, 0, 24],
@@ -161,7 +161,7 @@ define(
                     ]))).toBe(true);
 
                     grandparent.addChild(parent);
-                    t = entity.getTransform();
+                    t = entity.getWorldTransform();
                     expect(t.equals(Matrix4.create([
                         [1, 0, 0, 11],
                         [0, 1, 0, 22],

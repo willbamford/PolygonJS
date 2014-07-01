@@ -49,17 +49,18 @@ require(
             scene: scene
         });
 
-        var engine = Engine.create({
-            onTick: function (delta) {
+        // var engine = Engine.create({
+            // onTick: function (delta) {
+                var delta = 100;
                 scene.update(delta);
                 renderer.draw(delta);
-            }
-        });
-        engine.start();
+            // }
+        // });
+        // engine.start();
 
-        window.setTimeout(function () {
-            engine.stop();
-        }, 10000);
+        // window.setTimeout(function () {
+        //     engine.stop();
+        // }, 10000);
 
         // var mesh = Sphere.create({
         //     levelOfDetail: 2,

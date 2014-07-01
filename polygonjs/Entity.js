@@ -56,7 +56,7 @@ define(
                 return this;
             },
 
-            getLocalTransform: function () { // Optimise by caching?
+            getTransform: function () { // Optimise by caching?
                 var p = this.position;
                 var r = this.rotation;
                 var s = this.scale;
@@ -68,10 +68,10 @@ define(
                 ]);
             },
 
-            getTransform: function () { // Optimise by caching?
+            getWorldTransform: function () { // Optimise by caching?
                 return this.parent ?
-                    this.getLocalTransform().multiply(this.parent.getTransform()) :
-                    this.getLocalTransform();
+                    this.getTransform().multiply(this.parent.getWorldTransform()) :
+                    this.getTransform();
             }
         };
 
