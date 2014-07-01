@@ -44,11 +44,37 @@ define(
                 });
             });
 
+            describe('update', function () {
+                it('should be a function that accepts a delta argument', function () {
+                    var entity = Entity.create();
+                    expect(typeof entity.update).toEqual('function');
+                    entity.update(100);
+                });
+
+                it('should call update on all child entities (which in turn call update on their children)', function () {
+
+                    var root = Entity.create();
+                    var entity1 = Entity.create();
+                    var entity2 = Entity.create();
+
+                    root.addChild(entity1).addChild(entity2);
+
+                    spyOn(entity1, 'update');
+                    spyOn(entity2, 'update');
+
+                    var delta = 88;
+                    root.update(delta);
+
+                    expect(entity1.update).toHaveBeenCalledWith(delta);
+                    expect(entity2.update).toHaveBeenCalledWith(delta);
+                });
+            });
+
             describe('root', function () {
                 it('should return the root entity (may be itself)', function () {
-                    var entity = Entity.create({});
-                    var parent = Entity.create({});
-                    var grandparent = Entity.create({});
+                    var entity = Entity.create();
+                    var parent = Entity.create();
+                    var grandparent = Entity.create();
                     expect(entity.root()).toBe(entity);
                     entity.parent = parent;
                     expect(entity.root()).toBe(parent);
@@ -59,9 +85,9 @@ define(
 
             describe('addChild', function () {
                 it('should be able to add child entities', function () {
-                    var entity = Entity.create({});
-                    var childA = Entity.create({});
-                    var childB = Entity.create({});
+                    var entity = Entity.create();
+                    var childA = Entity.create();
+                    var childB = Entity.create();
                     expect(entity.children.length).toEqual(0);
                     entity.addChild(childA);
                     expect(childA.parent).toBe(entity);
@@ -75,9 +101,9 @@ define(
 
             describe('removeChild', function () {
                 it('should be able to remove child entities', function () {
-                    var entity = Entity.create({});
-                    var childA = Entity.create({});
-                    var childB = Entity.create({});
+                    var entity = Entity.create();
+                    var childA = Entity.create();
+                    var childB = Entity.create();
                     entity.addChild(childA).addChild(childB);
                     entity.removeChild(childA);
                     expect(childA.parent).toBe(null);

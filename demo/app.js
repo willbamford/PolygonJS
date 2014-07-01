@@ -49,22 +49,27 @@ require(
 
         var frame = 0;
 
+        // var loop = function (delta) {
+
+        //     var m1 = Matrix3.createRotationZ(delta * 0.001);
+        //     var m2 = Matrix3.createRotationY(delta * 0.0005);
+        //     var m3 = m1.multiply(m2);
+
+        //     renderer.clear();
+        //     frame++;
+        //     var i = mesh.vertices.length;
+        //     var vertex;
+        //     while (--i >= 0) {
+        //         vertex = mesh.vertices[i];
+        //         mesh.vertices[i] = m3.multiplyPoint(vertex);
+        //     }
+        //     mesh.updateNormals();
+        //     renderer.mesh(mesh);
+        // };
+
         var loop = function (delta) {
-
-            var m1 = Matrix3.createRotationZ(delta * 0.001);
-            var m2 = Matrix3.createRotationY(delta * 0.0005);
-            var m3 = m1.multiply(m2);
-
-            renderer.clear();
-            frame++;
-            var i = mesh.vertices.length;
-            var vertex;
-            while (--i >= 0) {
-                vertex = mesh.vertices[i];
-                mesh.vertices[i] = m3.multiplyPoint(vertex);
-            }
-            mesh.updateNormals();
-            renderer.mesh(mesh);
+            // scene.update();
+            // renderer.drawScene();
         };
 
         var engine = Engine.create({

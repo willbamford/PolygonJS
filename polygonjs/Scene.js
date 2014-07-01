@@ -13,6 +13,12 @@ define(['polygonjs/lib'], function (lib) {
     };
 
     Scene.prototype = {
+
+        update: function (delta) {
+            if (this.root)
+                this.root.update(delta);
+        },
+
         revalidate: function () {
             var self = this;
             this.cameras = [];

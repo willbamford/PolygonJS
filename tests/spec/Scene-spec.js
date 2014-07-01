@@ -57,6 +57,17 @@ define(
                     expect(scene.polygons.length).toEqual(2);
                 });
             });
+
+            describe('update', function () {
+                it('should call update on the scene graph root', function () {
+                    var scene = Scene.create();
+                    scene.root = Entity.create();
+                    var delta = 100;
+                    spyOn(scene.root, 'update');
+                    scene.update(delta);
+                    expect(scene.root.update).toHaveBeenCalledWith(delta);
+                });
+            });
         });
     }
 );

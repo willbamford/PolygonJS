@@ -25,6 +25,12 @@ define(
 
         Entity.prototype = {
 
+            update: function (delta) {
+                lib.each(this.children, function (entity) {
+                    entity.update(delta);
+                });
+            },
+
             root: function () {
                 var e = this;
                 while (e.parent) e = e.parent;
