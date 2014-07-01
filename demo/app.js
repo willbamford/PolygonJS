@@ -3,6 +3,7 @@ require(
         'polygonjs/lib',
         'polygonjs/surfaces/Canvas',
         'polygonjs/entities/Camera',
+        'polygonjs/Scene',
         'polygonjs/Renderer',
         'polygonjs/Mesh',
         'polygonjs/geom/Matrix3',
@@ -10,13 +11,15 @@ require(
         'polygonjs/meshes/Cube',
         'polygonjs/meshes/Sphere',
         'polygonjs/format/object-file-format',
-        'polygonjs/Engine'/*,
-        'text!polygonjs/meshes/data/princeton/m100.off'*/
+        'polygonjs/Engine',
+        'polygonjs/entities/Polygons'
+        /*'text!polygonjs/meshes/data/princeton/m100.off'*/
     ],
     function (
         lib,
         Surface,
         Camera,
+        Scene,
         Renderer,
         Mesh,
         Matrix3,
@@ -25,29 +28,55 @@ require(
         Sphere,
         objectFileFormat,
         Engine,
+        Polygons,
         meshData
     ) {
 
         var surface = Surface.create({});
-        var camera = Camera.create({
-            zoom: 120,
-            mode: Camera.ISOMETRIC
-        });
+        var scene = Scene.create();
+
+        var entity = Polygons.createFromMesh(Sphere.create({
+            levelOfDetail: 1,
+            spikiness: 0
+        }));
+        scene.root = entity;
+        scene.revalidate();
+
+        console.dir(scene);
+
         var renderer = Renderer.create({
             surface: surface,
-            camera: camera
+            scene: scene
         });
+
+        var engine = Engine.create({
+            onTick: function (delta) {
+                scene.update(delta);
+                renderer.draw(delta);
+            }
+        });
+        engine.start();
+
+        window.setTimeout(function () {
+            engine.stop();
+        }, 10000);
+
+        // var mesh = Sphere.create({
+        //     levelOfDetail: 2,
+        //     spikiness: 0.1
+        // });
+
+        // var camera = Camera.create({
+        //     zoom: 120,
+        //     mode: Camera.ISOMETRIC
+        // });
+
+        // console.log('Vertices count: ' + mesh.vertices.length);
+        // console.log('Faces count: ' + mesh.faces.length);
 
         // var mesh = objectFileFormat.loadMesh(meshData);
         // mesh.normalise();
         // renderer.mesh(mesh);
-
-        var mesh = Sphere.create({
-            levelOfDetail: 2,
-            spikiness: 0.1
-        });
-
-        var frame = 0;
 
         // var loop = function (delta) {
 
@@ -67,21 +96,9 @@ require(
         //     renderer.mesh(mesh);
         // };
 
-        var loop = function (delta) {
-            // scene.update();
-            // renderer.drawScene();
-        };
-
-        var engine = Engine.create({
-            onTick: loop
-        });
-        engine.start();
-
-        window.setTimeout(function () {
-            engine.stop();
-        }, 10000);
-
-        console.log('Vertices count: ' + mesh.vertices.length);
-        console.log('Faces count: ' + mesh.faces.length);
+        // var renderer = Renderer.create({
+        //     surface: surface,
+        //     camera: camera
+        // });
     }
 );
