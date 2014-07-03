@@ -18,6 +18,9 @@ define(
 
             describe('create', function () {
 
+                var vertices = [Vector3.create(0, 0, 1), Vector3.create(0, 1, 0), Vector3.create(0, 1, 1)];
+                var normal = Vector3.create(1, 0, 0);
+
                 it('should have an entity type of "polygon"', function () {
                     var polygon = Polygon.create();
                     expect(polygon.type).toBe('polygon');
@@ -25,11 +28,22 @@ define(
 
                 it('should be able initialise with vertices and normal', function () {
                     var polygon = Polygon.create({
-                        vertices: [Vector3.create(0, 0, 1), Vector3.create(0, 1, 0), Vector3.create(0, 1, 1)],
-                        normal: Vector3.create(1, 0, 0)
+                        vertices: vertices,
+                        normal: normal
                     });
                     expect(polygon.vertices.length).toBe(3);
-                    expect(polygon.normal.equals(Vector3.create(1, 0, 0))).toBe(true);
+                    expect(polygon.normal.equals(normal)).toBe(true);
+                });
+
+                it('should initialiase world, view and screen vertices to zero vectors', function () {
+                    var polygon = Polygon.create({
+                        vertices: vertices,
+                        normal: normal
+                    });
+                    expect(polygon.worldVertices.length).toBe(3);
+                    expect(polygon.viewVertices.length).toBe(3);
+                    expect(polygon.screenVertices.length).toBe(3);
+                    expect(polygon.worldVertices[0].equals(Vector3.ZERO)).toBe(true);
                 });
             });
         });
