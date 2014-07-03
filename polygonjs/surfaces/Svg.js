@@ -12,7 +12,7 @@ define(['polygonjs/lib'], function (lib) {
         this.cx = this.width / 2;
         this.cy = this.height / 2;
         var svg = this.createEl('svg', {
-            style: 'border: 1px solid #eee',
+            style: 'background: black; border: 1px solid #eee',
             width: this.width,
             height: this.height
         });

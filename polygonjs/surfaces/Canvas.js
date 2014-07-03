@@ -10,7 +10,7 @@ define(['polygonjs/lib'], function (lib) {
         this.cy = this.height / 2;
 
         var canvas = this.createEl('canvas', {
-            style: 'border: 1px solid #eee',
+            style: 'background: black; border: 1px solid #eee',
             width: this.width,
             height: this.height
         });
