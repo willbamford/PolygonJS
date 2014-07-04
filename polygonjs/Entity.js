@@ -70,7 +70,7 @@ define(
 
             getWorldTransform: function () { // Optimise by caching?
                 return this.parent ?
-                    this.getTransform().multiply(this.parent.getWorldTransform()) :
+                    this.parent.getWorldTransform().multiply(this.getTransform()) :
                     this.getTransform();
             }
         };
