@@ -1,6 +1,6 @@
 define(
     [
-        'polygonjs/entities/Camera',
+        'polygonjs/entities/Camera-archive',
         'polygonjs/Entity',
         'polygonjs/geom/Vector2',
         'polygonjs/geom/Vector3'

@@ -11,8 +11,10 @@ require(
         'polygonjs/meshes/Cube',
         'polygonjs/meshes/Sphere',
         'polygonjs/format/object-file-format',
+        'polygonjs/Entity',
         'polygonjs/Engine',
-        'polygonjs/entities/Polygons'
+        'polygonjs/entities/Polygons',
+        'polygonjs/geom/Vector3'
         /*'text!polygonjs/meshes/data/princeton/m100.off'*/
     ],
     function (
@@ -27,40 +29,66 @@ require(
         Cube,
         Sphere,
         objectFileFormat,
+        Entity,
         Engine,
         Polygons,
+        Vector3,
         meshData
     ) {
 
         var surface = Surface.create({});
         var scene = Scene.create();
 
-        var entity = Polygons.createFromMesh(Sphere.create({
+        var root = Entity.create();
+
+        var theSun = Polygons.createFromMesh(Sphere.create({
             levelOfDetail: 1,
             spikiness: 0
         }));
-        scene.root = entity;
-        scene.revalidate();
+        theSun.scale = Vector3.create(2, 2, 2);
+        var theMoon = Polygons.createFromMesh(Sphere.create({
 
-        console.dir(scene);
+        }));
+        root.addChild(theSun);
+
+        var theMoon = Polygons.createFromMesh(Sphere.create({
+            levelOfDetail: 1,
+            spikiness: 0
+        }));
+        theMoon.position.x = 3;
+        theMoon.scale = Vector3.create(1, 1, 1);
+        theSun.addChild(theMoon);
+
+        scene.root = root;
+        scene.revalidate();
 
         var renderer = Renderer.create({
             surface: surface,
             scene: scene
         });
 
-        // var engine = Engine.create({
-            // onTick: function (delta) {
-                var delta = 100;
+        var rotation = 0;
+
+        var engine = Engine.create({
+            onTick: function (delta) {
+
+                rotation += delta;
+
+                var m1 = Matrix3.createRotationZ(rotation * 0.001);
+                var m2 = Matrix3.createRotationY(rotation * 0.0005);
+                var m3 = m1.multiply(m2);
+
+                scene.root.rotation = m3;
+
                 scene.update(delta);
                 renderer.draw(delta);
-            // }
-        // });
-        // engine.start();
+            }
+        });
+        engine.start();
 
-        // window.setTimeout(function () {
-        //     engine.stop();
-        // }, 10000);
+        window.setTimeout(function () {
+            engine.stop();
+        }, 10000);
 
         // var mesh = Sphere.create({
         //     levelOfDetail: 2,

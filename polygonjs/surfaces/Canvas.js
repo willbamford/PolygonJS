@@ -55,6 +55,19 @@ define(['polygonjs/lib'], function (lib) {
             this.context.clearRect (0, 0, this.width, this.height);
         },
 
+        circle: function (point, r, style) {
+            var ctx = this.context;
+            ctx.fillStyle = style;
+            ctx.beginPath();
+            ctx.arc(this.cx + point.x, this.cy + point.y, r, 2 * Math.PI, false);
+            ctx.closePath();
+            ctx.fill();
+        },
+
+        dot: function (point) {
+            return this.circle(point, 1, 'white');
+        },
+
         polygon: function (points, style) {
             var ctx = this.context;
             var len = points.length;

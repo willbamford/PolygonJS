@@ -1,4 +1,8 @@
-define([], function () {
+define(['polygonjs/entities/Camera-archive'], function (Camera) {
+
+    var tempCamera = Camera.create({
+        zoom: 20
+    });
 
     var Renderer = function (opts) {
         opts = opts || {};
@@ -12,14 +16,37 @@ define([], function () {
 
     Renderer.prototype = {
         draw: function (delta) {
-            
-            var polygons = this.scene.polygons;
-            var polygon;
-            var i = polygons.length;
+
+            var polygons = this.scene.polygons,
+                surface = this.surface,
+                i = polygons.length, j, vertex, viewVertex;
+
+            surface.clear();
+
             while (--i >= 0) {
                 polygon = polygons[i];
+                j = polygon.worldVertices.length;
+                while (--j >= 0) {
+                    vertex = polygon.worldVertices[j];
+                    viewVertex = tempCamera.project(vertex);
+                    surface.dot(viewVertex, 'white');
+                }
+
                 // polygon.updateViewVertices(camera.projection);
             }
+
+
+           // var polygons = this.scene.polygons; 
+
+            // var polygons = this.scene.polygons;
+            // var polygon;
+            // var i = polygons.length;
+            // while (--i >= 0) {
+            //     polygon = polygons[i];
+
+
+            //     // polygon.updateViewVertices(camera.projection);
+            // }
 
             /*
                 TODO:

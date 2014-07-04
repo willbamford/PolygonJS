@@ -46,25 +46,25 @@ define(['polygonjs/lib'], function (lib) {
             el.setAttributeNS(namespace, name, value);
         },
 
-        line: function (x1, y1, x2, y2, style) {
-            style = style || 'stroke: black';
-            var line = this.createEl('line', {
-                x1: this.cx + x1,
-                x2: this.cx + x2,
-                y1: this.cy + y1,
-                y2: this.cy + y2,
-                style: style
-            });
-            this.svg.appendChild(line);
-            return line;
-        },
+        // line: function (x1, y1, x2, y2, style) {
+        //     style = style || 'stroke: black';
+        //     var line = this.createEl('line', {
+        //         x1: this.cx + x1,
+        //         x2: this.cx + x2,
+        //         y1: this.cy + y1,
+        //         y2: this.cy + y2,
+        //         style: style
+        //     });
+        //     this.svg.appendChild(line);
+        //     return line;
+        // },
 
-        circle: function (x, y, r, style) {
+        circle: function (point, r, style) {
             r = r || 1;
             style = style || 'stroke: black';
             var circle = this.createEl('circle', {
-                cx: this.cx + x,
-                cy: this.cy + y,
+                cx: this.cx + point.x,
+                cy: this.cy + point.y,
                 r: r,
                 style: style
             });
@@ -72,8 +72,8 @@ define(['polygonjs/lib'], function (lib) {
             return circle;
         },
 
-        dot: function (x, y) {
-            return this.circle(x, y, 1);
+        dot: function (point) {
+            return this.circle(point, 1);
         },
 
         clear: function () {

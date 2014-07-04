@@ -36,7 +36,7 @@ define(
                 this.viewVertices.push(Vector3.create(0, 0, 0));
                 this.screenVertices.push(Vector3.create(0, 0, 0));
             }
-        },
+        };
 
         Polygon.prototype.update = function (delta) {
             var vertices = this.vertices,
@@ -52,6 +52,12 @@ define(
                 transform.multiplyPointTo(vertex, worldVertex);
             }
         };
+
+        // Polygon.prototype.draw = function (camera, surface) {
+
+        //     // ...
+
+        // };
 
         return Polygon;
     }
