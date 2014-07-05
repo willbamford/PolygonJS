@@ -40,24 +40,32 @@ require(
         var scene = Scene.create();
 
         var root = Entity.create();
+        var camera = Camera.create();
+        root.addChild(camera);
 
+        // Sun
         var theSun = Polygons.createFromMesh(Sphere.create({
             levelOfDetail: 1,
             spikiness: 0
         }));
         theSun.scale = Vector3.create(2, 2, 2);
-        var theMoon = Polygons.createFromMesh(Sphere.create({
-
-        }));
         root.addChild(theSun);
 
+        // Earth
+        var theEarth = Polygons.createFromMesh(Sphere.create({
+            levelOfDetail: 1,
+            spikiness: 0
+        }));
+        theEarth.position.x = 8;
+        root.addChild(theEarth);
+
+        // Moon
         var theMoon = Polygons.createFromMesh(Sphere.create({
             levelOfDetail: 1,
             spikiness: 0
         }));
-        theMoon.position.x = 3;
-        theMoon.scale = Vector3.create(1, 1, 1);
-        theSun.addChild(theMoon);
+        theMoon.position.y = 4;
+        theEarth.addChild(theMoon);
 
         scene.root = root;
         scene.revalidate();
@@ -78,7 +86,10 @@ require(
                 var m2 = Matrix3.createRotationY(rotation * 0.0005);
                 var m3 = m1.multiply(m2);
 
-                scene.root.rotation = m3;
+                // scene.root.rotation = m3;
+
+                theEarth.rotation = m1;
+                theMoon.rotation = m2;
 
                 scene.update(delta);
                 renderer.draw(delta);
