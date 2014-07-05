@@ -56,7 +56,7 @@ define(
                 return this;
             },
 
-            getTransform: function () { // Optimise by caching?
+            getTransform: function () { // Optimise
                 var p = this.position;
                 var r = this.rotation;
                 var s = this.scale;
@@ -68,7 +68,7 @@ define(
                 ]);
             },
 
-            getWorldTransform: function () { // Optimise by caching?
+            getWorldTransform: function () { // Optimise
                 return this.parent ?
                     this.parent.getWorldTransform().multiply(this.getTransform()) :
                     this.getTransform();
