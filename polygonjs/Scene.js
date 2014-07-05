@@ -6,6 +6,8 @@ define(['polygonjs/lib'], function (lib) {
         this.cameras = [];
         this.lights = [];
         this.polygons = [];
+
+        this.mainCamera = null;
     };
 
     Scene.create = function (opts) {
@@ -25,6 +27,9 @@ define(['polygonjs/lib'], function (lib) {
             this.lights = [];
             this.polygons = [];
             this._revalidateFromChildren(this.root.children);
+            
+            if (this.cameras.length > 0 && !lib.contains(this.camera, this.mainCamera))
+                this.mainCamera = this.cameras[0];
         },
 
         _revalidateFromChildren: function (children) {

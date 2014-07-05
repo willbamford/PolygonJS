@@ -68,6 +68,24 @@ define(
                     expect(scene.root.update).toHaveBeenCalledWith(delta);
                 });
             });
+
+            describe('mainCamera', function () {
+
+                var scene = Scene.create();
+                    scene.root = Entity.create();
+                    var camera = Camera.create();
+                    scene.root.addChild(camera);
+                    scene.revalidate();
+
+                it('should default to first camera found in scene graph if not already set', function () {
+                    expect(scene.mainCamera).toBe(camera);
+                });
+
+                it('should be possible to set the main camera on the scene', function () {
+                    scene.mainCamera = scene.cameras[0];
+                    expect(scene.mainCamera).toBe(camera);
+                });
+            });
         });
     }
 );
