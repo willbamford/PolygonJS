@@ -51,21 +51,31 @@ define(
                 });
             });
 
-            describe('findWithTag', function () {
+            describe('find', function () {
+                var a = Entity.create({tags: ['one', 'two', 'three']});
+                var b1 = Entity.create({tags: ['two', 'three']});
+                var b2 = Entity.create({tags: ['two']});
+                var c = Entity.create({tags: ['two', 'three']});
 
-                it('should return all entities with a given tag in this entity or child entities', function () {
-                    var a = Entity.create({tags: ['one', 'two', 'three']});
-                    var b1 = Entity.create({tags: ['two', 'three']});
-                    var b2 = Entity.create({tags: ['two']});
-                    var c = Entity.create({tags: ['two', 'three']});
+                b2.addChild(c);
+                a.addChild(b1).addChild(b2);
 
-                    b2.addChild(c);
-                    a.addChild(b1).addChild(b2);
+                describe('find [all]', function () {
+                    it('should return all entities with a given tag (includes children)', function () {
+                        expect(a.find('three')).toEqual([a, b1, c]);
+                        expect(a.find('two')).toEqual([a, b1, b2, c]);
+                        expect(a.find('twinsen')).toEqual([]);
+                        expect(c.find('three')).toEqual([c]);
+                    });
+                });
 
-                    expect(a.findWithTag('three')).toEqual([a, b1, c]);
-                    expect(a.findWithTag('two')).toEqual([a, b1, b2, c]);
-                    expect(a.findWithTag('twinsen')).toEqual([]);
-                    expect(c.findWithTag('three')).toEqual([c]);
+                describe('findFirst', function () {
+                    it('should return the first child with a given tag or \'null\'', function () {
+                        expect(a.findFirst('three')).toEqual(a);
+                        expect(a.findFirst('two')).toEqual(a);
+                        expect(a.findFirst('twinsen')).toEqual(null);
+                        expect(c.findFirst('three')).toEqual(c);
+                    });
                 });
             });
 

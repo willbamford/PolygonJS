@@ -26,13 +26,18 @@ define(
 
         Entity.prototype = {
 
-            findWithTag: function (tag) {
+            find: function (tag) {
                 var found = [];
                 if (lib.contains(this.tags, tag)) found.push(this);
                 lib.each(this.children, function (entity) {
-                    found = found.concat(entity.findWithTag(tag));
+                    found = found.concat(entity.find(tag));
                 });
                 return found;
+            },
+
+            findFirst: function (tag) {
+                var all = this.find(tag);
+                return all.length > 0 ? all[0] : null;
             },
 
             update: function (delta) {
