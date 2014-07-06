@@ -124,8 +124,8 @@ define(
                     var actual = e.getTransform();
                     var expected = Matrix4.create([
                         [4,        0,         0, 10],
-                        [0, 1.414214, -0.707107, 20],
-                        [0, 0.707107,  2.121321, 30],
+                        [0, 1.414214, -1.414214, 20],
+                        [0, 2.121320, 2.1213203, 30],
                         [0,        0,         0,  1]
                     ]);
                     expect(expected.equals(actual)).toBe(true);

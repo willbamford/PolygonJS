@@ -61,10 +61,10 @@ define(
                 var r = this.rotation;
                 var s = this.scale;
                 return Matrix4.create([
-                    [r.a * s.x, r.b,       r.c,       p.x],
-                    [r.d,       r.e * s.y, r.f,       p.y],
-                    [r.g,       r.h,       r.i * s.z, p.z],
-                    [0,         0,         0,         1  ]
+                    [s.x * r.a, s.x * r.b, s.x * r.c, p.x],
+                    [s.y * r.d, s.y * r.e, s.y * r.f, p.y],
+                    [s.z * r.g, s.z * r.h, s.z * r.i, p.z],
+                    [ 0,    0,   0,   1]
                 ]);
             },
 
