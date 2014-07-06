@@ -17,6 +17,7 @@ define(
             this.rotation = opts.rotation || Matrix3.IDENTITY.copy();
             this.scale    = opts.scale    || Vector3.create(1, 1, 1);
             this.children = [];
+            this.tags = opts.tags || [];
         };
 
         Entity.create = function (opts) {
@@ -24,6 +25,16 @@ define(
         };
 
         Entity.prototype = {
+
+            findWithTag: function (tag) {
+                var self = this, found = [];
+                if (lib.contains(this.tags, tag))
+                    found.push(self);
+                lib.each(this.children, function (entity) {
+                    found = found.concat(entity.findWithTag(tag));
+                });
+                return found;
+            },
 
             update: function (delta) {
                 lib.each(this.children, function (entity) {

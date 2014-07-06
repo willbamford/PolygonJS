@@ -42,6 +42,31 @@ define(
                 it('should initially have a 3x3 identity rotation matrix', function () {
                     expect(e.rotation.equals(Matrix3.IDENTITY)).toBe(true);
                 });
+
+                it('should be possible to initialise with tags', function () {
+                    var entity = Entity.create({
+                        tags: ['ai', 'enemy']
+                    });
+                    expect(entity.tags).toEqual(['ai', 'enemy']);
+                });
+            });
+
+            describe('findWithTag', function () {
+
+                it('should return all entities with a given tag in this entity or child entities', function () {
+                    var a = Entity.create({tags: ['one', 'two', 'three']});
+                    var b1 = Entity.create({tags: ['two', 'three']});
+                    var b2 = Entity.create({tags: ['two']});
+                    var c = Entity.create({tags: ['two', 'three']});
+
+                    b2.addChild(c);
+                    a.addChild(b1).addChild(b2);
+
+                    expect(a.findWithTag('three')).toEqual([a, b1, c]);
+                    expect(a.findWithTag('two')).toEqual([a, b1, b2, c]);
+                    expect(a.findWithTag('twinsen')).toEqual([]);
+                    expect(c.findWithTag('three')).toEqual([c]);
+                });
             });
 
             describe('update', function () {
