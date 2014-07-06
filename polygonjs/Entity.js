@@ -27,9 +27,8 @@ define(
         Entity.prototype = {
 
             findWithTag: function (tag) {
-                var self = this, found = [];
-                if (lib.contains(this.tags, tag))
-                    found.push(self);
+                var found = [];
+                if (lib.contains(this.tags, tag)) found.push(this);
                 lib.each(this.children, function (entity) {
                     found = found.concat(entity.findWithTag(tag));
                 });
