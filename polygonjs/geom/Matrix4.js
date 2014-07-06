@@ -28,6 +28,14 @@ define(
 
         Matrix4.prototype = {
 
+            toString: function () {
+                var s = '';
+                this.toArrays().forEach(function (row) {
+                    s += row.join(', ') + '\n';
+                });
+                return s;
+            },
+
             copy: function () {
                 return Matrix4.create(this.toArrays());
             },

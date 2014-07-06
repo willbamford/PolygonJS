@@ -36,6 +36,15 @@ define(
             });
         });
 
+        describe('toString', function () {
+            it('should return a string representation of this matrix', function () {
+                var m = Matrix4.create(a);
+                expect(m.toString()).toEqual(
+                    '1, 2, 3, 4\n5, 6, 7, 8\n9, 10, 11, 12\n13, 14, 15, 16\n'
+                );
+            });
+        });
+
         describe('copy', function () {
             it('should copy this matrix to a new matrix', function () {
                 var m1 = Matrix4.create(a);

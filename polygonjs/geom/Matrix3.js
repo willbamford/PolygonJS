@@ -53,6 +53,14 @@ define(
 
         Matrix3.prototype = {
 
+            toString: function () {
+                var s = '';
+                this.toArrays().forEach(function (row) {
+                    s += row.join(', ') + '\n';
+                });
+                return s;
+            },
+
             copy: function () {
                 return Matrix3.create(this.toArrays());
             },
