@@ -45,7 +45,20 @@ v' = MVP * v
 
 View-space to clip-space (final). **Orthographic** e.g. isometric or **Perspective**.
 
+	Think of the projection matrix as describing the attributes of your camera, such as field of view, focal length, fish eye lens, etc. Think of the ModelView matrix as where you stand with the camera and the direction you point it. [3]
+	
+Relevant OpenGL functions:
+
+```
+gluPerspective/glFrustum/glOrtho/gluOrtho2
+```
+
+Best place to achieve **zoom** is in the projection transform matrix [3].
+
 ### References
 
 1. [3D Game Engine Programming - Understanding the View Matrix](http://3dgep.com/?p=1700)
-2. [Matrix44 - Coordinate Systems (in OpenGL)](http://www.matrix44.net/cms/notes/opengl-3d-graphics/coordinate-systems-in-opengl)
+2. [Matrix44 - Coordinate Systems (in OpenGL)](http://www.matrix44.net/cms/notes/opengl-3d-graphics/coordinate-systems-in-opengl).
+3. [Using Viewing and Camera Transforms, and gluLookAt() - OpenGL](http://www.opengl.org/archives/resources/faq/technical/viewing.htm)
+4. [Help stamp out GL_PROJECTION abuse](http://sjbaker.org/steve/omniv/projection_abuse.html) - don't combine view and perspective transform matrices! Can screw up z-depth accuracy, lighting (normals), fog calculation etc. etc.
+5. [Calculating the gluPerspective matrix and other OpenGL matrix maths](http://unspecified.wordpress.com/2012/06/21/calculating-the-gluperspective-matrix-and-other-opengl-matrix-maths/)
