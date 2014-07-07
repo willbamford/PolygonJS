@@ -50,10 +50,10 @@ define(
             },
 
             equals: function (m) {
-                return math.equals(this.a, m.a) && math.equals(this.b, m.b) && math.equals(this.c, m.c) && math.equals(this.d, m.d)
-                    && math.equals(this.e, m.e) && math.equals(this.f, m.f) && math.equals(this.g, m.g) && math.equals(this.h, m.h)
-                    && math.equals(this.i, m.i) && math.equals(this.j, m.j) && math.equals(this.k, m.k) && math.equals(this.l, m.l)
-                    && math.equals(this.m, m.m) && math.equals(this.n, m.n) && math.equals(this.o, m.o) && math.equals(this.p, m.p);
+                return math.equals(this.a, m.a) && math.equals(this.b, m.b) && math.equals(this.c, m.c) && math.equals(this.d, m.d) &&
+                    math.equals(this.e, m.e) && math.equals(this.f, m.f) && math.equals(this.g, m.g) && math.equals(this.h, m.h) &&
+                    math.equals(this.i, m.i) && math.equals(this.j, m.j) && math.equals(this.k, m.k) && math.equals(this.l, m.l) &&
+                    math.equals(this.m, m.m) && math.equals(this.n, m.n) && math.equals(this.o, m.o) && math.equals(this.p, m.p);
             },
 
             multiply: function (m) {

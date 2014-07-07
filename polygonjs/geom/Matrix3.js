@@ -74,9 +74,9 @@ define(
             },
 
             equals: function (m) {
-                return math.equals(this.a, m.a) && math.equals(this.b, m.b) && math.equals(this.c, m.c)
-                    && math.equals(this.d, m.d) && math.equals(this.e, m.e) && math.equals(this.f, m.f)
-                    && math.equals(this.g, m.g) && math.equals(this.h, m.h) && math.equals(this.i, m.i);
+                return math.equals(this.a, m.a) && math.equals(this.b, m.b) && math.equals(this.c, m.c) &&
+                    math.equals(this.d, m.d) && math.equals(this.e, m.e) && math.equals(this.f, m.f) &&
+                    math.equals(this.g, m.g) && math.equals(this.h, m.h) && math.equals(this.i, m.i);
             },
 
             multiply: function (m) {
