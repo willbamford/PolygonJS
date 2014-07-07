@@ -107,6 +107,10 @@ define(
                 q.y = p.x * t.e + p.y * t.f + p.z * t.g + t.h;
                 q.z = p.x * t.i + p.y * t.j + p.z * t.k + t.l;
                 return q;
+            },
+
+            getTranslation: function () {
+                return Vector3.create(this.d, this.h, this.l);
             }
         };
 

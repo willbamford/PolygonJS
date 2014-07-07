@@ -157,10 +157,10 @@ define(['polygonjs/math'], function (math) {
     Vector3.Z       = Vector3.create(0, 0, 1);
     Vector3.UP      = Vector3.create(0, 1, 0);
     Vector3.DOWN    = Vector3.create(0, -1, 0);
-    Vector3.FORWARD = Vector3.create(1, 0, 0);
-    Vector3.BACK    = Vector3.create(-1, 0, 0);
-    Vector3.RIGHT   = Vector3.create(0, 0, 1);
-    Vector3.LEFT    = Vector3.create(0, 0, -1);
+    Vector3.FORWARD = Vector3.create(0, 0, -1);
+    Vector3.BACK    = Vector3.create(0, 0, 1);
+    Vector3.RIGHT   = Vector3.create(1, 0, 0);
+    Vector3.LEFT    = Vector3.create(-1, 0, 0);
 
     return Vector3;
 });
