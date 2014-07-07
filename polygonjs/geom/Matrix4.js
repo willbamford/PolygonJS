@@ -56,6 +56,18 @@ define(
                     math.equals(this.m, m.m) && math.equals(this.n, m.n) && math.equals(this.o, m.o) && math.equals(this.p, m.p);
             },
 
+            transpose: function () {
+                var t = this,
+                    m = t.copy();
+                m.b = t.e; m.e = t.b;
+                m.c = t.i; m.i = t.c;
+                m.d = t.m; m.m = t.d;
+                m.g = t.j; m.j = t.g;
+                m.h = t.n; m.n = t.h;
+                m.l = t.o; m.o = t.l;
+                return m;
+            },
+
             multiply: function (m) {
                 var p = Matrix4.create(),
                     t = this;

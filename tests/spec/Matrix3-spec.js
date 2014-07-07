@@ -155,5 +155,17 @@ define(
                 expect(m.inverse().equals(Matrix3.create(e))).toBe(true);
             });
         });
+
+        describe('transpose', function () {
+            it('should tranpose the matrix', function () {
+                var m = Matrix3.create(a);
+                var expected = Matrix3.create([
+                    [1, 4, 7],
+                    [2, 5, 8],
+                    [3, 6, 9]
+                ]);
+                expect(m.tranpose().equals(expected)).toBeTruthy();
+            });
+        });
     });
 });

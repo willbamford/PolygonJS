@@ -64,6 +64,19 @@ define(
             });
         });
 
+        describe('transpose', function () {
+            it('should tranpose the matrix', function () {
+                var m = Matrix4.create(a);
+                var expected = Matrix4.create([
+                    [1, 5,  9, 13],
+                    [2, 6, 10, 14],
+                    [3, 7, 11, 15],
+                    [4, 8, 12, 16]
+                ]);
+                expect(m.transpose().equals(expected)).toBeTruthy();
+            });
+        });
+
         describe('multiply', function () {
             it('should return the result of multiplying this matrix with another', function () {
                 var e = [

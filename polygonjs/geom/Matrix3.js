@@ -131,6 +131,15 @@ define(
                 m.i = (t.a * t.e - t.d * t.b) * idet;
 
                 return m;
+            },
+
+            tranpose: function () {
+                var t = this,
+                    m = t.copy();
+                m.b = t.d; m.d = t.b;
+                m.c = t.g; m.g = t.c;
+                m.f = t.h; m.h = t.f;
+                return m;
             }
         };
 
