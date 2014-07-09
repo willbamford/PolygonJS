@@ -147,6 +147,28 @@ define(['polygonjs/math'], function (math) {
 
         normal: function (v) {
             return this.crossProduct(v).normalised();
+        },
+
+        // 'w' component equal to one (e.g. point)
+        transform: function (matrix4) {
+            var t = this,
+                m = matrix4,
+                v = Vector3.create();
+            v.x = t.x * m.a + t.y * m.b + t.z * m.c + /*1.0f **/ m.d;
+            v.y = t.x * m.e + t.y * m.f + t.z * m.g + /*1.0f **/ m.h;
+            v.z = t.x * m.i + t.y * m.j + t.z * m.k + /*1.0f **/ m.l;
+            return v;
+        },
+
+        // 'w' component equal to zero (e.g. vector)
+        transformNormal: function (matrix4) {
+            var t = this,
+                m = matrix4,
+                v = Vector3.create();
+            v.x = t.x * m.a + t.y * m.b + t.z * m.c /*+ 0.0f * m.d*/;
+            v.y = t.x * m.e + t.y * m.f + t.z * m.g /*+ 0.0f * m.h*/;
+            v.z = t.x * m.i + t.y * m.j + t.z * m.k /*+ 0.0f * m.l*/;
+            return v;
         }
     };
 
