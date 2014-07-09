@@ -62,3 +62,11 @@ Best place to achieve **zoom** is in the projection transform matrix [3].
 3. [Using Viewing and Camera Transforms, and gluLookAt() - OpenGL](http://www.opengl.org/archives/resources/faq/technical/viewing.htm)
 4. [Help stamp out GL_PROJECTION abuse](http://sjbaker.org/steve/omniv/projection_abuse.html) - don't combine view and perspective transform matrices! Can screw up z-depth accuracy, lighting (normals), fog calculation etc. etc.
 5. [Calculating the gluPerspective matrix and other OpenGL matrix maths](http://unspecified.wordpress.com/2012/06/21/calculating-the-gluperspective-matrix-and-other-opengl-matrix-maths/)
+6. [OpenGL Projection Matrix - Song Ho Ahn](http://www.songho.ca/opengl/gl_projectionmatrix.html)
+7. [c3DL - Canvas 3D JS Library](http://www.c3dl.org/)
+8. [OpenGL - Transformations](http://www.opengl.org/archives/resources/faq/technical/transformations.htm)
+9. [http://www.opengl.org/archives/resources/faq/technical/lookat.cpp](http://www.opengl.org/archives/resources/faq/technical/lookat.cpp)
+10. [Cameras in OpenGL (ES 2.0)](http://blog.db-in.com/cameras-on-opengl-es-2-x/)
+11. [http://www.songho.ca/opengl/gl_transform.html](http://www.songho.ca/opengl/gl_transform.html)
+12. [http://user.xmission.com/~nate/tutors.html](http://user.xmission.com/~nate/tutors.html)
+13. [www.scratchapixel.com - Transforming Points and Vectors](http://www.scratchapixel.com/lessons/3d-basic-lessons/lesson-4-geometry/transforming-points-and-vectors/)
