@@ -15,12 +15,6 @@ define(['polygonjs/lib'], function (lib) {
             height: this.height
         });
 
-        // var svg = this.createEl('svg', {
-        //     style: 'border: 1px solid #eee',
-        //     width: this.width,
-        //     height: this.height
-        // });
-        // this.setAttrNS(svg, XML_NS, 'xmlns:xlink', 'http://www.w3.org/1999/xlink');
         document.body.appendChild(canvas);
         this.canvas = canvas;
         this.context = canvas.getContext('2d');
@@ -59,13 +53,14 @@ define(['polygonjs/lib'], function (lib) {
             var ctx = this.context;
             ctx.fillStyle = style;
             ctx.beginPath();
-            ctx.arc(this.cx + point.x, this.cy + point.y, r, 2 * Math.PI, false);
+            ctx.arc(this.cx + point.x, this.cy - point.y, r, 2 * Math.PI, false);
             ctx.closePath();
             ctx.fill();
         },
 
-        dot: function (point) {
-            return this.circle(point, 1, 'white');
+        dot: function (point, style) {
+            style = style || 'white';
+            return this.circle(point, 1, style);
         },
 
         polygon: function (points, style) {
@@ -76,10 +71,10 @@ define(['polygonjs/lib'], function (lib) {
                 ctx.fillStyle = style;
                 ctx.strokeStyle = style;
                 ctx.beginPath();
-                ctx.moveTo(point.x + this.cx, point.y + this.cy);
+                ctx.moveTo(point.x + this.cx, -point.y + this.cy);
                 for (var i = 1; i < len; i++) {
                     point = points[i];
-                    ctx.lineTo(point.x + this.cx, point.y + this.cy);
+                    ctx.lineTo(point.x + this.cx, -point.y + this.cy);
                 }
                 ctx.closePath();
                 ctx.fill();

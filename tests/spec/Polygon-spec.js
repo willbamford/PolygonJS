@@ -34,17 +34,6 @@ define(
                     expect(polygon.vertices.length).toBe(3);
                     expect(polygon.normal.equals(normal)).toBe(true);
                 });
-
-                it('should initialiase world, view and screen vertices to zero vectors', function () {
-                    var polygon = Polygon.create({
-                        vertices: vertices,
-                        normal: normal
-                    });
-                    expect(polygon.worldVertices.length).toBe(3);
-                    expect(polygon.viewVertices.length).toBe(3);
-                    expect(polygon.screenVertices.length).toBe(3);
-                    expect(polygon.worldVertices[0].equals(Vector3.ZERO)).toBe(true);
-                });
             });
         });
     }

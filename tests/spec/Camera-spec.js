@@ -3,9 +3,10 @@ define(
         'polygonjs/entities/Camera',
         'polygonjs/Entity',
         'polygonjs/geom/Vector2',
-        'polygonjs/geom/Vector3'
+        'polygonjs/geom/Vector3',
+        'polygonjs/geom/Matrix4'
     ],
-    function (Camera, Entity, Vector2, Vector3) { 
+    function (Camera, Entity, Vector2, Vector3, Matrix4) { 
 
         "use strict";
 
@@ -24,38 +25,49 @@ define(
                     expect(camera instanceof Camera).toBeTruthy();
                 });
 
-                it('should have a default up vector along positive Y', function () {
+                it('should have an entity type of \'camera\'', function () {
                     var camera = Camera.create();
-                    expect(camera.upVector.equals(Vector3.create(0, 1, 0))).toBeTruthy();
+                    expect(camera.type).toBe('camera');
                 });
 
-                it('should be possible to initialise the up vector', function () {
-                    var opts = { upVector: Vector3.create(0, 0, 1) };
-                    var camera = Camera.create(opts);
-                    expect(camera.upVector).toBe(opts.upVector);
-                });
-
-                it('should have a default origin vector target', function () {
+                it('should be initialised with an identity view transform', function () {
                     var camera = Camera.create();
-                    expect(camera.targetVector.equals(Vector3.ZERO)).toBeTruthy();
+                    expect(camera.viewTransform.equals(Matrix4.IDENTITY)).toBeTruthy();
                 });
 
-                it('should be possible to initialise the target vector', function () {
-                    var opts = { targetVector: Vector3.create(10, 9, 8) };
-                    var camera = Camera.create(opts);
-                    expect(camera.targetVector).toBe(opts.targetVector);
+                it('should have a default \'up\' vector pointing positively along y-axis', function () {
+                    var camera = Camera.create();
+                    expect(camera.up.equals(Vector3.create(0, 1, 0))).toBeTruthy();
                 });
             });
 
-            describe('update', function () {
-                it('should call Entity prototype update method', function () {
-                    var camera = Camera.create();
-                    var delta = 100;
-                    spyOn(Entity.prototype, 'update');
-                    camera.update(delta);
-                    expect(Entity.prototype.update).toHaveBeenCalledWith(delta);
+            describe('calculateLookAtViewTransform', function () {
+                it('should calculate the look at view transform', function () {
+                    var eye = Vector3.create(100, 100, -100);
+                    var up = Vector3.create(0, 1, 0);
+                    var target = Vector3.create(100, 100, 0);
+
+                    var m = Matrix4.create();
+                    Camera.calculateLookAtViewTransform(m, eye, up, target);
+                    var expected = [
+                        [-1, 0,  0,  100],
+                        [ 0, 1,  0, -100],
+                        [ 0, 0, -1, -100],
+                        [ 0, 0,  0,    1]
+                    ];
+                    expect(m.equals(Matrix4.create(expected))).toBeTruthy();
                 });
             });
+
+            // describe('update', function () {
+            //     it('should call Entity prototype update method', function () {
+            //         var camera = Camera.create();
+            //         var delta = 100;
+            //         spyOn(Entity.prototype, 'update');
+            //         camera.update(delta);
+            //         expect(Entity.prototype.update).toHaveBeenCalledWith(delta);
+            //     });
+            // });
         });
     }
 );

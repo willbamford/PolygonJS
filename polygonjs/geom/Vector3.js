@@ -153,10 +153,19 @@ define(['polygonjs/math'], function (math) {
         transform: function (matrix4) {
             var t = this,
                 m = matrix4,
-                v = Vector3.create();
+                v = Vector3.create(),
+                vw;
             v.x = t.x * m.a + t.y * m.b + t.z * m.c + /*1.0f **/ m.d;
             v.y = t.x * m.e + t.y * m.f + t.z * m.g + /*1.0f **/ m.h;
             v.z = t.x * m.i + t.y * m.j + t.z * m.k + /*1.0f **/ m.l;
+            vw  = t.x * m.m + t.y * m.n + t.z * m.o + /*1.0f **/ m.p;
+
+            // Normalize
+            if (vw !== 0 && vw !== 1) {
+                v.x /= vw;
+                v.y /= vw;
+                v.z /= vw;
+            }
             return v;
         },
 

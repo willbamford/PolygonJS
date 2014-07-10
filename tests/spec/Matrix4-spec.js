@@ -64,19 +64,6 @@ define(
             });
         });
 
-        describe('transpose', function () {
-            it('should tranpose the matrix', function () {
-                var m = Matrix4.create(a);
-                var expected = Matrix4.create([
-                    [1, 5,  9, 13],
-                    [2, 6, 10, 14],
-                    [3, 7, 11, 15],
-                    [4, 8, 12, 16]
-                ]);
-                expect(m.transpose().equals(expected)).toBeTruthy();
-            });
-        });
-
         describe('multiply', function () {
             it('should return the result of multiplying this matrix with another', function () {
                 var e = [
@@ -91,46 +78,36 @@ define(
             });
         });
 
-        describe('multiplyPoint', function () {
-            it('should return the result of multiplying a point by this matrix', function () {
-                var m = Matrix4.create([
-                    [1, 0, 0, 0],
-                    [0, 1, 0, 0],
-                    [0, 0, 1, 0],
-                    [0, 0, 0, 1]
-                ]);
-                var a = Vector3.create(10, 20, 30);
-                var b = m.multiplyPoint(a);
-                expect(a).not.toBe(b);
-                expect(a.equals(b)).toBe(true);
-
-                m = Matrix4.create([
-                    [1, 0, 0, 5],
-                    [0, 1, 0, 6],
-                    [0, 0, 1, 7],
-                    [0, 0, 0, 1]
-                ]);
-                b = m.multiplyPoint(a);
-                expect(b.equals(Vector3.create(15, 26, 37))).toBe(true);
-
-                m = Matrix4.create([
-                    [4,        0,         0, 10],
-                    [0, 1.414214, -0.707107, 20],
-                    [0, 0.707107,  2.121321, 30],
-                    [0,        0,         0,  1]
-                ]);
-                b = m.multiplyPoint(a);
-                expect(b.equals(Vector3.create(50, 27.07107, 107.78177))).toBe(true);
+        describe('multiplyVector', function () {
+            it('should return the result of multiplying a vector by this matrix', function () {
+                var m = Matrix4.create(a);
+                var v = Vector3.create(0, 0, 0);
+                spyOn(v, 'transform');
+                var r = m.multiplyVector(v);
+                expect(v.transform).toHaveBeenCalledWith(m);
             });
         });
 
-        describe('multiplyPointTo', function () {
-            it('should return the result of multiplying a point by this matrix (mutable)', function () {
-                var m = Matrix4.create();
+        describe('multiplyVectorNormal', function () {
+            it('should return the result of multiplying a point by this matrix', function () {
+                var m = Matrix4.create(a);
                 var v = Vector3.create(0, 0, 0);
-                spyOn(m, 'multiplyPointTo');
-                var p = m.multiplyPoint(v);
-                expect(m.multiplyPointTo).toHaveBeenCalledWith(v, Vector3.create());
+                spyOn(v, 'transformNormal');
+                var r = m.multiplyVectorNormal(v);
+                expect(v.transformNormal).toHaveBeenCalledWith(m);
+            });
+        });
+
+        describe('transpose', function () {
+            it('should tranpose the matrix', function () {
+                var m = Matrix4.create(a);
+                var expected = Matrix4.create([
+                    [1, 5,  9, 13],
+                    [2, 6, 10, 14],
+                    [3, 7, 11, 15],
+                    [4, 8, 12, 16]
+                ]);
+                expect(m.transpose().equals(expected)).toBeTruthy();
             });
         });
     });

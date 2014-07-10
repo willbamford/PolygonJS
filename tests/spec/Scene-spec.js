@@ -2,11 +2,12 @@ define(
     [
         'polygonjs/Scene',
         'polygonjs/Entity',
-        'polygonjs/entities/Camera-archive',
+        'polygonjs/entities/Camera',
         'polygonjs/entities/Light',
-        'polygonjs/entities/Polygon'
+        'polygonjs/entities/Polygon',
+        'polygonjs/entities/Model'
     ],
-    function (Scene, Entity, Camera, Light, Polygon) {
+    function (Scene, Entity, Camera, Light, Polygon, Model) {
 
         "use strict";
 
@@ -34,13 +35,15 @@ define(
                     expect(scene.cameras).toEqual([]);
                     expect(scene.lights).toEqual([]);
                     expect(scene.polygons).toEqual([]);
+                    expect(scene.models).toEqual([]);
                     scene.revalidate();
 
                     var entity1 = Entity.create();
                     var entity2 = Entity.create();
                     var entity3 = Entity.create();
-
-                    entity1.addChild(Polygon.create()).addChild(Polygon.create());
+                    var model1 = Model.create();
+                    model1.addChild(Polygon.create()).addChild(Polygon.create());
+                    entity1.addChild(model1);
                     entity3.addChild(Light.create()).addChild(Light.create()).addChild(Camera.create());
                     entity2.addChild(entity3).addChild(Camera.create());
                     root.addChild(Camera.create()).addChild(Light.create());
@@ -49,12 +52,14 @@ define(
                     expect(scene.cameras.length).toEqual(0);
                     expect(scene.lights.length).toEqual(0);
                     expect(scene.polygons.length).toEqual(0);
+                    expect(scene.models.length).toEqual(0);
 
                     scene.revalidate();
 
                     expect(scene.cameras.length).toEqual(3);
                     expect(scene.lights.length).toEqual(3);
                     expect(scene.polygons.length).toEqual(2);
+                    expect(scene.models.length).toEqual(1);
                 });
             });
 

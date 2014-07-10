@@ -13,9 +13,8 @@ require(
         'polygonjs/format/object-file-format',
         'polygonjs/Entity',
         'polygonjs/Engine',
-        'polygonjs/entities/Polygons',
+        'polygonjs/entities/Model',
         'polygonjs/geom/Vector3'
-        /*'text!polygonjs/meshes/data/princeton/m100.off'*/
     ],
     function (
         lib,
@@ -31,42 +30,18 @@ require(
         objectFileFormat,
         Entity,
         Engine,
-        Polygons,
-        Vector3,
-        meshData
+        Model,
+        Vector3
     ) {
-
+        var cube = Model.createFromMesh(Cube.create());
+        cube.tags = ['cube'];
         var surface = Surface.create({});
-        var scene = Scene.create();
+        var scene = Scene.create({});
+        var camera = Camera.create({});
 
         var root = Entity.create();
-        var camera = Camera.create();
+        root.addChild(cube);
         root.addChild(camera);
-
-        // Sun
-        var theSun = Polygons.createFromMesh(Sphere.create({
-            levelOfDetail: 1,
-            spikiness: 0
-        }));
-        theSun.scale = Vector3.create(2, 2, 2);
-        root.addChild(theSun);
-
-        // Earth
-        var theEarth = Polygons.createFromMesh(Sphere.create({
-            levelOfDetail: 1,
-            spikiness: 0
-        }));
-        theEarth.position.x = 8;
-        root.addChild(theEarth);
-
-        // Moon
-        var theMoon = Polygons.createFromMesh(Sphere.create({
-            levelOfDetail: 1,
-            spikiness: 0
-        }));
-        theMoon.position.y = 4;
-        theEarth.addChild(theMoon);
-
         scene.root = root;
         scene.revalidate();
 
@@ -75,23 +50,15 @@ require(
             scene: scene
         });
 
-        var rotation = 0;
-
+        var eye = Vector3.create(5, 5, 5);
+        var target = Vector3.create(0, 0, 0);
+        
         var engine = Engine.create({
             onTick: function (delta) {
-
-                rotation += delta;
-
-                var m1 = Matrix3.createRotationZ(rotation * 0.001);
-                var m2 = Matrix3.createRotationY(rotation * 0.0005);
-                var m3 = m1.multiply(m2);
-
-                // scene.root.rotation = m3;
-
-                theEarth.rotation = m1;
-                theMoon.rotation = m2;
-
                 scene.update(delta);
+                
+                camera.position = eye;
+                camera.lookAt(target);
                 renderer.draw(delta);
             }
         });
@@ -99,46 +66,6 @@ require(
 
         window.setTimeout(function () {
             engine.stop();
-        }, 10000);
-
-        // var mesh = Sphere.create({
-        //     levelOfDetail: 2,
-        //     spikiness: 0.1
-        // });
-
-        // var camera = Camera.create({
-        //     zoom: 120,
-        //     mode: Camera.ISOMETRIC
-        // });
-
-        // console.log('Vertices count: ' + mesh.vertices.length);
-        // console.log('Faces count: ' + mesh.faces.length);
-
-        // var mesh = objectFileFormat.loadMesh(meshData);
-        // mesh.normalise();
-        // renderer.mesh(mesh);
-
-        // var loop = function (delta) {
-
-        //     var m1 = Matrix3.createRotationZ(delta * 0.001);
-        //     var m2 = Matrix3.createRotationY(delta * 0.0005);
-        //     var m3 = m1.multiply(m2);
-
-        //     renderer.clear();
-        //     frame++;
-        //     var i = mesh.vertices.length;
-        //     var vertex;
-        //     while (--i >= 0) {
-        //         vertex = mesh.vertices[i];
-        //         mesh.vertices[i] = m3.multiplyPoint(vertex);
-        //     }
-        //     mesh.updateNormals();
-        //     renderer.mesh(mesh);
-        // };
-
-        // var renderer = Renderer.create({
-        //     surface: surface,
-        //     camera: camera
-        // });
+        }, 5000);
     }
 );

@@ -108,7 +108,7 @@ define(
             });
         });
 
-        describe('multiplyPoint', function () {
+        describe('multiplyVector', function () {
             it('should return the result of multiplying a point by this matrix', function () {
                 var m = Matrix3.create([
                     [1, 0, 0],
@@ -116,7 +116,7 @@ define(
                     [0, 0, 1]
                 ]);
                 var a = Vector3.create(10, 20, 30);
-                var b = m.multiplyPoint(a);
+                var b = m.multiplyVector(a);
                 expect(a).not.toBe(b);
                 expect(a.equals(b)).toBe(true);
 
@@ -125,7 +125,7 @@ define(
                     [0, 1, 6],
                     [0, 0, 1]
                 ]);
-                b = m.multiplyPoint(a);
+                b = m.multiplyVector(a);
                 expect(b.equals(Vector3.create(160, 200, 30))).toBe(true);
 
                 m = Matrix3.create([
@@ -134,7 +134,7 @@ define(
                     [0, 0.707107, 30],
                     [0,        0,  1]
                 ]);
-                b = m.multiplyPoint(a);
+                b = m.multiplyVector(a);
                 expect(b.equals(Vector3.create(340, 628.28428, 914.14214))).toBe(true);
             });
         });

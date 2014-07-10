@@ -98,7 +98,7 @@ define(
                 return p;
             },
 
-            multiplyPoint: function (p) {
+            multiplyVector: function (p) {
                 var t = this;
                 var x, y, z;
                 x = p.x * t.a + p.y * t.b + p.z * t.c;

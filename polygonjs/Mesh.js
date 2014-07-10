@@ -10,17 +10,9 @@ define(
 
         var Mesh = function (opts) {
 
-            //   Y
-            //   |
-            //   |
-            //   0-- X
-            //  /
-            // Z
-
-            this.normals = []; // Per face, not vertex
-
             this.vertices = opts.vertices || [];
             this.faces = opts.faces || [];
+            this.normals = []; // Per face, not vertex
 
             this.updateNormals();
             return this;

@@ -6,6 +6,7 @@ define(['polygonjs/lib'], function (lib) {
         this.cameras = [];
         this.lights = [];
         this.polygons = [];
+        this.models = [];
 
         this.mainCamera = null;
     };
@@ -26,6 +27,7 @@ define(['polygonjs/lib'], function (lib) {
             this.cameras = [];
             this.lights = [];
             this.polygons = [];
+            this.models = [];
             this._revalidateFromChildren(this.root.children);
             
             if (this.cameras.length > 0 && !lib.contains(this.camera, this.mainCamera))
@@ -44,6 +46,9 @@ define(['polygonjs/lib'], function (lib) {
                         break;
                     case 'polygon':
                         self.polygons.push(entity);
+                        break;
+                    case 'model':
+                        self.models.push(entity);
                         break;
                 }
                 self._revalidateFromChildren(entity.children);

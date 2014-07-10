@@ -1,87 +1,54 @@
-define(['polygonjs/entities/Camera-archive'], function (Camera) {
+define(
+    [
+        'polygonjs/entities/Camera',
+        'polygonjs/geom/Matrix4'
+    ],
+    function (Camera, Matrix4) {
 
-    var tempCamera = Camera.create({
-        zoom: 20
-    });
+        var Renderer = function (opts) {
+            opts = opts || {};
+            this.surface = opts.surface;
+            this.scene = opts.scene;
+        };
 
-    var Renderer = function (opts) {
-        opts = opts || {};
-        this.surface = opts.surface;
-        this.scene = opts.scene;
-    };
+        Renderer.create = function (opts) {
+            return new Renderer(opts);
+        };
 
-    Renderer.create = function (opts) {
-        return new Renderer(opts);
-    };
+        Renderer.prototype = {
+            draw: function (delta) {
 
-    Renderer.prototype = {
-        draw: function (delta) {
+                var scene = this.scene,
+                    model = scene.root.findFirst('cube'),
+                    surface = this.surface,
+                    i = model.length, j,
+                    worldVertex, viewVertex, screenVertex;
 
-            var polygons = this.scene.polygons,
-                surface = this.surface,
-                i = polygons.length, j, vertex, viewVertex;
+                surface.clear();
 
-            surface.clear();
+                var viewTransform = scene.mainCamera.viewTransform;
+                var projectionTransform = Camera.createPerspectiveProjectionTransform(
+                    60, 640 / 480, 1, 100
+                );
+                // var projectionTransform = Camera.createOrthographicProjectionTransform(
+                //    6.4, 4.8, 0, 100
+                // );
 
-            while (--i >= 0) {
-                polygon = polygons[i];
-                j = polygon.worldVertices.length;
-                while (--j >= 0) {
-                    vertex = polygon.worldVertices[j];
-                    viewVertex = tempCamera.project(vertex);
-                    surface.dot(viewVertex, 'white');
-                }
-
-                // polygon.updateViewVertices(camera.projection);
-            }
-
-
-           // var polygons = this.scene.polygons; 
-
-            // var polygons = this.scene.polygons;
-            // var polygon;
-            // var i = polygons.length;
-            // while (--i >= 0) {
-            //     polygon = polygons[i];
-
-
-            //     // polygon.updateViewVertices(camera.projection);
-            // }
-
-            /*
-                TODO:
-                =====
-
-                // Assuming polygon / camera / light world vertices have been
-                // calculated properly.
-
-                var camera = scene.mainCamera;
-                scene.polygons.each(function (polygon) {
-                    // camera.updateViewVertices(polygon);
-                    polygon.updateScreenVertices(camera.projection); // M.
-
-                    if (polygon.isVisible)
-                        polygon.updateLighting(scene.lights);
-
-                    // polygon.isVisible (based on backface cull and facing of normal)
-                    // Note: there may be a "z" component to screen vertex
-                    // which can be used for sorting.
-                    // polygon.worldVertices.each(function (wv, index) {
-                    //    polygon.screenVertices[index] = camera.project(wv);
-                    //});
-                });
-
-                sortPolygonsByDepth(scene.polygons); // M.
-
-                scene.polygons.each(function (polygon) {
-                    if (polygon.isVisible) {
-                        surface.drawPolygon(polygon.screenVertices, material);
+                // while (--i >= 0) {
+                    // polygon = model[i];
+                    j = model.vertices.length;
+                    while (--j >= 0) {
+                        vertex = model.vertices[j];
+                        var projectionViewTransform = projectionTransform.multiply(viewTransform);
+                        var screenVertex = vertex.transform(projectionViewTransform);
+                        screenVertex.x *= 640;
+                        screenVertex.y *= 480;
+                        surface.dot(screenVertex, 'red');
                     }
-                });
-             */
+                // }
+            }
+        };
 
-        }
-    };
-
-    return Renderer;
-});
+        return Renderer;
+    }
+);

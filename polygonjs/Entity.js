@@ -44,6 +44,9 @@ define(
                 lib.each(this.children, function (entity) {
                     entity.update(delta);
                 });
+
+                // TODO: update world position
+                // ...
             },
 
             root: function () {
@@ -87,6 +90,11 @@ define(
                 return this.parent ?
                     this.parent.getWorldTransform().multiply(this.getTransform()) :
                     this.getTransform();
+            },
+
+            // TODO: test (and calculate in update!)
+            getWorldPosition: function () {
+                return this.getWorldTransform().getTranslation();
             }
         };
 

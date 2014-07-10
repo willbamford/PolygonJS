@@ -64,7 +64,7 @@ define(['polygonjs/lib'], function (lib) {
             style = style || 'stroke: black';
             var circle = this.createEl('circle', {
                 cx: this.cx + point.x,
-                cy: this.cy + point.y,
+                cy: this.cy - point.y,
                 r: r,
                 style: style
             });
@@ -87,7 +87,7 @@ define(['polygonjs/lib'], function (lib) {
             id = id || 'p' + Surface.lastId++;
             lib.each(points, function (point) {
                 var x = point.x + self.cx;
-                var y = point.y + self.cy;
+                var y = -point.y + self.cy;
                 encodedPoints += x + ',' + y + ' ';
             });
             var polygon = this.createEl('polygon', {
