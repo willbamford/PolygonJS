@@ -85,6 +85,19 @@ define([], function () {
 
         trim: function (s) {
             return s.replace(/^\s+|\s+$/g, '');
+        },
+
+        merge: function (base, override) {
+            var merged = {};
+            if (base) {
+                for (var prop in base)
+                    merged[prop] = base[prop];
+            }
+            if (override) {
+                for (var prop in override)
+                    merged[prop] = override[prop];
+            }
+            return merged;
         }
     };
     return lib;

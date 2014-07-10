@@ -150,5 +150,18 @@ define(['polygonjs/lib'], function (lib) {
             });
         });
 
+        describe('merge', function () {
+            it('should merge two objects', function () {
+                expect(lib.merge({a: 1}, {b: 2})).toEqual({a: 1, b: 2});
+            });
+
+            it('should override base properties with if override has identical keys', function () {
+                expect(lib.merge({a: 1}, {a: 2})).toEqual({a: 2});
+            });
+
+            it('should return empty object if inputs are null', function () {
+                expect(lib.merge(null, null)).toEqual({});
+            });
+        });
     });
 });
