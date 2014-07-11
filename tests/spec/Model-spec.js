@@ -1,18 +1,29 @@
 define(
     [
         'polygonjs/entities/Model',
+        'polygonjs/entities/Polygon',
         'polygonjs/Entity',
         'polygonjs/meshes/Cube',
         'polygonjs/geom/Vector3'
     ],
-    function (Model, Entity, Cube, Vector3) {
+    function (Model, Polygon, Entity, Cube, Vector3) {
 
         "use strict";
 
         describe('Model', function () {
 
-            var vertices = [Vector3.create(0, 0, 1), Vector3.create(0, 1, 0), Vector3.create(0, 1, 1)];
-            var normals = [Vector3.create(1, 0, 0)];
+            var va = Vector3.create(0, 0, 1);
+            var vb = Vector3.create(0, 1, 0);
+            var vc = Vector3.create(0, 1, 1);
+            var normal = Vector3.create(1, 0, 0);
+            var vertices = [va, vb, vc];
+            var worldVertices = [va, vb, vc];
+            var viewVertices = [va, vb, vc];
+            var screenVertices = [va, vb, vc];
+            var polygons = [Polygon.create({
+                vertices: vertices,
+                normal: normal
+            })];
 
             it('should "extend" Entity', function () {
                 var p = Model.create();
@@ -33,39 +44,38 @@ define(
                     expect(model.type).toBe('model');
                 });
 
-                it('should be able to set vertices and normals', function () {
+                it('should be able to initialise vertices and polygons', function () {
                     var opts = {
                         vertices: vertices,
-                        normals: normals
+                        worldVertices: worldVertices,
+                        viewVertices: viewVertices,
+                        screenVertices: screenVertices,
+                        polygons: polygons
                     };
                     var model = Model.create(opts);
                     expect(model.vertices).toBe(vertices);
-                    expect(model.normals).toBe(normals);
-                });
-
-                it('should initialise world, view and screen vertices', function () {
-                    var opts = {
-                        vertices: vertices,
-                        normals: normals
-                    };
-                    var model = Model.create(opts);
-                    expect(model.worldVertices.length).toBe(vertices.length);
-                    expect(model.viewVertices.length).toBe(vertices.length);
-                    expect(model.screenVertices.length).toBe(vertices.length);
+                    expect(model.worldVertices).toBe(worldVertices);
+                    expect(model.viewVertices).toBe(viewVertices);
+                    expect(model.screenVertices).toBe(screenVertices);
+                    expect(model.polygons).toBe(polygons);
                 });
             });
 
             describe('createFromMesh', function () {
 
                 var cube = Cube.create();
-                var model = Model.createFromMesh(cube);
 
-                // it('should initialise the world vertices to zero vectors', function () {
-                //     model.worldVet
-                // });
+                it('should create model with zero world, view and screen vertex arrays', function () {
+                    var model = Model.createFromMesh(cube);
+                    expect(model.vertices).toBe(cube.vertices);
+                    expect(model.worldVertices.length).toBe(8);
+                    expect(model.viewVertices.length).toBe(8);
+                    expect(model.screenVertices.length).toBe(8);
+                });
 
-                // it('should create a child polygon entity for each face in the mesh', function () {
-                //     expect(model.children.length).toBe(6);
+                // it('should create polygons and pass these along with vertices to the constructor', function () {
+                //     var model = Model.createFromMesh(cube);
+                //     expect(model.polygons.length).toBe(6);
                 // });
             });
         });

@@ -7,88 +7,62 @@ define(
     ],
     function (Entity, Polygon, lib, Vector3) {
 
+        "use strict";
+
         var Model = function (opts) {
             opts = opts || {};
             Entity.call(this, opts);
             this.type = 'model';
-  
-            this.normals = opts.normals || [];
-            this.vertices = opts.vertices || []; // Object Space
-            this.worldVertices;                  // World Space
-            this.viewVertices;                   // View Space
-            this.screenVertices;                 // Clip Space
-            this.initVertices();
+
+            this.vertices = opts.vertices || [];             // Object Space
+            this.worldVertices = opts.worldVertices || [];   // World Space
+            this.viewVertices = opts.viewVertices || [];     // View Space
+            this.screenVertices = opts.screenVertices || []; // Clip Space
+
+            this.polygons = opts.polygons || [];
         };
 
         Model.create = function (opts) {
             return new Model(opts);
         };
 
-        // Polygon should be fairly dumb
-
-        /*
-            Polygon
-            =======
-
-            Shared properties (from ancestor):
-            ----------------------------------
-            - material (possibly unique)
-            - transform
-            - vertices
-            - worldVertices
-            - viewVertices
-            - projectionVertices
-            - normal
-
-            Still receives an update? Yes (but don't transform unless instructed to do so).
-            Transforms it's own vertices - generally no.
-
-            Could consider introducing a "fracture" method to Polgons which turns each poly into it's own unique thing
-        */
-
         Model.createFromMesh = function (mesh, opts) {
 
-            var self = this;
-
+            var normals = mesh.normals;
+            var faces = mesh.faces;
             var vertices = mesh.vertices;
+            var worldVertices = [];
+            var viewVertices = [];
+            var screenVertices = [];
 
-            opts = lib.merge(opts, {
-                vertices: vertices
+            lib.each(vertices, function () {
+                worldVertices.push(Vector3.create(0, 0, 0));
+                viewVertices.push(Vector3.create(0, 0, 0));
+                screenVertices.push(Vector3.create(0, 0, 0));
             });
 
-            // TODO: create polygons in the constructor!!!
+            var polygons = [];
+
+            // i = faces.length;
+            // while (--i >= 0) {
+            //     var face = faces[i];
+            //     j = face.length;
+            //     while (j++ < )
+            //     var polygon = Polygon.create();
+            // }
+
+            opts = lib.merge(opts, {
+                vertices: mesh.vertices,
+                worldVertices: worldVertices,
+                viewVertices: viewVertices,
+                screenVertices: screenVertices,
+                polygons: polygons
+            });
 
             return Model.create(opts);
-
-            // // opts = lib.merge(opts, {
-            // // });
-            // // var model = Model.create(opts);
-            // model.vertices = mesh.vertices;
-            // // mesh.eachFace(function (vertices, normal) {
-            // //     model.vertices = model.vertices.concat(vertices);
-            // //     // var polygon = Polygon.create({
-            // //     //     vertices: vertices,
-            // //     //     normal: normal
-            // //     // });
-            // //     // model.addChild(polygon);
-            // // });
-            // // console.log(model.vertices);
-            // return model;
         };
 
         Model.prototype = Object.create(Entity.prototype);
-
-        Model.prototype.initVertices = function () {
-            this.worldVertices = [];
-            this.viewVertices = [];
-            this.screenVertices = [];
-            var i = this.vertices.length;
-            while (--i >= 0) {
-                this.worldVertices.push(Vector3.create(0, 0, 0));
-                this.viewVertices.push(Vector3.create(0, 0, 0));
-                this.screenVertices.push(Vector3.create(0, 0, 0));
-            }
-        };
 
         return Model;
     }
