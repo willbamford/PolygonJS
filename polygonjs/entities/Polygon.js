@@ -24,17 +24,7 @@ define(
 
         Polygon.prototype = Object.create(Entity.prototype);
 
-        // Polygon.prototype.initVertices = function () {
-            // this.worldVertices = [];
-            // this.viewVertices = [];
-            // this.screenVertices = [];
-            // var i = this.vertices.length;
-            // while (--i >= 0) {
-            //     // this.worldVertices.push(Vector3.create(0, 0, 0));
-            //     // this.viewVertices.push(Vector3.create(0, 0, 0));
-            //     // this.screenVertices.push(Vector3.create(0, 0, 0));
-            // }
-        // };
+
 
         // Polygon.prototype.update = function (delta) {
         //     var vertices = this.vertices,
