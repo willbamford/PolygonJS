@@ -2,13 +2,17 @@ define(
     [
         'polygonjs/entities/Model',
         'polygonjs/Entity',
-        'polygonjs/meshes/Cube'
+        'polygonjs/meshes/Cube',
+        'polygonjs/geom/Vector3'
     ],
-    function (Model, Entity, Cube) {
+    function (Model, Entity, Cube, Vector3) {
 
         "use strict";
 
         describe('Model', function () {
+
+            var vertices = [Vector3.create(0, 0, 1), Vector3.create(0, 1, 0), Vector3.create(0, 1, 1)];
+            var normals = [Vector3.create(1, 0, 0)];
 
             it('should "extend" Entity', function () {
                 var p = Model.create();
@@ -29,6 +33,26 @@ define(
                     expect(model.type).toBe('model');
                 });
 
+                it('should be able to set vertices and normals', function () {
+                    var opts = {
+                        vertices: vertices,
+                        normals: normals
+                    };
+                    var model = Model.create(opts);
+                    expect(model.vertices).toBe(vertices);
+                    expect(model.normals).toBe(normals);
+                });
+
+                it('should initialise world, view and screen vertices', function () {
+                    var opts = {
+                        vertices: vertices,
+                        normals: normals
+                    };
+                    var model = Model.create(opts);
+                    expect(model.worldVertices.length).toBe(vertices.length);
+                    expect(model.viewVertices.length).toBe(vertices.length);
+                    expect(model.screenVertices.length).toBe(vertices.length);
+                });
             });
 
             describe('createFromMesh', function () {
