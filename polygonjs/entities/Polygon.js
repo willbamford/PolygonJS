@@ -13,9 +13,10 @@ define(
             this.type = 'polygon';
 
             this.vertices = opts.vertices || [];
+            this.worldVertices = opts.worldVertices || [];
+            this.viewVertices = opts.viewVertices || [];
+            this.screenVertices = opts.screenVertices || [];
             this.normal = opts.normal || Vector3.ONE;
-
-            // this.initVertices();
         };
 
         Polygon.create = function (opts) {
@@ -23,28 +24,6 @@ define(
         };
 
         Polygon.prototype = Object.create(Entity.prototype);
-
-
-
-        // Polygon.prototype.update = function (delta) {
-        //     var vertices = this.vertices,
-        //         worldVertices = this.worldVertices,
-        //         vertex, worldVertex,
-        //         i = vertices.length,
-        //         transform = this.getWorldTransform();
-
-        //     // Apply world transformation
-        //     while (--i >= 0) {
-        //         vertex = vertices[i];
-        //         worldVertices[i] = transform.multiplyVector(vertex); // TODO: slow!
-        //     }
-        // };
-
-        // Polygon.prototype.draw = function (camera, surface) {
-
-        //     // ...
-
-        // };
 
         return Polygon;
     }
