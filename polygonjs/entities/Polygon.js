@@ -17,6 +17,8 @@ define(
             this.viewVertices = opts.viewVertices || [];
             this.screenVertices = opts.screenVertices || [];
             this.normal = opts.normal || Vector3.ONE;
+            this.viewNormal = this.normal.clone();
+            this.isCulled = false;
         };
 
         Polygon.create = function (opts) {
@@ -24,6 +26,12 @@ define(
         };
 
         Polygon.prototype = Object.create(Entity.prototype);
+
+        // TODO: test
+        Polygon.prototype.update = function (delta) {
+            Entity.prototype.update.call(this, delta);
+            
+        };
 
         return Polygon;
     }

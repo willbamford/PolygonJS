@@ -2,7 +2,8 @@ require(
     [
         'polygonjs/lib',
         'polygonjs/surfaces/Canvas',
-        'polygonjs/entities/Camera',
+        'polygonjs/entities/OrthographicCamera',
+        'polygonjs/entities/PerspectiveCamera',
         'polygonjs/Scene',
         'polygonjs/Renderer',
         'polygonjs/Mesh',
@@ -19,7 +20,8 @@ require(
     function (
         lib,
         Surface,
-        Camera,
+        OrthographicCamera,
+        PerspectiveCamera,
         Scene,
         Renderer,
         Mesh,
@@ -34,13 +36,19 @@ require(
         Vector3
     ) {
         var cube = Model.createFromMesh(Cube.create());
+        // var sphere = Model.createFromMesh(Sphere.create({
+        //     levelOfDetail: 1
+        // }));
+        // sphere.position = Vector3.create(10, 0, 0);
+
         cube.tags = ['cube'];
         var surface = Surface.create({});
         var scene = Scene.create({});
-        var camera = Camera.create({});
+        var camera = PerspectiveCamera.create({});
 
         var root = Entity.create();
         root.addChild(cube);
+        // root.addChild(sphere);
         root.addChild(camera);
         scene.root = root;
         scene.revalidate();
@@ -53,12 +61,21 @@ require(
         var eye = Vector3.create(5, 5, 5);
         var target = Vector3.create(0, 0, 0);
         
+        var angle = 0;
+
         var engine = Engine.create({
             onTick: function (delta) {
                 scene.update(delta);
                 
+                angle += delta / 10000;
+                if (angle > 360) angle -= 360;
+
+                cube.rotation = Matrix3.createRotationX(angle);
+
                 camera.position = eye;
                 camera.lookAt(target);
+
+
                 renderer.draw(delta);
             }
         });
@@ -66,6 +83,6 @@ require(
 
         window.setTimeout(function () {
             engine.stop();
-        }, 5000);
+        }, 3000);
     }
 );

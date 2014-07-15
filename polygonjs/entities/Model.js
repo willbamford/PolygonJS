@@ -10,6 +10,7 @@ define(
         "use strict";
 
         var Model = function (opts) {
+            var self = this;
             opts = opts || {};
             Entity.call(this, opts);
             this.type = 'model';
@@ -20,6 +21,9 @@ define(
             this.screenVertices = opts.screenVertices || []; // Clip Space
 
             this.polygons = opts.polygons || [];
+            lib.each(this.polygons, function (polygon) {
+                self.addChild(polygon);
+            });
         };
 
         Model.create = function (opts) {
@@ -43,13 +47,23 @@ define(
 
             var polygons = [];
 
-            // i = faces.length;
-            // while (--i >= 0) {
-            //     var face = faces[i];
-            //     j = face.length;
-            //     while (j++ < )
-            //     var polygon = Polygon.create();
-            // }
+            mesh.eachFace(function (vertices, normal, vertexIndices) {
+                var vs = [], wvs = [], vvs = [], svs = [];
+                lib.each(vertexIndices, function (index) {
+                    vs.push(vertices[index]);
+                    wvs.push(worldVertices[index]);
+                    vvs.push(viewVertices[index]);
+                    svs.push(screenVertices[index]);
+                });
+                var polygon = Polygon.create({
+                    vertices: vs,
+                    worldVertices: wvs,
+                    viewVertices: vvs,
+                    screenVertices: svs,
+                    normal: normal
+                });
+                polygons.push(polygon);
+            });
 
             opts = lib.merge(opts, {
                 vertices: mesh.vertices,
@@ -63,6 +77,15 @@ define(
         };
 
         Model.prototype = Object.create(Entity.prototype);
+
+        Model.prototype.update = function (delta) {
+            Entity.prototype.update.call(this, delta);
+
+            var i = this.vertices.length;
+            while (--i >= 0) {
+                this.worldVertices[i] = this.vertices[i].applyMatrix4(this.getWorldTransform());
+            }
+        };
 
         return Model;
     }

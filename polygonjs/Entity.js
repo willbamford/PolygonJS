@@ -14,7 +14,7 @@ define(
             this.type = 'entity';
             this.parent = null;
             this.position = opts.position || Vector3.create(0, 0, 0);
-            this.rotation = opts.rotation || Matrix3.IDENTITY.copy();
+            this.rotation = opts.rotation || Matrix3.IDENTITY.clone();
             this.scale    = opts.scale    || Vector3.create(1, 1, 1);
             this.children = [];
             this.tags = opts.tags || [];
@@ -41,9 +41,18 @@ define(
             },
 
             update: function (delta) {
-                lib.each(this.children, function (entity) {
+
+                var children = this.children;
+                var i = children.length;
+                var entity;
+                while (--i >= 0) {
+                    entity = children[i];
                     entity.update(delta);
-                });
+                }
+
+                // lib.each(this.children, function (entity) {
+                //     entity.update(delta);
+                // });
 
                 // TODO: update world position
                 // ...

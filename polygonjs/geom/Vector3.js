@@ -51,10 +51,54 @@ define(['polygonjs/math'], function (math) {
         return ba.normal(ca);
     };
 
+    Vector3.transform = function (v, m, r) {
+
+        if (!r) r = Vector3.create();
+
+        var x = v.x;
+        var y = v.y;
+        var z = v.z;
+        var vw;
+
+        r.x = x * m.a + y * m.b + z * m.c + /*1.0f **/ m.d;
+        r.y = x * m.e + y * m.f + z * m.g + /*1.0f **/ m.h;
+        r.z = x * m.i + y * m.j + z * m.k + /*1.0f **/ m.l;
+        vw  = x * m.m + y * m.n + z * m.o + /*1.0f **/ m.p;
+
+        // Normalize
+        if (vw !== 0 && vw !== 1) {
+            r.x /= vw;
+            r.y /= vw;
+            r.z /= vw;
+        }
+        return r;
+    };
+
+    Vector3.transformNormal = function (v, m, r) {
+
+        if (!r) r = Vector3.create();
+        
+        var x = v.x;
+        var y = v.y;
+        var z = v.z;
+
+        r.x = x * m.a + y * m.b + z * m.c /*+ 0.0f * m.d*/;
+        r.y = x * m.e + y * m.f + z * m.g /*+ 0.0f * m.h*/;
+        r.z = x * m.i + y * m.j + z * m.k /*+ 0.0f * m.l*/;
+        return r;
+    };
+
     Vector3.prototype = {
         
-        copy: function () {
+        clone: function () {
             return new Vector3(this.x, this.y, this.z);
+        },
+
+        copy: function (v) {
+            this.x = v.x;
+            this.y = v.y;
+            this.z = v.z;
+            return this;
         },
 
         equals: function (v) {
@@ -68,7 +112,7 @@ define(['polygonjs/math'], function (math) {
         },
 
         add: function (v) {
-            return this.copy().addTo(v);
+            return this.clone().addTo(v);
         },
 
         addTo: function (v) {
@@ -79,7 +123,7 @@ define(['polygonjs/math'], function (math) {
         },
 
         subtract: function (v) {
-            return this.copy().subtractBy(v);
+            return this.clone().subtractBy(v);
         },
 
         subtractBy: function (v) {
@@ -90,7 +134,7 @@ define(['polygonjs/math'], function (math) {
         },
 
         multiply: function (k) {
-            return this.copy().multiplyBy(k);
+            return this.clone().multiplyBy(k);
         },
 
         multiplyBy: function (k) {
@@ -142,43 +186,53 @@ define(['polygonjs/math'], function (math) {
         },
 
         normalised: function () {
-            return this.copy().normalise();
+            return this.clone().normalise();
         },
 
         normal: function (v) {
             return this.crossProduct(v).normalised();
         },
 
-        // 'w' component equal to one (e.g. point)
-        transform: function (matrix4) {
-            var t = this,
-                m = matrix4,
-                v = Vector3.create(),
-                vw;
-            v.x = t.x * m.a + t.y * m.b + t.z * m.c + /*1.0f **/ m.d;
-            v.y = t.x * m.e + t.y * m.f + t.z * m.g + /*1.0f **/ m.h;
-            v.z = t.x * m.i + t.y * m.j + t.z * m.k + /*1.0f **/ m.l;
-            vw  = t.x * m.m + t.y * m.n + t.z * m.o + /*1.0f **/ m.p;
-
-            // Normalize
-            if (vw !== 0 && vw !== 1) {
-                v.x /= vw;
-                v.y /= vw;
-                v.z /= vw;
-            }
-            return v;
+        applyMatrix4: function (m) {
+            var x = this.x, y = this.y, z = this.z;
+            this.x = x * m.a + y * m.b + z * m.c;
+            this.y = x * m.e + y * m.f + z * m.g;
+            this.z = x * m.i + y * m.j + z * m.k;
+            return this;
         },
 
-        // 'w' component equal to zero (e.g. vector)
-        transformNormal: function (matrix4) {
-            var t = this,
-                m = matrix4,
-                v = Vector3.create();
-            v.x = t.x * m.a + t.y * m.b + t.z * m.c /*+ 0.0f * m.d*/;
-            v.y = t.x * m.e + t.y * m.f + t.z * m.g /*+ 0.0f * m.h*/;
-            v.z = t.x * m.i + t.y * m.j + t.z * m.k /*+ 0.0f * m.l*/;
-            return v;
-        }
+        applyProjection: function (m) {
+            var x = this.x, y = this.y, z = this.z;
+            this.x = x * m.a + y * m.b + z * m.c + /*1.0f **/ m.d;
+            this.y = x * m.e + y * m.f + z * m.g + /*1.0f **/ m.h;
+            this.z = x * m.i + y * m.j + z * m.k + /*1.0f **/ m.l;
+            var vw  = x * m.m + y * m.n + z * m.o + /*1.0f **/ m.p;
+            if (vw !== 0 && vw !== 1) {
+                this.x /= vw;
+                this.y /= vw;
+                this.z /= vw;
+            }
+            return this;
+        },
+
+        // transformBy: function (m) {
+        //     return Vector3.transform(this, m, this);
+        // },
+
+        // // 'w' component equal to one (e.g. point)
+        // transform: function (m) {
+        //     return Vector3.transform(this, m);
+        // },
+
+        // // TODO: test
+        // transformByNormal: function (m) {
+        //     return Vector3.transformNormal(this, m, this);
+        // },
+
+        // // 'w' component equal to zero (e.g. vector)
+        // transformNormal: function (m) {
+        //     return Vector3.transformNormal(this, m);
+        // }
     };
 
     Vector3.ZERO    = Vector3.create(0, 0, 0);

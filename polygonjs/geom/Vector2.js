@@ -13,8 +13,14 @@ define(['polygonjs/math'], function (math) {
 
     Vector2.prototype = {
         
-        copy: function () {
+        clone: function () {
             return new Vector2(this.x, this.y);
+        },
+
+        copy: function (v) {
+            this.x = v.x;
+            this.y = v.y;
+            return this;
         },
 
         equals: function (v) {
@@ -27,7 +33,7 @@ define(['polygonjs/math'], function (math) {
         },
 
         add: function (v) {
-            return this.copy().addTo(v);
+            return this.clone().addTo(v);
         },
 
         addTo: function (v) {
@@ -37,7 +43,7 @@ define(['polygonjs/math'], function (math) {
         },
 
         subtract: function (v) {
-            return this.copy().subtractBy(v);
+            return this.clone().subtractBy(v);
         },
 
         subtractBy: function (v) {
@@ -47,7 +53,7 @@ define(['polygonjs/math'], function (math) {
         },
 
         multiply: function (k) {
-            return this.copy().multiplyBy(k);
+            return this.clone().multiplyBy(k);
         },
 
         multiplyBy: function (k) {

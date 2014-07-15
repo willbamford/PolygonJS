@@ -30,9 +30,10 @@ define(
                     expect(camera.type).toBe('camera');
                 });
 
-                it('should be initialised with an identity view transform', function () {
+                it('should be initialised with an identity view and projection transform', function () {
                     var camera = Camera.create();
                     expect(camera.viewTransform.equals(Matrix4.IDENTITY)).toBeTruthy();
+                    expect(camera.projectionTransform.equals(Matrix4.IDENTITY)).toBeTruthy();
                 });
 
                 it('should have a default \'up\' vector pointing positively along y-axis', function () {

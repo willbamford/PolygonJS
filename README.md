@@ -55,6 +55,10 @@ gluPerspective/glFrustum/glOrtho/gluOrtho2
 
 Best place to achieve **zoom** is in the projection transform matrix [3].
 
+### Notes
+
+* Canvas inspector in FF worth exploring (see ref.14).
+
 ### References
 
 1. [3D Game Engine Programming - Understanding the View Matrix](http://3dgep.com/?p=1700)
@@ -70,3 +74,5 @@ Best place to achieve **zoom** is in the projection transform matrix [3].
 11. [http://www.songho.ca/opengl/gl_transform.html](http://www.songho.ca/opengl/gl_transform.html)
 12. [http://user.xmission.com/~nate/tutors.html](http://user.xmission.com/~nate/tutors.html)
 13. [www.scratchapixel.com - Transforming Points and Vectors](http://www.scratchapixel.com/lessons/3d-basic-lessons/lesson-4-geometry/transforming-points-and-vectors/)
+14. [Angelina Fabbro: Improving 2D & 3D Canvas Performance on the Web, One Frame at a Time [JSConf2014]](https://www.youtube.com/watch?v=NG5uDXCOr8s) - Use off-screen canvas?
+15. [Object properties vs. array - jsPerf test](http://jsperf.com/object-properties-vs-array)

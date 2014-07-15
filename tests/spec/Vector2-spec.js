@@ -12,12 +12,23 @@ define(['polygonjs/geom/Vector2'], function (Vector2) {
             });
         });
 
-        describe('copy', function () {
-            it('should return a copy of the vector', function () {
+        describe('clone', function () {
+            it('should return a clone of the vector', function () {
                 var original = Vector2.create(10, 20);
-                var copy = original.copy();
-                expect(copy).not.toBe(original);
-                expect(copy.toArray()).toEqual(original.toArray());
+                var clone = original.clone();
+                expect(clone).not.toBe(original);
+                expect(clone.toArray()).toEqual(original.toArray());
+            });
+        });
+
+        describe('copy', function () {
+            it('should copy the components of the input vector', function () {
+                var a = Vector2.create(1, 2);
+                var b = Vector2.create(3, 4);
+                var c = a.copy(b);
+                expect(c).toBe(a);
+                expect(c).not.toBe(b);
+                expect(c.equals(b)).toBeTruthy();
             });
         });
 

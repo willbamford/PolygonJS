@@ -42,6 +42,13 @@ define(
                     expect(polygon.viewVertices).toBe(viewVertices);
                     expect(polygon.screenVertices).toBe(screenVertices);
                     expect(polygon.normal).toBe(normal);
+                    expect(polygon.viewNormal).not.toBe(polygon.normal);
+                    expect(polygon.viewNormal.equals(polygon.normal)).toBeTruthy();
+                });
+
+                it('should not be culled initially', function () {
+                    var polygon = Polygon.create();
+                    expect(polygon.isCulled).toBeFalsy();
                 });
             });
         });

@@ -75,12 +75,23 @@ define(
             });
         });
 
-        describe('copy', function () {
-            it('should copy this matrix to a new matrix', function () {
+        describe('clone', function () {
+            it('should clone this matrix to a new matrix', function () {
                 var m1 = Matrix3.create(a);
-                var m2 = m1.copy();
+                var m2 = m1.clone();
                 expect(m1).not.toBe(m2);
                 expect(m1.equals(m2)).toBe(true);
+            });
+        });
+
+        describe('copy', function () {
+            it('should copy the components of the input matrix', function () {
+                var a = Matrix3.create(a);
+                var b = Matrix3.create(b);
+                var c = a.copy(b);
+                expect(c).toBe(a);
+                expect(c).not.toBe(b);
+                expect(c.equals(b)).toBeTruthy();
             });
         });
 

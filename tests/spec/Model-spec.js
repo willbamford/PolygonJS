@@ -59,6 +59,16 @@ define(
                     expect(model.screenVertices).toBe(screenVertices);
                     expect(model.polygons).toBe(polygons);
                 });
+
+                it('should add polygons as children', function () {
+                    var polygons = [
+                        Polygon.create(),
+                        Polygon.create()
+                    ];
+                    var model = Model.create({polygons: polygons});
+                    expect(model.polygons).toBe(polygons);
+                    expect(model.children.length).toBe(polygons.length);
+                });
             });
 
             describe('createFromMesh', function () {
@@ -73,10 +83,10 @@ define(
                     expect(model.screenVertices.length).toBe(8);
                 });
 
-                // it('should create polygons and pass these along with vertices to the constructor', function () {
-                //     var model = Model.createFromMesh(cube);
-                //     expect(model.polygons.length).toBe(6);
-                // });
+                it('should create polygons and pass these along to the constructor', function () {
+                    var model = Model.createFromMesh(cube);
+                    expect(model.polygons.length).toBe(6);
+                });
             });
         });
     }

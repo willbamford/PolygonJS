@@ -40,7 +40,7 @@ define(
             eachFace: function (fn) {
                 var self = this, vertices, normal;
                 lib.each(this.faces, function (face, faceIndex) {
-                    fn(self.getVerticesForFace(face), self.normals[faceIndex]);
+                    fn(self.getVerticesForFace(face), self.normals[faceIndex], face);
                 });
             },
 

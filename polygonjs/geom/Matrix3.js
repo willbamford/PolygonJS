@@ -61,8 +61,15 @@ define(
                 return s;
             },
 
-            copy: function () {
+            clone: function () {
                 return Matrix3.create(this.toArrays());
+            },
+
+            copy: function (m) {
+                this.a = m.a; this.b = m.b, this.c = m.c;
+                this.d = m.d; this.e = m.e, this.f = m.f;
+                this.g = m.g; this.h = m.h, this.i = m.i;
+                return this;
             },
 
             toArrays: function () {
@@ -135,7 +142,7 @@ define(
 
             tranpose: function () {
                 var t = this,
-                    m = t.copy();
+                    m = t.clone();
                 m.b = t.d; m.d = t.b;
                 m.c = t.g; m.g = t.c;
                 m.f = t.h; m.h = t.f;

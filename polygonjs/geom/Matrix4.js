@@ -36,8 +36,16 @@ define(
                 return s;
             },
 
-            copy: function () {
+            clone: function () {
                 return Matrix4.create(this.toArrays());
+            },
+
+            copy: function (m) {
+                this.a = m.a; this.b = m.b, this.c = m.c; this.d = m.d;
+                this.e = m.e; this.f = m.f, this.g = m.g; this.h = m.h;
+                this.i = m.i; this.j = m.j, this.k = m.k; this.l = m.l;
+                this.m = m.m; this.n = m.n, this.o = m.o; this.p = m.p;
+                return this;
             },
 
             toArrays: function () {
@@ -56,17 +64,17 @@ define(
                     math.equals(this.m, m.m) && math.equals(this.n, m.n) && math.equals(this.o, m.o) && math.equals(this.p, m.p);
             },
 
-            transpose: function () {
-                var t = this,
-                    m = t.copy();
-                m.b = t.e; m.e = t.b;
-                m.c = t.i; m.i = t.c;
-                m.d = t.m; m.m = t.d;
-                m.g = t.j; m.j = t.g;
-                m.h = t.n; m.n = t.h;
-                m.l = t.o; m.o = t.l;
-                return m;
-            },
+            // transpose: function () {
+            //     var t = this,
+            //         m = t.copy();
+            //     m.b = t.e; m.e = t.b;
+            //     m.c = t.i; m.i = t.c;
+            //     m.d = t.m; m.m = t.d;
+            //     m.g = t.j; m.j = t.g;
+            //     m.h = t.n; m.n = t.h;
+            //     m.l = t.o; m.o = t.l;
+            //     return m;
+            // },
 
             multiply: function (m) {
                 var p = Matrix4.create(),
@@ -93,14 +101,6 @@ define(
                 p.p = t.m * m.d + t.n * m.h + t.o * m.l + t.p * m.p;
 
                 return p;
-            },
-
-            multiplyVector: function (v) {
-                return v.transform(this);
-            },
-
-            multiplyVectorNormal: function (v) {
-                return v.transformNormal(this);
             },
 
             getTranslation: function () {
