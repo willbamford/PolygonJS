@@ -78,7 +78,7 @@ require(
                 profiler.measure();
                 profiler.toConsole();
 
-                cube.rotation = Matrix3.createRotationX(angle);
+                cube.rotation.setRotationY(angle);
 
                 camera.position = eye;
                 camera.lookAt(target);

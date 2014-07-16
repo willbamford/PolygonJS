@@ -33,9 +33,9 @@ define(
             });
         });
 
-        describe('createRotationX', function () {
-            it('should be able to create a matrix for rotation in the x-axis', function () {
-                var m = Matrix3.createRotationX(Math.PI);
+        describe('setRotationX', function () {
+            it('should be able to set the x-axis rotation for this matrix', function () {
+                var m = Matrix3.create().setRotationX(Math.PI);
                 expect(m.equals(Matrix3.create([
                     [1,  0,  0],
                     [0, -1,  0],
@@ -44,9 +44,9 @@ define(
             });
         });
 
-        describe('createRotationY', function () {
-            it('should be able to create a matrix for rotation in the y-axis', function () {
-                var m = Matrix3.createRotationY(Math.PI);
+        describe('setRotationY', function () {
+            it('should be able to set the y-axis rotation for this matrix', function () {
+                var m = Matrix3.create().setRotationY(Math.PI);
                 expect(m.equals(Matrix3.create([
                     [-1,  0,  0],
                     [ 0,  1,  0],
@@ -55,9 +55,9 @@ define(
             });
         });
 
-        describe('createRotationZ', function () {
-            it('should be able to create a matrix for rotation in the z-axis', function () {
-                var m = Matrix3.createRotationZ(Math.PI);
+        describe('setRotationZ', function () {
+            it('should be able to set the z-axis rotation for this matrix', function () {
+                var m = Matrix3.create().setRotationZ(Math.PI);
                 expect(m.equals(Matrix3.create([
                     [-1,  0,  0],
                     [ 0, -1,  0],

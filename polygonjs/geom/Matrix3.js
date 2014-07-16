@@ -27,33 +27,6 @@ define(
             return new Matrix3(a);
         };
 
-        Matrix3.createRotationX = function (ax) {
-            var c = Math.cos(ax), s = Math.sin(ax);
-            return Matrix3.create([
-                [1,  0,  0],
-                [0,  c, -s],
-                [0,  s,  c]
-            ]);
-        };
-
-        Matrix3.createRotationY = function (ay) {
-            var c = Math.cos(ay), s = Math.sin(ay);
-            return Matrix3.create([
-                [ c,  0, s],
-                [ 0,  1, 0],
-                [-s,  0, c]
-            ]);
-        };
-
-        Matrix3.createRotationZ = function (az) {
-            var c = Math.cos(az), s = Math.sin(az);
-            return Matrix3.create([
-                [c, -s, 0],
-                [s,  c, 0],
-                [0,  0, 1]
-            ]);
-        };
-
         Matrix3.prototype = {
 
             toString: function () {
@@ -150,6 +123,30 @@ define(
                 m.c = t.g; m.g = t.c;
                 m.f = t.h; m.h = t.f;
                 return m;
+            },
+
+            setRotationX: function (ax) {
+                var c = Math.cos(ax), s = Math.sin(ax);
+                this.a = 1; this.b = 0; this.c =  0;
+                this.d = 0; this.e = c; this.f = -s;
+                this.g = 0; this.h = s; this.i =  c;
+                return this;
+            },
+
+            setRotationY: function (ay) {
+                var c = Math.cos(ay), s = Math.sin(ay);
+                this.a =  c; this.b = 0; this.c = s;
+                this.d =  0; this.e = 1; this.f = 0;
+                this.g = -s; this.h = 0; this.i = c;
+                return this;
+            },
+
+            setRotationZ: function (az) {
+                var c = Math.cos(az), s = Math.sin(az);
+                this.a = c; this.b = -s; this.c = s;
+                this.d = s; this.e =  c; this.f = 0;
+                this.g = 0; this.h =  0; this.i = 1;
+                return this;
             }
         };
 
