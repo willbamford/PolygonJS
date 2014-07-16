@@ -11,40 +11,35 @@ define(
 
         var Profiler = function () {
 
-            this.measurables = {
-                Vector2: {
-                    constructor: Vector2
-                },
-                Vector3: {
-                    constructor: Vector3
-                },
-                Matrix3: {
-                    constructor: Matrix3
-                },
-                Matrix4: {
-                    constructor: Matrix4
-                }
-            };
+            var measurables = [
+                { name: 'Vector2', object: Vector2 },
+                { name: 'Vector3', object: Vector3 },
+                { name: 'Matrix3', object: Matrix3 },
+                { name: 'Matrix4', object: Matrix4 }
+            ];
 
-            this.measurables.forEach(function (measurable) {
-                measurable.instanceCount = 0;
-                measurable.instanceDelta = 0;
+            measurables.forEach(function (measurable) {
+                measurable.lastCount = 0;
+                measurable.count = 0;
+                measurable.delta = 0;
             });
+
+            this.measurables = measurables;
         };
 
         Profiler.prototype.measure = function () {
+            this.measurables.forEach(function (measurable) {
+                measurable.lastCount = measurable.count;
+                measurable.count = measurable.object.instanceCount;
+                measurable.delta = measurable.count - measurable.lastCount;
+            });
+        };
 
-            // this.
-
-            // var lastVector2 = this.vector2;
-            // var lastVector3 = this.vector3;
-            // var lastMatrix3 = this.matrix3;
-            // var lastMatrix4 = this.matrix4;
-
-            // var vector2 = Vector2.numInstances;
-            // var vector3 = Vector3.numInstances;
-            // var matrix3 = Matrix3.numInstances;
-            // var matrix4 = Matrix4.numInstances;
+        Profiler.prototype.toConsole = function () {
+            console.log('Profiler:');
+            this.measurables.forEach(function (measurable) {
+                console.log(measurable.name + ': ' + measurable.delta);
+            });
         };
 
         return Profiler;

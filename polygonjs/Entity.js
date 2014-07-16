@@ -18,6 +18,10 @@ define(
             this.scale    = opts.scale    || Vector3.create(1, 1, 1);
             this.children = [];
             this.tags = opts.tags || [];
+
+            this.localTransform = Matrix4.IDENTITY.clone();
+            this.worldTransform = Matrix4.IDENTITY.clone();
+            this.worldPosition = Vector3.ZERO.clone();
         };
 
         Entity.create = function (opts) {
@@ -42,6 +46,11 @@ define(
 
             update: function (delta) {
 
+                this.updateLocalTransform();
+                this.updateWorldTransform();
+
+                this.worldTransform.applyPosition(this.worldPosition);
+
                 var children = this.children;
                 var i = children.length;
                 var entity;
@@ -56,6 +65,21 @@ define(
 
                 // TODO: update world position
                 // ...
+            },
+
+            updateLocalTransform: function () {
+                this.localTransform.setPositionRotationAndScale(
+                    this.position,
+                    this.rotation,
+                    this.scale
+                );
+            },
+
+            updateWorldTransform: function () {
+                var lt = this.localTransform;
+                var wt = this.worldTransform;
+                var p = this.parent;
+                return p ? wt.copy(p.worldTransform).multiply(lt) : lt;
             },
 
             root: function () {
@@ -83,28 +107,29 @@ define(
                 return this;
             },
 
-            getTransform: function () { // Optimise
-                var p = this.position;
-                var r = this.rotation;
-                var s = this.scale;
-                return Matrix4.create([
-                    [s.x * r.a, s.x * r.b, s.x * r.c, p.x],
-                    [s.y * r.d, s.y * r.e, s.y * r.f, p.y],
-                    [s.z * r.g, s.z * r.h, s.z * r.i, p.z],
-                    [ 0,    0,   0,   1]
-                ]);
-            },
+            // getTransform: function () { // Optimise
+            //     var p = this.position;
+            //     var r = this.rotation;
+            //     var s = this.scale;
+            //     return Matrix4.create([
+            //         [s.x * r.a, s.x * r.b, s.x * r.c, p.x],
+            //         [s.y * r.d, s.y * r.e, s.y * r.f, p.y],
+            //         [s.z * r.g, s.z * r.h, s.z * r.i, p.z],
+            //         [ 0,    0,   0,   1]
+            //     ]);
+            // },
 
-            getWorldTransform: function () { // Optimise
-                return this.parent ?
-                    this.parent.getWorldTransform().multiply(this.getTransform()) :
-                    this.getTransform();
-            },
+            // getWorldTransform: function () { // Optimise
+            //     return this.parent ?
+            //         this.parent.getWorldTransform().multiply(this.getTransform()) :
+            //         this.getTransform();
+            // },
 
-            // TODO: test (and calculate in update!)
-            getWorldPosition: function () {
-                return this.getWorldTransform().getTranslation();
-            }
+            // // TODO: test (and calculate in update!)
+            // getWorldPosition: function () {
+            //     return this.worldTransform.getTranslation();
+            //     // return this.getWorldTransform().getTranslation();
+            // }
         };
 
         return Entity;
