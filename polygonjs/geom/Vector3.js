@@ -3,10 +3,13 @@ define(['polygonjs/math'], function (math) {
     "use strict";
 
     var Vector3 = function (x, y, z) {
+        Vector3.instanceCount++;
         this.x = x;
         this.y = y;
         this.z = z;
     };
+
+    Vector3.instanceCount = 0;
 
     Vector3.create = function (x, y, z) {
         return new Vector3(x, y, z);
@@ -48,7 +51,7 @@ define(['polygonjs/math'], function (math) {
     Vector3.normalFromPositionVectors = function (a, b, c) {
         var ba = a.clone().subtract(b);
         var ca = a.clone().subtract(c);
-        return ba.clone().normal(ca);
+        return ba.normal(ca);
     };
 
     Vector3.prototype = {

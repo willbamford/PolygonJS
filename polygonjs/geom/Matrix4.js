@@ -12,6 +12,7 @@ define(
         ];
 
         var Matrix4 = function (a) {
+            Matrix4.instanceCount++;
             var t = this;
             a = a || identity;
             if (a) {
@@ -21,6 +22,8 @@ define(
                 t.m = a[3][0]; t.n = a[3][1]; t.o = a[3][2]; t.p = a[3][3];
             }
         };
+
+        Matrix4.instanceCount = 0;
 
         Matrix4.create = function (a) {
             return new Matrix4(a);

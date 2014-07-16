@@ -82,13 +82,13 @@ define(
             
             var vertices = this.vertices;
             var worldVertices = this.worldVertices;
+            var worldTransform = this.worldTransform;
 
             Entity.prototype.update.call(this, delta);
 
             var i = this.vertices.length;
-            while (--i >= 0) {
-                worldVertices[i].copy(vertices[i]).applyMatrix4(this.getWorldTransform());
-            }
+            while (--i >= 0)
+                worldVertices[i].copy(vertices[i]).applyMatrix4(worldTransform);
         };
 
         return Model;

@@ -40,23 +40,29 @@ define(
                     var camera = Camera.create();
                     expect(camera.up.equals(Vector3.create(0, 1, 0))).toBeTruthy();
                 });
+
+                it('should provide defaults for up / right and forward vectors', function () {
+                    var camera = Camera.create();
+                    expect(camera.up.equals(Vector3.UP)).toBeTruthy();
+                    expect(camera.right.equals(Vector3.RIGHT)).toBeTruthy();
+                    expect(camera.forward.equals(Vector3.FORWARD)).toBeTruthy();
+                });
             });
 
-            describe('calculateLookAtViewTransform', function () {
-                it('should calculate the look at view transform', function () {
-                    var eye = Vector3.create(100, 100, -100);
-                    var up = Vector3.create(0, 1, 0);
+            describe('lookAt', function () {
+                it('should calculate the "look at" view transform', function () {
+                    var camera = Camera.create();
                     var target = Vector3.create(100, 100, 0);
-
-                    var m = Matrix4.create();
-                    Camera.calculateLookAtViewTransform(m, eye, up, target);
+                    var eye = Vector3.create(100, 100, -100);
+                    camera.worldPosition = eye;
+                    camera.lookAt(target);
                     var expected = [
                         [-1, 0,  0,  100],
                         [ 0, 1,  0, -100],
                         [ 0, 0, -1, -100],
                         [ 0, 0,  0,    1]
                     ];
-                    expect(m.equals(Matrix4.create(expected))).toBeTruthy();
+                    expect(camera.viewTransform.equals(Matrix4.create(expected))).toBeTruthy();
                 });
             });
 

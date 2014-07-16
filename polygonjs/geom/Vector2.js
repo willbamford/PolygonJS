@@ -3,9 +3,12 @@ define(['polygonjs/math'], function (math) {
     "use strict";
 
     var Vector2 = function (x, y) {
+        Vector2.instanceCount++;
         this.x = x;
         this.y = y;
     };
+
+    Vector2.instanceCount = 0;
 
     Vector2.create = function (x, y) {
         return new Vector2(x, y);

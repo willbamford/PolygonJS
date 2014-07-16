@@ -11,6 +11,7 @@ define(
         ];
 
         var Matrix3 = function (a) {
+            Matrix3.instanceCount++;
             var t = this;
             a = a || identity;
             if (a) {
@@ -19,6 +20,8 @@ define(
                 t.g = a[2][0]; t.h = a[2][1]; t.i = a[2][2];
             }
         };
+
+        Matrix3.instanceCount = 0;
 
         Matrix3.create = function (a) {
             return new Matrix3(a);

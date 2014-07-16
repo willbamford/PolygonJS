@@ -15,7 +15,8 @@ require(
         'polygonjs/Entity',
         'polygonjs/Engine',
         'polygonjs/entities/Model',
-        'polygonjs/geom/Vector3'
+        'polygonjs/geom/Vector3',
+        'polygonjs/Profiler'
     ],
     function (
         lib,
@@ -33,8 +34,12 @@ require(
         Entity,
         Engine,
         Model,
-        Vector3
+        Vector3,
+        Profiler
     ) {
+
+        var profiler = new Profiler();
+
         var cube = Model.createFromMesh(Cube.create());
         // var sphere = Model.createFromMesh(Sphere.create({
         //     levelOfDetail: 1
@@ -63,12 +68,17 @@ require(
         
         var angle = 0.00;
 
+        profiler.measure();
+
         var engine = Engine.create({
             onTick: function (delta) {
                 scene.update(delta);
                 
                 angle += delta / 1000;
                 if (angle > 360) angle -= 360;
+
+                profiler.toConsole();
+                profiler.measure();
 
                 cube.rotation = Matrix3.createRotationX(angle);
 

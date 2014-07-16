@@ -14,6 +14,9 @@ define(
             this.type = 'camera';
 
             this.up = Vector3.UP.clone();
+            this.right = Vector3.RIGHT.clone();
+            this.forward = Vector3.FORWARD.clone();
+
             this.viewTransform = Matrix4.create();
             this.projectionTransform = Matrix4.create();
         };
@@ -22,11 +25,17 @@ define(
             return new Camera(opts);
         };
 
-        Camera.calculateLookAtViewTransform = function (transform, eye, up, target) {
+        Camera.prototype = Object.create(Entity.prototype);
 
-            var forward = eye.subtract(target).normalised(); // z-axis
-            var right = up.clone().normal(forward); // x-axis
-            up = forward.clone().normal(right); // y-axis
+        Camera.prototype.lookAt = function (target) {
+            
+            var eye = this.worldPosition;
+            var transform = this.viewTransform;
+
+            var up = this.up.copy(Vector3.UP);
+            var forward = this.forward.copy(eye).subtract(target).normalise();  // z-axis
+            var right = this.right.copy(up).normal(forward);                    // x-axis
+            up = up.copy(forward).normal(right);                                // y-axis
 
             transform.a = right.x; transform.b = right.y; transform.c = right.z;
             transform.d = -right.dotProduct(eye);
@@ -38,15 +47,6 @@ define(
             transform.l = -forward.dotProduct(eye);
 
             transform.m = 0; transform.n = 0; transform.o = 0; transform.p = 1;
-        };
-
-        Camera.prototype = Object.create(Entity.prototype);
-
-        Camera.prototype.lookAt = function (target) {
-            var eye = this.getWorldPosition();
-            Camera.calculateLookAtViewTransform(
-                this.viewTransform, eye, this.up, target
-            );
         };
 
         // Camera.prototype.update = function (delta) {
