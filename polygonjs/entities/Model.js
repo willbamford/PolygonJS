@@ -79,11 +79,15 @@ define(
         Model.prototype = Object.create(Entity.prototype);
 
         Model.prototype.update = function (delta) {
+            
+            var vertices = this.vertices;
+            var worldVertices = this.worldVertices;
+
             Entity.prototype.update.call(this, delta);
 
             var i = this.vertices.length;
             while (--i >= 0) {
-                this.worldVertices[i] = this.vertices[i].applyMatrix4(this.getWorldTransform());
+                worldVertices[i].copy(vertices[i]).applyMatrix4(this.getWorldTransform());
             }
         };
 

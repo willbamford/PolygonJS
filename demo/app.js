@@ -61,20 +61,19 @@ require(
         var eye = Vector3.create(5, 5, 5);
         var target = Vector3.create(0, 0, 0);
         
-        var angle = 0;
+        var angle = 0.00;
 
         var engine = Engine.create({
             onTick: function (delta) {
                 scene.update(delta);
                 
-                angle += delta / 10000;
+                angle += delta / 1000;
                 if (angle > 360) angle -= 360;
 
                 cube.rotation = Matrix3.createRotationX(angle);
 
                 camera.position = eye;
                 camera.lookAt(target);
-
 
                 renderer.draw(delta);
             }

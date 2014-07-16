@@ -89,27 +89,7 @@ define(
             });
         });
 
-        describe('multiplyVector', function () {
-            it('should return the result of multiplying a vector by this matrix', function () {
-                var m = Matrix4.create(a);
-                var v = Vector3.create(0, 0, 0);
-                spyOn(v, 'transform');
-                var r = m.multiplyVector(v);
-                expect(v.transform).toHaveBeenCalledWith(m);
-            });
-        });
-
-        describe('multiplyVectorNormal', function () {
-            it('should return the result of multiplying a point by this matrix', function () {
-                var m = Matrix4.create(a);
-                var v = Vector3.create(0, 0, 0);
-                spyOn(v, 'transformNormal');
-                var r = m.multiplyVectorNormal(v);
-                expect(v.transformNormal).toHaveBeenCalledWith(m);
-            });
-        });
-
-        describe('transpose', function () {
+        xdescribe('transpose', function () {
             it('should tranpose the matrix', function () {
                 var m = Matrix4.create(a);
                 var expected = Matrix4.create([

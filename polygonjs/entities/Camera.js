@@ -25,8 +25,8 @@ define(
         Camera.calculateLookAtViewTransform = function (transform, eye, up, target) {
 
             var forward = eye.subtract(target).normalised(); // z-axis
-            var right = up.normal(forward); // x-axis
-            up = forward.normal(right); // y-axis
+            var right = up.clone().normal(forward); // x-axis
+            up = forward.clone().normal(right); // y-axis
 
             transform.a = right.x; transform.b = right.y; transform.c = right.z;
             transform.d = -right.dotProduct(eye);

@@ -247,7 +247,22 @@ define(
                 });
             });
 
-            describe('transform', function () {
+            describe('applyMatrix4', function () {
+                it('should return this vector transformed by the top-left 3x3 input of 4x4 matrix', function () {
+                    var v1 = Vector3.create(5, 4, 3);
+                    var m = Matrix4.create([
+                        [1,   2,  3,  4],
+                        [5,   6,  7,  8],
+                        [9,  10, 11, 12],
+                        [13, 14, 15, 16]
+                    ]);
+                    var v2 = v1.applyMatrix4(m);
+                    expect(v2).toBe(v1);
+                    expect(v2.equals(Vector3.create(22, 70, 118))).toBeTruthy();
+                });
+            });
+
+            describe('applyProjection', function () {
                 it('should return this vector transformed by the 4x4 input matrix (w == 1, do not normalise)', function () {
                     var v1 = Vector3.create(5, 4, 3);
                     var m = Matrix4.create([
@@ -256,8 +271,10 @@ define(
                         [9,  10, 11, 12],
                         [0,   0,  0,  1]
                     ]);
-                    var v2 = v1.transform(m);
-                    expect(v2).not.toBe(v1);
+                    var v2 = v1.applyProjection(m);
+                    expect(v2).toBe(v1);
+
+                    console.log(v1);
                     expect(v2.equals(Vector3.create(26, 78, 130))).toBeTruthy();
                 });
                 it('should return this vector transformed by the 4x4 input matrix (w != 1, normalise)', function () {
@@ -268,24 +285,9 @@ define(
                         [9,  10, 11, 12],
                         [13, 14, 15, 16]
                     ]);
-                    var v2 = v1.transform(m);
-                    expect(v2).not.toBe(v1);
+                    var v2 = v1.applyProjection(m);
+                    expect(v2).toBe(v1);
                     expect(v2.equals(Vector3.create(0.142857, 0.428571, 0.714285))).toBeTruthy();
-                });
-            });
-
-            describe('transformNormal', function () {
-                it('should return this vector transformed by the top-left 3x3 input of 4x4 matrix', function () {
-                    var v1 = Vector3.create(5, 4, 3);
-                    var m = Matrix4.create([
-                        [1,   2,  3,  4],
-                        [5,   6,  7,  8],
-                        [9,  10, 11, 12],
-                        [13, 14, 15, 16]
-                    ]);
-                    var v2 = v1.transformNormal(m);
-                    expect(v2).not.toBe(v1);
-                    expect(v2.equals(Vector3.create(22, 70, 118))).toBeTruthy();
                 });
             });
         });

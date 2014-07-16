@@ -51,43 +51,6 @@ define(['polygonjs/math'], function (math) {
         return ba.normal(ca);
     };
 
-    Vector3.transform = function (v, m, r) {
-
-        if (!r) r = Vector3.create();
-
-        var x = v.x;
-        var y = v.y;
-        var z = v.z;
-        var vw;
-
-        r.x = x * m.a + y * m.b + z * m.c + /*1.0f **/ m.d;
-        r.y = x * m.e + y * m.f + z * m.g + /*1.0f **/ m.h;
-        r.z = x * m.i + y * m.j + z * m.k + /*1.0f **/ m.l;
-        vw  = x * m.m + y * m.n + z * m.o + /*1.0f **/ m.p;
-
-        // Normalize
-        if (vw !== 0 && vw !== 1) {
-            r.x /= vw;
-            r.y /= vw;
-            r.z /= vw;
-        }
-        return r;
-    };
-
-    Vector3.transformNormal = function (v, m, r) {
-
-        if (!r) r = Vector3.create();
-        
-        var x = v.x;
-        var y = v.y;
-        var z = v.z;
-
-        r.x = x * m.a + y * m.b + z * m.c /*+ 0.0f * m.d*/;
-        r.y = x * m.e + y * m.f + z * m.g /*+ 0.0f * m.h*/;
-        r.z = x * m.i + y * m.j + z * m.k /*+ 0.0f * m.l*/;
-        return r;
-    };
-
     Vector3.prototype = {
         
         clone: function () {
@@ -111,6 +74,7 @@ define(['polygonjs/math'], function (math) {
             return [this.x, this.y, this.z];
         },
 
+        // TODO: deprecate
         add: function (v) {
             return this.clone().addTo(v);
         },
@@ -122,6 +86,7 @@ define(['polygonjs/math'], function (math) {
             return this;
         },
 
+        // TODO: deprecate
         subtract: function (v) {
             return this.clone().subtractBy(v);
         },
@@ -133,6 +98,7 @@ define(['polygonjs/math'], function (math) {
             return this;
         },
 
+        // TODO: deprecate
         multiply: function (k) {
             return this.clone().multiplyBy(k);
         },
@@ -164,11 +130,11 @@ define(['polygonjs/math'], function (math) {
         },
 
         crossProduct: function (v) {
-            return Vector3.create(
-                this.y * v.z - this.z * v.y,
-                this.z * v.x - this.x * v.z,
-                this.x * v.y - this.y * v.x
-            );
+            var x = this.x, y = this.y, z = this.z;
+            this.x = y * v.z - z * v.y;
+            this.y = z * v.x - x * v.z;
+            this.z = x * v.y - y * v.x;
+            return this;
         },
 
         dotProduct: function (v) {
@@ -190,7 +156,7 @@ define(['polygonjs/math'], function (math) {
         },
 
         normal: function (v) {
-            return this.crossProduct(v).normalised();
+            return this.crossProduct(v).normalise();
         },
 
         applyMatrix4: function (m) {
@@ -203,36 +169,17 @@ define(['polygonjs/math'], function (math) {
 
         applyProjection: function (m) {
             var x = this.x, y = this.y, z = this.z;
-            this.x = x * m.a + y * m.b + z * m.c + /*1.0f **/ m.d;
-            this.y = x * m.e + y * m.f + z * m.g + /*1.0f **/ m.h;
-            this.z = x * m.i + y * m.j + z * m.k + /*1.0f **/ m.l;
-            var vw  = x * m.m + y * m.n + z * m.o + /*1.0f **/ m.p;
+            this.x = x * m.a + y * m.b + z * m.c + m.d;
+            this.y = x * m.e + y * m.f + z * m.g + m.h;
+            this.z = x * m.i + y * m.j + z * m.k + m.l;
+            var vw  = x * m.m + y * m.n + z * m.o + m.p;
             if (vw !== 0 && vw !== 1) {
                 this.x /= vw;
                 this.y /= vw;
                 this.z /= vw;
             }
             return this;
-        },
-
-        // transformBy: function (m) {
-        //     return Vector3.transform(this, m, this);
-        // },
-
-        // // 'w' component equal to one (e.g. point)
-        // transform: function (m) {
-        //     return Vector3.transform(this, m);
-        // },
-
-        // // TODO: test
-        // transformByNormal: function (m) {
-        //     return Vector3.transformNormal(this, m, this);
-        // },
-
-        // // 'w' component equal to zero (e.g. vector)
-        // transformNormal: function (m) {
-        //     return Vector3.transformNormal(this, m);
-        // }
+        }
     };
 
     Vector3.ZERO    = Vector3.create(0, 0, 0);

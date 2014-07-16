@@ -49,14 +49,13 @@ define(
                         screenVertex = screenVertices[j]; // TODO: TEMP.
 
                         // Apply transform
-                        //Vector3.transform(worldVertex, viewTransform, viewVertex);
+                        
                         viewVertex.copy(worldVertex).applyProjection(viewTransform);
 
                         //// BEGIN: MOVE
 
                         // Temp.
                         screenVertex.copy(viewVertex).applyProjection(projectionTransform);
-                        //Vector3.transform(viewVertex, projectionTransform, screenVertex);
 
                         // Temp.
                         screenVertex.x *= 640;
