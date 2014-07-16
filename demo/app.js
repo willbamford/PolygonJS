@@ -68,8 +68,6 @@ require(
         
         var angle = 0.00;
 
-        profiler.measure();
-
         var engine = Engine.create({
             onTick: function (delta) {
                 scene.update(delta);
@@ -77,8 +75,8 @@ require(
                 angle += delta / 1000;
                 if (angle > 360) angle -= 360;
 
-                profiler.toConsole();
                 profiler.measure();
+                profiler.toConsole();
 
                 cube.rotation = Matrix3.createRotationX(angle);
 

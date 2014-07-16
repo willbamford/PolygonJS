@@ -12,10 +12,10 @@ define(
         var Profiler = function () {
 
             var measurables = [
-                { name: 'Vector2', object: Vector2 },
-                { name: 'Vector3', object: Vector3 },
-                { name: 'Matrix3', object: Matrix3 },
-                { name: 'Matrix4', object: Matrix4 }
+                { name: 'Vector2', class: Vector2 },
+                { name: 'Vector3', class: Vector3 },
+                { name: 'Matrix3', class: Matrix3 },
+                { name: 'Matrix4', class: Matrix4 }
             ];
 
             measurables.forEach(function (measurable) {
@@ -30,7 +30,7 @@ define(
         Profiler.prototype.measure = function () {
             this.measurables.forEach(function (measurable) {
                 measurable.lastCount = measurable.count;
-                measurable.count = measurable.object.instanceCount;
+                measurable.count = measurable.class.instanceCount;
                 measurable.delta = measurable.count - measurable.lastCount;
             });
         };
@@ -38,7 +38,7 @@ define(
         Profiler.prototype.toConsole = function () {
             console.log('Profiler:');
             this.measurables.forEach(function (measurable) {
-                console.log(measurable.name + ': ' + measurable.delta);
+                console.log('  ' + measurable.name + ': ' + measurable.delta);
             });
         };
 
