@@ -24,8 +24,7 @@ define(['polygonjs/math'], function (math) {
         },
 
         equals: function (v) {
-            return (math.equals(this.x, v.x) &&
-                math.equals(this.y, v.y));
+            return (math.equals(this.x, v.x) && math.equals(this.y, v.y));
         },
 
         toArray: function () {
@@ -33,30 +32,18 @@ define(['polygonjs/math'], function (math) {
         },
 
         add: function (v) {
-            return this.clone().addTo(v);
-        },
-
-        addTo: function (v) {
             this.x += v.x;
             this.y += v.y;
             return this;
         },
 
         subtract: function (v) {
-            return this.clone().subtractBy(v);
-        },
-
-        subtractBy: function (v) {
             this.x -= v.x;
             this.y -= v.y;
             return this;
         },
 
         multiply: function (k) {
-            return this.clone().multiplyBy(k);
-        },
-
-        multiplyBy: function (k) {
             this.x = this.x * k;
             this.y = this.y * k;
             return this;

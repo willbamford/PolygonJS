@@ -65,34 +65,77 @@ define(
             },
 
             multiply: function (m) {
-                var p = Matrix4.create(),
-                    t = this;
-                
-                p.a = t.a * m.a + t.b * m.e + t.c * m.i + t.d * m.m;
-                p.b = t.a * m.b + t.b * m.f + t.c * m.j + t.d * m.n;
-                p.c = t.a * m.c + t.b * m.g + t.c * m.k + t.d * m.o;
-                p.d = t.a * m.d + t.b * m.h + t.c * m.l + t.d * m.p;
-
-                p.e = t.e * m.a + t.f * m.e + t.g * m.i + t.h * m.m;
-                p.f = t.e * m.b + t.f * m.f + t.g * m.j + t.h * m.n;
-                p.g = t.e * m.c + t.f * m.g + t.g * m.k + t.h * m.o;
-                p.h = t.e * m.d + t.f * m.h + t.g * m.l + t.h * m.p;
-
-                p.i = t.i * m.a + t.j * m.e + t.k * m.i + t.l * m.m;
-                p.j = t.i * m.b + t.j * m.f + t.k * m.j + t.l * m.n;
-                p.k = t.i * m.c + t.j * m.g + t.k * m.k + t.l * m.o;
-                p.l = t.i * m.d + t.j * m.h + t.k * m.l + t.l * m.p;
-
-                p.m = t.m * m.a + t.n * m.e + t.o * m.i + t.p * m.m;
-                p.n = t.m * m.b + t.n * m.f + t.o * m.j + t.p * m.n;
-                p.o = t.m * m.c + t.n * m.g + t.o * m.k + t.p * m.o;
-                p.p = t.m * m.d + t.n * m.h + t.o * m.l + t.p * m.p;
-
-                return p;
+                return this.multiplyMatrices(this, m);
             },
 
-            getTranslation: function () {
-                return Vector3.create(this.d, this.h, this.l);
+            multiplyMatrices: function (m, n) {
+
+                var ma = m.a, mb = m.b, mc = m.c, md = m.d,
+                    me = m.e, mf = m.f, mg = m.g, mh = m.h,
+                    mi = m.i, mj = m.j, mk = m.k, ml = m.l, 
+                    mm = m.m, mn = m.n, mo = m.o, mp = m.p;
+
+                var na = n.a, nb = n.b, nc = n.c, nd = n.d,
+                    ne = n.e, nf = n.f, ng = n.g, nh = n.h,
+                    ni = n.i, nj = n.j, nk = n.k, nl = n.l,
+                    nm = n.m, nn = n.n, no = n.o, np = n.p;
+
+                this.a = ma * na + mb * ne + mc * ni + md * nm;
+                this.b = ma * nb + mb * nf + mc * nj + md * nn;
+                this.c = ma * nc + mb * ng + mc * nk + md * no;
+                this.d = ma * nd + mb * nh + mc * nl + md * np;
+
+                this.e = me * na + mf * ne + mg * ni + mh * nm;
+                this.f = me * nb + mf * nf + mg * nj + mh * nn;
+                this.g = me * nc + mf * ng + mg * nk + mh * no;
+                this.h = me * nd + mf * nh + mg * nl + mh * np;
+
+                this.i = mi * na + mj * ne + mk * ni + ml * nm;
+                this.j = mi * nb + mj * nf + mk * nj + ml * nn;
+                this.k = mi * nc + mj * ng + mk * nk + ml * no;
+                this.l = mi * nd + mj * nh + mk * nl + ml * np;
+
+                this.m = mm * na + mn * ne + mo * ni + mp * nm;
+                this.n = mm * nb + mn * nf + mo * nj + mp * nn;
+                this.o = mm * nc + mn * ng + mo * nk + mp * no;
+                this.p = mm * nd + mn * nh + mo * nl + mp * np;
+
+                return this;
+            },
+
+            applyPosition: function (v) {
+                v.x = this.d;
+                v.y = this.h;
+                v.z = this.l;
+                return v;
+            },
+
+            setPositionRotationAndScale: function (positionVector, rotationMatrix, scaleVector) {
+                var p = positionVector;
+                var r = rotationMatrix;
+                var s = scaleVector;
+
+                this.a = s.x * r.a;
+                this.b = s.x * r.b;
+                this.c = s.x * r.c;
+                this.d = p.x;
+
+                this.e = s.y * r.d;
+                this.f = s.y * r.e;
+                this.g = s.y * r.f;
+                this.h = p.y,
+                
+                this.i = s.z * r.g;
+                this.j = s.z * r.h;
+                this.k = s.z * r.i;
+                this.l = p.z;
+
+                this.m = 0;
+                this.n = 0;
+                this.o = 0;
+                this.p = 1;
+
+                return this;
             }
         };
 

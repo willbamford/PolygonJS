@@ -61,16 +61,6 @@ define(['polygonjs/geom/Vector2'], function (Vector2) {
                 var v1 = Vector2.create(4, -2);
                 var v2 = Vector2.create(3, 5);
                 var v3 = v1.add(v2);
-                expect(v1.x).toEqual(4); // Should not mutate
-                expect(v3.toArray()).toEqual([7, 3]);
-            });
-        });
-
-        describe('addTo', function () {
-            it('should be add a vector (mutates)', function () {
-                var v1 = Vector2.create(4, -2);
-                var v2 = Vector2.create(3, 5);
-                var v3 = v1.addTo(v2);
                 expect(v1).toBe(v3); // Should mutate
                 expect(v3.toArray()).toEqual([7, 3]);
             });
@@ -81,16 +71,6 @@ define(['polygonjs/geom/Vector2'], function (Vector2) {
                 var v1 = Vector2.create(4, -2);
                 var v2 = Vector2.create(3, 5);
                 var v3 = v1.subtract(v2);
-                expect(v1.x).toEqual(4); // Should not mutate
-                expect(v3.toArray()).toEqual([1, -7]);
-            });
-        });
-
-        describe('subtractBy', function () {
-            it('should be able to subtract one vector from another (mutates)', function () {
-                var v1 = Vector2.create(4, -2);
-                var v2 = Vector2.create(3, 5);
-                var v3 = v1.subtractBy(v2);
                 expect(v3).toBe(v1); // Should mutate
                 expect(v3.toArray()).toEqual([1, -7]);
             });
@@ -101,16 +81,6 @@ define(['polygonjs/geom/Vector2'], function (Vector2) {
                 var v1 = Vector2.create(4, -2);
                 var k = 10;
                 var v2 = v1.multiply(k);
-                expect(v1.x).toEqual(4); // Should not mutate
-                expect(v2.toArray()).toEqual([40, -20]);
-            });
-        });
-
-        describe('multiplyBy', function () {
-            it('should be able to multiply a vector by a scalar (mutates)', function () {
-                var v1 = Vector2.create(4, -2);
-                var k = 10;
-                var v2 = v1.multiplyBy(k);
                 expect(v1).toBe(v2); // Should mutate
                 expect(v2.toArray()).toEqual([40, -20]);
             });

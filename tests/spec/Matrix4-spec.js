@@ -84,13 +84,21 @@ define(
                     [1354, 1412, 1470, 1528]
                 ];
                 var m = Matrix4.create(a);
-                var p = m.multiply(Matrix4.create(b));
+                var n = Matrix4.create(b);
+                var p = m.multiply(n);
+                expect(p).toBe(m);
                 expect(p.equals(Matrix4.create(e))).toBe(true);
             });
         });
 
-        xdescribe('transpose', function () {
-            it('should tranpose the matrix', function () {
+        describe('applyPosition', function () {
+            xit('should apply the translation / position components of the matrix to the input vector', function () {
+                // ...
+            });
+        });
+
+        describe('transpose', function () {
+            xit('should tranpose the matrix', function () {
                 var m = Matrix4.create(a);
                 var expected = Matrix4.create([
                     [1, 5,  9, 13],

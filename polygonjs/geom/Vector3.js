@@ -46,9 +46,9 @@ define(['polygonjs/math'], function (math) {
     };
 
     Vector3.normalFromPositionVectors = function (a, b, c) {
-        var ba = a.subtract(b);
-        var ca = a.subtract(c);
-        return ba.normal(ca);
+        var ba = a.clone().subtract(b);
+        var ca = a.clone().subtract(c);
+        return ba.clone().normal(ca);
     };
 
     Vector3.prototype = {
@@ -74,36 +74,21 @@ define(['polygonjs/math'], function (math) {
             return [this.x, this.y, this.z];
         },
 
-        // TODO: deprecate
         add: function (v) {
-            return this.clone().addTo(v);
-        },
-
-        addTo: function (v) {
             this.x += v.x;
             this.y += v.y;
             this.z += v.z;
             return this;
         },
 
-        // TODO: deprecate
         subtract: function (v) {
-            return this.clone().subtractBy(v);
-        },
-
-        subtractBy: function (v) {
             this.x -= v.x;
             this.y -= v.y;
             this.z -= v.z;
             return this;
         },
 
-        // TODO: deprecate
         multiply: function (k) {
-            return this.clone().multiplyBy(k);
-        },
-
-        multiplyBy: function (k) {
             this.x *= k;
             this.y *= k;
             this.z *= k;
@@ -149,10 +134,6 @@ define(['polygonjs/math'], function (math) {
                 this.z /= mag;
             }
             return this;
-        },
-
-        normalised: function () {
-            return this.clone().normalise();
         },
 
         normal: function (v) {

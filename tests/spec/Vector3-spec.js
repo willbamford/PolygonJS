@@ -106,16 +106,6 @@ define(
                     var v1 = Vector3.create(4, -2, 9);
                     var v2 = Vector3.create(3, 5, -10);
                     var v3 = v1.add(v2);
-                    expect(v1.x).toEqual(4); // Should not mutate
-                    expect(v3.toArray()).toEqual([7, 3, -1]);
-                });
-            });
-
-            describe('addTo', function () {
-                it('should be able to add a vector (mutates)', function () {
-                    var v1 = Vector3.create(4, -2, 9);
-                    var v2 = Vector3.create(3, 5, -10);
-                    var v3 = v1.addTo(v2);
                     expect(v3).toBe(v1); // Should mutate
                     expect(v3.toArray()).toEqual([7, 3, -1]);
                 });
@@ -126,16 +116,6 @@ define(
                     var v1 = Vector3.create(4, -2, 9);
                     var v2 = Vector3.create(3, 5, -10);
                     var v3 = v1.subtract(v2);
-                    expect(v1.x).toEqual(4); // Should not mutate
-                    expect(v3.toArray()).toEqual([1, -7, 19]);
-                });
-            });
-
-            describe('subtractBy', function () {
-                it('should be able to subtract one vector from another (mutates)', function () {
-                    var v1 = Vector3.create(4, -2, 9);
-                    var v2 = Vector3.create(3, 5, -10);
-                    var v3 = v1.subtractBy(v2);
                     expect(v3).toBe(v1); // Should mutate
                     expect(v3.toArray()).toEqual([1, -7, 19]);
                 });
@@ -146,18 +126,6 @@ define(
                     var v1 = Vector3.create(4, -2, 9);
                     var k = 10;
                     var v2 = v1.multiply(k);
-                    expect(v1.x).toEqual(4); // Should not mutate
-                    expect(v2.x).toEqual(40);
-                    expect(v2.y).toEqual(-20);
-                    expect(v2.z).toEqual(90);
-                });
-            });
-
-            describe('multiplyBy', function () {
-                it('should be able to multiply a vector by a scalar (mutates)', function () {
-                    var v1 = Vector3.create(4, -2, 9);
-                    var k = 10;
-                    var v2 = v1.multiplyBy(k);
                     expect(v1).toBe(v2); // Should mutate
                     expect(v2.x).toEqual(40);
                     expect(v2.y).toEqual(-20);
@@ -227,15 +195,6 @@ define(
                 });
                 it('should return unmodified array if magnitude is zero', function () {
                     expect(Vector3.create(0, 0, 0).toArray()).toEqual([0, 0, 0]);
-                });
-            });
-
-            describe('normalised', function () {
-                it('should return a clone of the array normalised', function () {
-                    var v1 = Vector3.create(2, 2, 2);
-                    var v2 = v1.normalised();
-                    expect(v1).not.toBe(v2);
-                    expect(v2.toArray()).toEqual([0.5773502691896258, 0.5773502691896258, 0.5773502691896258]);
                 });
             });
 
