@@ -46,7 +46,7 @@ define(['polygonjs/lib'], function (lib) {
         },
 
         clear: function () {
-            this.context.clearRect (0, 0, this.width, this.height);
+            this.context.clearRect(0, 0, this.width, this.height);
         },
 
         circle: function (point, r, style) {
@@ -78,7 +78,7 @@ define(['polygonjs/lib'], function (lib) {
                 }
                 ctx.closePath();
                 ctx.fill();
-                ctx.stroke(); // Get rid of seams
+                // ctx.stroke(); // Gets rid of seams but performance hit
             }
         }
     };
