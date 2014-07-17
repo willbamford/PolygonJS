@@ -24,6 +24,7 @@ define(
 
                 var scene = this.scene;
                 var camera = scene.mainCamera;
+                var cameraWorldPosition = camera.worldPosition;
                 var viewTransform = camera.viewTransform;
                 var projectionTransform = camera.projectionTransform;
                 var models = scene.models, model;
@@ -32,11 +33,33 @@ define(
                 var viewVertices, viewVertex;
                 var screenVertices, screenVertex;
                 var surface = this.surface;
-                var normal, viewNormal;
+                var surfaceWidth = surface.width;
+                var surfaceHeight = surface.height;
+                var worldNormal, viewNormal;
+                var dp;
+                var i, j, len;
 
                 surface.clear();
 
-                var i = models.length, j;
+                // Back-face cull
+                i = polygons.length;
+                while (--i >= 0) {
+                    polygon = polygons[i];
+                    dp = polygon.worldNormal.dotProduct(camera.forward);
+                    polygon.isCulled = dp < 0;
+                    polygon.distanceToCamera = polygon.worldPosition.distanceTo(cameraWorldPosition);
+                }
+
+                // Sort (slow!)
+                // var count = 0;
+                polygons.sort(function (a, b) {
+                    // count++;
+                    return a.distanceToCamera - b.distanceToCamera;
+                });
+                // console.log(count);
+
+                // Project (view-space and clip-space)
+                i = models.length, j;
                 while (--i >= 0) {
                     model = models[i];
                     worldVertices = model.worldVertices;
@@ -46,92 +69,25 @@ define(
                     while (--j >= 0) {
                         worldVertex = worldVertices[j];
                         viewVertex = viewVertices[j];
-                        screenVertex = screenVertices[j]; // TODO: TEMP.
+                        screenVertex = screenVertices[j];
 
-                        // Apply transform
-                        
                         viewVertex.copy(worldVertex).applyProjection(viewTransform);
-
-                        //// BEGIN: MOVE
-
-                        // Temp.
                         screenVertex.copy(viewVertex).applyProjection(projectionTransform);
 
-                        // Temp.
-                        screenVertex.x *= 640;
-                        screenVertex.y *= 480;
+                        // TODO: combine above?
 
-                        //// END: MOVE
+                        screenVertex.x *= surfaceWidth;
+                        screenVertex.y *= surfaceHeight;
                     }
                 }
 
-                // Recalculate polygon normals and perform back-face cull
+                // Render
                 i = polygons.length;
                 while (--i >= 0) {
                     polygon = polygons[i];
-                    normal = polygon.normal;
-                    viewNormal = polygon.viewNormal;
-                    // Vector3.transform(normal, viewTransform, viewNormal); // Assume uniform scaling!
-                    
-                    polygon.isCulled = false;
-
-                    // Work out dot product between
+                    if (!polygon.isCulled)
+                        surface.polygon(polygon.screenVertices, polygon.style);
                 }
-                // ...
-
-                // SORT POLYGONS!!!
-                // ...
-
-                // APPLY PROJECTION TRANSFORM
-                // ...
-
-                i = polygons.length;
-                while (--i >= 0) {
-                    polygon = polygons[i];
-                    surface.polygon(polygon.screenVertices, 'red');
-                }
-
-                // APPLY VIEW TRANSFORM (to models)
-
-
-
-
-
-
-
-
-                // SORT
-
-                // EACH POLYGON - DRAW
-
-                // var scene = this.scene,
-                //     model = scene.root.findFirst('cube'),
-                //     surface = this.surface,
-                //     i = model.length, j,
-                //     worldVertex, viewVertex, screenVertex;
-
-                // surface.clear();
-
-                // var viewTransform = scene.mainCamera.viewTransform;
-                // var projectionTransform = Camera.createPerspectiveProjectionTransform(
-                //     60, 640 / 480, 1, 100
-                // );
-                // // var projectionTransform = Camera.createOrthographicProjectionTransform(
-                // //    6.4, 4.8, 0, 100
-                // // );
-
-                // // while (--i >= 0) {
-                //     // polygon = model[i];
-                //     j = model.worldVertices.length;
-                //     while (--j >= 0) {
-                //         worldVertex = model.worldVertices[j];
-                //         var projectionViewTransform = projectionTransform.multiply(viewTransform);
-                //         var screenVertex = worldVertex.transform(projectionViewTransform);
-                //         screenVertex.x *= 640;
-                //         screenVertex.y *= 480;
-                //         surface.dot(screenVertex, 'red');
-                //     }
-                // // }
             }
         };
 
