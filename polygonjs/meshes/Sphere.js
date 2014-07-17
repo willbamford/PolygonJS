@@ -35,8 +35,8 @@ define(
                 if (map[abk]) {
                     abi = map[abk];
                 } else {
-                    ab = Vector3.mean([vs[face[0]], vs[face[1]]]).normalise();
-                    if (levelOfDetail === 0 && spikiness !== 0) ab.multiplyBy(1 - spikiness);
+                    ab = Vector3.create().center([vs[face[0]], vs[face[1]]]).normalise();
+                    if (levelOfDetail === 0 && spikiness !== 0) ab.multiply(1 - spikiness);
                     abi = vertices.length; vertices.push(ab);
                     map[abk] = abi;
                 }
@@ -44,8 +44,8 @@ define(
                 if (map[bck]) {
                     bci = map[bck];
                 } else {
-                    bc = Vector3.mean([vs[face[1]], vs[face[2]]]).normalise();
-                    if (levelOfDetail === 0 && spikiness !== 0) bc.multiplyBy(1 - spikiness);
+                    bc = Vector3.create().center([vs[face[1]], vs[face[2]]]).normalise();
+                    if (levelOfDetail === 0 && spikiness !== 0) bc.multiply(1 - spikiness);
                     bci = vertices.length; vertices.push(bc);
                     map[bck] = bci;
                 }
@@ -53,8 +53,8 @@ define(
                 if (map[cak]) {
                     cai = map[cak];
                 } else {
-                    ca = Vector3.mean([vs[face[2]], vs[face[0]]]).normalise();
-                    if (levelOfDetail === 0 && spikiness !== 0) ca.multiplyBy(1 - spikiness);
+                    ca = Vector3.create().center([vs[face[2]], vs[face[0]]]).normalise();
+                    if (levelOfDetail === 0 && spikiness !== 0) ca.multiply(1 - spikiness);
                     cai = vertices.length; vertices.push(ca);
                     map[cak] = cai;
                 }

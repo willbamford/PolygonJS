@@ -87,8 +87,9 @@ define(
             Entity.prototype.update.call(this, delta);
 
             var i = this.vertices.length;
-            while (--i >= 0)
+            while (--i >= 0) {
                 worldVertices[i].copy(vertices[i]).applyMatrix4(worldTransform);
+            }
         };
 
         return Model;
