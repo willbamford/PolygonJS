@@ -33,19 +33,6 @@ define(
                 });
             });
 
-            describe('mean', function () {
-                it('should return the mean vector', function () {
-                    var arrs = [
-                        [0,  10, 12],
-                        [2, -10, 15],
-                        [4, -20, 14],
-                        [8,  20, 13]
-                    ];
-                    var a = Vector3.mean(Vector3.createFromArrays(arrs));
-                    expect(a.toArray()).toEqual([3.5, 0, 13.5]);
-                });
-            });
-
             describe('normalFromPositionVectors', function () {
                 it('should calculate the normal from three position vectors', function () {
                     var v1 = Vector3.create(5, 5, 5);
@@ -247,6 +234,21 @@ define(
                     var v2 = v1.applyProjection(m);
                     expect(v2).toBe(v1);
                     expect(v2.equals(Vector3.create(0.142857, 0.428571, 0.714285))).toBeTruthy();
+                });
+            });
+
+            describe('center', function () {
+                it('should set this vector to the center point of the input vectors', function () {
+                    var v = Vector3.create();
+                    var arrs = [
+                        [0,  10, 12],
+                        [2, -10, 15],
+                        [4, -20, 14],
+                        [8,  20, 13]
+                    ];
+                    var r = v.center(Vector3.createFromArrays(arrs));
+                    expect(r).toBe(v);
+                    expect(r.toArray()).toEqual([3.5, 0, 13.5]);
                 });
             });
         });

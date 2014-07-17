@@ -30,24 +30,6 @@ define(['polygonjs/math'], function (math) {
         return oa;
     };
 
-    Vector3.mean = function (arrs) {
-        var ax = 0,
-            ay = 0,
-            az = 0;
-        if (arrs) {
-            var len = arrs.length;
-            for (var i = 0; i < len; i++) {
-                ax += arrs[i].x;
-                ay += arrs[i].y;
-                az += arrs[i].z;
-            }
-            ax /= len;
-            ay /= len;
-            az /= len;
-        }
-        return Vector3.create(ax, ay, az);
-    };
-
     Vector3.normalFromPositionVectors = function (a, b, c) {
         var ba = a.clone().subtract(b);
         var ca = a.clone().subtract(c);
@@ -161,6 +143,25 @@ define(['polygonjs/math'], function (math) {
                 this.x /= vw;
                 this.y /= vw;
                 this.z /= vw;
+            }
+            return this;
+        },
+
+        center: function (vectors) {
+            var ax = 0, ay = 0, az = 0;
+            if (vectors) {
+                var len = vectors.length;
+                var i = len;
+                var v;
+                while (--i >= 0) {
+                    v = vectors[i];
+                    ax += v.x;
+                    ay += v.y;
+                    az += v.z;
+                }
+                this.x = ax / len;
+                this.y = ay / len;
+                this.z = az / len;
             }
             return this;
         }
