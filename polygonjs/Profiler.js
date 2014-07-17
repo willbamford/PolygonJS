@@ -9,7 +9,7 @@ define(
 
         "use strict";
 
-        var Profiler = function () {
+        var Profiler = function (opts) {
 
             var measurables = [
                 { name: 'Vector2', class: Vector2 },
@@ -24,7 +24,12 @@ define(
                 measurable.delta = 0;
             });
 
+            this.scene = opts.scene || null;
             this.measurables = measurables;
+        };
+
+        Profiler.create = function (opts) {
+            return new Profiler(opts);
         };
 
         Profiler.prototype.measure = function () {
@@ -35,11 +40,36 @@ define(
             });
         };
 
+        var createTitle = function (title) {
+            var dashes = '';
+            var i = title.length + 4;
+            while (--i >= 0) dashes += '-';
+            return dashes + '\n| ' + title + ' |\n' + dashes;
+        };
+
         Profiler.prototype.toConsole = function () {
-            console.log('Profiler:');
+            console.log(createTitle('Object counts'));
             this.measurables.forEach(function (measurable) {
-                console.log('  ' + measurable.name + ': ' + measurable.delta);
+                console.log(measurable.name + ': ' + measurable.delta);
             });
+            if (this.scene) {
+                console.log(createTitle('Scene stats'));
+                console.log('Polygon count: ' + this.scene.polygons.length);
+                var polygons = this.scene.polygons;
+                var i = polygons.length;
+                var polygon;
+                var culled = 0;
+                var visible = 0;
+                while (--i >= 0) {
+                    polygon = polygons[i];
+                    if (polygon.isCulled) {
+                        culled++;
+                    } else {
+                        visible++;
+                    }
+                }
+                console.log('Polygons culled: ' + culled + ', visible: ' + visible);
+            }
         };
 
         return Profiler;
