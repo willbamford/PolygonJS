@@ -18,7 +18,8 @@
     "tests"
   ],
   "dependencies": {
-    "requirejs": "~2.1.13"
+    "requirejs": "~2.1.13",
+    "pixi.js": "~1.6.0"
   },
   "devDependencies": {
     "jasmine": "~2.0.0"
