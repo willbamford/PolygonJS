@@ -2,8 +2,8 @@ define(
     [
         'polygonjs/Scene',
         'polygonjs/Entity',
-        'polygonjs/entities/Camera',
-        'polygonjs/entities/Light',
+        'polygonjs/cameras/Camera',
+        'polygonjs/lights/Light',
         'polygonjs/entities/Polygon',
         'polygonjs/entities/Model'
     ],

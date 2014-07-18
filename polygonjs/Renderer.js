@@ -1,11 +1,9 @@
 define(
     [
-        'polygonjs/entities/PerspectiveCamera',
-        'polygonjs/entities/OrthographicCamera',
         'polygonjs/geom/Matrix4',
         'polygonjs/geom/Vector3'
     ],
-    function (PerspectiveCamera, OrthographicCamera, Matrix4, Vector3) {
+    function (Matrix4, Vector3) {
 
         "use strict";
 

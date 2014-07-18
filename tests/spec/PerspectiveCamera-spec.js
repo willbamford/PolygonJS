@@ -1,8 +1,8 @@
 define(
     [
         'polygonjs/Entity',
-        'polygonjs/entities/Camera',
-        'polygonjs/entities/PerspectiveCamera'
+        'polygonjs/cameras/Camera',
+        'polygonjs/cameras/PerspectiveCamera'
     ],
     function (Entity, Camera, PerspectiveCamera) { 
 

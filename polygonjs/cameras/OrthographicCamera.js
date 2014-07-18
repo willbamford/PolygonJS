@@ -1,6 +1,6 @@
 define(
     [
-        'polygonjs/entities/Camera',
+        'polygonjs/cameras/Camera',
         'polygonjs/geom/Matrix4'
     ],
     function (Camera, Matrix4) {
