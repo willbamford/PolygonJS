@@ -1,10 +1,9 @@
 define(
     [
         'polygonjs/lib',
-        'polygonjs/math/Vector3',
-        'polygonjs/math'
+        'polygonjs/math/Vector3'
     ],
-    function (lib, Vector3, math) {
+    function (lib, Vector3) {
 
         "use strict";
 

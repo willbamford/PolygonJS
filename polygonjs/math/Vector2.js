@@ -1,4 +1,4 @@
-define(['polygonjs/math'], function (math) {
+define(['polygonjs/math/MissingMath'], function (MissingMath) {
 
     "use strict";
 
@@ -27,7 +27,7 @@ define(['polygonjs/math'], function (math) {
         },
 
         equals: function (v) {
-            return (math.equals(this.x, v.x) && math.equals(this.y, v.y));
+            return (MissingMath.equals(this.x, v.x) && MissingMath.equals(this.y, v.y));
         },
 
         toArray: function () {

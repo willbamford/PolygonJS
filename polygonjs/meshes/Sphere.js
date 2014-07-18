@@ -1,12 +1,11 @@
 define(
     [
         'polygonjs/lib',
-        'polygonjs/math',
         'polygonjs/math/Vector3',
         'polygonjs/Mesh',
         'polygonjs/meshes/Icosahedron'
     ],
-    function (lib, math, Vector3, Mesh, Icosahedron) {
+    function (lib, Vector3, Mesh, Icosahedron) {
 
         "use strict";
 
