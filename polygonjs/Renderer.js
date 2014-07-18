@@ -88,6 +88,8 @@ define(
                     if (!polygon.isCulled)
                         surface.polygon(polygon.screenVertices, polygon.style);
                 }
+
+                surface.render();
             }
         };
 
