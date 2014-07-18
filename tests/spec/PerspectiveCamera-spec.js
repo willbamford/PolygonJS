@@ -8,7 +8,7 @@ define(
 
         "use strict";
 
-        describe('Perspective Camera', function () {
+        describe('PerspectiveCamera', function () {
 
             it('should "extend" Camera', function () {
                 var p = Camera.create();

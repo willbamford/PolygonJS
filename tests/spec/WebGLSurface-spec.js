@@ -1,8 +1,8 @@
-define(['polygonjs/surfaces/WebGL'], function (Surface) { 
+define(['polygonjs/surfaces/WebGLSurface'], function (Surface) { 
 
     "use strict";
 
-    describe('WebGL Surface', function () {
+    describe('WebGLSurface', function () {
         
         describe('create', function () {
             it('should be able to create new instances', function () {

@@ -1,8 +1,8 @@
-define(['polygonjs/surfaces/Canvas'], function (Surface) { 
+define(['polygonjs/surfaces/CanvasSurface'], function (Surface) { 
 
     "use strict";
 
-    describe('Canvas Surface', function () {
+    describe('CanvasSurface', function () {
         
         describe('create', function () {
             it('should be able to create new instances', function () {

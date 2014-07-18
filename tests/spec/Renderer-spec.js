@@ -1,7 +1,7 @@
 define(
     [
         'polygonjs/Renderer',
-        'polygonjs/surfaces/Canvas',
+        'polygonjs/surfaces/CanvasSurface',
         'polygonjs/Scene'
     ],
     function (Renderer, Surface, Scene) {

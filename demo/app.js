@@ -1,7 +1,7 @@
 require(
     [
         'polygonjs/Fn',
-        'polygonjs/surfaces/WebGL',
+        'polygonjs/surfaces/WebGLSurface',
         'polygonjs/cameras/OrthographicCamera',
         'polygonjs/cameras/PerspectiveCamera',
         'polygonjs/Scene',

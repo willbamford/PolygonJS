@@ -8,7 +8,7 @@ define(
 
         "use strict";
 
-        describe('Orthographic Camera', function () {
+        describe('OrthographicCamera', function () {
 
             it('should "extend" Camera', function () {
                 var p = Camera.create();
