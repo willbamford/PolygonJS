@@ -48,7 +48,6 @@ define(
 
                 this.updateLocalTransform();
                 this.updateWorldTransform();
-
                 this.worldPosition.applyPosition(this.worldTransform);
 
                 var children = this.children;
@@ -58,9 +57,6 @@ define(
                     entity = children[i];
                     entity.update(delta);
                 }
-
-                // TODO: update world position
-                // ...
             },
 
             updateLocalTransform: function () {
