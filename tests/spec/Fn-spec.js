@@ -12,7 +12,7 @@ define(['polygonjs/Fn'], function (Fn) {
                 expect(isCalled).toBeFalsy();
             });
 
-            it('should iterate over array and pass element and index to callback function', function () {
+            it('should iterate over an array and pass both the element and index to the callback', function () {
                 var arr = ['twinsen', 'zoe', 'funfrock'],
                     trace = '';
                 Fn.each(arr, function (el, i) {
