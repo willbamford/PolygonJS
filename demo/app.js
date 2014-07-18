@@ -1,7 +1,6 @@
 require(
     [
         'polygonjs/lib',
-        'polygonjs/surfaces/Canvas',
         'polygonjs/surfaces/WebGL',
         'polygonjs/entities/OrthographicCamera',
         'polygonjs/entities/PerspectiveCamera',
@@ -22,7 +21,6 @@ require(
     function (
         lib,
         Surface,
-        WebGLSurface,
         OrthographicCamera,
         PerspectiveCamera,
         Scene,
@@ -41,8 +39,8 @@ require(
     ) {
         // var model = Model.createFromMesh(Cube.create());
         var model = Model.createFromMesh(Sphere.create({
-            levelOfDetail: 3,
-            spikiness: 0.1
+            levelOfDetail: 4,
+            spikiness: 0.0
         }));
 
         model.tags = ['sphere'];
@@ -226,7 +224,7 @@ require(
             onTick: function (delta) {
                 scene.update(delta);
                 
-                angle += delta / 1000;
+                angle += delta / 10000;
                 if (angle > 360) angle -= 360;
 
                 // profiler.measure();
