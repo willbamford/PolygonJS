@@ -91,9 +91,16 @@ define(
             });
         });
 
-        describe('applyPosition', function () {
-            xit('should apply the translation / position components of the matrix to the input vector', function () {
-                // ...
+        xdescribe('setPositionRotationAndScale', function () {});
+
+        describe('setPosition', function () {
+            it('should be able to set the position (translation) components of this matrix', function () {
+                var m1 = Matrix4.create();
+                var m2 = m1.setPosition(Vector3.create(10, 11, 12));
+                expect(m2).toBe(m1);
+                expect(m2.d).toBe(10);
+                expect(m2.h).toBe(11);
+                expect(m2.l).toBe(12);
             });
         });
 

@@ -8,6 +8,8 @@ define(
             var opts = {};
             Entity.call(this, opts);
             this.type = 'light';
+            
+            // this.color = opts.colour;
         };
 
         Light.create = function () {

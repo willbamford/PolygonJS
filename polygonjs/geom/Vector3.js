@@ -147,6 +147,13 @@ define(['polygonjs/math'], function (math) {
             return this;
         },
 
+        applyPosition: function (m) {
+            this.x = m.d;
+            this.y = m.h;
+            this.z = m.l;
+            return this;
+        },
+
         center: function (vectors) {
             var ax = 0, ay = 0, az = 0;
             if (vectors) {

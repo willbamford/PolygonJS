@@ -106,38 +106,37 @@ define(
                 return this;
             },
 
-            applyPosition: function (v) {
-                v.x = this.d;
-                v.y = this.h;
-                v.z = this.l;
-                return v;
-            },
+            setPositionRotationAndScale: function (position, rotation, scale) {
+                var p = position;
+                var r = rotation;
+                var s = scale;
 
-            setPositionRotationAndScale: function (positionVector, rotationMatrix, scaleVector) {
-                var p = positionVector;
-                var r = rotationMatrix;
-                var s = scaleVector;
+                this.setPosition(p);
 
                 this.a = s.x * r.a;
                 this.b = s.x * r.b;
                 this.c = s.x * r.c;
-                this.d = p.x;
 
                 this.e = s.y * r.d;
                 this.f = s.y * r.e;
                 this.g = s.y * r.f;
-                this.h = p.y,
                 
                 this.i = s.z * r.g;
                 this.j = s.z * r.h;
                 this.k = s.z * r.i;
-                this.l = p.z;
 
                 this.m = 0;
                 this.n = 0;
                 this.o = 0;
                 this.p = 1;
 
+                return this;
+            },
+
+            setPosition: function (position) {
+                this.d = position.x;
+                this.h = position.y;
+                this.l = position.z;
                 return this;
             }
         };

@@ -219,8 +219,6 @@ define(
                     ]);
                     var v2 = v1.applyProjection(m);
                     expect(v2).toBe(v1);
-
-                    console.log(v1);
                     expect(v2.equals(Vector3.create(26, 78, 130))).toBeTruthy();
                 });
                 it('should return this vector transformed by the 4x4 input matrix (w != 1, normalise)', function () {
@@ -234,6 +232,19 @@ define(
                     var v2 = v1.applyProjection(m);
                     expect(v2).toBe(v1);
                     expect(v2.equals(Vector3.create(0.142857, 0.428571, 0.714285))).toBeTruthy();
+                });
+            });
+
+            describe('applyPosition', function () {
+                it('should set the translation components of the 4x4 matrix input to this vector', function () {
+                    var v1 = Vector3.create();
+                    var m = Matrix4.create();
+                    var p = Vector3.create(10, 11, 12);
+                    m.setPosition(p);
+                    var v2 = v1.applyPosition(m);
+                    console.log(v2);
+                    expect(v2).toBe(v1);
+                    expect(v2.equals(p)).toBeTruthy();
                 });
             });
 
