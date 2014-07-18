@@ -21,8 +21,6 @@ define(['polygonjs/lib'], function (lib) {
         return this;
     };
 
-    Surface.lastId = 0;
-
     Surface.create = function (opts) {
         return new Surface(opts);
     };
@@ -49,20 +47,6 @@ define(['polygonjs/lib'], function (lib) {
             this.context.clearRect(0, 0, this.width, this.height);
         },
 
-        circle: function (point, r, style) {
-            var ctx = this.context;
-            ctx.fillStyle = style;
-            ctx.beginPath();
-            ctx.arc(this.cx + point.x, this.cy - point.y, r, 2 * Math.PI, false);
-            ctx.closePath();
-            ctx.fill();
-        },
-
-        dot: function (point, style) {
-            style = style || 'white';
-            return this.circle(point, 1, style);
-        },
-
         polygon: function (points, style) {
             var ctx = this.context;
             var len = points.length;
@@ -80,7 +64,9 @@ define(['polygonjs/lib'], function (lib) {
                 ctx.fill();
                 // ctx.stroke(); // Gets rid of seams but performance hit
             }
-        }
+        },
+
+        render: function () {}
     };
 
     return Surface;
