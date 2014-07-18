@@ -55,6 +55,11 @@ gluPerspective/glFrustum/glOrtho/gluOrtho2
 
 Best place to achieve **zoom** is in the projection transform matrix [3].
 
+### Credit
+
+* [Pixi.js](http://www.pixijs.com/) - used to enable WebGL drawing surface (with 2D Canvas fallback).
+* [three.js](https://github.com/mrdoob/three.js) - awesome 3D library. If I'd discovered this earlier PolygonJS may not exist!
+
 ### Notes
 
 * Canvas inspector in FF worth exploring (see ref.14).
