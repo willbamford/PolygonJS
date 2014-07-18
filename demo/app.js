@@ -2,8 +2,8 @@ require(
     [
         'polygonjs/lib',
         'polygonjs/surfaces/WebGL',
-        'polygonjs/entities/OrthographicCamera',
-        'polygonjs/entities/PerspectiveCamera',
+        'polygonjs/cameras/OrthographicCamera',
+        'polygonjs/cameras/PerspectiveCamera',
         'polygonjs/Scene',
         'polygonjs/Renderer',
         'polygonjs/Mesh',

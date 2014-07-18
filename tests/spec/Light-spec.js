@@ -1,6 +1,6 @@
 define(
     [
-        'polygonjs/entities/Light',
+        'polygonjs/lights/Light',
         'polygonjs/Entity'
     ],
     function (Light, Entity) {
