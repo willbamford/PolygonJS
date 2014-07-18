@@ -20,7 +20,7 @@ define(
         };
 
         Renderer.prototype = {
-            draw: function (delta) {
+            render: function (delta) {
 
                 var scene = this.scene;
                 var camera = scene.mainCamera;

@@ -235,7 +235,7 @@ require(
                 camera.position = eye;
                 camera.lookAt(target);
 
-                renderer.draw(delta);
+                renderer.render(delta);
             }
         });
         engine.start();
