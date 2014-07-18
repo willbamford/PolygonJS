@@ -1,6 +1,6 @@
 require(
     [
-        'polygonjs/lib',
+        'polygonjs/Fn',
         'polygonjs/surfaces/WebGL',
         'polygonjs/cameras/OrthographicCamera',
         'polygonjs/cameras/PerspectiveCamera',
@@ -19,7 +19,7 @@ require(
         'polygonjs/Profiler'
     ],
     function (
-        lib,
+        Fn,
         Surface,
         OrthographicCamera,
         PerspectiveCamera,

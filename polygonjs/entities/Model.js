@@ -2,10 +2,10 @@ define(
     [
         'polygonjs/Entity',
         'polygonjs/entities/Polygon',
-        'polygonjs/lib',
+        'polygonjs/Fn',
         'polygonjs/math/Vector3'
     ],
-    function (Entity, Polygon, lib, Vector3) {
+    function (Entity, Polygon, Fn, Vector3) {
 
         "use strict";
 
@@ -21,7 +21,7 @@ define(
             this.screenVertices = opts.screenVertices || []; // Clip Space
 
             this.polygons = opts.polygons || [];
-            lib.each(this.polygons, function (polygon) {
+            Fn.each(this.polygons, function (polygon) {
                 self.addChild(polygon);
             });
         };
@@ -39,7 +39,7 @@ define(
             var viewVertices = [];
             var screenVertices = [];
 
-            lib.each(vertices, function () {
+            Fn.each(vertices, function () {
                 worldVertices.push(Vector3.create(0, 0, 0));
                 viewVertices.push(Vector3.create(0, 0, 0));
                 screenVertices.push(Vector3.create(0, 0, 0));
@@ -49,7 +49,7 @@ define(
 
             mesh.eachFace(function (vertices, normal, vertexIndices) {
                 var vs = [], wvs = [], vvs = [], svs = [];
-                lib.each(vertexIndices, function (index) {
+                Fn.each(vertexIndices, function (index) {
                     vs.push(vertices[index]);
                     wvs.push(worldVertices[index]);
                     vvs.push(viewVertices[index]);
@@ -65,7 +65,7 @@ define(
                 polygons.push(polygon);
             });
 
-            opts = lib.merge(opts, {
+            opts = Fn.merge(opts, {
                 vertices: mesh.vertices,
                 worldVertices: worldVertices,
                 viewVertices: viewVertices,

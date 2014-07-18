@@ -2,7 +2,7 @@ define([], function () {
 
     "use strict";
 
-    var lib = {
+    var Fn = {
 
         each: function (arr, fn) {
             if (arr && arr.length > 0) {
@@ -100,5 +100,5 @@ define([], function () {
             return merged;
         }
     };
-    return lib;
+    return Fn;
 });

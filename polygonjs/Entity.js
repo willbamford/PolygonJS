@@ -1,11 +1,11 @@
 define(
     [
-        'polygonjs/lib',
+        'polygonjs/Fn',
         'polygonjs/math/Vector3',
         'polygonjs/math/Matrix3',
         'polygonjs/math/Matrix4'
     ],
-    function (lib, Vector3, Matrix3, Matrix4) {
+    function (Fn, Vector3, Matrix3, Matrix4) {
 
         "use strict";
 
@@ -32,8 +32,8 @@ define(
 
             find: function (tag) {
                 var found = [];
-                if (lib.contains(this.tags, tag)) found.push(this);
-                lib.each(this.children, function (entity) {
+                if (Fn.contains(this.tags, tag)) found.push(this);
+                Fn.each(this.children, function (entity) {
                     found = found.concat(entity.find(tag));
                 });
                 return found;

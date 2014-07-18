@@ -1,4 +1,4 @@
-define(['polygonjs/lib'], function (lib) {
+define([], function () {
 
     "use strict";
 

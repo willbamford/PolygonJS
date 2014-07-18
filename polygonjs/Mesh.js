@@ -1,9 +1,9 @@
 define(
     [
-        'polygonjs/lib',
+        'polygonjs/Fn',
         'polygonjs/math/Vector3'
     ],
-    function (lib, Vector3) {
+    function (Fn, Vector3) {
 
         "use strict";
 
@@ -27,7 +27,7 @@ define(
                 var self = this, vertices;
                 var normal;
                 this.normals = [];
-                lib.each(this.faces, function (face) {
+                Fn.each(this.faces, function (face) {
                     vertices = self.getVerticesForFace(face);
                     normal = Vector3.normalFromPositionVectors(
                         vertices[0], vertices[1], vertices[2]
@@ -38,14 +38,14 @@ define(
 
             eachFace: function (fn) {
                 var self = this, vertices, normal;
-                lib.each(this.faces, function (face, faceIndex) {
+                Fn.each(this.faces, function (face, faceIndex) {
                     fn(self.getVerticesForFace(face), self.normals[faceIndex], face);
                 });
             },
 
             getVerticesForFace: function (face) {
                 var self = this, vertices = [];
-                lib.each(face, function (index) {
+                Fn.each(face, function (index) {
                     vertices.push(self.vertices[index]);
                 });
                 return vertices;
@@ -56,7 +56,7 @@ define(
                     var minX = Number.MAX_VALUE, maxX = Number.MIN_VALUE;
                     var minY = Number.MAX_VALUE, maxY = Number.MIN_VALUE;
                     var minZ = Number.MAX_VALUE, maxZ = Number.MIN_VALUE;
-                    lib.each(this.vertices, function (vertex) {
+                    Fn.each(this.vertices, function (vertex) {
                         if (vertex.x < minX) minX = vertex.x;
                         if (vertex.x > maxX) maxX = vertex.x;
                         if (vertex.y < minY) minY = vertex.y;
@@ -68,7 +68,7 @@ define(
                     var dmax = Math.max(dx, Math.max(dy, dz));
                     var tx = 0.5 * (minX + maxX), ty = 0.5 * (minY + maxY), tz = 0.5 * (minZ + maxZ);
                     var scale = 2 / dmax;
-                    lib.each(this.vertices, function (vertex) {
+                    Fn.each(this.vertices, function (vertex) {
                         vertex.x -= tx;
                         vertex.y -= ty;
                         vertex.z -= tz;

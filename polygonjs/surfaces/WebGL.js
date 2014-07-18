@@ -1,9 +1,8 @@
 define(
     [
-        'polygonjs/lib',
         'libs/pixi.js/bin/pixi.dev'
     ],
-    function (lib, PIXI) {
+    function (PIXI) {
 
         "use strict";
 

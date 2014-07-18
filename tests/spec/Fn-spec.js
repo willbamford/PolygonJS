@@ -1,21 +1,21 @@
-define(['polygonjs/lib'], function (lib) { 
+define(['polygonjs/Fn'], function (Fn) { 
 
     "use strict";
 
-    describe('lib', function () {
+    describe('Fn', function () {
 
         describe('each', function () {
             
             it('should do nothing if the input array is undefined or null', function () {
                 var isCalled = false;
-                lib.each(null, function (el, i) { isCalled = true; });
+                Fn.each(null, function (el, i) { isCalled = true; });
                 expect(isCalled).toBeFalsy();
             });
 
             it('should iterate over array and pass element and index to callback function', function () {
                 var arr = ['twinsen', 'zoe', 'funfrock'],
                     trace = '';
-                lib.each(arr, function (el, i) {
+                Fn.each(arr, function (el, i) {
                     trace += '[' + el + ':' + i + ']';
                 });
                 expect(trace).toEqual('[twinsen:0][zoe:1][funfrock:2]');
@@ -23,7 +23,7 @@ define(['polygonjs/lib'], function (lib) {
 
             it('should do nothing if the input array is undefined or null', function () {
                 var isCalled = false;
-                lib.reverseEach(null, function (el, i) { isCalled = true; });
+                Fn.reverseEach(null, function (el, i) { isCalled = true; });
                 expect(isCalled).toBeFalsy();
             });
         });
@@ -33,7 +33,7 @@ define(['polygonjs/lib'], function (lib) {
             it('should perform as each but in reverse', function () {
                 var arr = ['twinsen', 'zoe', 'funfrock'],
                     trace = '';
-                lib.reverseEach(arr, function (el, i) {
+                Fn.reverseEach(arr, function (el, i) {
                     trace += '[' + el + ':' + i + ']';
                 });
                 expect(trace).toEqual('[funfrock:2][zoe:1][twinsen:0]');
@@ -49,7 +49,7 @@ define(['polygonjs/lib'], function (lib) {
                     zoe: 'Wife'
                 },
                 found = [];
-                lib.eachPair(obj, function (key, value) {
+                Fn.eachPair(obj, function (key, value) {
                     found.push([key, value]);
                 });
                 expect(found.length).toEqual(3);
@@ -65,17 +65,17 @@ define(['polygonjs/lib'], function (lib) {
         describe('contains', function () {
 
             it('should return false if the input array is undefined or null', function () {
-                expect(lib.contains(null, 'a')).toBeFalsy();
+                expect(Fn.contains(null, 'a')).toBeFalsy();
             });
 
             it('should return true if the array contains the element', function () {
                 var arr = ['a', 'b', 'c'];
-                expect(lib.contains(arr, 'b')).toBeTruthy();
+                expect(Fn.contains(arr, 'b')).toBeTruthy();
             });
 
             it('should return false if the array does not contain the element', function () {
                 var arr = ['a', 'b', 'c'];
-                expect(lib.contains(arr, 'd')).toBeFalsy();
+                expect(Fn.contains(arr, 'd')).toBeFalsy();
             });
         });
 
@@ -83,21 +83,21 @@ define(['polygonjs/lib'], function (lib) {
 
             it('should remove and element from the array if it exists', function () {
                 var arr = ['cat', 'fat', 'bat'],
-                    removed = lib.remove(arr, 'fat');
+                    removed = Fn.remove(arr, 'fat');
                 expect(removed).toEqual('fat');
                 expect(arr).toEqual(['cat', 'bat']);
             });
 
             it('should return null if the element does not exist in the array', function () {
                 var arr = ['cat', 'fat', 'bat'],
-                    removed = lib.remove(arr, 'hat');
+                    removed = Fn.remove(arr, 'hat');
                 expect(removed).toBeNull();
                 expect(arr).toEqual(['cat', 'fat', 'bat']);
             });
 
 
             it('should return null if the array is null', function () {
-                var removed = lib.remove(null, 'hat');
+                var removed = Fn.remove(null, 'hat');
                 expect(removed).toBeNull();
             });
         });
@@ -105,12 +105,12 @@ define(['polygonjs/lib'], function (lib) {
         describe('last', function () {
 
             it('should return null if the input array is undefined or null', function () {
-                expect(lib.last(null)).toBeNull();
+                expect(Fn.last(null)).toBeNull();
             });
 
             it('should return the last element', function() {
                 var arr = ['a', 'b', 'c'];
-                expect(lib.last(arr)).toEqual('c');
+                expect(Fn.last(arr)).toEqual('c');
             });
         });
 
@@ -118,14 +118,14 @@ define(['polygonjs/lib'], function (lib) {
 
             it('should do nothing if the input array is undefined or null', function () {
                 var isCalled = false;
-                lib.until(null, function (el, i) { isCalled = true; });
+                Fn.until(null, function (el, i) { isCalled = true; });
                 expect(isCalled).toBeFalsy();
             });
 
             it('should call callback function until true returned', function () {
                 var arr = ['one', 'two', 'three'],
                     callTrace = '';
-                lib.until(arr, function (element) {
+                Fn.until(arr, function (element) {
                     callTrace += '[' + element + ']';
                     return element === 'two';
                 });
@@ -135,7 +135,7 @@ define(['polygonjs/lib'], function (lib) {
             it('should call callback function until true returned (last element to first)', function () {
                 var arr = ['one', 'two', 'three'],
                     callTrace = '';
-                lib.reverseUntil(arr, function (element) {
+                Fn.reverseUntil(arr, function (element) {
                     callTrace += '[' + element + ']';
                     return element === 'two';
                 });
@@ -145,22 +145,22 @@ define(['polygonjs/lib'], function (lib) {
 
         describe('trim', function () {
             it('should trim whitespace from the start / end of a string', function () {
-                expect(lib.trim('    hello    ')).toEqual('hello');
-                expect(lib.trim(' abc def')).toEqual('abc def');
+                expect(Fn.trim('    hello    ')).toEqual('hello');
+                expect(Fn.trim(' abc def')).toEqual('abc def');
             });
         });
 
         describe('merge', function () {
             it('should merge two objects', function () {
-                expect(lib.merge({a: 1}, {b: 2})).toEqual({a: 1, b: 2});
+                expect(Fn.merge({a: 1}, {b: 2})).toEqual({a: 1, b: 2});
             });
 
             it('should override base properties with if override has identical keys', function () {
-                expect(lib.merge({a: 1}, {a: 2})).toEqual({a: 2});
+                expect(Fn.merge({a: 1}, {a: 2})).toEqual({a: 2});
             });
 
             it('should return empty object if inputs are null', function () {
-                expect(lib.merge(null, null)).toEqual({});
+                expect(Fn.merge(null, null)).toEqual({});
             });
         });
     });

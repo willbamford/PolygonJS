@@ -1,4 +1,4 @@
-define(['polygonjs/lib'], function (lib) {
+define(['polygonjs/Fn'], function (Fn) {
 
     var Scene = function (opts) {
         opts = opts || {};
@@ -30,13 +30,13 @@ define(['polygonjs/lib'], function (lib) {
             this.models = [];
             this._revalidateFromChildren(this.root.children);
             
-            if (this.cameras.length > 0 && !lib.contains(this.camera, this.mainCamera))
+            if (this.cameras.length > 0 && !Fn.contains(this.camera, this.mainCamera))
                 this.mainCamera = this.cameras[0];
         },
 
         _revalidateFromChildren: function (children) {
             var self = this;
-            lib.each(children, function (entity) {
+            Fn.each(children, function (entity) {
                 switch (entity.type) {
                     case 'camera':
                         self.cameras.push(entity);

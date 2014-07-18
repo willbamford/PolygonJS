@@ -1,11 +1,11 @@
 define(
     [
-        'polygonjs/lib',
+        'polygonjs/Fn',
         'polygonjs/math/Vector3',
         'polygonjs/Mesh',
         'polygonjs/meshes/Icosahedron'
     ],
-    function (lib, Vector3, Mesh, Icosahedron) {
+    function (Fn, Vector3, Mesh, Icosahedron) {
 
         "use strict";
 
@@ -66,7 +66,7 @@ define(
 
             while (--levelOfDetail >= 0) {
                 faces = [];
-                lib.each(fs, faceFn);
+                Fn.each(fs, faceFn);
                 fs = faces;
             }
 

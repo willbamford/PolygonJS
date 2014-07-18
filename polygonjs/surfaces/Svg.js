@@ -1,4 +1,4 @@
-define(['polygonjs/lib'], function (lib) {
+define(['polygonjs/Fn'], function (Fn) {
 
     "use strict";
 
@@ -55,7 +55,7 @@ define(['polygonjs/lib'], function (lib) {
             var encodedPoints = '';
             style = style || this.randomColour();
             id = id || 'p' + Surface.lastId++;
-            lib.each(points, function (point) {
+            Fn.each(points, function (point) {
                 var x = point.x + self.cx;
                 var y = -point.y + self.cy;
                 encodedPoints += x + ',' + y + ' ';

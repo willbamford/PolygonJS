@@ -1,6 +1,6 @@
 define(
-    ['polygonjs/lib', 'polygonjs/math/Vector3', 'polygonjs/Mesh'],
-    function (lib, Vector3, Mesh) {
+    ['polygonjs/Fn', 'polygonjs/math/Vector3', 'polygonjs/Mesh'],
+    function (Fn, Vector3, Mesh) {
 
         "use strict";
 
@@ -19,8 +19,8 @@ define(
                         vertices = [], faces = [],
                         faceVertexCount, faceIndices,
                         i;
-                    lib.each(lines, function (line) {
-                        line = lib.trim(line).replace(/\s{2,}/g, ' ');
+                    Fn.each(lines, function (line) {
+                        line = Fn.trim(line).replace(/\s{2,}/g, ' ');
                         if (
                             !line || line.length === 0 ||   // Empty line
                             line === 'OFF' ||               // Format header
@@ -61,12 +61,12 @@ define(
                 var s = '';
                 s += line('OFF');
                 s += line(mesh.vertices.length + ' ' + mesh.faces.length + ' 0');
-                lib.each(mesh.vertices, function (vertex) {
+                Fn.each(mesh.vertices, function (vertex) {
                     s += line(vertex.x + ' ' + vertex.y + ' ' + vertex.z);
                 });
-                lib.each(mesh.faces, function (face) {
+                Fn.each(mesh.faces, function (face) {
                     var ln = face.length + ' ';
-                    lib.each(face, function (index) {
+                    Fn.each(face, function (index) {
                         ln += index + ' ';
                     });
                     s += line(ln);
