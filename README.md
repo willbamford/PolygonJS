@@ -6,6 +6,8 @@ JavaScript 3D library where polygons are first class citizens.
 
 PolygonJS uses a right-hand coordinate system.
 
+Most 3D engines default to implementing a normal vector per vertex. In PolygonJS each face / polygon has a normal. This results in fewer normals and results in a flat-shaded, more geometric look.
+
 ## 3D Primer
 
 ### Coordinate Systems
@@ -53,7 +55,19 @@ Relevant OpenGL functions:
 gluPerspective/glFrustum/glOrtho/gluOrtho2
 ```
 
-Best place to achieve **zoom** is in the projection transform matrix [3].
+	Best place to achieve zoom is in the projection transform matrix [3].
+
+### Materials
+
+	Like lights, materials have different ambient, diffuse, and specular colors… In addition to ambient, diffuse, and specular colors, materials have an emissive color, which simulates light originating from an object. In the OpenGL lighting model, the emissive color of a surface adds intensity to the object, but is unaffected by any light sources. Also, the emissive color does not introduce any additional light into the overall scene. [16]
+
+### Lighting
+
+Lights are added as nodes in the scene graph. In addition, diffuse lights have a direction.
+
+Ambient, Diffuse and Specular Lighting.
+
+	A good set of settings for a light source would be to set the Diffuse and Specular components to the colour of the light source, and the Ambient to the same colour - but at MUCH reduced intensity, 10% to 40% seems reasonable in most cases. [17]
 
 ### Credit
 
@@ -62,7 +76,7 @@ Best place to achieve **zoom** is in the projection transform matrix [3].
 
 ### Notes
 
-* Canvas inspector in FF worth exploring (see ref.14).
+* Canvas inspector in FF worth exploring [14].
 
 ### References
 
@@ -81,3 +95,5 @@ Best place to achieve **zoom** is in the projection transform matrix [3].
 13. [www.scratchapixel.com - Transforming Points and Vectors](http://www.scratchapixel.com/lessons/3d-basic-lessons/lesson-4-geometry/transforming-points-and-vectors/)
 14. [Angelina Fabbro: Improving 2D & 3D Canvas Performance on the Web, One Frame at a Time [JSConf2014]](https://www.youtube.com/watch?v=NG5uDXCOr8s) - Use off-screen canvas?
 15. [Object properties vs. array - jsPerf test](http://jsperf.com/object-properties-vs-array)
+16. [Lighting &amp; Material](http://www.glprogramming.com/red/chapter05.html)
+17. [http://sjbaker.org/steve/omniv/opengl_lighting.html](http://sjbaker.org/steve/omniv/opengl_lighting.html)
