@@ -8,7 +8,7 @@ define(
             return s + "\n";
         };
 
-        var objectFileFormat = {
+        var ObjectFileFormat = {
             loadMesh: function (data) {
                 if (data) {
                     var lines = data.split('\n'),
@@ -75,6 +75,6 @@ define(
             }
         };
 
-        return objectFileFormat;
+        return ObjectFileFormat;
     }
 );
