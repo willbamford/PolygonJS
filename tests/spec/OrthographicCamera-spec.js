@@ -11,16 +11,15 @@ define(
         describe('OrthographicCamera', function () {
 
             it('should "extend" Camera', function () {
-                var p = Camera.create();
-                expect(p instanceof Camera).toBe(true);
-                expect(p instanceof Entity).toBe(true);
+                var camera = OrthographicCamera.create();
+                expect(camera).toBeInstanceOf(Camera);
             });
 
             describe('create', function () {
 
                 it('should be able to create new instances', function () {
                     var camera = OrthographicCamera.create();
-                    expect(camera instanceof OrthographicCamera).toBeTruthy();
+                    expect(camera).toBeInstanceOf(OrthographicCamera);
                 });
 
                 it('should have an entity type of \'camera\'', function () {

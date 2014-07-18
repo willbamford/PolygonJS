@@ -17,7 +17,7 @@ define(
 
                 it('should be able to create new instance', function () {
                     var scene = Scene.create();
-                    expect(scene instanceof Scene).toBe(true);
+                    expect(scene).toBeInstanceOf(Scene);
                 });
 
                 it('should default to a null scene graph', function () {

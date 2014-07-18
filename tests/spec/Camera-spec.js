@@ -13,16 +13,15 @@ define(
         describe('Camera', function () {
 
             it('should "extend" Entity', function () {
-                var p = Camera.create();
-                expect(p instanceof Camera).toBe(true);
-                expect(p instanceof Entity).toBe(true);
+                var camera = Camera.create();
+                expect(camera).toBeInstanceOf(Entity);
             });
 
             describe('create', function () {
 
                 it('should be able to create new instances', function () {
                     var camera = Camera.create();
-                    expect(camera instanceof Camera).toBeTruthy();
+                    expect(camera).toBeInstanceOf(Camera);
                 });
 
                 it('should have an entity type of \'camera\'', function () {

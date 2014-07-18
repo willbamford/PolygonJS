@@ -26,17 +26,15 @@ define(
             })];
 
             it('should "extend" Entity', function () {
-                var p = Model.create();
-                expect(p instanceof Model).toBe(true);
-                expect(p instanceof Entity).toBe(true);
+                var model = Model.create();
+                expect(model).toBeInstanceOf(Entity);
             });
 
             describe('create', function () {
 
                 it('should create a new model entity', function () {
                     var model = Model.create();
-                    expect(model instanceof Model).toBe(true);
-                    expect(model instanceof Entity).toBe(true);
+                    expect(model).toBeInstanceOf(Model);
                 });
 
                 it('should have an entity type of "model"', function () {

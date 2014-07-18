@@ -11,9 +11,8 @@ define(
         describe('Polygon', function () {
 
             it('should "extend" Entity', function () {
-                var p = Polygon.create();
-                expect(p instanceof Polygon).toBe(true);
-                expect(p instanceof Entity).toBe(true);
+                var polygon = Polygon.create();
+                expect(polygon).toBeInstanceOf(Entity);
             });
 
             describe('create', function () {
@@ -23,6 +22,11 @@ define(
                 var viewVertices = [Vector3.create(0, 0, 3), Vector3.create(0, 3, 0), Vector3.create(0, 3, 3)];
                 var screenVertices = [Vector3.create(0, 0, 4), Vector3.create(0, 4, 0), Vector3.create(0, 4, 4)];
                 var normal = Vector3.create(1, 0, 0);
+
+                it('should be able to create instances', function () {
+                    var polygon = Polygon.create();
+                    expect(polygon).toBeInstanceOf(Polygon);
+                });
 
                 it('should have an entity type of "polygon"', function () {
                     var polygon = Polygon.create();
