@@ -23,8 +23,7 @@ define(
                 });
             });
 
-            describe('draw', function () {
-            });
+            xdescribe('render', function () {});
         });
     }
 );
