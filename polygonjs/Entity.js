@@ -1,9 +1,9 @@
 define(
     [
         'polygonjs/lib',
-        'polygonjs/geom/Vector3',
-        'polygonjs/geom/Matrix3',
-        'polygonjs/geom/Matrix4'
+        'polygonjs/math/Vector3',
+        'polygonjs/math/Matrix3',
+        'polygonjs/math/Matrix4'
     ],
     function (lib, Vector3, Matrix3, Matrix4) {
 

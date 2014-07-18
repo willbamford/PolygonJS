@@ -2,7 +2,7 @@ define(
     [
         'polygonjs/entities/Polygon',
         'polygonjs/Entity',
-        'polygonjs/geom/Vector3'
+        'polygonjs/math/Vector3'
     ],
     function (Polygon, Entity, Vector3) {
 

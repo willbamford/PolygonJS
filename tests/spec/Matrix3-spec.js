@@ -1,7 +1,7 @@
 define(
     [
-        'polygonjs/geom/Matrix3',
-        'polygonjs/geom/Vector3'],
+        'polygonjs/math/Matrix3',
+        'polygonjs/math/Vector3'],
     function (Matrix3, Vector3) { 
 
     "use strict";

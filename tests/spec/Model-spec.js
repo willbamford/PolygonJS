@@ -4,7 +4,7 @@ define(
         'polygonjs/entities/Polygon',
         'polygonjs/Entity',
         'polygonjs/meshes/Cube',
-        'polygonjs/geom/Vector3'
+        'polygonjs/math/Vector3'
     ],
     function (Model, Polygon, Entity, Cube, Vector3) {
 

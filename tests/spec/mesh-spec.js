@@ -1,7 +1,7 @@
 define(
     [
         'polygonjs/Mesh',
-        'polygonjs/geom/Vector3',
+        'polygonjs/math/Vector3',
         'polygonjs/meshes/Cube'
     ],
     function (Mesh, Vector3, Cube) { 

@@ -1,7 +1,7 @@
 define(
     [
-        'polygonjs/geom/Matrix4',
-        'polygonjs/geom/Vector3'
+        'polygonjs/math/Matrix4',
+        'polygonjs/math/Vector3'
     ],
     function (Matrix4, Vector3) { 
 

@@ -1,7 +1,7 @@
 define(
     [
         'polygonjs/lib',
-        'polygonjs/geom/Vector3',
+        'polygonjs/math/Vector3',
         'polygonjs/math'
     ],
     function (lib, Vector3, math) {

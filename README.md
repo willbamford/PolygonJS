@@ -2,11 +2,13 @@
 
 JavaScript 3D library where polygons are first class citizens.
 
+Most 3D engines default to implementing a normal vector per vertex. In PolygonJS each face / polygon has a normal. This results in fewer normals and results in a flat-shaded, more geometric look.
+
 ## Guide
 
-PolygonJS uses a right-hand coordinate system.
+PolygonJS uses [AMD](http://requirejs.org/docs/whyamd.html) to organise the JS modules.
 
-Most 3D engines default to implementing a normal vector per vertex. In PolygonJS each face / polygon has a normal. This results in fewer normals and results in a flat-shaded, more geometric look.
+PolygonJS uses a right-hand coordinate system.
 
 ## 3D Primer
 
@@ -69,7 +71,7 @@ Ambient, Diffuse and Specular Lighting.
 
 	A good set of settings for a light source would be to set the Diffuse and Specular components to the colour of the light source, and the Ambient to the same colour - but at MUCH reduced intensity, 10% to 40% seems reasonable in most cases... For the glMaterial, it's usual to set the Ambient and Diffuse colours to the natural colour of the object and to put the Specular colour to white. The emission colour is generally black for objects that do not shine by their own light. [17]
 
-### Credit
+### Credits
 
 * [Pixi.js](http://www.pixijs.com/) - used to enable WebGL drawing surface (with 2D Canvas fallback).
 * [three.js](https://github.com/mrdoob/three.js) - awesome 3D library. If I'd discovered this earlier PolygonJS may not exist!

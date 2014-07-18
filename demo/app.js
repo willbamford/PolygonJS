@@ -7,7 +7,7 @@ require(
         'polygonjs/Scene',
         'polygonjs/Renderer',
         'polygonjs/Mesh',
-        'polygonjs/geom/Matrix3',
+        'polygonjs/math/Matrix3',
         'polygonjs/meshes/Icosahedron',
         'polygonjs/meshes/Cube',
         'polygonjs/meshes/Sphere',
@@ -15,7 +15,7 @@ require(
         'polygonjs/Entity',
         'polygonjs/Engine',
         'polygonjs/entities/Model',
-        'polygonjs/geom/Vector3',
+        'polygonjs/math/Vector3',
         'polygonjs/Profiler'
     ],
     function (

@@ -2,7 +2,7 @@ define(
     [
         'polygonjs/lib',
         'polygonjs/math',
-        'polygonjs/geom/Vector3',
+        'polygonjs/math/Vector3',
         'polygonjs/Mesh',
         'polygonjs/meshes/Icosahedron'
     ],

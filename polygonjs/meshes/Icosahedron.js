@@ -1,5 +1,5 @@
 define(
-    ['polygonjs/Mesh', 'polygonjs/geom/Vector3'],
+    ['polygonjs/Mesh', 'polygonjs/math/Vector3'],
     function (Mesh, Vector3) {
 
         "use strict";
