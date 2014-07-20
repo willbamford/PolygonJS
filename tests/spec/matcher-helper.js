@@ -8,6 +8,15 @@ beforeEach(function () {
                     };
                 }
             };
+        },
+        toEqualColor: function () {
+            return {
+                compare: function (actual, expected) {
+                    return {
+                        pass: (actual.equals(expected))
+                    };
+                }
+            }
         }
     });
 });

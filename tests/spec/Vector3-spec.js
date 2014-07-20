@@ -242,7 +242,6 @@ define(
                     var p = Vector3.create(10, 11, 12);
                     m.setPosition(p);
                     var v2 = v1.applyPosition(m);
-                    console.log(v2);
                     expect(v2).toBe(v1);
                     expect(v2.equals(p)).toBeTruthy();
                 });
