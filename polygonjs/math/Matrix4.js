@@ -1,6 +1,6 @@
 define(
-    ['polygonjs/math/MissingMath', 'polygonjs/math/Vector3'],
-    function (MMath, Vector3) {
+    ['polygonjs/math/PMath', 'polygonjs/math/Vector3'],
+    function (PMath, Vector3) {
 
         "use strict";
 
@@ -61,10 +61,10 @@ define(
             },
 
             equals: function (m) {
-                return MMath.equals(this.a, m.a) && MMath.equals(this.b, m.b) && MMath.equals(this.c, m.c) && MMath.equals(this.d, m.d) &&
-                    MMath.equals(this.e, m.e) && MMath.equals(this.f, m.f) && MMath.equals(this.g, m.g) && MMath.equals(this.h, m.h) &&
-                    MMath.equals(this.i, m.i) && MMath.equals(this.j, m.j) && MMath.equals(this.k, m.k) && MMath.equals(this.l, m.l) &&
-                    MMath.equals(this.m, m.m) && MMath.equals(this.n, m.n) && MMath.equals(this.o, m.o) && MMath.equals(this.p, m.p);
+                return PMath.equals(this.a, m.a) && PMath.equals(this.b, m.b) && PMath.equals(this.c, m.c) && PMath.equals(this.d, m.d) &&
+                    PMath.equals(this.e, m.e) && PMath.equals(this.f, m.f) && PMath.equals(this.g, m.g) && PMath.equals(this.h, m.h) &&
+                    PMath.equals(this.i, m.i) && PMath.equals(this.j, m.j) && PMath.equals(this.k, m.k) && PMath.equals(this.l, m.l) &&
+                    PMath.equals(this.m, m.m) && PMath.equals(this.n, m.n) && PMath.equals(this.o, m.o) && PMath.equals(this.p, m.p);
             },
 
             multiply: function (m) {

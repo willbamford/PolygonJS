@@ -1,4 +1,4 @@
-define(['polygonjs/math/MissingMath'], function (MMath) {
+define(['polygonjs/math/PMath'], function (PMath) {
 
     var Color = function (opts) {
         opts = opts || {};
@@ -14,9 +14,9 @@ define(['polygonjs/math/MissingMath'], function (MMath) {
     Color.prototype = {
 
         equals: function (color) {
-            return MMath.equals(this.r, color.r) &&
-                MMath.equals(this.g, color.g) &&
-                MMath.equals(this.b, color.b);
+            return PMath.equals(this.r, color.r) &&
+                PMath.equals(this.g, color.g) &&
+                PMath.equals(this.b, color.b);
         },
 
         clone: function () {
@@ -59,9 +59,9 @@ define(['polygonjs/math/MissingMath'], function (MMath) {
         },
 
         clamp: function () {
-            this.r = MMath.clamp(this.r, 0.0, 1.0);
-            this.g = MMath.clamp(this.g, 0.0, 1.0);
-            this.b = MMath.clamp(this.b, 0.0, 1.0);
+            this.r = PMath.clamp(this.r, 0.0, 1.0);
+            this.g = PMath.clamp(this.g, 0.0, 1.0);
+            this.b = PMath.clamp(this.b, 0.0, 1.0);
             return this;
         },
 

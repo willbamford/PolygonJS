@@ -13,19 +13,6 @@ define(
             return new Material(opts);
         };
 
-        // // Note: wouldn't calculate here!
-        // Material.prototype.getColor = function (lights) {
-
-        //     // var color = Color.create();
-        //     // lights.forEach(function (light)) {
-        //     //     color.add(light.ambient.multiply(this.ambient));
-        //     //     color.add(light.diffuse.multiply(this.diffuse));
-        //     //     color.add(light.specular.multiply(this.specular));
-        //     // };
-        //     // color.add(this.emissive);
-        //     // return color;
-        // };
-
         return Material;
     }
 );

@@ -1,6 +1,6 @@
 define(
-    ['polygonjs/math/MissingMath', 'polygonjs/math/Vector3'],
-    function (MMath, Vector3) {
+    ['polygonjs/math/PMath', 'polygonjs/math/Vector3'],
+    function (PMath, Vector3) {
 
         "use strict";
 
@@ -57,9 +57,9 @@ define(
             },
 
             equals: function (m) {
-                return MMath.equals(this.a, m.a) && MMath.equals(this.b, m.b) && MMath.equals(this.c, m.c) &&
-                    MMath.equals(this.d, m.d) && MMath.equals(this.e, m.e) && MMath.equals(this.f, m.f) &&
-                    MMath.equals(this.g, m.g) && MMath.equals(this.h, m.h) && MMath.equals(this.i, m.i);
+                return PMath.equals(this.a, m.a) && PMath.equals(this.b, m.b) && PMath.equals(this.c, m.c) &&
+                    PMath.equals(this.d, m.d) && PMath.equals(this.e, m.e) && PMath.equals(this.f, m.f) &&
+                    PMath.equals(this.g, m.g) && PMath.equals(this.h, m.h) && PMath.equals(this.i, m.i);
             },
 
             multiply: function (m) {
