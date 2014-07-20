@@ -6,10 +6,7 @@ define(
             opts = opts || {};
             this.diffuse = opts.diffuse || Color.WHITE.clone();
             this.ambient = opts.ambient || Color.WHITE.clone();
-
-            // this.diffuse;
-            // this.specular;
-            // this.emissive;
+            this.emissive = opts.emissive || Color.BLACK.clone();
         };
 
         Material.create = function (opts) {
