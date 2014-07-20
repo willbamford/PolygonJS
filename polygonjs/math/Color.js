@@ -66,8 +66,8 @@ define(['polygonjs/math/MissingMath'], function (MMath) {
         },
 
         getHex: function () {
-            return ((this.r * 255) << 16) ^
-                ((this.g * 255) << 8) ^
+            return ((this.r * 255) << 16) |
+                ((this.g * 255) << 8) |
                 ((this.b * 255) << 0);
         },
 
