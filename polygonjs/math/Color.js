@@ -80,5 +80,11 @@ define(['polygonjs/math/MissingMath'], function (MMath) {
         }
     };
 
+    Color.BLACK = Color.create({r: 0, g: 0, b: 0});
+    Color.WHITE = Color.create({r: 1, g: 1, b: 1});
+    Color.RED = Color.create({r: 1, g: 0, b: 0});
+    Color.GREEN = Color.create({r: 0, g: 1, b: 0});
+    Color.BLUE = Color.create({r: 0, g: 0, b: 1});
+
     return Color;
 });
