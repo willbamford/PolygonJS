@@ -43,6 +43,12 @@ define(
                     expect(e.rotation.equals(Matrix3.IDENTITY)).toBe(true);
                 });
 
+                it('should provide defaults for up / right and forward vectors', function () {
+                    expect(e.up.equals(Vector3.UP)).toBeTruthy();
+                    expect(e.right.equals(Vector3.RIGHT)).toBeTruthy();
+                    expect(e.forward.equals(Vector3.FORWARD)).toBeTruthy();
+                });
+
                 it('should be possible to initialise with tags', function () {
                     var entity = Entity.create({
                         tags: ['ai', 'enemy']

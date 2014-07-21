@@ -19,6 +19,10 @@ define(
             this.children = [];
             this.tags = opts.tags || [];
 
+            this.up = Vector3.UP.clone();
+            this.right = Vector3.RIGHT.clone();
+            this.forward = Vector3.FORWARD.clone();
+
             this.localTransform = Matrix4.IDENTITY.clone();
             this.worldTransform = Matrix4.IDENTITY.clone();
             this.worldPosition = Vector3.ZERO.clone();
@@ -97,31 +101,7 @@ define(
                     }
                 }
                 return this;
-            },
-
-            // getTransform: function () { // Optimise
-            //     var p = this.position;
-            //     var r = this.rotation;
-            //     var s = this.scale;
-            //     return Matrix4.create([
-            //         [s.x * r.a, s.x * r.b, s.x * r.c, p.x],
-            //         [s.y * r.d, s.y * r.e, s.y * r.f, p.y],
-            //         [s.z * r.g, s.z * r.h, s.z * r.i, p.z],
-            //         [ 0,    0,   0,   1]
-            //     ]);
-            // },
-
-            // getWorldTransform: function () { // Optimise
-            //     return this.parent ?
-            //         this.parent.getWorldTransform().multiply(this.getTransform()) :
-            //         this.getTransform();
-            // },
-
-            // // TODO: test (and calculate in update!)
-            // getWorldPosition: function () {
-            //     return this.worldTransform.getTranslation();
-            //     // return this.getWorldTransform().getTranslation();
-            // }
+            }
         };
 
         return Entity;
