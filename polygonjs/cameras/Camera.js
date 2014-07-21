@@ -13,10 +13,6 @@ define(
             Entity.call(this, opts);
             this.type = 'camera';
 
-            this.up = Vector3.UP.clone();
-            this.right = Vector3.RIGHT.clone();
-            this.forward = Vector3.FORWARD.clone();
-
             this.viewTransform = Matrix4.create();
             this.projectionTransform = Matrix4.create();
         };

@@ -2,9 +2,10 @@ define(
     [
         'polygonjs/entities/Polygon',
         'polygonjs/Entity',
-        'polygonjs/math/Vector3'
+        'polygonjs/math/Vector3',
+        'polygonjs/Material'
     ],
-    function (Polygon, Entity, Vector3) {
+    function (Polygon, Entity, Vector3, Material) {
 
         "use strict";
 
@@ -33,14 +34,10 @@ define(
                     expect(polygon.type).toBe('polygon');
                 });
 
-                it('should have a default style of "white"', function () {
-                    var polygon = Polygon.create();
-                    expect(polygon.style).toBe('white');
-                });
-
-                it('should be able to initialise with a style', function () {
-                    var polygon = Polygon.create({style: 'red'});
-                    expect(polygon.style).toBe('red');
+                it('should be able to initialise with a material', function () {
+                    var material = Material.create();
+                    var polygon = Polygon.create({material: material});
+                    expect(polygon.material).toBe(material);
                 });
 
                 it('should be able initialise with vertices and normal', function () {

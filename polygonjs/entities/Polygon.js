@@ -1,9 +1,10 @@
 define(
     [
         'polygonjs/Entity',
-        'polygonjs/math/Vector3'
+        'polygonjs/math/Vector3',
+        'polygonjs/Material'
     ],
-    function (Entity, Vector3) {
+    function (Entity, Vector3, Material) {
 
         "use strict";
 
@@ -12,7 +13,6 @@ define(
             Entity.call(this, opts);
             this.type = 'polygon';
 
-            this.style = opts.style || 'white';
             this.vertices = opts.vertices || [];
             this.worldVertices = opts.worldVertices || [];
             this.viewVertices = opts.viewVertices || [];
@@ -21,6 +21,8 @@ define(
             this.worldNormal = this.normal.clone();
             this.isCulled = false;
             this.distanceToCamera = 0;
+
+            this.material = opts.material || Material.create();
         };
 
         Polygon.create = function (opts) {
