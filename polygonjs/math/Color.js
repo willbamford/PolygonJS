@@ -77,6 +77,13 @@ define(['polygonjs/math/PMath'], function (PMath) {
             this.g = ((hex & 0x00ff00) >> 8) / 255;
             this.b = (hex & 0x0000ff) / 255;
             return this;
+        },
+
+        randomise: function () {
+            this.r = Math.random();
+            this.g = Math.random();
+            this.b = Math.random();
+            return this;
         }
     };
 
