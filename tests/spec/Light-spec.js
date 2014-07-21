@@ -1,9 +1,10 @@
 define(
     [
         'polygonjs/lights/Light',
-        'polygonjs/Entity'
+        'polygonjs/Entity',
+        'polygonjs/math/Color'
     ],
-    function (Light, Entity) {
+    function (Light, Entity, Color) {
 
         "use strict";
 
@@ -20,6 +21,27 @@ define(
                     var light = Light.create();
                     expect(light).toBeInstanceOf(Light);
                     expect(light.type).toBe('light');
+                });
+
+                it('should have a default white color', function () {
+                    var light = Light.create();
+                    expect(light.color).toEqualColor(Color.WHITE);
+                });
+
+                it('should be able to initialise color', function () {
+                    var light = Light.create({
+                        color: Color.BLUE.clone()
+                    });
+                    expect(light.color).toEqualColor(Color.BLUE);
+                });
+
+                it('should have a default intensity of one (full brightness)', function () {
+                    var light = Light.create();
+                    expect(light.intensity).toEqual(1.0);
+                    light = Light.create({intensity: 0.0});
+                    expect(light.intensity).toEqual(0.0);
+                    light = Light.create({intensity: 0.5});
+                    expect(light.intensity).toEqual(0.5);
                 });
             });
         });

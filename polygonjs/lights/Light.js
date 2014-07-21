@@ -1,19 +1,22 @@
 define(
-    ['polygonjs/Entity'],
-    function (Entity) {
+    [
+        'polygonjs/Entity',
+        'polygonjs/math/Color'
+    ],
+    function (Entity, Color) {
 
         "use strict";
 
-        var Light = function () {
-            var opts = {};
+        var Light = function (opts) {
+            opts = opts || {};
             Entity.call(this, opts);
             this.type = 'light';
-            
-            // this.color = opts.colour;
+            this.color = opts.color || Color.WHITE.clone();
+            this.intensity = opts.intensity !== undefined ? opts.intensity : 1.0;
         };
 
-        Light.create = function () {
-            return new Light();
+        Light.create = function (opts) {
+            return new Light(opts);
         };
 
         Light.prototype = Object.create(Entity.prototype);
