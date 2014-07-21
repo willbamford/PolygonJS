@@ -35,7 +35,7 @@ define(
 
         Polygon.prototype.update = function (delta) {
             Entity.prototype.update.call(this, delta);
-            this.worldNormal.copy(this.normal).applyMatrix4(this.worldTransform);
+            this.worldNormal.copy(this.normal).applyMatrix4(this.worldTransform).normalise();
             this.worldPosition.center(this.worldVertices);
         };
 

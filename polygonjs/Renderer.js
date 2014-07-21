@@ -23,7 +23,7 @@ define(
                 var scene = this.scene;
                 var camera = scene.mainCamera;
                 var lights = scene.lights, light;
-                var material, lightColor, diffuseColor, ambientColor, polygonColor;
+                var material, lightColor, materialDiffuseColor, materialAmbientColor, polygonColor;
                 var cameraWorldPosition = camera.worldPosition;
                 var viewTransform = camera.viewTransform;
                 var projectionTransform = camera.projectionTransform;
@@ -56,21 +56,27 @@ define(
                 });
 
                 // Lighting
-                i = lights.length;
+                i = polygons.length;
                 while (--i >= 0) {
-                    light = lights[i];
-                    lightColor = light.color;
-                    j = polygons.length;
-                    while (--j >= 0) {
-                        polygon = polygons[j];
+                    polygon = polygons[i];
+                    if (!polygon.isCulled) {
+
                         material = polygon.material;
-                        diffuseColor = material.diffuse;
-                        ambientColor = material.ambient;
                         polygonColor = polygon.color;
-                        polygonColor.copy(diffuseColor).multiply(lightColor);
-                        dp = light.forward.dotProduct(polygon.worldNormal);
-                        if (dp < 0) dp = 0;
-                        polygonColor.multiplyScalar(dp);
+                        
+                        materialDiffuseColor = material.diffuse;
+                        materialAmbientColor = material.ambient;
+                        polygonColor.copy(materialDiffuseColor);
+
+                        j = lights.length;
+                        while (--j >= 0) {
+                            light = lights[j];
+                            lightColor = light.color;
+                            polygonColor.multiply(lightColor);
+                            dp = light.forward.dotProduct(polygon.worldNormal);
+                            if (dp < 0) dp = 0;
+                            polygonColor.multiplyScalar(dp);
+                        }
                     }
                 }
 
