@@ -9,7 +9,7 @@ module.exports = function (grunt) {
             all: {
                 options: {
                     specs: 'tests/specs/**/*-spec.js',
-                    helpers: ['tests/spec/matchers.js'],
+                    helpers: ['tests/matchers.js'],
                     template: require('grunt-template-jasmine-requirejs')
                 }
             }
@@ -17,7 +17,7 @@ module.exports = function (grunt) {
         requirejs: {
             compile: {
                 options: {
-                    baseUrl: '',
+                    baseUrl: '/',
                     name: 'polygonjs/polygonjs',
                     out: 'dist/polygonjs.min.js'
                 }
