@@ -18,7 +18,8 @@ require(
         'polygonjs/math/Vector3',
         'polygonjs/Profiler',
         'polygonjs/math/Color',
-        'polygonjs/Material'
+        'polygonjs/Material',
+        'polygonjs/Light'
     ],
     function (
         Fn,
@@ -39,7 +40,8 @@ require(
         Vector3,
         Profiler,
         Color,
-        Material
+        Material,
+        Light
     ) {
         // var model = Model.createFromMesh(Cube.create());
         var model = Model.createFromMesh(Sphere.create({
@@ -52,14 +54,16 @@ require(
         var surface = Surface.create({});
         var scene = Scene.create({});
         var camera = PerspectiveCamera.create({});
+        var light = Light.create({
+            forward: Vector3.create(1, 0, 0)
+        });
 
         var root = Entity.create();
         root.addChild(model);
-        // root.addChild(sphere);
         root.addChild(camera);
+        root.addChild(light);
         scene.root = root;
         scene.revalidate();
-
 
         scene.polygons.forEach(function (polygon) {
             polygon.material = Material.create({
