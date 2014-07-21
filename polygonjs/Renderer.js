@@ -77,11 +77,13 @@ define(
                             if (dp < 0) dp = 0;
                             polygonColor.multiplyScalar(dp);
                         }
+
+                        polygonColor.clamp();
                     }
                 }
 
                 // Project (view-space and clip-space)
-                i = models.length, j;
+                i = models.length;
                 while (--i >= 0) {
                     model = models[i];
                     worldVertices = model.worldVertices;

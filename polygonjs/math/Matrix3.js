@@ -42,9 +42,9 @@ define(
             },
 
             copy: function (m) {
-                this.a = m.a; this.b = m.b, this.c = m.c;
-                this.d = m.d; this.e = m.e, this.f = m.f;
-                this.g = m.g; this.h = m.h, this.i = m.i;
+                this.a = m.a; this.b = m.b; this.c = m.c;
+                this.d = m.d; this.e = m.e; this.f = m.f;
+                this.g = m.g; this.h = m.h; this.i = m.i;
                 return this;
             },
 

@@ -55,7 +55,7 @@ require(
         var camera = PerspectiveCamera.create({});
 
         var redLight = Light.create({
-            color: Color.RED.clone(),
+            color: Color.GREEN.clone(),
             forward: Vector3.create(1, 0, 0)
         });
 
@@ -78,7 +78,7 @@ require(
 
         scene.polygons.forEach(function (polygon) {
             polygon.material = Material.create({
-                diffuse: Color.create().randomise()
+                diffuse: Color.WHITE.clone() //.randomise()
             });
         });
 

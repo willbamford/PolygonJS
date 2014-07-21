@@ -44,10 +44,10 @@ define(
             },
 
             copy: function (m) {
-                this.a = m.a; this.b = m.b, this.c = m.c; this.d = m.d;
-                this.e = m.e; this.f = m.f, this.g = m.g; this.h = m.h;
-                this.i = m.i; this.j = m.j, this.k = m.k; this.l = m.l;
-                this.m = m.m; this.n = m.n, this.o = m.o; this.p = m.p;
+                this.a = m.a; this.b = m.b; this.c = m.c; this.d = m.d;
+                this.e = m.e; this.f = m.f; this.g = m.g; this.h = m.h;
+                this.i = m.i; this.j = m.j; this.k = m.k; this.l = m.l;
+                this.m = m.m; this.n = m.n; this.o = m.o; this.p = m.p;
                 return this;
             },
 

@@ -88,13 +88,13 @@ define([], function () {
         },
 
         merge: function (base, override) {
-            var merged = {};
+            var merged = {}, prop;
             if (base) {
-                for (var prop in base)
+                for (prop in base)
                     merged[prop] = base[prop];
             }
             if (override) {
-                for (var prop in override)
+                for (prop in override)
                     merged[prop] = override[prop];
             }
             return merged;

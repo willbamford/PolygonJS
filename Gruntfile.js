@@ -8,8 +8,8 @@ module.exports = function (grunt) {
         jasmine: {
             all: {
                 options: {
-                    specs: 'tests/spec/**/*-spec.js',
-                    helpers: 'tests/spec/**/*-helper.js',
+                    specs: 'tests/specs/**/*-spec.js',
+                    helpers: ['tests/spec/matchers.js'],
                     template: require('grunt-template-jasmine-requirejs')
                 }
             }
