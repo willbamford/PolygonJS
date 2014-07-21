@@ -2,9 +2,10 @@ define(
     [
         'polygonjs/Entity',
         'polygonjs/math/Vector3',
-        'polygonjs/Material'
+        'polygonjs/Material',
+        'polygonjs/math/Color'
     ],
-    function (Entity, Vector3, Material) {
+    function (Entity, Vector3, Material, Color) {
 
         "use strict";
 
@@ -23,6 +24,7 @@ define(
             this.distanceToCamera = 0;
 
             this.material = opts.material || Material.create();
+            this.color = Color.BLACK.clone();
         };
 
         Polygon.create = function (opts) {

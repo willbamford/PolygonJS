@@ -45,11 +45,6 @@ define(
             transform.m = 0; transform.n = 0; transform.o = 0; transform.p = 1;
         };
 
-        // Camera.prototype.update = function (delta) {
-        //     Entity.prototype.update.call(this, delta);
-        //     this.lookAt(this.target);
-        // };
-
         return Camera;
     }
 );

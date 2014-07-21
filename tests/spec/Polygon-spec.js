@@ -3,9 +3,10 @@ define(
         'polygonjs/entities/Polygon',
         'polygonjs/Entity',
         'polygonjs/math/Vector3',
-        'polygonjs/Material'
+        'polygonjs/Material',
+        'polygonjs/math/Color'
     ],
-    function (Polygon, Entity, Vector3, Material) {
+    function (Polygon, Entity, Vector3, Material, Color) {
 
         "use strict";
 
@@ -65,6 +66,11 @@ define(
                 it('should have a distance to camera value of zero initially', function () {
                     var polygon = Polygon.create();
                     expect(polygon.distanceToCamera).toBe(0);
+                });
+
+                it('should have a default color of black', function () {
+                    var polygon = Polygon.create();
+                    expect(polygon.color).toEqualColor(Color.BLACK);
                 });
             });
         });
