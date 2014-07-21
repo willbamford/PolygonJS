@@ -83,8 +83,9 @@ define(
                 i = polygons.length;
                 while (--i >= 0) {
                     polygon = polygons[i];
-                    if (!polygon.isCulled)
-                        surface.polygon(polygon.screenVertices, polygon.style);
+                    if (!polygon.isCulled) {
+                        surface.polygon(polygon.screenVertices, polygon.material.diffuse.getHex());
+                    }
                 }
 
                 surface.render();
