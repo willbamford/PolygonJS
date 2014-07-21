@@ -22,6 +22,8 @@ define(
 
                 var scene = this.scene;
                 var camera = scene.mainCamera;
+                var lights = scene.lights, light;
+                var material, lightColor, diffuseColor, ambientColor, polygonColor;
                 var cameraWorldPosition = camera.worldPosition;
                 var viewTransform = camera.viewTransform;
                 var projectionTransform = camera.projectionTransform;
@@ -49,12 +51,28 @@ define(
                 }
 
                 // Sort (slow!)
-                // var count = 0;
                 polygons.sort(function (a, b) {
-                    // count++;
                     return a.distanceToCamera - b.distanceToCamera;
                 });
-                // console.log(count);
+
+                // Lighting
+                i = lights.length;
+                while (--i >= 0) {
+                    light = lights[i];
+                    lightColor = light.color;
+                    j = polygons.length;
+                    while (--j >= 0) {
+                        polygon = polygons[j];
+                        material = polygon.material;
+                        diffuseColor = material.diffuse;
+                        ambientColor = material.ambient;
+                        polygonColor = polygon.color;
+                        polygonColor.copy(diffuseColor).multiply(lightColor);
+                        dp = light.forward.dotProduct(polygon.worldNormal);
+                        if (dp < 0) dp = 0;
+                        polygonColor.multiplyScalar(dp);
+                    }
+                }
 
                 // Project (view-space and clip-space)
                 i = models.length, j;
@@ -72,8 +90,6 @@ define(
                         viewVertex.copy(worldVertex).applyProjection(viewTransform);
                         screenVertex.copy(viewVertex).applyProjection(projectionTransform);
 
-                        // TODO: combine above?
-
                         screenVertex.x *= surfaceWidth;
                         screenVertex.y *= surfaceHeight;
                     }
@@ -84,7 +100,6 @@ define(
                 while (--i >= 0) {
                     polygon = polygons[i];
                     if (!polygon.isCulled) {
-                        polygon.color.copy(polygon.material.diffuse);
                         surface.polygon(polygon.screenVertices, polygon.color.getHex());
                     }
                 }

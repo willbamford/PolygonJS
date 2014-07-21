@@ -18,7 +18,7 @@ require(
         'polygonjs/math/Vector3',
         'polygonjs/Profiler',
         'polygonjs/math/Color',
-        'polygonjs/Material',
+        'polygonjs/Material',   
         'polygonjs/lights/Light'
     ],
     function (
@@ -43,19 +43,19 @@ require(
         Material,
         Light
     ) {
-        // var model = Model.createFromMesh(Cube.create());
-        var model = Model.createFromMesh(Sphere.create({
-            levelOfDetail: 4,
-            spikiness: 0.0
-        }));
+        var model = Model.createFromMesh(Cube.create());
+        // var model = Model.createFromMesh(Sphere.create({
+        //     levelOfDetail: 2,
+        //     spikiness: 0.1
+        // }));
 
-        model.tags = ['sphere'];
-        model.scale = Vector3.create(2, 2, 2);
+        // model.scale = Vector3.create(2, 2, 2);
         var surface = Surface.create({});
         var scene = Scene.create({});
         var camera = PerspectiveCamera.create({});
         var light = Light.create({
-            forward: Vector3.create(1, 0, 0)
+            // color: Color.BLUE.clone().add(Color.GREEN),
+            forward: Vector3.create(0, 0, 1)
         });
 
         var root = Entity.create();
@@ -90,7 +90,7 @@ require(
             onTick: function (delta) {
                 scene.update(delta);
                 
-                angle += delta / 10000;
+                angle += delta / 2000;
                 if (angle > 360) angle -= 360;
 
                 // profiler.measure();
