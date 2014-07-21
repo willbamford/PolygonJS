@@ -19,9 +19,9 @@ define(
             this.children = [];
             this.tags = opts.tags || [];
 
-            this.up = Vector3.UP.clone();
-            this.right = Vector3.RIGHT.clone();
-            this.forward = Vector3.FORWARD.clone();
+            this.up = opts.up || Vector3.UP.clone();
+            this.right = opts.right || Vector3.RIGHT.clone();
+            this.forward = opts.forward || Vector3.FORWARD.clone();
 
             this.localTransform = Matrix4.IDENTITY.clone();
             this.worldTransform = Matrix4.IDENTITY.clone();
