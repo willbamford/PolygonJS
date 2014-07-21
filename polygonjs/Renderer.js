@@ -84,7 +84,8 @@ define(
                 while (--i >= 0) {
                     polygon = polygons[i];
                     if (!polygon.isCulled) {
-                        surface.polygon(polygon.screenVertices, polygon.material.diffuse.getHex());
+                        polygon.color.copy(polygon.material.diffuse);
+                        surface.polygon(polygon.screenVertices, polygon.color.getHex());
                     }
                 }
 

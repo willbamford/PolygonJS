@@ -19,7 +19,7 @@ require(
         'polygonjs/Profiler',
         'polygonjs/math/Color',
         'polygonjs/Material',
-        'polygonjs/Light'
+        'polygonjs/lights/Light'
     ],
     function (
         Fn,
