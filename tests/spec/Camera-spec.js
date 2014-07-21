@@ -34,18 +34,6 @@ define(
                     expect(camera.viewTransform.equals(Matrix4.IDENTITY)).toBeTruthy();
                     expect(camera.projectionTransform.equals(Matrix4.IDENTITY)).toBeTruthy();
                 });
-
-                it('should have a default \'up\' vector pointing positively along y-axis', function () {
-                    var camera = Camera.create();
-                    expect(camera.up.equals(Vector3.create(0, 1, 0))).toBeTruthy();
-                });
-
-                it('should provide defaults for up / right and forward vectors', function () {
-                    var camera = Camera.create();
-                    expect(camera.up.equals(Vector3.UP)).toBeTruthy();
-                    expect(camera.right.equals(Vector3.RIGHT)).toBeTruthy();
-                    expect(camera.forward.equals(Vector3.FORWARD)).toBeTruthy();
-                });
             });
 
             describe('lookAt', function () {
