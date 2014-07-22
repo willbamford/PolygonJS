@@ -4,9 +4,7 @@ define(
 
         var Material = function (opts) {
             opts = opts || {};
-            this.diffuse = opts.diffuse || Color.WHITE.clone();
-            this.ambient = opts.ambient || Color.WHITE.clone();
-            this.emissive = opts.emissive || Color.BLACK.clone();
+            this.color = opts.color || Color.WHITE.clone();
         };
 
         Material.create = function (opts) {

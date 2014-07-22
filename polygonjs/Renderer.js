@@ -64,7 +64,7 @@ define(
                         material = polygon.material;
                         polygonColor = polygon.color;
                         
-                        materialColor = material.diffuse;
+                        materialColor = material.color;
                         polygonColor.setRGB(0, 0, 0);
 
                         j = lights.length;
