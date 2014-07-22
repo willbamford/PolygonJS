@@ -43,36 +43,41 @@ require(
         Material,
         Light
     ) {
+
+        "use strict";
+
         // var model = Model.createFromMesh(Cube.create());
         var model = Model.createFromMesh(Sphere.create({
             levelOfDetail: 3,
             spikiness: 0.1
         }));
 
-        model.scale = Vector3.create(3, 3, 3);
+        // var model = Model.createFromMesh(Icosahedron.create());
+
+        model.scale = Vector3.create(2, 2, 2);
         var surface = Surface.create({});
         var scene = Scene.create({});
         var camera = PerspectiveCamera.create({});
 
         var redLight = Light.create({
-            color: Color.GREEN.clone(),
+            color: Color.CYAN.clone(),
             forward: Vector3.create(1, 0, 0)
         });
 
         var greenLight = Light.create({
-            color: Color.GREEN.clone(),
+            color: Color.MAGENTA.clone(),
             forward: Vector3.create(0, 1, 0)
         });
 
         var blueLight = Light.create({
-            color: Color.BLUE.clone(),
-            forward: Vector3.create(0, 1, 0)
+            color: Color.YELLOW.clone(),
+            forward: Vector3.create(0, 0, 1)
         });
 
         var root = Entity.create();
         root.addChild(model);
         root.addChild(camera);
-        root.addChild(redLight); //.addChild(greenLight).addChild(blueLight);
+        root.addChild(redLight).addChild(greenLight).addChild(blueLight);
         scene.root = root;
         scene.revalidate();
 
