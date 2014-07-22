@@ -66,8 +66,8 @@ define(['polygonjs/math/PMath'], function (PMath) {
         },
 
         setRGB: function (r, g, b) {
-            this.r = r,
-            this.g = g,
+            this.r = r;
+            this.g = g;
             this.b = b;
             return this;
         },
