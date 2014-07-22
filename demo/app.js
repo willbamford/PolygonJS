@@ -59,31 +59,38 @@ require(
         var scene = Scene.create({});
         var camera = PerspectiveCamera.create({});
 
+        var whiteLight = Light.create({
+            color: Color.create({r: 0.3, g: 0.3, b: 0.3}),
+            forward: Vector3.create(1, 1, 1)
+        });
+
         var redLight = Light.create({
-            color: Color.CYAN.clone(),
+            color: Color.RED.clone(),
             forward: Vector3.create(1, 0, 0)
         });
 
         var greenLight = Light.create({
-            color: Color.MAGENTA.clone(),
+            color: Color.GREEN.clone(),
             forward: Vector3.create(0, 1, 0)
         });
 
         var blueLight = Light.create({
-            color: Color.YELLOW.clone(),
+            color: Color.BLUE.clone(),
             forward: Vector3.create(0, 0, 1)
         });
 
         var root = Entity.create();
         root.addChild(model);
         root.addChild(camera);
-        root.addChild(redLight).addChild(greenLight).addChild(blueLight);
+        root.addChild(whiteLight);
+        root.addChild(greenLight); //.addChild(greenLight).addChild(blueLight);
         scene.root = root;
         scene.revalidate();
 
         scene.polygons.forEach(function (polygon) {
             polygon.material = Material.create({
-                diffuse: Color.WHITE.clone() //.randomise()
+                color: Color.WHITE.clone(), //.randomise()
+                emissive: Color.create({r: 0.5, g: 0, b: 0})
             });
         });
 

@@ -23,7 +23,7 @@ define(
                 var scene = this.scene;
                 var camera = scene.mainCamera;
                 var lights = scene.lights, light;
-                var material, lightColor, materialColor, polygonColor;
+                var material, lightColor, materialColor, materialEmissive, polygonColor;
                 var cameraWorldPosition = camera.worldPosition;
                 var viewTransform = camera.viewTransform;
                 var projectionTransform = camera.projectionTransform;
@@ -65,6 +65,8 @@ define(
                         polygonColor = polygon.color;
                         
                         materialColor = material.color;
+                        materialEmissive = material.emissive;
+
                         polygonColor.setRGB(0, 0, 0);
 
                         j = lights.length;
@@ -80,6 +82,8 @@ define(
                             polygonColor.g += materialColor.g * lightColor.g * dp;
                             polygonColor.b += materialColor.b * lightColor.b * dp;
                         }
+
+                        polygonColor.add(materialEmissive);
 
                         polygonColor.clamp();
                     }
