@@ -88,6 +88,24 @@ define(
                 });
             });
 
+            describe('set', function () {
+                it('should be able to set x, y and z components', function () {
+                    var v = Vector3.create();
+                    var r = v.set(9, 8, 7);
+                    expect(r).toBe(v);
+                    expect(r).toEqualVector3(Vector3.create(9, 8, 7));
+                });
+            });
+
+            describe('setScalar', function () {
+                it('should be able to set x, y and z components to a scalar value', function () {
+                    var v = Vector3.create();
+                    var r = v.setScalar(5);
+                    expect(r).toBe(v);
+                    expect(r).toEqualVector3(Vector3.create(5, 5, 5));
+                });
+            });
+
             describe('add', function () {
                 it('should be able to add a vector', function () {
                     var v1 = Vector3.create(4, -2, 9);

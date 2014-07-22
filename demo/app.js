@@ -119,7 +119,10 @@ require(
                 // profiler.measure();
                 // profiler.toConsole();
 
+                var s = Math.sin(angle * 30 / Math.PI) + 1;
+
                 model.rotation.setRotationY(angle);
+                model.scale.setScalar(s);
 
                 camera.position = eye;
                 camera.lookAt(target);

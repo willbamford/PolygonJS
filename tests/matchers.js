@@ -17,6 +17,15 @@ beforeEach(function () {
                     };
                 }
             }
+        },
+        toEqualVector3: function () {
+            return {
+                compare: function (actual, expected) {
+                    return {
+                        pass: (actual.equals(expected))
+                    }
+                }
+            }
         }
     });
 });

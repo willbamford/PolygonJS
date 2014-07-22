@@ -59,6 +59,20 @@ define(['polygonjs/math/PMath'], function (PMath) {
             return [this.x, this.y, this.z];
         },
 
+        set: function (x, y, z) {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+            return this;
+        },
+
+        setScalar: function (v) {
+            this.x = v;
+            this.y = v;
+            this.z = v;
+            return this;
+        },
+
         add: function (v) {
             this.x += v.x;
             this.y += v.y;
