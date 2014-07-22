@@ -65,6 +65,13 @@ define(['polygonjs/math/PMath'], function (PMath) {
             return this;
         },
 
+        setRGB: function (r, g, b) {
+            this.r = r,
+            this.g = g,
+            this.b = b;
+            return this;
+        },
+
         getHex: function () {
             return ((this.r * 255) << 16) ^
                 ((this.g * 255) << 8) ^
@@ -92,6 +99,9 @@ define(['polygonjs/math/PMath'], function (PMath) {
     Color.RED = Color.create({r: 1, g: 0, b: 0});
     Color.GREEN = Color.create({r: 0, g: 1, b: 0});
     Color.BLUE = Color.create({r: 0, g: 0, b: 1});
+    Color.CYAN = Color.create({r: 0, g: 1, b: 1});
+    Color.MAGENTA = Color.create({r: 1, g: 0, b: 1});
+    Color.YELLOW = Color.create({r: 1, g: 1, b: 0});
 
     return Color;
 });

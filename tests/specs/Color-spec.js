@@ -112,6 +112,15 @@ define(
                 });
             });
 
+            describe('setRGB', function () {
+                it('should be able to set the red, green and blue components of a color', function () {
+                    var color = Color.create({r: 0, g: 0, b: 0});
+                    var r = color.setRGB(1, 0.9, 0.8);
+                    expect(r).toBe(color);
+                    expect(r).toEqualColor(Color.create({r: 1, g: 0.9, b: 0.8}));
+                });
+            });
+
             describe('getHex', function () {
                 it('should return the hex value of this color', function () {
                     expect(Color.create({r: 0, g: 0, b: 0}).getHex()).toEqual(0x000000);
