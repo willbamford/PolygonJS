@@ -34,19 +34,23 @@ define(
             },
 
             polygon: function (points, color) {
+
                 var graphics = this.graphics;
                 var len = points.length;
                 if (len) {
-                    var point = points[0];
-                    var x, y;
+
+                    var point, firstPoint = points[0];
+                    var x, y, i;
                     graphics.beginFill(color);
-                    graphics.moveTo(point.x + this.cx, -point.y + this.cy);
-                    for (var i = 1; i < len; i++) {
+                    graphics.moveTo(firstPoint.x + this.cx, -firstPoint.y + this.cy);
+                    for (i = 1; i < len; i++) {
                         point = points[i];
                         graphics.lineTo(point.x + this.cx, -point.y + this.cy);
                     }
-                    point = points[0];
-                    graphics.lineTo(point.x + this.cx, -point.y + this.cy);
+                    // TODO: examine why this is necessary
+                    if (len === 3) {
+                        graphics.lineTo(firstPoint.x + this.cx, -firstPoint.y + this.cy);
+                    }
                     graphics.endFill();
                 }
             },
