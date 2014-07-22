@@ -4,7 +4,7 @@ define([], function () {
 
     var precision = 1e-6;
 
-    var MissingMath = {
+    var PMath = {
 
         equals: function (a, b, p) {
             return Math.abs(a - b) < (p || precision);
@@ -15,5 +15,5 @@ define([], function () {
         }
     };
 
-    return MissingMath;
+    return PMath;
 });
