@@ -48,8 +48,8 @@ require(
 
         // var model = Model.createFromMesh(Cube.create());
         var model = Model.createFromMesh(Sphere.create({
-            levelOfDetail: 3,
-            spikiness: 0.1
+            levelOfDetail: 4,
+            spikiness: 0
         }));
 
         // var model = Model.createFromMesh(Icosahedron.create());
@@ -60,10 +60,12 @@ require(
         var camera = PerspectiveCamera.create({});
 
         var whiteLight = Light.create({
-            color: Color.create({r: 0.3, g: 0.3, b: 0.3}),
-            forward: Vector3.create(1, 1, 1)
+            color: Color.create({r: 1, g: 1, b: 1}),
+            forward: Vector3.create(1, 0, 0),
+            intensity: 1
         });
 
+        /*
         var redLight = Light.create({
             color: Color.RED.clone(),
             forward: Vector3.create(1, 0, 0)
@@ -78,18 +80,18 @@ require(
             color: Color.BLUE.clone(),
             forward: Vector3.create(0, 0, 1)
         });
+        */
 
         var root = Entity.create();
         root.addChild(model);
         root.addChild(camera);
-        root.addChild(blueLight);
-        root.addChild(redLight); //.addChild(greenLight).addChild(blueLight);
+        root.addChild(whiteLight);
         scene.root = root;
         scene.revalidate();
 
         scene.polygons.forEach(function (polygon) {
             polygon.material = Material.create({
-                color: Color.WHITE.clone(), //.randomise()
+                color: Color.GREEN.clone(), //.randomise()
                 emissive: Color.create({r: 0.0, g: 0.0, b: 0})
             });
         });
@@ -119,9 +121,9 @@ require(
                 // profiler.measure();
                 // profiler.toConsole();
 
-                var s = Math.sin(angle * 30 / Math.PI) + 2;
+                var s = Math.sin(angle / Math.PI) + 2;
 
-                redLight.color.b = Math.sin(angle * 30);
+                // redLight.color.b = Math.sin(angle * 30);
 
                 model.rotation.setRotationY(angle);
                 model.scale.setScalar(s);

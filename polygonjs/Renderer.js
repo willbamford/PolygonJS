@@ -22,47 +22,59 @@ define(
 
                 var scene = this.scene;
                 var camera = scene.mainCamera;
-                var lights = scene.lights, light;
-                var material, lightColor, materialColor, materialEmissive, polygonColor;
-                var cameraWorldPosition = camera.worldPosition;
-                var viewTransform = camera.viewTransform;
-                var projectionTransform = camera.projectionTransform;
-                var models = scene.models, model;
-                var polygons = scene.polygons, polygon;
-                var worldVertices, worldVertex;
-                var viewVertices, viewVertex;
-                var screenVertices, screenVertex;
+                var lights = scene.lights;
+                var models = scene.models;
+                var polygons = scene.polygons;
                 var surface = this.surface;
-                var surfaceWidth = surface.width;
-                var surfaceHeight = surface.height;
-                var worldNormal, viewNormal;
-                var dp;
-                var i, j, len;
 
                 surface.clear();
 
-                // Back-face cull
-                i = polygons.length;
+                this.cull(polygons, camera);
+                this.depthSort(polygons);
+                this.light(polygons, lights);
+                this.project(models, camera, surface);
+                this.draw(polygons, surface);
+
+                surface.render();
+            },
+
+            cull: function (polygons, camera) {
+
+                var i = polygons.length;
+                var polygon;
+                var dotProduct;
+                var cameraPosition = camera.worldPosition;
                 while (--i >= 0) {
                     polygon = polygons[i];
-                    dp = polygon.worldNormal.dotProduct(camera.forward);
-                    polygon.isCulled = dp < 0;
-                    polygon.distanceToCamera = polygon.worldPosition.distanceTo(cameraWorldPosition);
+                    dotProduct = polygon.worldNormal.dotProduct(camera.forward);
+                    polygon.isCulled = dotProduct < 0;
+                    polygon.distanceToCamera = polygon.worldPosition.distanceTo(cameraPosition);
                 }
+            },
 
-                // Sort (slow!)
-                polygons.sort(function (a, b) {
+            depthSort: function (polygons) {
+
+                var sorter = function (a, b) {
                     return a.distanceToCamera - b.distanceToCamera;
-                });
+                }
+                polygons.sort(sorter);
+            },
 
-                // Lighting
-                i = polygons.length;
+            light: function (polygons, lights) {
+
+                var i = polygons.length, j;
+                var polygon, polygonColor;
+                var light, lightColor, lightIntensity;
+                var material, materialColor, materialEmissive;
+                var dotProduct;
+                var polygonNormal;
                 while (--i >= 0) {
                     polygon = polygons[i];
                     if (!polygon.isCulled) {
 
                         material = polygon.material;
                         polygonColor = polygon.color;
+                        polygonNormal = polygon.worldNormal;
                         
                         materialColor = material.color;
                         materialEmissive = material.emissive;
@@ -73,31 +85,51 @@ define(
                         while (--j >= 0) {
                             light = lights[j];
                             lightColor = light.color;
+                            lightIntensity = light.intensity;
                             
-                            dp = light.forward.dotProduct(polygon.worldNormal);
-                            if (dp < 0)
-                                dp = 0;
+                            dotProduct = light.forward.dotProduct(polygonNormal);
+                            
+                            if (dotProduct < 0)
+                                dotProduct = 0;
 
-                            polygonColor.r += materialColor.r * lightColor.r * dp;
-                            polygonColor.g += materialColor.g * lightColor.g * dp;
-                            polygonColor.b += materialColor.b * lightColor.b * dp;
+                            lightIntensity *= dotProduct;
+
+                            polygonColor.r += materialColor.r * lightColor.r * lightIntensity;
+                            polygonColor.g += materialColor.g * lightColor.g * lightIntensity;
+                            polygonColor.b += materialColor.b * lightColor.b * lightIntensity;
                         }
 
                         polygonColor.add(materialEmissive);
-
                         polygonColor.clamp();
                     }
                 }
+            },
 
-                // Project (view-space and clip-space)
-                i = models.length;
+            project: function (models, camera, surface) {
+
+                var i = models.length, j;
+                var model;
+
+                var viewTransform = camera.viewTransform;
+                var projectionTransform = camera.projectionTransform;
+
+                var worldVertices, worldVertex;
+                var viewVertices, viewVertex;
+                var screenVertices, screenVertex;
+
+                var surfaceWidth = surface.width;
+                var surfaceHeight = surface.height;
+
                 while (--i >= 0) {
+
                     model = models[i];
                     worldVertices = model.worldVertices;
                     viewVertices = model.viewVertices;
                     screenVertices = model.screenVertices;
+
                     j = worldVertices.length;
                     while (--j >= 0) {
+
                         worldVertex = worldVertices[j];
                         viewVertex = viewVertices[j];
                         screenVertex = screenVertices[j];
@@ -109,17 +141,16 @@ define(
                         screenVertex.y *= surfaceHeight;
                     }
                 }
+            },
 
-                // Render
-                i = polygons.length;
+            draw: function (polygons, surface) {
+
+                var i = polygons.length, polygon;
                 while (--i >= 0) {
                     polygon = polygons[i];
-                    if (!polygon.isCulled) {
+                    if (!polygon.isCulled)
                         surface.polygon(polygon.screenVertices, polygon.color.getHex());
-                    }
                 }
-
-                surface.render();
             }
         };
 
