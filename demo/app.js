@@ -82,15 +82,15 @@ require(
         var root = Entity.create();
         root.addChild(model);
         root.addChild(camera);
-        root.addChild(whiteLight);
-        root.addChild(greenLight); //.addChild(greenLight).addChild(blueLight);
+        root.addChild(blueLight);
+        root.addChild(redLight); //.addChild(greenLight).addChild(blueLight);
         scene.root = root;
         scene.revalidate();
 
         scene.polygons.forEach(function (polygon) {
             polygon.material = Material.create({
                 color: Color.WHITE.clone(), //.randomise()
-                emissive: Color.create({r: 0.5, g: 0, b: 0})
+                emissive: Color.create({r: 0.0, g: 0.0, b: 0})
             });
         });
 
@@ -119,7 +119,9 @@ require(
                 // profiler.measure();
                 // profiler.toConsole();
 
-                var s = Math.sin(angle * 30 / Math.PI) + 1;
+                var s = Math.sin(angle * 30 / Math.PI) + 2;
+
+                redLight.color.b = Math.sin(angle * 30);
 
                 model.rotation.setRotationY(angle);
                 model.scale.setScalar(s);
