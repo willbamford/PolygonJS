@@ -67,9 +67,13 @@ gluPerspective/glFrustum/glOrtho/gluOrtho2
 
 Lights are added as nodes in the scene graph. In addition, diffuse lights have a direction.
 
-Ambient, Diffuse and Specular Lighting.
+#### Ambient, Diffuse and Specular Lighting.
 
 	A good set of settings for a light source would be to set the Diffuse and Specular components to the colour of the light source, and the Ambient to the same colour - but at MUCH reduced intensity, 10% to 40% seems reasonable in most cases... For the glMaterial, it's usual to set the Ambient and Diffuse colours to the natural colour of the object and to put the Specular colour to white. The emission colour is generally black for objects that do not shine by their own light. [17]
+
+#### Specular Reflection
+
+	You can assign a number in the range of [0.0, 128.0] to GL_SHININESS - the higher the value, the smaller and brighter (more focused) the highlight. [17]
 
 ### Credits
 
