@@ -49,7 +49,7 @@ require(
         // var model = Model.createFromMesh(Cube.create());
         var model = Model.createFromMesh(Sphere.create({
             levelOfDetail: 4,
-            spikiness: 0
+            spikiness: 0.0
         }));
 
         // var model = Model.createFromMesh(Icosahedron.create());
