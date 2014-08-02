@@ -14,8 +14,8 @@ define(
             this.cy = this.height / 2;
             this.stage = new PIXI.Stage(0x000000, true);
             // this.renderer = new PIXI.WebGLRenderer(this.width, this.height);
-            // this.renderer = new PIXI.CanvasRenderer(this.width, this.height);
-            this.renderer = PIXI.autoDetectRenderer(this.width, this.height);
+            this.renderer = new PIXI.CanvasRenderer(this.width, this.height);
+            // this.renderer = PIXI.autoDetectRenderer(this.width, this.height);
             this.renderer.view.style.display = 'block';
             document.body.appendChild(this.renderer.view);
             this.graphics = new PIXI.Graphics();
@@ -41,6 +41,7 @@ define(
 
                     var point, firstPoint = points[0];
                     var x, y, i;
+
                     graphics.beginFill(color);
                     graphics.moveTo(firstPoint.x + this.cx, -firstPoint.y + this.cy);
                     for (i = 1; i < len; i++) {

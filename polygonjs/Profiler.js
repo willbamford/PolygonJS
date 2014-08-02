@@ -38,6 +38,7 @@ define(
                 measurable.count = measurable.class.instanceCount;
                 measurable.delta = measurable.count - measurable.lastCount;
             });
+            return this;
         };
 
         var createTitle = function (title) {
@@ -70,6 +71,7 @@ define(
                 }
                 console.log('Polygons culled: ' + culled + ', visible: ' + visible);
             }
+            return this;
         };
 
         return Profiler;
