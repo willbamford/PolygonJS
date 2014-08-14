@@ -1,0 +1,112 @@
+
+.t-sendell,
+h1 {
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: -1px;
+    font-weight: bold;
+}
+
+.t-dinofly,
+h2 {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: normal;
+}
+
+.t-funfrock,
+h3 {
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -1px;
+    font-weight: bold;
+}
+
+.t-twinsen,
+p {
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: normal;
+}
+
+.t-twinsen-bold {
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: bold;
+}
+
+.t-zoe {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: normal;
+}
+
+.t-joe {
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: normal;
+}
+
+.t-small-caps {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+@media all and (min-width: 600px) {
+
+    .t-sendell,
+    h1 {
+        font-size: 32px;
+        line-height: 36px;
+        letter-spacing: -1px;
+        font-weight: bold;
+    }
+
+    .t-dinofly,
+    h2 {
+        font-size: 28px;
+        line-height: 32px;
+        font-weight: normal;
+    }
+
+    .t-funfrock,
+    h3 {
+        font-size: 24px;
+        line-height: 28px;
+        letter-spacing: -1px;
+        font-weight: bold;
+    }
+
+    .t-twinsen,
+    p {
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: normal;
+    }
+
+    .t-twinsen-bold {
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: bold;
+    }
+
+    .t-zoe {
+        font-size: 16px;
+        line-height: 22px;
+        font-weight: normal;
+    }
+
+    /* Same as parent
+    .t-joe {
+    }
+    */
+
+    .t-small-caps {
+        font-size: 14px;
+        line-height: 16px;
+        font-weight: normal;
+        text-transform: uppercase;
+    }
+}

@@ -17,7 +17,12 @@ define(['polygonjs/Fn'], function (Fn) {
             height: this.height
         });
         this.setAttrNS(svg, XML_NS, 'xmlns:xlink', 'http://www.w3.org/1999/xlink');
-        document.body.appendChild(svg);
+
+        var container = opts.containerId ?
+            document.getElementById(opts.containerId) :
+            document.body;
+
+        container.appendChild(svg);
         this.svg = svg;
         return this;
     };

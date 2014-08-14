@@ -40,11 +40,11 @@ define(
 
             cull: function (polygons, camera) {
 
-                var i = polygons.length;
+                var i = 0, len = polygons.length;
                 var polygon;
                 var dotProduct;
                 var cameraPosition = camera.worldPosition;
-                while (--i >= 0) {
+                for (i = 0; i < len; i++) {
                     polygon = polygons[i];
                     dotProduct = polygon.worldNormal.dotProduct(camera.forward);
                     polygon.isCulled = dotProduct < 0;
@@ -53,9 +53,8 @@ define(
             },
 
             depthSort: function (polygons) {
-
                 var sorter = function (a, b) {
-                    return a.distanceToCamera - b.distanceToCamera;
+                    return b.distanceToCamera - a.distanceToCamera;
                 }
                 polygons.sort(sorter);
             },
@@ -107,7 +106,7 @@ define(
 
             project: function (models, camera, surface) {
 
-                var i = models.length, j;
+                var i, ilen = models.length, j, jlen;
                 var model;
 
                 var viewTransform = camera.viewTransform;
@@ -120,15 +119,15 @@ define(
                 var surfaceWidth = surface.width;
                 var surfaceHeight = surface.height;
 
-                while (--i >= 0) {
+                for (i = 0; i < ilen; i++) {
 
                     model = models[i];
                     worldVertices = model.worldVertices;
                     viewVertices = model.viewVertices;
                     screenVertices = model.screenVertices;
 
-                    j = worldVertices.length;
-                    while (--j >= 0) {
+                    jlen = worldVertices.length;
+                    for (j = 0; j < jlen; j++) {
 
                         worldVertex = worldVertices[j];
                         viewVertex = viewVertices[j];
@@ -145,8 +144,8 @@ define(
 
             draw: function (polygons, surface) {
 
-                var i = polygons.length, polygon;
-                while (--i >= 0) {
+                var i, len = polygons.length, polygon;
+                for (i = 0; i < len; i++) {
                     polygon = polygons[i];
                     if (!polygon.isCulled)
                         surface.polygon(polygon.screenVertices, polygon.color.getHex());

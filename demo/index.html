@@ -2,23 +2,46 @@
 <html>
     <head>
         <title>PolygonJS Demo</title>
-        <style>
-            * {
-                margin: 0;
-                padding: 0;
-            }
-            svg, canvas {
-                max-width: 100%;
-            }
-        </style>
-    </head>
-    <body>
+        <link rel="stylesheet" href="css/typography.css">
+        <link rel="stylesheet" href="css/style.css">
+
         <script>
             var require = {
                 baseUrl: '../'
             };
         </script>
-        <script data-main="demo/app" src="../libs/requirejs/require.js"></script>
+        <script src="../libs/requirejs/require.js"></script>
+    </head>
+    <body>
+
+        <h1 class="page-title">PolygonJS Demos</h1>
+
+        <div class="demo">
+            <h2 class="demo__title">Demo 001</h2>
+            <div class="demo__surface" id="demo-001"></div>
+            <script>
+                require(['demo/js/demo-001'], function (demo001) {
+                    demo001.init();
+                });
+            </script>
+        </div><!--
+        --><div class="demo">
+            <h2 class="demo__title">Demo 002</h2>
+            <div class="demo__surface" id="demo-002"></div>
+        </div><!--
+        --><div class="demo">
+            <h2 class="demo__title">Demo 003</h2>
+            <div class="demo__surface" id="demo-003"></div>
+        </div><!--
+        --><div class="demo">
+            <h2 class="demo__title">Demo 004</h2>
+            <div class="demo__surface" id="demo-004"></div>
+        </div><!--
+        --><div class="demo">
+            <h2 class="demo__title">Demo 005</h2>
+            <div class="demo__surface" id="demo-005"></div>
+        </div>
+
         <noscript>Sorry, PolygonJS requires JavaScript support.</noscript>
     </body>
 </html>

@@ -15,7 +15,11 @@ define([], function () {
             height: this.height
         });
 
-        document.body.appendChild(canvas);
+        var container = opts.containerId ?
+            document.getElementById(opts.containerId) :
+            document.body;
+
+        container.appendChild(canvas);
         this.canvas = canvas;
         this.context = canvas.getContext('2d');
         return this;

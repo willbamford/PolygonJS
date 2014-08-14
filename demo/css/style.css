@@ -1,0 +1,74 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+*, *:before, *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+svg, canvas {
+    max-width: 100%;
+}
+
+html {
+    background-color: #303030;
+    color: #fff;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.page-title {
+    margin-top: 16px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+@media all and (min-width: 600px) {
+    .page-title {
+        margin-top: 32px;
+        margin-bottom: 40px;
+    }
+}
+
+body {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.demo {
+    display: inline-block;
+    width: 100%;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-bottom: 16px;
+}
+
+@media all and (min-width: 600px) {
+    .demo {
+        width: 50%;
+    }
+}
+
+@media all and (min-width: 1000px) {
+    .demo {
+        width: 25%;
+    }
+}
+
+.demo__title {
+    text-align: center;
+    margin-bottom: 8px;
+    color: #999;
+}
+
+.demo__surface > canvas,
+.demo__surface > svg {
+    width: 100%;
+    height: auto;
+}
