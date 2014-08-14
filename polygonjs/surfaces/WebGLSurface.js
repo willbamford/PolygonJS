@@ -14,10 +14,16 @@ define(
             this.cy = this.height / 2;
             this.stage = new PIXI.Stage(0x000000, true);
             // this.renderer = new PIXI.WebGLRenderer(this.width, this.height);
-            this.renderer = new PIXI.CanvasRenderer(this.width, this.height);
-            // this.renderer = PIXI.autoDetectRenderer(this.width, this.height);
+            // this.renderer = new PIXI.CanvasRenderer(this.width, this.height);
+            this.renderer = PIXI.autoDetectRenderer(this.width, this.height);
             this.renderer.view.style.display = 'block';
-            document.body.appendChild(this.renderer.view);
+
+            var container = opts.containerId ?
+                document.getElementById(opts.containerId) :
+                document.body;
+
+            container.appendChild(this.renderer.view);
+
             this.graphics = new PIXI.Graphics();
             this.stage.addChild(this.graphics);
             return this;

@@ -54,14 +54,7 @@ define(
 
             depthSort: function (polygons) {
                 var sorter = function (a, b) {
-                    if (a.shouldSort && b.shouldSort)
-                        return b.distanceToCamera - a.distanceToCamera;
-                    else if (a.shouldSort)
-                        return 1;
-                    else if (b.shouldSort)
-                        return -1;
-                    else
-                        return 0;
+                    return b.distanceToCamera - a.distanceToCamera;
                 }
                 polygons.sort(sorter);
             },

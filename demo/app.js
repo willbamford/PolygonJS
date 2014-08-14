@@ -48,16 +48,26 @@ require(
 
         // var model = Model.createFromMesh(Cube.create());
         var model = Model.createFromMesh(Sphere.create({
-            levelOfDetail: 4,
+            levelOfDetail: 2,
             spikiness: 0.0
         }));
 
         // var model = Model.createFromMesh(Icosahedron.create());
 
+        var sceneWidth = 320;
+        var sceneHeight = 320;
+        var aspectRatio = sceneWidth / sceneHeight;
+
         model.scale = Vector3.create(2, 2, 2);
-        var surface = Surface.create({});
+        var surface = Surface.create({
+            containerId: 'demo-002',
+            width: sceneWidth,
+            height: sceneHeight
+        });
         var scene = Scene.create({});
-        var camera = PerspectiveCamera.create({});
+        var camera = PerspectiveCamera.create({
+            aspectRatio: aspectRatio
+        });
 
         var whiteLight = Light.create({
             color: Color.create({r: 1, g: 1, b: 1}),

@@ -19,7 +19,6 @@ define(
             this.viewVertices = opts.viewVertices || [];
             this.screenVertices = opts.screenVertices || [];
             this.normal = opts.normal || Vector3.ONE;
-            this.shouldSort = opts.shouldSort !== undefined ? opts.shouldSort : true;
             this.worldNormal = this.normal.clone();
             this.isCulled = false;
             this.distanceToCamera = 0;
