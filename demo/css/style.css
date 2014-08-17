@@ -79,7 +79,7 @@ body {
 
 .demo__surface-text {
     display: block;
-    padding: 4px 8px;
+    padding: 8px 16px;
     position: absolute;
     bottom: 0;
     left: 0;
