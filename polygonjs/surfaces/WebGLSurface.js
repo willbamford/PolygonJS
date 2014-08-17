@@ -18,11 +18,12 @@ define(
             this.renderer = PIXI.autoDetectRenderer(this.width, this.height);
             this.renderer.view.style.display = 'block';
 
-            var container = opts.containerId ?
-                document.getElementById(opts.containerId) :
-                document.body;
+            var container = typeof opts.container === 'string' ?
+                document.getElementById(opts.container) :
+                opts.container;
 
             container.appendChild(this.renderer.view);
+            this.container = container;
 
             this.graphics = new PIXI.Graphics();
             this.stage.addChild(this.graphics);

@@ -18,11 +18,12 @@ define(['polygonjs/Fn'], function (Fn) {
         });
         this.setAttrNS(svg, XML_NS, 'xmlns:xlink', 'http://www.w3.org/1999/xlink');
 
-        var container = opts.containerId ?
-            document.getElementById(opts.containerId) :
-            document.body;
+        var container = typeof opts.container === 'string' ?
+            document.getElementById(opts.container) :
+            opts.container;
 
         container.appendChild(svg);
+        this.container = container;
         this.svg = svg;
         return this;
     };

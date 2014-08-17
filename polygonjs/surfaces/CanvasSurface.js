@@ -15,11 +15,12 @@ define([], function () {
             height: this.height
         });
 
-        var container = opts.containerId ?
-            document.getElementById(opts.containerId) :
-            document.body;
+        var container = typeof opts.container === 'string' ?
+            document.getElementById(opts.container) :
+            opts.container;
 
         container.appendChild(canvas);
+        this.container = container;
         this.canvas = canvas;
         this.context = canvas.getContext('2d');
         return this;

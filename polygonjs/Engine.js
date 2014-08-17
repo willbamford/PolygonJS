@@ -12,7 +12,7 @@ define(
             this.lastTime = null;
             this.onTick = opts.onTick;
             this.fpsCounter = FpsCounter.create({
-                sampleSize: 10,
+                sampleSize: 100,
                 callback: function (framesPerSecond) {
                     console.log('FPS: ' + framesPerSecond);
                 }

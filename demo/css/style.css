@@ -67,8 +67,28 @@ body {
     color: #999;
 }
 
+.demo__surface {
+    position: relative;
+}
+
 .demo__surface > canvas,
 .demo__surface > svg {
     width: 100%;
     height: auto;
+}
+
+.demo__surface-text {
+    display: block;
+    padding: 4px 8px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #093;
+    color: white;
+    z-index: 100;
+    text-transform: uppercase;
+}
+
+.demo--playing .demo__surface-text {
+    display: none;
 }
