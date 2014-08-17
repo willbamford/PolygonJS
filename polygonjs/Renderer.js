@@ -55,7 +55,7 @@ define(
             depthSort: function (polygons) {
                 var sorter = function (a, b) {
                     return b.distanceToCamera - a.distanceToCamera;
-                }
+                };
                 polygons.sort(sorter);
             },
 
@@ -74,7 +74,7 @@ define(
                         material = polygon.material;
                         polygonColor = polygon.color;
                         polygonNormal = polygon.worldNormal;
-                        
+
                         materialColor = material.color;
                         materialEmissive = material.emissive;
 
@@ -85,9 +85,9 @@ define(
                             light = lights[j];
                             lightColor = light.color;
                             lightIntensity = light.intensity;
-                            
+
                             dotProduct = light.forward.dotProduct(polygonNormal);
-                            
+
                             if (dotProduct < 0)
                                 dotProduct = 0;
 

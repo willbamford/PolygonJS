@@ -51,13 +51,6 @@ define(
                 scene.root = root;
                 scene.revalidate();
 
-                scene.polygons.forEach(function (polygon) {
-                    polygon.material = P.Material.create({
-                        color: P.Color.WHITE.clone(), //.randomise()
-                        emissive: P.Color.create({r: 0.0, g: 0.0, b: 0})
-                    });
-                });
-
                 var renderer = P.Renderer.create({
                     surface: surface,
                     scene: scene
@@ -65,8 +58,7 @@ define(
 
                 var eye = P.Vector3.create(5, 5, 5);
                 var target = P.Vector3.create(0, 0, 0);
-                var angle = 0.00;
-
+                var angle = 0;
                 var scale = 1;
 
                 camera.position = eye;
