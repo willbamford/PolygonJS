@@ -15,12 +15,14 @@ define(
 
         var Sphere = function (opts) {
 
+            opts = opts || {};
+
             var icosahedron = Icosahedron.create();
             var vs = icosahedron.vertices;
             var fs = icosahedron.faces;
             var vertices = vs;
             var faces = fs;
-            var levelOfDetail = opts.levelOfDetail;
+            var levelOfDetail = opts.levelOfDetail || 3;
             var spikiness = opts.spikiness || 0;
             var a, b, c, ab, bc, ca, ai, bi, ci, abi, bci, cai, abk, bck, cak;
             var map = {};
