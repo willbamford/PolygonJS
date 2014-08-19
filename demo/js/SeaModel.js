@@ -1,12 +1,21 @@
 define(
     [
-        'polygonjs/entities/Model'
+        'polygonjs/entities/Model',
+        'polygonjs/meshes/TrianglePlane',
+        'polygonjs/Fn'
     ],
-    function (Model) {
+    function (Model, TrianglePlane, Fn) {
 
         var SeaModel = function (opts) {
             opts = opts || {};
-            this.buildOpts(opts);
+
+            var trianglePlane = TrianglePlane.create({
+                triangleHeight: 0.5,
+                numWidthSegments: 4,
+                numHeightSegments: 4
+            });
+
+            opts = Fn.merge(Model.getOptsForMesh(trianglePlane), opts);
             Model.call(this, opts);
         };
 
@@ -15,10 +24,6 @@ define(
         };
 
         SeaModel.prototype = Object.create(Model.prototype);
-
-        SeaModel.prototype.buildOpts = function (opts) {
-            console.log('Building opts!');
-        };
 
         return SeaModel;
     }

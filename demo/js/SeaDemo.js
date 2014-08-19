@@ -19,6 +19,13 @@ define(
             var model = P.Model.createFromMesh(mesh);
 
             var seaModel = SeaModel.create();
+            var odd = false;
+            P.Fn.each(seaModel.polygons, function (polygon) {
+                polygon.material = P.Material.create({
+                    emissive: odd ? P.Color.BLUE.clone() : P.Color.GREEN.clone()
+                });
+                odd = !odd;
+            });
 
             var sceneWidth = 640;
             var sceneHeight = 640;
@@ -41,14 +48,15 @@ define(
             });
 
             var root = P.Entity.create();
-            root.addChild(model).addChild(camera);
-            root.addChild(whiteLight);
+            root.addChild(seaModel).addChild(camera);
+            // root.addChild(whiteLight);
             scene.root = root;
             scene.revalidate();
 
             var renderer = P.Renderer.create({
                 surface: surface,
-                scene: scene
+                scene: scene,
+                showAxes: true
             });
 
             var eye = P.Vector3.create(3, 3, 3);
@@ -62,7 +70,7 @@ define(
                 angle += delta / 1000;
                 if (angle > 360) angle -= 360;
 
-                model.rotation.setRotationY(angle);
+                seaModel.rotation.setRotationX(angle);
 
                 camera.lookAt(target);
                 scene.update(delta);
