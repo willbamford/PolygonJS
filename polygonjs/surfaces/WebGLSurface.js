@@ -63,6 +63,15 @@ define(
                 }
             },
 
+            line: function (from, to, color) {
+
+                var graphics = this.graphics;
+                graphics.lineStyle(2, color, 1);
+                graphics.moveTo(from.x + this.cx, -from.x + this.cy);
+                graphics.lineTo(to.x + this.cx, -to.y + this.cy);
+                graphics.lineStyle(0);
+            },
+
             render: function () {
                 this.renderer.render(this.stage);
             }

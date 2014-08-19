@@ -11,6 +11,15 @@ define(
             opts = opts || {};
             this.surface = opts.surface;
             this.scene = opts.scene;
+
+            this.axes = {
+                show: opts.showAxes || false,
+                len: 2,
+                o: Vector3.create(0, 0, 0),
+                x: Vector3.create(0, 0, 0),
+                y: Vector3.create(0, 0, 0),
+                z: Vector3.create(0, 0, 0)
+            }
         };
 
         Renderer.create = function (opts) {
@@ -140,6 +149,20 @@ define(
                         screenVertex.y *= surfaceHeight;
                     }
                 }
+
+                var axes = this.axes;
+                if (axes.show) {
+                    axes.o.set(0, 0, 0).applyProjection(viewTransform).applyProjection(projectionTransform);
+                    axes.x.set(axes.len, 0, 0).applyProjection(viewTransform).applyProjection(projectionTransform);
+                    axes.y.set(0, axes.len, 0).applyProjection(viewTransform).applyProjection(projectionTransform);
+                    axes.z.set(0, 0, axes.len).applyProjection(viewTransform).applyProjection(projectionTransform);
+                    axes.x.x *= surfaceWidth;
+                    axes.x.y *= surfaceHeight;
+                    axes.y.x *= surfaceWidth;
+                    axes.y.y *= surfaceHeight;
+                    axes.z.x *= surfaceWidth;
+                    axes.z.y *= surfaceHeight;
+                }
             },
 
             draw: function (polygons, surface) {
@@ -149,6 +172,13 @@ define(
                     polygon = polygons[i];
                     if (!polygon.isCulled)
                         surface.polygon(polygon.screenVertices, polygon.color.getHex());
+                }
+
+                var axes = this.axes;
+                if (axes.show) {
+                    surface.line(axes.o, axes.x, 0xff0000);
+                    surface.line(axes.o, axes.y, 0x00ff00);
+                    surface.line(axes.o, axes.z, 0x0000ff);
                 }
             }
         };
