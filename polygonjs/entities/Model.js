@@ -30,7 +30,7 @@ define(
             return new Model(opts);
         };
 
-        Model.createFromMesh = function (mesh, opts) {
+        Model.getOptsForMesh = function (mesh) {
 
             var normals = mesh.normals;
             var faces = mesh.faces;
@@ -65,21 +65,24 @@ define(
                 polygons.push(polygon);
             });
 
-            opts = Fn.merge(opts, {
+            return {
                 vertices: mesh.vertices,
                 worldVertices: worldVertices,
                 viewVertices: viewVertices,
                 screenVertices: screenVertices,
                 polygons: polygons
-            });
+            };
+        };
 
+        Model.createFromMesh = function (mesh, opts) {
+            opts = Fn.merge(opts, this.getOptsForMesh(mesh));
             return Model.create(opts);
         };
 
         Model.prototype = Object.create(Entity.prototype);
 
         Model.prototype.update = function (delta) {
-            
+
             var vertices = this.vertices;
             var worldVertices = this.worldVertices;
             var worldTransform = this.worldTransform;
