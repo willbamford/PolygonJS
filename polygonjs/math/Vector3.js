@@ -30,14 +30,8 @@ define(['polygonjs/math/PMath'], function (PMath) {
         return oa;
     };
 
-    Vector3.normalFromPositionVectors = function (a, b, c) {
-        var ba = a.clone().subtract(b);
-        var ca = a.clone().subtract(c);
-        return ba.normal(ca);
-    };
-
     Vector3.prototype = {
-        
+
         clone: function () {
             return new Vector3(this.x, this.y, this.z);
         },
@@ -186,6 +180,14 @@ define(['polygonjs/math/PMath'], function (PMath) {
             }
             return this;
         }
+    };
+
+    var _ba = Vector3.create(0, 0, 0);
+    var _ca = Vector3.create(0, 0, 0);
+    Vector3.prototype.normalFromPositionVectors = function (a, b, c) {
+        _ba.copy(a).subtract(b);
+        _ca.copy(a).subtract(c);
+        return this.copy(_ba).normal(_ca);
     };
 
     Vector3.ZERO    = Vector3.create(0, 0, 0);

@@ -12,12 +12,6 @@ define(
             var container = document.querySelector('#' + containerId);
             var surfaceElement = container.querySelector('.demo__surface');
 
-            var mesh = P.Sphere.create({
-                levelOfDetail: 1,
-                spikiness: 0
-            });
-            var model = P.Model.createFromMesh(mesh);
-
             var seaModel = SeaModel.create();
             var odd = false;
             P.Fn.each(seaModel.polygons, function (polygon) {
@@ -44,12 +38,13 @@ define(
 
             var whiteLight = P.Light.create({
                 color: P.Color.WHITE.clone(),
+                intensity: 0.5,
                 forward: P.Vector3.create(0, 1, 0)
             });
 
             var root = P.Entity.create();
             root.addChild(seaModel).addChild(camera);
-            // root.addChild(whiteLight);
+            root.addChild(whiteLight);
             scene.root = root;
             scene.revalidate();
 
@@ -70,7 +65,7 @@ define(
                 angle += delta / 1000;
                 if (angle > 360) angle -= 360;
 
-                seaModel.rotation.setRotationX(angle);
+                seaModel.rotation.setRotationY(angle);
 
                 camera.lookAt(target);
                 scene.update(delta);

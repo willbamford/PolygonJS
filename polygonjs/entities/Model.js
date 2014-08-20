@@ -32,7 +32,6 @@ define(
 
         Model.getOptsForMesh = function (mesh) {
 
-            var normals = mesh.normals;
             var faces = mesh.faces;
             var vertices = mesh.vertices;
             var worldVertices = [];
@@ -47,7 +46,7 @@ define(
 
             var polygons = [];
 
-            mesh.eachFace(function (vertices, normal, vertexIndices) {
+            mesh.eachFace(function (_vertices, vertexIndices) {
                 var vs = [], wvs = [], vvs = [], svs = [];
                 Fn.each(vertexIndices, function (index) {
                     vs.push(vertices[index]);
@@ -59,8 +58,7 @@ define(
                     vertices: vs,
                     worldVertices: wvs,
                     viewVertices: vvs,
-                    screenVertices: svs,
-                    normal: normal
+                    screenVertices: svs
                 });
                 polygons.push(polygon);
             });

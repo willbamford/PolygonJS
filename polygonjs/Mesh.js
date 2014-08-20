@@ -8,12 +8,8 @@ define(
         "use strict";
 
         var Mesh = function (opts) {
-
             this.vertices = opts.vertices || [];
             this.faces = opts.faces || [];
-            this.normals = []; // Per face, not vertex
-
-            this.updateNormals();
             return this;
         };
 
@@ -23,23 +19,11 @@ define(
 
         Mesh.prototype = {
 
-            updateNormals: function () {
-                var self = this, vertices;
-                var normal;
-                this.normals = [];
-                Fn.each(this.faces, function (face) {
-                    vertices = self.getVerticesForFace(face);
-                    normal = Vector3.normalFromPositionVectors(
-                        vertices[0], vertices[1], vertices[2]
-                    );
-                    self.normals.push(normal);
-                });
-            },
-
             eachFace: function (fn) {
-                var self = this, vertices, normal;
+                var self = this, vertices;
                 Fn.each(this.faces, function (face, faceIndex) {
-                    fn(self.getVerticesForFace(face), self.normals[faceIndex], face);
+                    vertices = self.getVerticesForFace(face);
+                    fn(vertices, face);
                 });
             },
 
