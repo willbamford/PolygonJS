@@ -9,13 +9,13 @@ define(
         var SeaModel = function (opts) {
             opts = opts || {};
 
-            var trianglePlane = TrianglePlane.create({
+            var mesh = TrianglePlane.create({
                 triangleHeight: 0.5,
-                numWidthSegments: 4,
-                numHeightSegments: 4
+                numWidthSegments: 10,
+                numHeightSegments: 10
             });
 
-            opts = Fn.merge(Model.getOptsForMesh(trianglePlane), opts);
+            opts = Fn.merge(Model.getOptsForMesh(mesh), opts);
             Model.call(this, opts);
         };
 

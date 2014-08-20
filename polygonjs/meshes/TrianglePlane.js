@@ -24,82 +24,57 @@ define(
             var jlen;
             var faces = [];
             var isOdd = false;
+            var offsetX = 0;
+            var cx = -triangleHeight * numWidthSegments / 2;
+            var cz = -triangleHeight * numHeightSegments / 2;
 
             var a, b, c;
 
-            for (i = 0; i < numWidthSegments + 1; i++) {
+            for (i = 0; i < numHeightSegments + 1; i++) {
 
                 isOdd = (i % 2) === 1;
 
                 if (isOdd) {
-                    jlen = numHeightSegments - 1;
-                    z = 0; //triangleHeight / 2;
+                    jlen = numWidthSegments + 1;
+                    offsetX = 0;
                 } else {
-                    jlen = numHeightSegments;
-                    z = 0;
+                    jlen = numWidthSegments;
+                    offsetX = triangleHeight / 2;
                 }
 
-                console.log('Starting Z: ' + z);
-
+                x = 0;
                 for (j = 0; j < jlen; j++) {
-                    var v = Vector3.create(x, 0, z);
+                    x = j * triangleHeight + offsetX;
+                    var v = Vector3.create(x + cx, 0, z + cz);
                     vertices.push(v);
-                    z += triangleHeight;
                 }
 
-                x += triangleHeight;
+                z += triangleHeight;
+            }
 
-                // if (prevStrip) {
-                //     if (isOdd) {
-                //         for (j = 0; j < (jlen - 1); j++) {
-                //             a = strip[j];
-                //             b = strip[j + 1];
-                //             c = prevStrip[j];
-                //         }
-                //     } else {
-
-                //     }
-                // }
+            isOdd = false;
+            var startOfNextStrip = numWidthSegments;
+            for (i = numWidthSegments; i < vertices.length; i++) {
+                if (i === startOfNextStrip) {
+                    if (isOdd) startOfNextStrip += numWidthSegments;
+                    else startOfNextStrip += numWidthSegments + 1;
+                    isOdd = !isOdd;
+                }
+                if (isOdd) {
+                    if (i < startOfNextStrip - 1) faces.push([i, i + 1, i - numWidthSegments]);
+                    if (i < startOfNextStrip - 2) faces.push([i + 1, i - numWidthSegments + 1, i - numWidthSegments]);
+                } else {
+                    if (i < startOfNextStrip) faces.push([i, i - numWidthSegments, i - numWidthSegments - 1]);
+                    if (i < startOfNextStrip - 1) faces.push([i, i + 1, i - numWidthSegments]);
+                }
             }
 
             var instance = Mesh.create({
-                vertices: [
-                    Vector3.create(0, 0, 0),
-                    Vector3.create(1, 0, 0),
-                    Vector3.create(1, 0, 1),
-                    Vector3.create(0, 0, 1)
-                ],
-                faces: [
-                    [2, 1, 0]
-                ]
+                vertices: vertices,
+                faces: faces
             });
 
             return instance;
-
-            // var vertices = Vector3.createFromArrays([
-            //     [ 1,  1,  1], // 0
-            //     [ 1,  1, -1], // 1
-            //     [ 1, -1,  1], // 2
-            //     [ 1, -1, -1], // 3
-            //     [-1,  1,  1], // 4
-            //     [-1,  1, -1], // 5
-            //     [-1, -1,  1], // 6
-            //     [-1, -1, -1]  // 7
-            // ]);
-            //
-            // var instance = Mesh.create({
-            //     vertices: vertices,
-            //     faces: [
-            //         [0, 2, 3, 1], // Right
-            //         [5, 7, 6, 4], // Left
-            //         [4, 6, 2, 0], // Front
-            //         [1, 3, 7, 5], // Back
-            //         [0, 1, 5, 4], // Top
-            //         [7, 3, 2, 6], // Bottom
-            //     ]
-            // });
-            //
-            // return instance;
         };
 
         return TrianglePlane;
