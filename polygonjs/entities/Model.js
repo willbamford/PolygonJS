@@ -81,11 +81,11 @@ define(
 
         Model.prototype.update = function (delta) {
 
+            Entity.prototype.update.call(this, delta);
+
             var vertices = this.vertices;
             var worldVertices = this.worldVertices;
             var worldTransform = this.worldTransform;
-
-            Entity.prototype.update.call(this, delta);
 
             var i = this.vertices.length;
             while (--i >= 0) {
