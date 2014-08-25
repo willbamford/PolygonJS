@@ -39,7 +39,7 @@ define(
                     var v2 = Vector3.create(6, 5, 5);
                     var v3 = Vector3.create(5, 10, 5);
 
-                    Vector3 v = Vector3.create();
+                    var v = Vector3.create(0, 0, 0);
                     var n = v.normalFromPositionVectors(v1, v2, v3);
                     expect(n).toBe(v);
                     expect(n.toArray()).toEqual([0, 0, 1]);
