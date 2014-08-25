@@ -12,7 +12,7 @@ define(
             Entity.call(this, opts);
             this.type = 'light';
             this.color = opts.color || Color.WHITE.clone();
-            this.specular = opts.specular || Color.WHITE.clone();
+            this.specular = opts.specular !== undefined ? opts.specular : Color.WHITE.clone();
             this.intensity = opts.intensity !== undefined ? opts.intensity : 1.0;
         };
 

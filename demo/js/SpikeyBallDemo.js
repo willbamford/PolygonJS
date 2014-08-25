@@ -31,16 +31,19 @@ define(
 
             var redLight = P.Light.create({
                 color: P.Color.RED.clone(),
+                specular: null,
                 forward: P.Vector3.create(0, 1, 0)
             });
 
             var greenLight = P.Light.create({
                 color: P.Color.GREEN.clone(),
+                specular: null,
                 forward: P.Vector3.create(1, 0, 0)
             });
 
             var blueLight = P.Light.create({
                 color: P.Color.BLUE.clone(),
+                specular: null,
                 forward: P.Vector3.create(0, 0, 1)
             });
 

@@ -37,24 +37,12 @@ define(
 
             opts = Fn.merge(Model.getOptsForMesh(mesh), opts);
             Model.call(this, opts);
-
-            var color1 = Color.create().setHex(0x339933);
-            var color2 = Color.create().setHex(0x0063c9);
-            var getColor = function () {
-                var r = Math.random() * 0.1;
-                var g = 0.3 + Math.random() * 0.5;
-                var b = 0.6 + Math.random() * 0.4;
-                return Color.create({r: r, g: g, b: b});
-            };
-
-            var odd = false;
             Fn.each(this.polygons, function (polygon) {
                 polygon.material = Material.create({
-                    color: Color.BLUE.clone(), //getColor() //odd ? color1 : color2
+                    color: Color.create({r: 0.2, g: 0.2, b: 1.0}),
                     specular: Color.WHITE.clone(),
                     shininess: 10
                 });
-                odd = !odd;
             });
         };
 

@@ -116,15 +116,13 @@ define(
                                 polygonColor.b += materialColor.b * lightColor.b * lightIntensity;
 
                                 // Specular
-                                if (dp > 0) {
-                                    if (materialShininess > 0) {
-                                        dp = -camera.forward.dotProduct(reflect.copy(light.forward).reflect(polygonNormal));
-                                        if (dp > 0) {
-                                            specularK = Math.max(Math.pow(dp, materialShininess), 0);
-                                            polygonColor.r += specularK * lightSpecular.r * materialSpecular.r;
-                                            polygonColor.g += specularK * lightSpecular.g * materialSpecular.g;
-                                            polygonColor.b += specularK * lightSpecular.b * materialSpecular.b;
-                                        }
+                                if (dp > 0 && lightSpecular && materialSpecular) {
+                                    dp = -camera.forward.dotProduct(reflect.copy(light.forward).reflect(polygonNormal));
+                                    if (dp > 0) {
+                                        specularK = Math.max(Math.pow(dp, materialShininess), 0);
+                                        polygonColor.r += specularK * lightSpecular.r * materialSpecular.r;
+                                        polygonColor.g += specularK * lightSpecular.g * materialSpecular.g;
+                                        polygonColor.b += specularK * lightSpecular.b * materialSpecular.b;
                                     }
                                 }
                             }

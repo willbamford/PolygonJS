@@ -1,20 +1,25 @@
 define(
-    [
-        'polygonjs/PolygonJS',
-        'demo/js/SeaModel'
-    ],
-    function (P, SeaModel) {
+    ['polygonjs/PolygonJS'],
+    function (P) {
 
         "use strict";
 
-        var SeaDemo = function (containerId, opts) {
-
-            opts = opts || {};
+        var ShinyBallDemo = function (containerId) {
 
             var container = document.querySelector('#' + containerId);
             var surfaceElement = container.querySelector('.demo__surface');
 
-            var seaModel = SeaModel.create();
+            var mesh = P.Sphere.create({
+                levelOfDetail: 3,
+                spikiness: 0.0
+            });
+            var model = P.Model.createFromMesh(mesh);
+            P.Fn.each(model.polygons, function (polygon) {
+                polygon.material = P.Material.create({
+                    specular: P.Color.create({r: 1, g: 1, b: 1}),
+                    shininess: 10
+                });
+            });
 
             var sceneWidth = 640;
             var sceneHeight = 640;
@@ -25,53 +30,45 @@ define(
                 width: sceneWidth,
                 height: sceneHeight
             });
-
             var scene = P.Scene.create({});
+            var camera = P.PerspectiveCamera.create({
+                aspectRatio: aspectRatio
+            });
 
-            var cameraMode = opts.cameraMode || "orthographic";
-            var camera;
-
-            switch (cameraMode) {
-                case "perspective":
-                    camera = P.PerspectiveCamera.create({
-                        aspectRatio: aspectRatio
-                    });
-                    break;
-                case "orthographic":
-                    camera = P.OrthographicCamera.create({
-                        width: sceneWidth / 100,
-                        height: sceneHeight / 100
-                    });
-                    break;
-            }
+            var redLight = P.Light.create({
+                color: P.Color.RED.clone(),
+                specular: P.Color.create({r: 0.7, g: 0.7, b: 0.7}),
+                forward: P.Vector3.create(0, 1, 0)
+            });
 
             var greenLight = P.Light.create({
                 color: P.Color.GREEN.clone(),
-                intensity: 1,
-                forward: P.Vector3.create(0, 1, 1).normalise()
+                specular: P.Color.create({r: 0.7, g: 0.7, b: 0.7}),
+                forward: P.Vector3.create(1, 0, 0)
             });
 
-            var whiteLight = P.Light.create({
-                color: P.Color.WHITE.clone(),
-                intensity: 1,
-                forward: P.Vector3.create(1, 1, 0).normalise()
+            var blueLight = P.Light.create({
+                color: P.Color.BLUE.clone(),
+                specular: P.Color.create({r: 0.7, g: 0.7, b: 0.7}),
+                forward: P.Vector3.create(0, 0, 1)
             });
 
             var root = P.Entity.create();
-            root.addChild(seaModel).addChild(camera);
-            root.addChild(whiteLight);
+            root.addChild(model).addChild(camera);
+            root.addChild(redLight).addChild(greenLight).addChild(blueLight);
             scene.root = root;
             scene.revalidate();
 
             var renderer = P.Renderer.create({
                 surface: surface,
-                scene: scene,
-                showAxes: true
+                scene: scene
             });
 
-            var eye = P.Vector3.create(3, 3, 3);
+            var eye = P.Vector3.create(5, 5, 5);
             var target = P.Vector3.create(0, 0, 0);
             var angle = 0;
+            var scale = 4;
+            model.scale.setScalar(scale);
 
             camera.position = eye;
 
@@ -80,9 +77,13 @@ define(
                 angle += delta / 1000;
                 if (angle > 360) angle -= 360;
 
-                seaModel.rotation.setRotationY(angle);
+                // scale = Math.max(1, scale - 0.0005 * delta);
+
+                model.rotation.setRotationY(angle);
+                // model.scale.setScalar(scale);
 
                 camera.lookAt(target);
+
                 scene.update(delta);
                 renderer.render(delta);
             };
@@ -105,10 +106,10 @@ define(
             });
         };
 
-        SeaDemo.create = function (containerId) {
-            return new SeaDemo(containerId);
+        ShinyBallDemo.create = function (containerId) {
+            return new ShinyBallDemo(containerId);
         };
 
-        return SeaDemo;
+        return ShinyBallDemo;
     }
 );
