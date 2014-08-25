@@ -33,19 +33,6 @@ define(
                 });
             });
 
-            describe('normalFromPositionVectors', function () {
-                it('should calculate the normal from three position vectors', function () {
-                    var v1 = Vector3.create(5, 5, 5);
-                    var v2 = Vector3.create(6, 5, 5);
-                    var v3 = Vector3.create(5, 10, 5);
-
-                    var v = Vector3.create(0, 0, 0);
-                    var n = v.normalFromPositionVectors(v1, v2, v3);
-                    expect(n).toBe(v);
-                    expect(n.toArray()).toEqual([0, 0, 1]);
-                });
-            });
-
             describe('clone', function () {
                 it('should return a clone of the vector', function () {
                     var original = Vector3.create(10, 20, 30);
@@ -280,6 +267,32 @@ define(
                     var r = v.center(Vector3.createFromArrays(arrs));
                     expect(r).toBe(v);
                     expect(r.toArray()).toEqual([3.5, 0, 13.5]);
+                });
+            });
+
+            describe('normalFromPositionVectors', function () {
+                it('should calculate the normal from three position vectors', function () {
+                    var v1 = Vector3.create(5, 5, 5);
+                    var v2 = Vector3.create(6, 5, 5);
+                    var v3 = Vector3.create(5, 10, 5);
+
+                    var v = Vector3.create(0, 0, 0);
+                    var n = v.normalFromPositionVectors(v1, v2, v3);
+                    expect(n).toBe(v);
+                    expect(n.toArray()).toEqual([0, 0, 1]);
+                });
+            });
+
+            describe('reflect', function () {
+                it('should reflect the incident vector off the plane represented by input normal', function () {
+                    var normal = Vector3.create(0, 1, 0);
+                    var v = Vector3.create(0, -1, -1);
+                    var r = v.reflect(normal);
+                    expect(r).toBe(v);
+                    expect(r.toArray()).toEqual([0, 1, -1]);
+
+                    v.set(1, -1, 0);
+                    expect(v.reflect(normal).toArray()).toEqual([1, 1, 0]);
                 });
             });
         });

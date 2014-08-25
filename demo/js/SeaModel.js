@@ -50,7 +50,9 @@ define(
             var odd = false;
             Fn.each(this.polygons, function (polygon) {
                 polygon.material = Material.create({
-                    color: Color.BLUE.clone() //getColor() //odd ? color1 : color2
+                    color: Color.BLUE.clone(), //getColor() //odd ? color1 : color2
+                    specular: Color.WHITE.clone(),
+                    shininess: 10
                 });
                 odd = !odd;
             });

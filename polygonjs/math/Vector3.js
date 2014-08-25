@@ -182,13 +182,23 @@ define(['polygonjs/math/PMath'], function (PMath) {
         }
     };
 
-    var _ba = Vector3.create(0, 0, 0);
-    var _ca = Vector3.create(0, 0, 0);
-    Vector3.prototype.normalFromPositionVectors = function (a, b, c) {
-        _ba.copy(a).subtract(b);
-        _ca.copy(a).subtract(c);
-        return this.copy(_ba).normal(_ca);
-    };
+    Vector3.prototype.normalFromPositionVectors = function () {
+        var ba = Vector3.create(0, 0, 0);
+        var ca = Vector3.create(0, 0, 0);
+        return function (a, b, c) {
+            ba.copy(a).subtract(b);
+            ca.copy(a).subtract(c);
+            return this.copy(ba).normal(ca);
+        };
+    }();
+
+    Vector3.prototype.reflect = function () {
+        var v = Vector3.create(0, 0, 0);
+        return function (normal) {
+            // http://math.stackexchange.com/a/13263
+            return this.subtract(v.copy(normal).multiply(2 * this.dotProduct(normal)));
+        }
+    }();
 
     Vector3.ZERO    = Vector3.create(0, 0, 0);
     Vector3.ONE     = Vector3.create(1, 1, 1);

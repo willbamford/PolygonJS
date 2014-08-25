@@ -23,16 +23,19 @@ define(
                     expect(light.type).toBe('light');
                 });
 
-                it('should have a default white color', function () {
+                it('should have a default white color and specular color', function () {
                     var light = Light.create();
                     expect(light.color).toEqualColor(Color.WHITE);
+                    expect(light.specular).toEqualColor(Color.WHITE);
                 });
 
-                it('should be able to initialise color', function () {
+                it('should be able to initialise color and specular color', function () {
                     var light = Light.create({
-                        color: Color.BLUE.clone()
+                        color: Color.BLUE.clone(),
+                        specular: Color.RED.clone()
                     });
                     expect(light.color).toEqualColor(Color.BLUE);
+                    expect(light.specular).toEqualColor(Color.RED);
                 });
 
                 it('should have a default intensity of one (full brightness)', function () {

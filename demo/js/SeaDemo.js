@@ -35,14 +35,14 @@ define(
 
             var redLight = P.Light.create({
                 color: P.Color.RED.clone(),
-                forward: P.Vector3.create(0, 1, 1),
+                forward: P.Vector3.create(0, 1, 1).normalise(),
                 intensity: 1
             });
 
             var whiteLight = P.Light.create({
                 color: P.Color.WHITE.clone(),
                 intensity: 1,
-                forward: P.Vector3.create(1, 1, 0)
+                forward: P.Vector3.create(1, 1, 0).normalise()
             });
 
             var root = P.Entity.create();
