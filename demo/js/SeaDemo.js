@@ -20,7 +20,7 @@ define(
             var sceneHeight = 640;
             var aspectRatio = sceneWidth / sceneHeight;
 
-            var surface = P.CanvasSurface.create({
+            var surface = P.WebGLSurface.create({
                 container: surfaceElement,
                 width: sceneWidth,
                 height: sceneHeight
@@ -66,7 +66,7 @@ define(
             var renderer = P.Renderer.create({
                 surface: surface,
                 scene: scene,
-                showAxes: true
+                showAxes: false
             });
 
             var eye = P.Vector3.create(3, 3, 3);
@@ -80,7 +80,7 @@ define(
                 angle += delta / 1000;
                 if (angle > 360) angle -= 360;
 
-                seaModel.rotation.setRotationY(angle);
+                // seaModel.rotation.setRotationY(angle);
 
                 camera.lookAt(target);
                 scene.update(delta);
