@@ -141,6 +141,20 @@ define(
                     expect(r).toEqualColor(Color.create({r: 0.4, g: 0.8, b: 1.0}));
                 });
             });
+
+            describe('getHexStyle', function () {
+                it('should return a color string in the form #rrggbb', function () {
+                    var color = Color.create();
+                    color.setHex(0x123456);
+                    expect(color.getHexStyle()).toBe('#123456');
+                    color.setHex(0x654321);
+                    expect(color.getHexStyle()).toBe('#654321');
+                    color.setHex(0x000000);
+                    expect(color.getHexStyle()).toBe('#000000');
+                    color.setHex(0xffffff);
+                    expect(color.getHexStyle()).toBe('#ffffff');
+                })
+            });
         });
     }
 );

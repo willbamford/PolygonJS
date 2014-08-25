@@ -1,9 +1,10 @@
 define(
     [
         'polygonjs/math/Matrix4',
-        'polygonjs/math/Vector3'
+        'polygonjs/math/Vector3',
+        'polygonjs/math/Color'
     ],
-    function (Matrix4, Vector3) {
+    function (Matrix4, Vector3, Color) {
 
         "use strict";
 
@@ -192,14 +193,14 @@ define(
                 for (i = 0; i < len; i++) {
                     polygon = polygons[i];
                     if (!polygon.isCulled)
-                        surface.polygon(polygon.screenVertices, polygon.color.getHex());
+                        surface.polygon(polygon.screenVertices, polygon.color);
                 }
 
                 var axes = this.axes;
                 if (axes.show) {
-                    surface.line(axes.o, axes.x, 0xff0000);
-                    surface.line(axes.o, axes.y, 0x00ff00);
-                    surface.line(axes.o, axes.z, 0x0000ff);
+                    surface.line(axes.o, axes.x, Color.RED);
+                    surface.line(axes.o, axes.y, Color.GREEN);
+                    surface.line(axes.o, axes.z, Color.BLUE);
                 }
             }
         };

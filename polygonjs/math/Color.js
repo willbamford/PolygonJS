@@ -86,6 +86,10 @@ define(['polygonjs/math/PMath'], function (PMath) {
             return this;
         },
 
+        getHexStyle: function () {
+    		return '#' + ('000000' + this.getHex().toString(16)).slice(-6);
+    	},
+
         randomise: function () {
             this.r = Math.random();
             this.g = Math.random();

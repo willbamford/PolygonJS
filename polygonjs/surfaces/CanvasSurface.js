@@ -10,7 +10,7 @@ define([], function () {
         this.cy = this.height / 2;
 
         var canvas = this.createEl('canvas', {
-            style: 'background: black; border: 1px solid #eee',
+            style: 'background: black',
             width: this.width,
             height: this.height
         });
@@ -52,13 +52,13 @@ define([], function () {
             this.context.clearRect(0, 0, this.width, this.height);
         },
 
-        polygon: function (points, style) {
+        polygon: function (points, color) {
             var ctx = this.context;
             var len = points.length;
             if (len > 1) {
                 var point = points[0];
-                ctx.fillStyle = style;
-                ctx.strokeStyle = style;
+                ctx.fillStyle = color.getHexStyle();
+                // ctx.strokeStyle = color;
                 ctx.beginPath();
                 ctx.moveTo(point.x + this.cx, -point.y + this.cy);
                 for (var i = 1; i < len; i++) {
@@ -69,6 +69,16 @@ define([], function () {
                 ctx.fill();
                 // ctx.stroke(); // Gets rid of seams but performance hit
             }
+        },
+
+        line: function (from, to, color) {
+
+            var ctx = this.context;
+            ctx.strokeStyle = color.getHexStyle();
+            ctx.beginPath();
+            ctx.moveTo(from.x + this.cx, -from.x + this.cy);
+            ctx.lineTo(to.x + this.cx, -to.y + this.cy);
+            ctx.stroke();
         },
 
         render: function () {}

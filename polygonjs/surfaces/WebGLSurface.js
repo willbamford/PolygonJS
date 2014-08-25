@@ -49,7 +49,7 @@ define(
                     var point, firstPoint = points[0];
                     var x, y, i;
 
-                    graphics.beginFill(color);
+                    graphics.beginFill(color.getHex());
                     graphics.moveTo(firstPoint.x + this.cx, -firstPoint.y + this.cy);
                     for (i = 1; i < len; i++) {
                         point = points[i];
@@ -66,7 +66,7 @@ define(
             line: function (from, to, color) {
 
                 var graphics = this.graphics;
-                graphics.lineStyle(2, color, 1);
+                graphics.lineStyle(2, color.getHex(), 1);
                 graphics.moveTo(from.x + this.cx, -from.x + this.cy);
                 graphics.lineTo(to.x + this.cx, -to.y + this.cy);
                 graphics.lineStyle(0);

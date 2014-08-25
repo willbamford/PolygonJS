@@ -20,7 +20,7 @@ define(
             var sceneHeight = 640;
             var aspectRatio = sceneWidth / sceneHeight;
 
-            var surface = P.WebGLSurface.create({
+            var surface = P.CanvasSurface.create({
                 container: surfaceElement,
                 width: sceneWidth,
                 height: sceneHeight
