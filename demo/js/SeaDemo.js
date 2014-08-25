@@ -39,16 +39,17 @@ define(
                     break;
                 case "orthographic":
                     camera = P.OrthographicCamera.create({
-                        width: sceneWidth / 100,
-                        height: sceneHeight / 100
+                        width: sceneWidth / 300,
+                        height: sceneHeight / 300
                     });
                     break;
             }
 
-            var greenLight = P.Light.create({
-                color: P.Color.GREEN.clone(),
-                intensity: 1,
-                forward: P.Vector3.create(0, 1, 1).normalise()
+            var redLight = P.Light.create({
+                color: P.Color.WHITE.clone(),
+                specular: P.Color.create({r: 1.0, g: 0.0, b: 0}),
+                intensity: 0.3,
+                forward: P.Vector3.create(-1, 1, 0).normalise()
             });
 
             var whiteLight = P.Light.create({
@@ -59,7 +60,7 @@ define(
 
             var root = P.Entity.create();
             root.addChild(seaModel).addChild(camera);
-            root.addChild(whiteLight);
+            root.addChild(whiteLight).addChild(redLight);
             scene.root = root;
             scene.revalidate();
 
@@ -80,7 +81,7 @@ define(
                 angle += delta / 1000;
                 if (angle > 360) angle -= 360;
 
-                // seaModel.rotation.setRotationY(angle);
+                seaModel.rotation.setRotationY(angle);
 
                 camera.lookAt(target);
                 scene.update(delta);

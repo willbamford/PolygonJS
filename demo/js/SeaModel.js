@@ -18,7 +18,7 @@ define(
             displacementAt: function (time, position) {
                 this.delta.copy(position).subtract(this.origin);
                 var distance = this.delta.magnitude();
-                var displacement = Math.sin((distance * 2 + time / 800) * 3) / 4;
+                var displacement = Math.sin((distance * 3 + time / 800) * 3) / 12;
                 return displacement;
             }
         };
@@ -30,7 +30,7 @@ define(
             this.time = 0;
 
             var mesh = TrianglePlane.create({
-                triangleHeight: 0.8,
+                triangleHeight: 0.2,
                 numWidthSegments: 12,
                 numHeightSegments: 12
             });
@@ -38,9 +38,9 @@ define(
             var makeColor = function () {
                 var r = Math.random() / 5;
                 r *= r;
-                var g = 0.5 + Math.random() / 5;
+                var g = 0.5; // + Math.random() / 5;
                 // g *= g;
-                var b = 0.3 + (1 - g) + 0.5 * Math.random(); //0.8 + Math.random() / 5;
+                var b = 1.0; //0.3 + (1 - g) + 0.5 * Math.random(); //0.8 + Math.random() / 5;
                 return {
                     r: r,
                     g: g,
@@ -54,7 +54,7 @@ define(
                 polygon.material = Material.create({
                     color: Color.create(makeColor()).clamp(),
                     specular: Color.WHITE.clone(),
-                    shininess: 10
+                    shininess: 3
                 });
             });
         };
