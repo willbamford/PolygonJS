@@ -89,10 +89,10 @@ define(
 
             surface.container.addEventListener('click', function () {
                 container.className = container.className + ' demo--playing';
-                engine.start();
-                window.setTimeout(function () {
+                if (!engine.isRunning)
+                    engine.start();
+                else
                     engine.stop();
-                }, 5000);
             });
         };
 

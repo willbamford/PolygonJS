@@ -41,21 +41,17 @@ define(
                     expect(polygon.material).toBe(material);
                 });
 
-                it('should be able initialise with vertices and normal', function () {
+                it('should be able initialise with vertices', function () {
                     var polygon = Polygon.create({
                         vertices: vertices,
                         worldVertices: worldVertices,
                         viewVertices: viewVertices,
-                        screenVertices: screenVertices,
-                        normal: normal
+                        screenVertices: screenVertices
                     });
                     expect(polygon.vertices).toBe(vertices);
                     expect(polygon.worldVertices).toBe(worldVertices);
                     expect(polygon.viewVertices).toBe(viewVertices);
                     expect(polygon.screenVertices).toBe(screenVertices);
-                    expect(polygon.normal).toBe(normal);
-                    expect(polygon.worldNormal).not.toBe(polygon.normal);
-                    expect(polygon.worldNormal.equals(polygon.normal)).toBeTruthy();
                 });
 
                 it('should not be culled initially', function () {

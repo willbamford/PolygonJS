@@ -19,7 +19,7 @@ define(
                 x: Vector3.create(0, 0, 0),
                 y: Vector3.create(0, 0, 0),
                 z: Vector3.create(0, 0, 0)
-            }
+            };
         };
 
         Renderer.create = function (opts) {

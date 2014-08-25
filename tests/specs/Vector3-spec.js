@@ -1,11 +1,11 @@
 define(
     ['polygonjs/math/Vector3', 'polygonjs/math/Matrix4'],
-    function (Vector3, Matrix4) { 
+    function (Vector3, Matrix4) {
 
         "use strict";
 
         describe('Vector3', function () {
-            
+
             describe('create', function () {
                 it('should be able to create new instances', function () {
                     expect(Vector3.create(3, 4, 5).toArray()).toEqual([3, 4, 5]);
@@ -38,7 +38,10 @@ define(
                     var v1 = Vector3.create(5, 5, 5);
                     var v2 = Vector3.create(6, 5, 5);
                     var v3 = Vector3.create(5, 10, 5);
-                    var n = Vector3.normalFromPositionVectors(v1, v2, v3);
+
+                    Vector3 v = Vector3.create();
+                    var n = v.normalFromPositionVectors(v1, v2, v3);
+                    expect(n).toBe(v);
                     expect(n.toArray()).toEqual([0, 0, 1]);
                 });
             });

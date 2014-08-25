@@ -3,9 +3,11 @@ define(
         'polygonjs/entities/Model',
         'polygonjs/meshes/TrianglePlane',
         'polygonjs/Fn',
-        'polygonjs/math/Vector3'
+        'polygonjs/math/Vector3',
+        'polygonjs/math/Color',
+        'polygonjs/Material'
     ],
-    function (Model, TrianglePlane, Fn, Vector3) {
+    function (Model, TrianglePlane, Fn, Vector3, Color, Material) {
 
         var Ripple = function (origin) {
             this.origin = origin;
@@ -16,7 +18,7 @@ define(
             displacementAt: function (time, position) {
                 this.delta.copy(position).subtract(this.origin);
                 var distance = this.delta.magnitude();
-                var displacement = Math.sin(distance * 2 + time / 400) / 2;
+                var displacement = Math.sin((distance + time / 800) * 3) / 3;
                 return displacement;
             }
         };
@@ -29,12 +31,29 @@ define(
 
             var mesh = TrianglePlane.create({
                 triangleHeight: 0.5,
-                numWidthSegments: 12,
-                numHeightSegments: 12
+                numWidthSegments: 14,
+                numHeightSegments: 14
             });
 
             opts = Fn.merge(Model.getOptsForMesh(mesh), opts);
             Model.call(this, opts);
+
+            var color1 = Color.create().setHex(0x339933);
+            var color2 = Color.create().setHex(0x0063c9);
+            var getColor = function () {
+                var r = Math.random() * 0.1;
+                var g = 0.3 + Math.random() * 0.5;
+                var b = 0.6 + Math.random() * 0.4;
+                return Color.create({r: r, g: g, b: b});
+            };
+
+            var odd = false;
+            Fn.each(this.polygons, function (polygon) {
+                polygon.material = Material.create({
+                    color: Color.BLUE.clone() //getColor() //odd ? color1 : color2
+                });
+                odd = !odd;
+            });
         };
 
         SeaModel.create = function (opts) {

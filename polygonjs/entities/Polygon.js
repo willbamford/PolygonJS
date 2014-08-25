@@ -43,7 +43,8 @@ define(
 
         Polygon.prototype.updateNormal = function () {
             var v = this.vertices;
-            this.normal.normalFromPositionVectors(v[0], v[1], v[2]);
+            if (v.length >= 3)
+                this.normal.normalFromPositionVectors(v[0], v[1], v[2]);
         };
 
         return Polygon;

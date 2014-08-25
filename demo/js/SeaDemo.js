@@ -13,13 +13,6 @@ define(
             var surfaceElement = container.querySelector('.demo__surface');
 
             var seaModel = SeaModel.create();
-            var odd = false;
-            P.Fn.each(seaModel.polygons, function (polygon) {
-                polygon.material = P.Material.create({
-                    emissive: null // odd ? P.Color.BLUE.clone() : P.Color.GREEN.clone()
-                });
-                odd = !odd;
-            });
 
             var sceneWidth = 640;
             var sceneHeight = 640;
@@ -40,32 +33,21 @@ define(
                 height: sceneHeight / 100
             });
 
-            // var redLight = P.Light.create({
-            //     color: P.Color.RED.clone(),
-            //     forward: P.Vector3.create(0, 1, 0),
-            //     intensity: 0.5
-            // });
-
-            var greenLight = P.Light.create({
-                color: P.Color.GREEN.clone(),
-                forward: P.Vector3.create(1, 0, 0)
-            });
-
-            var blueLight = P.Light.create({
-                color: P.Color.BLUE.clone(),
-                forward: P.Vector3.create(0, 0, 1)
+            var redLight = P.Light.create({
+                color: P.Color.RED.clone(),
+                forward: P.Vector3.create(0, 1, 1),
+                intensity: 1
             });
 
             var whiteLight = P.Light.create({
                 color: P.Color.WHITE.clone(),
-                intensity: 0.5,
-                forward: P.Vector3.create(0, 1, 0)
+                intensity: 1,
+                forward: P.Vector3.create(1, 1, 0)
             });
 
             var root = P.Entity.create();
             root.addChild(seaModel).addChild(camera);
-            root.addChild(whiteLight);
-            root.addChild(greenLight).addChild(blueLight);
+            root.addChild(whiteLight); //.addChild(redLight);
             scene.root = root;
             scene.revalidate();
 
@@ -104,10 +86,10 @@ define(
 
             surface.container.addEventListener('click', function () {
                 container.className = container.className + ' demo--playing';
-                engine.start();
-                window.setTimeout(function () {
+                if (!engine.isRunning)
+                    engine.start();
+                else
                     engine.stop();
-                }, 5000);
             });
         };
 

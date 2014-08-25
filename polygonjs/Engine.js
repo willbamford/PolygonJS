@@ -27,6 +27,7 @@ define(
 
             start: function () {
                 if (!this.isRunning) {
+                    this.lastTime = null;
                     this.requestId = window.requestAnimationFrame(this.tick.bind(this));
                     this.isRunning = true;
                 }
@@ -41,7 +42,7 @@ define(
 
             tick: function () {
                 // console.time('Render time');
-                var currentTime = new Date(),
+                var currentTime = Date.now(),
                     delta = 0;
 
                 if (this.lastTime)
