@@ -16,13 +16,14 @@
     </head>
     <body>
 
-        <h1 class="page-title">PolygonJS</h1>
+        <header class="header">
+            <h1 class="header__title t-sendell">PolygonJS</h1>
+            <p class="header__description t-twinsen">Tap a demo to toggle play / pause</p>
+        </header>
 
         <div id="spikey-ball-demo" class="demo">
             <h2 class="demo__title">Spikey Ball</h2>
-            <div class="demo__surface">
-                <span class="demo__surface-text t-small-caps">Tap to play</span>
-            </div>
+            <div class="demo__surface"></div>
             <script>
                 require(['demo/js/SpikeyBallDemo'], function (Demo) {
                     Demo.create('spikey-ball-demo');
@@ -31,9 +32,7 @@
         </div><!--
         --><div id="sea-demo" class="demo">
             <h2 class="demo__title">Sea</h2>
-            <div class="demo__surface">
-                <span class="demo__surface-text t-small-caps">Tap to play</span>
-            </div>
+            <div class="demo__surface"></div>
             <script>
                 require(['demo/js/SeaDemo'], function (Demo) {
                     Demo.create('sea-demo');
@@ -42,16 +41,13 @@
         </div><!--
         --><div id="shiny-ball-demo" class="demo">
             <h2 class="demo__title">Shiny Ball</h2>
-            <div class="demo__surface">
-                <span class="demo__surface-text t-small-caps">Tap to play</span>
-            </div>
+            <div class="demo__surface"></div>
             <script>
                 require(['demo/js/ShinyBallDemo'], function (Demo) {
                     Demo.create('shiny-ball-demo');
                 });
             </script>
         </div>
-
         <noscript>Sorry, PolygonJS requires JavaScript support.</noscript>
 
         <!-- Fork me on GitHub -->

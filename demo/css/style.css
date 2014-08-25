@@ -19,17 +19,23 @@ html {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.page-title {
-    margin-top: 16px;
-    margin-bottom: 20px;
+.header {
+    padding: 16px;
     text-align: center;
 }
 
 @media all and (min-width: 600px) {
-    .page-title {
-        margin-top: 32px;
-        margin-bottom: 40px;
+    .header {
+        padding: 32px;
     }
+}
+
+.header__title {
+    margin-bottom: 8px;
+}
+
+.header__description {
+    color: #0f0;
 }
 
 body {
@@ -75,20 +81,4 @@ body {
 .demo__surface > svg {
     width: 100%;
     height: auto;
-}
-
-.demo__surface-text {
-    display: block;
-    padding: 8px 16px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background-color: #093;
-    color: white;
-    z-index: 100;
-    text-transform: uppercase;
-}
-
-.demo--playing .demo__surface-text {
-    display: none;
 }
