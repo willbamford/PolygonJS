@@ -68,67 +68,73 @@ define(
                 polygons.sort(sorter);
             },
 
-            light: function (polygons, lights, camera) {
-
-                var i = polygons.length, j;
-                var polygon, polygonColor;
-                var light, lightColor, lightIntensity, lightSpecular;
-                var material, materialColor, materialEmissive, materialSpecular, materialShininess;
-                var dp;
-                var polygonNormal;
-                var specularK;
+            light: function () {
 
                 var reflect = Vector3.create(0, 0, 0);
 
-                while (--i >= 0) {
-                    polygon = polygons[i];
-                    if (!polygon.isCulled) {
+                return function (polygons, lights, camera) {
 
-                        material = polygon.material;
-                        polygonColor = polygon.color;
-                        polygonNormal = polygon.worldNormal;
+                    var i = polygons.length, j;
+                    var polygon, polygonColor;
+                    var light, lightColor, lightIntensity, lightSpecular;
+                    var material, materialColor, materialEmissive, materialSpecular, materialShininess;
+                    var dp;
+                    var polygonNormal;
+                    var specularK;
 
-                        materialColor = material.color;
-                        materialEmissive = material.emissive;
-                        materialSpecular = material.specular;
-                        materialShininess = material.shininess;
+                    while (--i >= 0) {
+                        polygon = polygons[i];
+                        if (!polygon.isCulled) {
 
-                        polygonColor.setRGB(0, 0, 0);
+                            material = polygon.material;
+                            polygonColor = polygon.color;
+                            polygonNormal = polygon.worldNormal;
 
-                        j = lights.length;
-                        while (--j >= 0) {
-                            light = lights[j];
-                            lightColor = light.color;
-                            lightIntensity = light.intensity;
-                            lightSpecular = light.specular;
+                            materialColor = material.color;
+                            materialEmissive = material.emissive;
+                            materialSpecular = material.specular;
+                            materialShininess = material.shininess;
 
-                            // Diffuse
-                            dp = light.forward.dotProduct(polygonNormal);
+                            polygonColor.setRGB(0, 0, 0);
 
-                            if (dp < 0)
-                                dp = 0;
+                            j = lights.length;
+                            while (--j >= 0) {
+                                light = lights[j];
+                                lightColor = light.color;
+                                lightIntensity = light.intensity;
+                                lightSpecular = light.specular;
 
-                            lightIntensity *= dp;
+                                // Diffuse
+                                dp = light.forward.dotProduct(polygonNormal);
 
-                            polygonColor.r += materialColor.r * lightColor.r * lightIntensity;
-                            polygonColor.g += materialColor.g * lightColor.g * lightIntensity;
-                            polygonColor.b += materialColor.b * lightColor.b * lightIntensity;
+                                if (dp < 0) dp = 0;
 
-                            // Specular
-                            if (materialShininess > 0) {
-                                dp = -camera.forward.dotProduct(reflect.copy(light.forward).reflect(polygonNormal));
-                                specularK = Math.max(Math.pow(dp, materialShininess), 0);
-                                polygonColor.r += specularK * lightSpecular.r * materialSpecular.r;
-                                polygonColor.g += specularK * lightSpecular.g * materialSpecular.g;
-                                polygonColor.b += specularK * lightSpecular.b * materialSpecular.b;
+                                lightIntensity *= dp;
+
+                                polygonColor.r += materialColor.r * lightColor.r * lightIntensity;
+                                polygonColor.g += materialColor.g * lightColor.g * lightIntensity;
+                                polygonColor.b += materialColor.b * lightColor.b * lightIntensity;
+
+                                // Specular
+                                if (dp > 0) {
+                                    if (materialShininess > 0) {
+                                        dp = -camera.forward.dotProduct(reflect.copy(light.forward).reflect(polygonNormal));
+                                        if (dp > 0) {
+                                            specularK = Math.max(Math.pow(dp, materialShininess), 0);
+                                            polygonColor.r += specularK * lightSpecular.r * materialSpecular.r;
+                                            polygonColor.g += specularK * lightSpecular.g * materialSpecular.g;
+                                            polygonColor.b += specularK * lightSpecular.b * materialSpecular.b;
+                                        }
+                                    }
+                                }
                             }
-                        }
 
-                        polygonColor.add(materialEmissive);
-                        polygonColor.clamp();
+                            polygonColor.add(materialEmissive);
+                            polygonColor.clamp();
+                        }
                     }
                 }
-            },
+            }(),
 
             project: function (models, camera, surface) {
 
