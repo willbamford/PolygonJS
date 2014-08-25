@@ -97,13 +97,13 @@ define(
                 }
             });
 
-            surface.container.addEventListener('click', function () {
-                container.className = container.className + ' demo--playing';
-                if (!engine.isRunning)
-                    engine.start();
-                else
-                    engine.stop();
-            });
+            var toggleEngine = function () {
+                if (!engine.isRunning) engine.start();
+                else engine.stop();
+            };
+
+            surface.container.addEventListener('click', toggleEngine);
+            surface.container.addEventListener('touchend', toggleEngine);
         };
 
         ShinyBallDemo.create = function (containerId) {

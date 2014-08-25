@@ -45,9 +45,9 @@ define(
                     break;
             }
 
-            var redLight = P.Light.create({
+            var sunsetLight = P.Light.create({
                 color: P.Color.WHITE.clone(),
-                specular: P.Color.create({r: 1.0, g: 0.0, b: 0}),
+                specular: P.Color.create({r: 1, g: 0, b: 0}),
                 intensity: 0.3,
                 forward: P.Vector3.create(-1, 1, 0).normalise()
             });
@@ -60,7 +60,7 @@ define(
 
             var root = P.Entity.create();
             root.addChild(seaModel).addChild(camera);
-            root.addChild(whiteLight).addChild(redLight);
+            root.addChild(whiteLight).addChild(sunsetLight);
             scene.root = root;
             scene.revalidate();
 
@@ -97,13 +97,13 @@ define(
                 }
             });
 
-            surface.container.addEventListener('click', function () {
-                container.className = container.className + ' demo--playing';
-                if (!engine.isRunning)
-                    engine.start();
-                else
-                    engine.stop();
-            });
+            var toggleEngine = function () {
+                if (!engine.isRunning) engine.start();
+                else engine.stop();
+            };
+
+            surface.container.addEventListener('click', toggleEngine);
+            surface.container.addEventListener('touchend', toggleEngine);
         };
 
         SeaDemo.create = function (containerId) {
