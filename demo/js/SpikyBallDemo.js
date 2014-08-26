@@ -4,7 +4,7 @@ define(
 
         "use strict";
 
-        var SpikeyBallDemo = function (containerId) {
+        var SpikyBallDemo = function (containerId) {
 
             var container = document.querySelector('#' + containerId);
             var surfaceElement = container.querySelector('.demo__surface');
@@ -99,10 +99,10 @@ define(
             surface.container.addEventListener('touchend', toggleEngine);
         };
 
-        SpikeyBallDemo.create = function (containerId) {
-            return new SpikeyBallDemo(containerId);
+        SpikyBallDemo.create = function (containerId) {
+            return new SpikyBallDemo(containerId);
         };
 
-        return SpikeyBallDemo;
+        return SpikyBallDemo;
     }
 );
